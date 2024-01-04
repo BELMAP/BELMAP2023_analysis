@@ -1,0 +1,694 @@
+Year;Pathogen;Antibiotic;Percent_resistant;Region;Percent_resistant_predict;Surveillance;Matrix;CI_upper;CI_lower;Sample_size.x;icon;signif_level
+;;;;;;;;;;;;
+2015;Acinetobacter;Carbapenem;0;Belgium;6,280674342;EARS;Blood_CSF;14,52724446;2,715371816;24;downward_arrow;*
+2016;Acinetobacter;Carbapenem;2,6;Belgium;4,730905643;EARS;Blood_CSF;8,988976828;2,489879396;78;downward_arrow;*
+2017;Acinetobacter;Carbapenem;6,9;Belgium;3,563545407;EARS;Blood_CSF;5,844403452;2,172823278;131;downward_arrow;*
+2018;Acinetobacter;Carbapenem;3,8;Belgium;2,684233596;EARS;Blood_CSF;4,204537491;1,713651029;132;downward_arrow;*
+2019;Acinetobacter;Carbapenem;0;Belgium;2,021893697;EARS;Blood_CSF;3,438380313;1,18894763;92;downward_arrow;*
+2020;Acinetobacter;Carbapenem;1,2;Belgium;1,522987466;EARS;Blood_CSF;3,058919714;0,758271232;163;downward_arrow;*
+2021;Acinetobacter;Carbapenem;1;Belgium;1,147187325;EARS;Blood_CSF;2,828943489;0,465205036;196;downward_arrow;*
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+2019;C. difficile;Moxifloxacin;26,3;Belgium;22,88487947;NRC;NRC_samples;35,208217;14,87487164;73;downward_arrow;*
+2020;C. difficile;Moxifloxacin;12,2;Belgium;16,55401853;NRC;NRC_samples;22,33059141;12,27175423;74;downward_arrow;*
+2021;C. difficile;Moxifloxacin;11,4;Belgium;11,97452361;NRC;NRC_samples;17,21087473;8,331314823;70;downward_arrow;*
+2022;C. difficile;Moxifloxacin;10;Belgium;8,661897742;NRC;NRC_samples;15,13681727;4,956687469;100;downward_arrow;*
+2019;C. difficile;Rifampicin;4,1;Belgium;4,134564814;NRC;NRC_samples;12,25582138;1,394816852;73;oscilate;
+2020;C. difficile;Rifampicin;1,4;Belgium;1,670747958;NRC;NRC_samples;4,471661573;0,62424195;74;oscilate;
+2021;C. difficile;Rifampicin;1,4;Belgium;0,675137255;NRC;NRC_samples;3,677120752;0,123958484;70;oscilate;
+2022;C. difficile;Rifampicin;0;Belgium;0,272818118;NRC;NRC_samples;3,767016729;0,019758268;100;oscilate;
+2011;C. albicans;Fluconazole;3,45;Belgium;0,908554329;NRC;NRC_samples;1,877449381;0,439676818;58;upward_arrow;**
+2012;C. albicans;Fluconazole;1,92;Belgium;1,032091681;NRC;NRC_samples;1,96632067;0,541729157;104;upward_arrow;**
+2013;C. albicans;Fluconazole;0,68;Belgium;1,172426573;NRC;NRC_samples;2,06255023;0,666448773;146;upward_arrow;**
+2014;C. albicans;Fluconazole;0,99;Belgium;1,331842989;NRC;NRC_samples;2,168427167;0,818014907;202;upward_arrow;**
+2015;C. albicans;Fluconazole;1,91;Belgium;1,512935468;NRC;NRC_samples;2,287874705;1,00048037;209;upward_arrow;**
+2016;C. albicans;Fluconazole;1,89;Belgium;1,718651335;NRC;NRC_samples;2,428075281;1,216503638;264;upward_arrow;**
+2017;C. albicans;Fluconazole;1,31;Belgium;1,952338665;NRC;NRC_samples;2,602865157;1,464396361;383;upward_arrow;**
+2018;C. albicans;Fluconazole;0,65;Belgium;2,217800775;NRC;NRC_samples;2,838690579;1,732714482;310;upward_arrow;**
+2019;C. albicans;Fluconazole;2,01;Belgium;2,519358124;NRC;NRC_samples;3,178870064;1,996673419;298;upward_arrow;**
+2020;C. albicans;Fluconazole;4,43;Belgium;2,861918632;NRC;NRC_samples;3,672080169;2,230500936;361;upward_arrow;**
+2021;C. albicans;Fluconazole;3,92;Belgium;3,251057551;NRC;NRC_samples;4,352466141;2,428364715;434;upward_arrow;**
+2022;C. albicans;Fluconazole;3,17;Belgium;3,693108211;NRC;NRC_samples;5,244819622;2,600479948;379;upward_arrow;**
+2011;C. glabrata;Fluconazole;15,49;Belgium;16,57136793;NRC;NRC_samples;21,6139281;12,70524422;71;oscilate;
+2012;C. glabrata;Fluconazole;14,71;Belgium;16,69529046;NRC;NRC_samples;21,09497605;13,21322778;68;oscilate;
+2013;C. glabrata;Fluconazole;12,5;Belgium;16,8201397;NRC;NRC_samples;20,61650127;13,72284734;104;oscilate;
+2014;C. glabrata;Fluconazole;18,18;Belgium;16,94592258;NRC;NRC_samples;20,19061251;14,22266371;110;oscilate;
+2015;C. glabrata;Fluconazole;26,83;Belgium;17,07264607;NRC;NRC_samples;19,83779012;14,6929291;123;oscilate;
+2016;C. glabrata;Fluconazole;19,44;Belgium;17,20031721;NRC;NRC_samples;19,591464;15,10101094;144;oscilate;
+2017;C. glabrata;Fluconazole;11,86;Belgium;17,3289431;NRC;NRC_samples;19,49906756;15,40033994;177;oscilate;
+2018;C. glabrata;Fluconazole;23,27;Belgium;17,45853086;NRC;NRC_samples;19,60683626;15,54561357;159;oscilate;
+2019;C. glabrata;Fluconazole;12,18;Belgium;17,58908769;NRC;NRC_samples;19,92762313;15,52498277;156;oscilate;
+2020;C. glabrata;Fluconazole;12,69;Belgium;17,72062085;NRC;NRC_samples;20,43161392;15,36933912;197;oscilate;
+2021;C. glabrata;Fluconazole;20,2;Belgium;17,85313762;NRC;NRC_samples;21,074375;15,1242693;198;oscilate;
+2022;C. glabrata;Fluconazole;19,91;Belgium;17,98664536;NRC;NRC_samples;21,82054165;14,82636942;216;oscilate;
+2011;C. glabrata;Anidulafungine;3,7;Belgium;3,194637539;NRC;NRC_samples;6,880406271;1,483300347;54;downward_arrow;*
+2012;C. glabrata;Anidulafungine;0;Belgium;2,816642928;NRC;NRC_samples;5,482573189;1,447035381;62;downward_arrow;*
+2013;C. glabrata;Anidulafungine;3,96;Belgium;2,483373242;NRC;NRC_samples;4,404824544;1,400088153;101;downward_arrow;*
+2014;C. glabrata;Anidulafungine;0,92;Belgium;2,189536557;NRC;NRC_samples;3,584902997;1,337294297;109;downward_arrow;*
+2015;C. glabrata;Anidulafungine;0,81;Belgium;1,930467098;NRC;NRC_samples;2,976899258;1,251874145;123;downward_arrow;*
+2016;C. glabrata;Anidulafungine;1,39;Belgium;1,70205115;NRC;NRC_samples;2,545287199;1,138173373;144;downward_arrow;*
+2017;C. glabrata;Anidulafungine;5;Belgium;1,500661742;NRC;NRC_samples;2,255727888;0,998341013;160;downward_arrow;*
+2018;C. glabrata;Anidulafungine;1,26;Belgium;1,32310105;NRC;NRC_samples;2,069549892;0,84588267;159;downward_arrow;*
+2019;C. glabrata;Anidulafungine;1,32;Belgium;1,166549622;NRC;NRC_samples;1,950012899;0,697861036;152;downward_arrow;*
+2020;C. glabrata;Anidulafungine;0,51;Belgium;1,028521609;NRC;NRC_samples;1,870437533;0,565566442;196;downward_arrow;*
+2021;C. glabrata;Anidulafungine;0;Belgium;0,906825291;NRC;NRC_samples;1,814613003;0,453172168;198;downward_arrow;*
+2022;C. glabrata;Anidulafungine;0,93;Belgium;0,799528276;NRC;NRC_samples;1,77332008;0,360479459;215;downward_arrow;*
+2012;E.coli;Colistin;0;Belgium;0,366624613;EARS;Blood_CSF;0,653608181;0,205648599;257;upward_arrow;**
+2013;E.coli;Colistin;0,6;Belgium;0,414858773;EARS;Blood_CSF;0,681904298;0,252392897;1082;upward_arrow;**
+2014;E.coli;Colistin;0,2;Belgium;0,469438753;EARS;Blood_CSF;0,713188369;0,308996547;506;upward_arrow;**
+2015;E.coli;Colistin;1,3;Belgium;0,531199429;EARS;Blood_CSF;0,749032545;0,376716387;927;upward_arrow;**
+2016;E.coli;Colistin;0,4;Belgium;0,601085513;EARS;Blood_CSF;0,792665169;0,455808843;1784;upward_arrow;**
+2017;E.coli;Colistin;0,3;Belgium;0,680166005;EARS;Blood_CSF;0,851077695;0,543576453;1393;upward_arrow;**
+2018;E.coli;Colistin;0,9;Belgium;0,769650548;EARS;Blood_CSF;0,938201915;0,631380043;2233;upward_arrow;**
+2019;E.coli;Colistin;0,8;Belgium;0,870907927;EARS;Blood_CSF;1,072718594;0,707063924;1981;upward_arrow;**
+2020;E.coli;Colistin;0,9;Belgium;0,985487011;EARS;Blood_CSF;1,266440124;0,766861876;1812;upward_arrow;**
+2021;E.coli;Colistin;1,3;Belgium;1,11514044;EARS;Blood_CSF;1,524202467;0,815861559;1594;upward_arrow;**
+2017;E.coli;Colistin;0,4;Belgium;0,495011958;EARS;Urine;0,694362933;0,352894469;17228;upward_arrow;**
+2018;E.coli;Colistin;0,6;Belgium;0,60365088;EARS;Urine;0,766344526;0,47549682;30118;upward_arrow;**
+2019;E.coli;Colistin;0,9;Belgium;0,73613249;EARS;Urine;0,889446203;0,60924544;27887;upward_arrow;**
+2020;E.coli;Colistin;1,1;Belgium;0,897689477;EARS;Urine;1,125280418;0,716129406;25822;upward_arrow;**
+2021;E.coli;Colistin;0,8;Belgium;1,094702934;EARS;Urine;1,508365072;0,794485723;32695;upward_arrow;**
+2011;E.coli;3GC;5,7;Belgium;7,505512067;EARS;Blood_CSF;8,814535181;6,390888485;3405;upward_arrow;*
+2012;E.coli;3GC;6,9;Belgium;7,750740861;EARS;Blood_CSF;8,904398481;6,746551609;4097;upward_arrow;*
+2013;E.coli;3GC;8;Belgium;8,003982055;EARS;Blood_CSF;9,012920109;7,107988084;4051;upward_arrow;*
+2014;E.coli;3GC;9,7;Belgium;8,265497439;EARS;Blood_CSF;9,151458916;7,465306738;2800;upward_arrow;*
+2015;E.coli;3GC;10;Belgium;8,535557356;EARS;Blood_CSF;9,338049021;7,802030083;2908;upward_arrow;*
+2016;E.coli;3GC;10,5;Belgium;8,814440985;EARS;Blood_CSF;9,595759587;8,096739937;3737;upward_arrow;*
+2017;E.coli;3GC;9,7;Belgium;9,102436622;EARS;Blood_CSF;9,942042319;8,333735646;4670;upward_arrow;*
+2018;E.coli;3GC;9;Belgium;9,399841988;EARS;Blood_CSF;10,37740573;8,514365891;4644;upward_arrow;*
+2019;E.coli;3GC;10,1;Belgium;9,706964526;EARS;Blood_CSF;10,89001035;8,652439919;4230;upward_arrow;*
+2020;E.coli;3GC;9,8;Belgium;10,02412173;EARS;Blood_CSF;11,4674413;8,762461805;4632;upward_arrow;*
+2021;E.coli;3GC;8,2;Belgium;10,35164146;EARS;Blood_CSF;12,10163479;8,854711177;5220;upward_arrow;*
+2017;E.coli;3GC;5,8;Belgium;6,17225066;EARS;Urine;6,591162111;5,779963771;82636;equals;
+2018;E.coli;3GC;6,4;Belgium;6,075107271;EARS;Urine;6,363759217;5,799548206;104256;equals;
+2019;E.coli;3GC;6,2;Belgium;5,979492795;EARS;Urine;6,20944871;5,75805289;102540;equals;
+2020;E.coli;3GC;5,9;Belgium;5,88538317;EARS;Urine;6,162688282;5,620556073;107666;equals;
+2021;E.coli;3GC;5,6;Belgium;5,79275471;EARS;Urine;6,182601387;5,427489989;122260;equals;
+2011;E.coli;3GC;9,01;Neighbouring countries;10,47933335;EARS;Blood_CSF;12,11950892;9,06112849;65319;oscilate;
+2012;E.coli;3GC;10,43;Neighbouring countries;10,65453604;EARS;Blood_CSF;12,07710299;9,399533835;72086;oscilate;
+2013;E.coli;3GC;11,06;Neighbouring countries;10,83266791;EARS;Blood_CSF;12,0575739;9,732197795;81001;oscilate;
+2014;E.coli;3GC;11,03;Neighbouring countries;11,01377795;EARS;Blood_CSF;12,07441499;10,04630907;85719;oscilate;
+2015;E.coli;3GC;11,88;Neighbouring countries;11,19791595;EARS;Blood_CSF;12,14845093;10,32175397;91822;oscilate;
+2016;E.coli;3GC;11,8;Neighbouring countries;11,38513253;EARS;Blood_CSF;12,30447929;10,53447607;123944;oscilate;
+2017;E.coli;3GC;12,02;Neighbouring countries;11,57547916;EARS;Blood_CSF;12,55745851;10,6702895;140404;oscilate;
+2018;E.coli;3GC;13,36;Neighbouring countries;11,76900817;EARS;Blood_CSF;12,90127263;10,73611551;152720;oscilate;
+2019;E.coli;3GC;13,54;Neighbouring countries;11,96577276;EARS;Blood_CSF;13,31734034;10,75137484;157918;oscilate;
+2020;E.coli;3GC;12,69;Neighbouring countries;12,16582704;EARS;Blood_CSF;13,78844968;10,73415439;137465;oscilate;
+2021;E.coli;3GC;8,558105513;Neighbouring countries;12,36922601;EARS;Blood_CSF;14,30326741;10,69669941;54685;oscilate;
+2011;E.coli;3GC;7,42;Europe;8,172328835;EARS;Blood_CSF;8,762414685;7,621981039;17904;upward_arrow;***
+2012;E.coli;3GC;8,6;Europe;8,444006741;EARS;Blood_CSF;8,967735939;7,950864112;19990;upward_arrow;***
+2013;E.coli;3GC;8,8;Europe;8,724716207;EARS;Blood_CSF;9,185430607;8,287109898;22455;upward_arrow;***
+2014;E.coli;3GC;9;Europe;9,014757477;EARS;Blood_CSF;9,420792983;8,626222072;24087;upward_arrow;***
+2015;E.coli;3GC;9,52;Europe;9,314440772;EARS;Blood_CSF;9,6822749;8,960580833;27503;upward_arrow;***
+2016;E.coli;3GC;10,27;Europe;9,624086629;EARS;Blood_CSF;9,980913348;9,280016789;36171;upward_arrow;***
+2017;E.coli;3GC;10,63;Europe;9,944026239;EARS;Blood_CSF;10,32545906;9,576683933;44223;upward_arrow;***
+2018;E.coli;3GC;10,51;Europe;10,2746018;EARS;Blood_CSF;10,71665297;9,850784804;43287;upward_arrow;***
+2019;E.coli;3GC;10,3;Europe;10,6161669;EARS;Blood_CSF;11,14899444;10,10880401;44224;upward_arrow;***
+2020;E.coli;3GC;9,57;Europe;10,96908687;EARS;Blood_CSF;11,61646057;10,35779065;54299;upward_arrow;***
+2021;E.coli;3GC;11,75443498;Europe;11,33373917;EARS;Blood_CSF;12,11505481;10,60281159;143180;upward_arrow;***
+2011;E.coli;Ciprofloxacin;21,5;Belgium;25,03203149;EARS;Blood_CSF;28,0338145;22,35167106;3549;downward_arrow;**
+2012;E.coli;Ciprofloxacin;21,9;Belgium;24,42081881;EARS;Blood_CSF;26,9270682;22,14783975;3428;downward_arrow;**
+2013;E.coli;Ciprofloxacin;23,2;Belgium;23,82453025;EARS;Blood_CSF;25,90187621;21,91378868;3679;downward_arrow;**
+2014;E.coli;Ciprofloxacin;26,1;Belgium;23,2428014;EARS;Blood_CSF;24,9738169;21,63176814;2337;downward_arrow;**
+2015;E.coli;Ciprofloxacin;26,8;Belgium;22,67527675;EARS;Blood_CSF;24,16665622;21,27593371;2402;downward_arrow;**
+2016;E.coli;Ciprofloxacin;24,5;Belgium;22,12160948;EARS;Blood_CSF;23,50544885;20,81924107;3409;downward_arrow;**
+2017;E.coli;Ciprofloxacin;23,3;Belgium;21,58146122;EARS;Blood_CSF;22,9963885;20,25359193;3890;downward_arrow;**
+2018;E.coli;Ciprofloxacin;21,7;Belgium;21,05450188;EARS;Blood_CSF;22,61466845;19,60196987;3766;downward_arrow;**
+2019;E.coli;Ciprofloxacin;19;Belgium;20,54040943;EARS;Blood_CSF;22,32138036;18,90153802;3802;downward_arrow;**
+2020;E.coli;Ciprofloxacin;18,4;Belgium;20,03886969;EARS;Blood_CSF;22,08409896;18,18305103;4201;downward_arrow;**
+2021;E.coli;Ciprofloxacin;18,1;Belgium;19,54957615;EARS;Blood_CSF;21,88183287;17,46590105;5046;downward_arrow;**
+2017;E.coli;Ciprofloxacin;16,2;Belgium;16,75546098;EARS;Urine;17,4109029;16,1246935;75845;downward_arrow;***
+2018;E.coli;Ciprofloxacin;16,7;Belgium;16,0606143;EARS;Urine;16,50224386;15,63080354;93123;downward_arrow;***
+2019;E.coli;Ciprofloxacin;15,4;Belgium;15,39458282;EARS;Urine;15,73774216;15,05890602;97239;downward_arrow;***
+2020;E.coli;Ciprofloxacin;14,9;Belgium;14,75617157;EARS;Urine;15,15832945;14,36468313;103576;downward_arrow;***
+2021;E.coli;Ciprofloxacin;13,9;Belgium;14,14423514;EARS;Urine;14,69259367;13,61634251;119251;downward_arrow;***
+2011;E.coli;Ciprofloxacin;20,57;Europe;21,06863641;EARS;Blood_CSF;21,67872137;20,47572052;66853;equals;
+2012;E.coli;Ciprofloxacin;20,76;Europe;21,05508183;EARS;Blood_CSF;21,57607568;20,54666833;73053;equals;
+2013;E.coli;Ciprofloxacin;20,94;Europe;21,04153597;EARS;Blood_CSF;21,48277406;20,60936053;82276;equals;
+2014;E.coli;Ciprofloxacin;21,19;Europe;21,02799883;EARS;Blood_CSF;21,40424951;20,658362;84545;equals;
+2015;E.coli;Ciprofloxacin;21,45;Europe;21,01447039;EARS;Blood_CSF;21,34867438;20,68549822;91832;equals;
+2016;E.coli;Ciprofloxacin;20,79;Europe;21,00095066;EARS;Blood_CSF;21,3246775;20,68213828;125161;equals;
+2017;E.coli;Ciprofloxacin;21,21;Europe;20,98743963;EARS;Blood_CSF;21,33492962;20,64560933;141386;equals;
+2018;E.coli;Ciprofloxacin;22,47;Europe;20,97393729;EARS;Blood_CSF;21,37339158;20,58194853;154698;equals;
+2019;E.coli;Ciprofloxacin;21,3;Europe;20,96044363;EARS;Blood_CSF;21,43095459;20,50026262;161718;equals;
+2020;E.coli;Ciprofloxacin;20,45;Europe;20,94695866;EARS;Blood_CSF;21,50049527;20,40767302;137785;equals;
+2011;E.coli;Ciprofloxacin;20,57499289;Europe;21,06863641;EARS;Blood_CSF;21,67872137;20,47572052;66853;equals;
+2012;E.coli;Ciprofloxacin;20,75616333;Europe;21,05508183;EARS;Blood_CSF;21,57607568;20,54666833;73053;equals;
+2013;E.coli;Ciprofloxacin;20,93684671;Europe;21,04153597;EARS;Blood_CSF;21,48277406;20,60936053;82276;equals;
+2014;E.coli;Ciprofloxacin;21,19463008;Europe;21,02799883;EARS;Blood_CSF;21,40424951;20,658362;84545;equals;
+2015;E.coli;Ciprofloxacin;21,44568342;Europe;21,01447039;EARS;Blood_CSF;21,34867438;20,68549822;91832;equals;
+2016;E.coli;Ciprofloxacin;20,79241936;Europe;21,00095066;EARS;Blood_CSF;21,3246775;20,68213828;125161;equals;
+2017;E.coli;Ciprofloxacin;21,21402636;Europe;20,98743963;EARS;Blood_CSF;21,33492962;20,64560933;141562;equals;
+2018;E.coli;Ciprofloxacin;22,47281801;Europe;20,97393729;EARS;Blood_CSF;21,37339158;20,58194853;154698;equals;
+2019;E.coli;Ciprofloxacin;21,29756737;Europe;20,96044363;EARS;Blood_CSF;21,43095459;20,50026262;161718;equals;
+2020;E.coli;Ciprofloxacin;20,40079786;Europe;20,94695866;EARS;Blood_CSF;21,50049527;20,40767302;139372;equals;
+2021;E.coli;Ciprofloxacin;18,83450957;Europe;20,93348237;EARS;Blood_CSF;21,57758216;20,30860921;143253;equals;
+2017;E.coli;3GC;5,1;Private lab;5,618002546;EARS;Urine;6,219444104;5,074722447;44766;equals;
+2018;E.coli;3GC;6;Private lab;5,507628174;EARS;Urine;5,918118486;5,125610137;56820;equals;
+2019;E.coli;3GC;5,6;Private lab;5,399422278;EARS;Urine;5,724821707;5,092518585;57176;equals;
+2020;E.coli;3GC;5,4;Private lab;5,293342255;EARS;Urine;5,685792473;4,927980113;56877;equals;
+2021;E.coli;3GC;4,9;Private lab;5,189346338;EARS;Urine;5,741943649;4,689930286;62306;equals;
+2017;E.coli;3GC;6,7;Hospital Lab;6,908494867;EARS;Urine;7,110948809;6,711804937;37870;downward_arrow;***
+2018;E.coli;3GC;6,8;Hospital Lab;6,771215973;EARS;Urine;6,911159215;6,634106424;47436;downward_arrow;***
+2019;E.coli;3GC;7;Hospital Lab;6,636664951;EARS;Urine;6,743206057;6,53180717;45364;downward_arrow;***
+2020;E.coli;3GC;6,4;Hospital Lab;6,504787597;EARS;Urine;6,62579834;6,385986941;50789;downward_arrow;***
+2021;E.coli;3GC;6,3;Hospital Lab;6,375530781;EARS;Urine;6,54357313;6,211803846;59954;downward_arrow;***
+2017;E.coli;Ciprofloxacin;18,1;Hospital Lab;17,73893231;EARS;Urine;18,35264753;17,14573982;30855;downward_arrow;***
+2018;E.coli;Ciprofloxacin;16,7;Hospital Lab;16,86744712;EARS;Urine;17,27826616;16,46639596;36132;downward_arrow;***
+2019;E.coli;Ciprofloxacin;15,9;Hospital Lab;16,03877659;EARS;Urine;16,35065886;15,73284334;39945;downward_arrow;***
+2020;E.coli;Ciprofloxacin;14,8;Hospital Lab;15,2508173;EARS;Urine;15,60677676;14,90297657;46525;downward_arrow;***
+2021;E.coli;Ciprofloxacin;14,9;Hospital Lab;14,5015692;EARS;Urine;14,98224099;14,03631868;56806;downward_arrow;***
+2017;E.coli;Ciprofloxacin;14,9;Private lab;16,06993169;EARS;Urine;17,5584011;14,70764354;44990;downward_arrow;*
+2018;E.coli;Ciprofloxacin;16,7;Private lab;15,48526453;EARS;Urine;16,4860399;14,54524063;56991;downward_arrow;*
+2019;E.coli;Ciprofloxacin;15;Private lab;14,92186912;EARS;Urine;15,70395532;14,17873227;57294;downward_arrow;*
+2020;E.coli;Ciprofloxacin;15;Private lab;14,37897154;EARS;Urine;15,30681143;13,50737373;57051;downward_arrow;*
+2021;E.coli;Ciprofloxacin;13,1;Private lab;13,85582604;EARS;Urine;15,13720366;12,68291816;62445;downward_arrow;*
+2017;E.coli;Colistin;0,3;Hospital Lab;0,465510999;EARS;Urine;0,551816994;0,392703546;9608;upward_arrow;***
+2018;E.coli;Colistin;0,6;Hospital Lab;0,58107576;EARS;Urine;0,654381409;0,515982015;20880;upward_arrow;***
+2019;E.coli;Colistin;0,8;Hospital Lab;0,725329883;EARS;Urine;0,786705895;0,668742209;22559;upward_arrow;***
+2020;E.coli;Colistin;1;Hospital Lab;0,905395605;EARS;Urine;0,980646743;0,835918956;20417;upward_arrow;***
+2021;E.coli;Colistin;1;Hospital Lab;1,130163283;EARS;Urine;1,26910928;1,006429521;18003;upward_arrow;***
+2017;E.coli;Colistin;0,6;Private lab;0,790353616;EARS;Urine;1,293010643;0,483104174;7620;oscilate;
+2018;E.coli;Colistin;0,9;Private lab;0,837069563;EARS;Urine;1,187469492;0,590066068;9238;oscilate;
+2019;E.coli;Colistin;1;Private lab;0,88654678;EARS;Urine;1,177953083;0,667229625;5328;oscilate;
+2020;E.coli;Colistin;1,4;Private lab;0,93894848;EARS;Urine;1,323435044;0,666163596;5405;oscilate;
+2021;E.coli;Colistin;0,6;Private lab;0,994447521;EARS;Urine;1,612070801;0,613450644;14692;oscilate;
+2014;E. faecalis;vancomycin;0,13;Belgium;0,133093081;AMR;NA;0,184903976;0,095799824;9222;downward_arrow;***
+2015;E. faecalis;vancomycin;0,17;Belgium;0,114818257;AMR;NA;0,149249126;0,088330382;15498;downward_arrow;***
+2016;E. faecalis;vancomycin;0,09;Belgium;0,099052724;AMR;NA;0,121978086;0,080436104;20815;downward_arrow;***
+2017;E. faecalis;vancomycin;0,04;Belgium;0,085451933;AMR;NA;0,102127265;0,071499349;22769;downward_arrow;***
+2018;E. faecalis;vancomycin;0,08;Belgium;0,073718648;AMR;NA;0,088667603;0,061290019;25241;downward_arrow;***
+2019;E. faecalis;vancomycin;0,05;Belgium;0,063596444;AMR;NA;0,079582341;0,050821673;24384;downward_arrow;***
+2020;E. faecalis;vancomycin;0,08;Belgium;0,054864106;AMR;NA;0,072843707;0,041322308;22900;downward_arrow;***
+2021;E. faecalis;vancomycin;0,05;Belgium;0,047330792;AMR;NA;0,067337057;0,033268515;25731;downward_arrow;***
+2016;E. faecium;vancomycin;1,5;Belgium;1,686523717;EARS;Urine;2,773984829;1,025370514;1073;oscilate;
+2017;E. faecium;vancomycin;1,6;Belgium;1,715315287;EARS;Urine;2,476499266;1,188091018;1492;oscilate;
+2018;E. faecium;vancomycin;2,5;Belgium;1,744598373;EARS;Urine;2,31241588;1,316209386;1591;oscilate;
+2019;E. faecium;vancomycin;1,7;Belgium;1,774381367;EARS;Urine;2,359342782;1,334451806;2095;oscilate;
+2020;E. faecium;vancomycin;1;Belgium;1,804672803;EARS;Urine;2,624466442;1,240954685;2614;oscilate;
+2021;E. faecium;vancomycin;2,6;Belgium;1,835481361;EARS;Urine;3,046053863;1,106018468;571;oscilate;
+2014;E. faecium;vancomycin;4,22;Belgium;4,175001981;AMR;All sample types;5,15543861;3,381020096;2226;downward_arrow;***
+2015;E. faecium;vancomycin;3,49;Belgium;3,549685979;AMR;All sample types;4,208968741;2,993671687;3779;downward_arrow;***
+2016;E. faecium;vancomycin;3,57;Belgium;3,018027443;AMR;All sample types;3,459938859;2,632557977;6194;downward_arrow;***
+2017;E. faecium;vancomycin;1,72;Belgium;2,56599871;AMR;All sample types;2,88148279;2,285055945;6915;downward_arrow;***
+2018;E. faecium;vancomycin;2,32;Belgium;2,181673131;AMR;All sample types;2,448811105;1,943676929;8102;downward_arrow;***
+2019;E. faecium;vancomycin;2;Belgium;1,854910383;AMR;All sample types;2,124091393;1,619842037;8335;downward_arrow;***
+2020;E. faecium;vancomycin;1,7;Belgium;1,577088923;AMR;All sample types;1,86715355;1,332086197;8167;downward_arrow;***
+2021;E. faecium;vancomycin;1,25;Belgium;1,340878511;AMR;All sample types;1,652913967;1,087748798;8829;downward_arrow;***
+2011;H. influenzae;Ampicillin;20,73170732;Belgium;22,11167778;NRC;NRC_samples;28,34615334;17,24841774;82;oscilate;
+2012;H. influenzae;Ampicillin;18,3908046;Belgium;21,74310918;NRC;NRC_samples;27,01911902;17,49734314;87;oscilate;
+2013;H. influenzae;Ampicillin;20,93023256;Belgium;21,38068408;NRC;NRC_samples;25,81162115;17,71038127;86;oscilate;
+2014;H. influenzae;Ampicillin;27,65957447;Belgium;21,02430005;NRC;NRC_samples;24,74248854;17,864864;94;oscilate;
+2015;H. influenzae;Ampicillin;16,32653061;Belgium;20,67385642;NRC;NRC_samples;23,84275936;17,92612729;98;oscilate;
+2016;H. influenzae;Ampicillin;27,17391304;Belgium;20,32925416;NRC;NRC_samples;23,15425787;17,84892338;92;oscilate;
+2017;H. influenzae;Ampicillin;13,26530612;Belgium;19,9903959;NRC;NRC_samples;22,71235592;17,5946489;98;oscilate;
+2018;H. influenzae;Ampicillin;18,60465116;Belgium;19,6571859;NRC;NRC_samples;22,5158233;17,16148472;129;oscilate;
+2019;H. influenzae;Ampicillin;22,58064516;Belgium;19,32953001;NRC;NRC_samples;22,52057601;16,59063829;155;oscilate;
+2020;H. influenzae;Ampicillin;24,69135802;Belgium;19,00733566;NRC;NRC_samples;22,66859825;15,93741285;81;oscilate;
+2021;H. influenzae;Ampicillin;20,23809524;Belgium;18,69051181;NRC;NRC_samples;22,91294893;15,24619256;84;oscilate;
+2022;H. influenzae;Ampicillin;13,7;Belgium;18,37896893;NRC;NRC_samples;23,22260751;14,54558877;146;oscilate;
+2016;H. pylori;Clarithomycin;20,7;Belgium;20,92238653;NRC;NRC_samples;23,32643815;18,76609946;723;equals;
+2017;H. pylori;Clarithomycin;20,5;Belgium;20,91303484;NRC;NRC_samples;22,80907767;19,17460376;674;equals;
+2018;H. pylori;Clarithomycin;23,1;Belgium;20,90368733;NRC;NRC_samples;22,37461702;19,52945804;670;equals;
+2019;H. pylori;Clarithomycin;19,9;Belgium;20,894344;NRC;NRC_samples;22,09220347;19,76143357;855;equals;
+2020;H. pylori;Clarithomycin;19,8;Belgium;20,88500484;NRC;NRC_samples;22,05722042;19,77508584;919;equals;
+2021;H. pylori;Clarithomycin;21,5;Belgium;20,87566986;NRC;NRC_samples;22,28152186;19,55852005;1301;equals;
+2022;H. pylori;Clarithomycin;20,8;Belgium;20,86633905;NRC;NRC_samples;22,67420516;19,20261823;1541;equals;
+2011;K.pneumoniae;Carbapenem;0,4;Belgium;0,599419543;EARS;Blood_CSF;1,028099148;0,349483597;534;upward_arrow;**
+2012;K.pneumoniae;Carbapenem;0,7;Belgium;0,662658512;EARS;Blood_CSF;1,063157565;0,413030314;545;upward_arrow;**
+2013;K.pneumoniae;Carbapenem;0,3;Belgium;0,732569213;EARS;Blood_CSF;1,102064732;0,486956561;618;upward_arrow;**
+2014;K.pneumoniae;Carbapenem;0,5;Belgium;0,809855518;EARS;Blood_CSF;1,146689087;0,571964945;429;upward_arrow;**
+2015;K.pneumoniae;Carbapenem;0,5;Belgium;0,895295555;EARS;Blood_CSF;1,200403918;0,667737016;432;upward_arrow;**
+2016;K.pneumoniae;Carbapenem;2,4;Belgium;0,989749545;EARS;Blood_CSF;1,26941494;0,771697363;669;upward_arrow;**
+2017;K.pneumoniae;Carbapenem;1,1;Belgium;1,094168463;EARS;Blood_CSF;1,364468047;0,877414923;790;upward_arrow;**
+2018;K.pneumoniae;Carbapenem;1,4;Belgium;1,209603614;EARS;Blood_CSF;1,500442389;0,975139674;935;upward_arrow;**
+2019;K.pneumoniae;Carbapenem;1,2;Belgium;1,337217213;EARS;Blood_CSF;1,690616219;1,057691186;822;upward_arrow;**
+2020;K.pneumoniae;Carbapenem;1,4;Belgium;1,47829409;EARS;Blood_CSF;1,941996422;1,125312792;957;upward_arrow;**
+2021;K.pneumoniae;Carbapenem;1,4;Belgium;1,634254627;EARS;Blood_CSF;2,25883397;1,182374721;1016;upward_arrow;**
+2016;K.pneumoniae;Carbapenem;0,4;Belgium;0,265710248;EARS;Urine;0,545911249;0,129328597;9531;oscilate;
+2017;K.pneumoniae;Carbapenem;0,3;Belgium;0,314376274;EARS;Urine;0,535188484;0,184668476;13631;oscilate;
+2018;K.pneumoniae;Carbapenem;0,3;Belgium;0,371955701;EARS;Urine;0,563631547;0,245463627;14089;oscilate;
+2019;K.pneumoniae;Carbapenem;0,2;Belgium;0,440081059;EARS;Urine;0,678593792;0,285400988;14345;oscilate;
+2020;K.pneumoniae;Carbapenem;0,3;Belgium;0,520683883;EARS;Urine;0,92276753;0,293802824;17521;oscilate;
+2021;K.pneumoniae;Carbapenem;1,4;Belgium;0,616049477;EARS;Urine;1,330149897;0,285318939;1016;oscilate;
+2011;K.pneumoniae;Carbapenem;0,13;Neighbouring countries;0,27771972;EARS;Blood_CSF;0,411375045;0,187488871;3069;upward_arrow;**
+2012;K.pneumoniae;Carbapenem;0,27;Neighbouring countries;0,305017206;EARS;Blood_CSF;0,429131121;0,216799694;3282;upward_arrow;**
+2013;K.pneumoniae;Carbapenem;0,54;Neighbouring countries;0,334997803;EARS;Blood_CSF;0,448840639;0,250029784;3713;upward_arrow;**
+2014;K.pneumoniae;Carbapenem;0,49;Neighbouring countries;0,367925237;EARS;Blood_CSF;0,471440027;0,287139344;4298;upward_arrow;**
+2015;K.pneumoniae;Carbapenem;0,3;Neighbouring countries;0,404089159;EARS;Blood_CSF;0,498617406;0,327481645;5084;upward_arrow;**
+2016;K.pneumoniae;Carbapenem;0,37;Neighbouring countries;0,443807686;EARS;Blood_CSF;0,533320612;0,369318676;6991;upward_arrow;**
+2017;K.pneumoniae;Carbapenem;0,53;Neighbouring countries;0,487430207;EARS;Blood_CSF;0,579901518;0,409704405;8093;upward_arrow;**
+2018;K.pneumoniae;Carbapenem;0,46;Neighbouring countries;0,53534045;EARS;Blood_CSF;0,642759355;0,445873553;8571;upward_arrow;**
+2019;K.pneumoniae;Carbapenem;0,84;Neighbouring countries;0,587959863;EARS;Blood_CSF;0,724404589;0,477215089;9257;upward_arrow;**
+2020;K.pneumoniae;Carbapenem;0,45;Neighbouring countries;0,645751317;EARS;Blood_CSF;0,825841473;0,504933182;12041;upward_arrow;**
+2021;K.pneumoniae;Carbapenem;0,728078506;Neighbouring countries;0,709223178;EARS;Blood_CSF;0,948176666;0,530489238;12636;upward_arrow;**
+2011;K.pneumoniae;Carbapenem;8,72;Europe;6,985395869;EARS;Blood_CSF;8,204161646;5,947683328;15169;upward_arrow;*
+2012;K.pneumoniae;Carbapenem;7,49;Europe;7,198322598;EARS;Blood_CSF;8,268853795;6,266388245;16548;upward_arrow;*
+2013;K.pneumoniae;Carbapenem;7,49;Europe;7,417739695;EARS;Blood_CSF;8,351117314;6,588682701;18311;upward_arrow;*
+2014;K.pneumoniae;Carbapenem;6,82;Europe;7,643844998;EARS;Blood_CSF;8,461799531;6,904957526;19809;upward_arrow;*
+2015;K.pneumoniae;Carbapenem;7,45;Europe;7,876842375;EARS;Blood_CSF;8,617993178;7,199430832;22065;upward_arrow;*
+2016;K.pneumoniae;Carbapenem;6,48;Europe;8,116941907;EARS;Blood_CSF;8,841038992;7,452149683;30314;upward_arrow;*
+2017;K.pneumoniae;Carbapenem;6,89;Europe;8,364360081;EARS;Blood_CSF;9,145995562;7,649524767;32861;upward_arrow;*
+2018;K.pneumoniae;Carbapenem;8,68;Europe;8,619319981;EARS;Blood_CSF;9,53170539;7,794269115;38141;upward_arrow;*
+2019;K.pneumoniae;Carbapenem;7,97;Europe;8,882051492;EARS;Blood_CSF;9,986258473;7,899939594;40714;upward_arrow;*
+2020;K.pneumoniae;Carbapenem;10,2;Europe;9,152791505;EARS;Blood_CSF;10,49790496;7,980029601;39068;upward_arrow;*
+2021;K.pneumoniae;Carbapenem;11,56950032;Europe;9,431784134;EARS;Blood_CSF;11,0591243;8,043905602;42007;upward_arrow;*
+2011;K.pneumoniae;AG, FQ and 3GC;5,5;Belgium;7,604652441;EARS;Blood_CSF;9,157194056;6,315333977;435;oscilate;
+2012;K.pneumoniae;AG, FQ and 3GC;8,5;Belgium;7,776497611;EARS;Blood_CSF;9,14597768;6,612077703;411;oscilate;
+2013;K.pneumoniae;AG, FQ and 3GC;8,2;Belgium;7,952226031;EARS;Blood_CSF;9,145382346;6,914735377;464;oscilate;
+2014;K.pneumoniae;AG, FQ and 3GC;7,9;Belgium;8,131925451;EARS;Blood_CSF;9,161417245;7,218120272;341;oscilate;
+2015;K.pneumoniae;AG, FQ and 3GC;8,6;Belgium;8,315685606;EARS;Blood_CSF;9,204395832;7,512782844;396;oscilate;
+2016;K.pneumoniae;AG, FQ and 3GC;9,3;Belgium;8,503598258;EARS;Blood_CSF;9,291127607;7,782821029;637;oscilate;
+2017;K.pneumoniae;AG, FQ and 3GC;8,5;Belgium;8,695757242;EARS;Blood_CSF;9,444021181;8,006779376;632;oscilate;
+2018;K.pneumoniae;AG, FQ and 3GC;9,8;Belgium;8,892258515;EARS;Blood_CSF;9,680727007;8,168008604;742;oscilate;
+2019;K.pneumoniae;AG, FQ and 3GC;9,2;Belgium;9,0932002;EARS;Blood_CSF;10,00101852;8,267786895;806;oscilate;
+2020;K.pneumoniae;AG, FQ and 3GC;10,4;Belgium;9,298682639;EARS;Blood_CSF;10,3906147;8,321499868;973;oscilate;
+2021;K.pneumoniae;AG, FQ and 3GC;7,6;Belgium;9,508808442;EARS;Blood_CSF;10,83448682;8,345336472;931;oscilate;
+2016;K.pneumoniae;AG, FQ and 3GC;5,2;Belgium;4,867797013;EARS;Urine;6,226734777;3,805437138;8332;oscilate;
+2017;K.pneumoniae;AG, FQ and 3GC;5,2;Belgium;4,948071494;EARS;Urine;5,934890977;4,12533467;12091;oscilate;
+2018;K.pneumoniae;AG, FQ and 3GC;5,1;Belgium;5,029669775;EARS;Urine;5,804202068;4,358493683;13948;oscilate;
+2019;K.pneumoniae;AG, FQ and 3GC;4,2;Belgium;5,112613688;EARS;Urine;5,948944921;4,393857914;13824;oscilate;
+2020;K.pneumoniae;AG, FQ and 3GC;4,1;Belgium;5,196925422;EARS;Urine;6,35366309;4,250781551;16402;oscilate;
+2021;K.pneumoniae;AG, FQ and 3GC;7,6;Belgium;5,282627535;EARS;Urine;6,918959664;4,033287522;931;oscilate;
+2015;K.pneumoniae;Carbapenem;1,89;Belgium;2,082397766;AMR;All samples;2,658620503;1,631064099;15565;oscilate;
+2016;K.pneumoniae;Carbapenem;1,67;Belgium;1,991597601;AMR;All samples;2,412085329;1,644411562;18838;oscilate;
+2017;K.pneumoniae;Carbapenem;2,04;Belgium;1,904756655;AMR;All samples;2,216051877;1,637189973;19330;oscilate;
+2018;K.pneumoniae;Carbapenem;2,18;Belgium;1,821702292;AMR;All samples;2,085878254;1,59098415;21772;oscilate;
+2019;K.pneumoniae;Carbapenem;2,12;Belgium;1,742269404;AMR;All samples;2,027361853;1,497267333;20037;oscilate;
+2020;K.pneumoniae;Carbapenem;1,77;Belgium;1,66630008;AMR;All samples;2,01866222;1,375443563;19338;oscilate;
+2021;K.pneumoniae;Carbapenem;1,13;Belgium;1,593643297;AMR;All samples;2,035280112;1,247837554;21219;oscilate;
+2014;K.pneumoniae;3GC;16,9;Belgium;19,24643404;AMR;All samples;22,13187361;16,7371832;6031;oscilate;
+2015;K.pneumoniae;3GC;20,8;Belgium;19,54162633;AMR;All samples;21,88497453;17,44919369;11119;oscilate;
+2016;K.pneumoniae;3GC;20,2;Belgium;19,84134614;AMR;All samples;21,7389899;18,10935183;11347;oscilate;
+2017;K.pneumoniae;3GC;18,1;Belgium;20,1456629;AMR;All samples;21,7771122;18,6364349;12470;oscilate;
+2018;K.pneumoniae;3GC;24,1;Belgium;20,45464712;AMR;All samples;22,10047909;18,93138095;21559;oscilate;
+2019;K.pneumoniae;3GC;22,7;Belgium;20,76837039;AMR;All samples;22,7265783;18,97888908;20037;oscilate;
+2020;K.pneumoniae;3GC;21,2;Belgium;21,08690539;AMR;All samples;23,57634607;18,86032627;19245;oscilate;
+2021;K.pneumoniae;3GC;18,3;Belgium;21,41032593;AMR;All samples;24,57381205;18,65408815;21219;oscilate;
+2016;M. genitalium;Macrolide;83,33;Belgium;55,90030127;NRC;NRC_samples;78,38900492;39,8632906;12;oscilate;
+2017;M. genitalium;Macrolide;56,76;Belgium;59,641812;NRC;NRC_samples;77,84386169;45,69590539;37;oscilate;
+2018;M. genitalium;Macrolide;53,57;Belgium;63,63374898;NRC;NRC_samples;78,08560589;51,85659973;56;oscilate;
+2020;M. genitalium;Macrolide;78,6;Belgium;72,43706951;NRC;NRC_samples;85,30858231;61,50763378;46;oscilate;
+2021;M. genitalium;Macrolide;83,7;Belgium;77,28541678;NRC;NRC_samples;94,55425384;63,17045932;43;oscilate;
+2022;M. genitalium;Macrolide;76,5;Belgium;82,45827291;NRC;NRC_samples;107,2119427;63,41986347;34;oscilate;
+2016;M. genitalium;Macrolide and Fluoroquinolone;8,33;Belgium;11,02823307;NRC;NRC_samples;21,73977531;5,59444258;12;upward_arrow;*
+2017;M. genitalium;Macrolide and Fluoroquinolone;16,22;Belgium;13,46016058;NRC;NRC_samples;23,1074412;7,840587856;37;upward_arrow;*
+2018;M. genitalium;Macrolide and Fluoroquinolone;10,71;Belgium;16,42837268;NRC;NRC_samples;24,86953405;10,85229133;56;upward_arrow;*
+2020;M. genitalium;Macrolide and Fluoroquinolone;31;Belgium;24,47277157;NRC;NRC_samples;32,2954793;18,54490354;46;upward_arrow;*
+2021;M. genitalium;Macrolide and Fluoroquinolone;39,5;Belgium;29,86946622;NRC;NRC_samples;41,11324082;21,70067342;43;upward_arrow;*
+2022;M. genitalium;Macrolide and Fluoroquinolone;23,5;Belgium;36,45623094;NRC;NRC_samples;55,43514361;23,97498569;34;upward_arrow;*
+2011;M. tuberculosis;Monoresistant isoniazid;4,5;Belgium;4,778526558;NRC;NRC_samples;5,777426741;3,952333295;754;oscilate;
+2012;M. tuberculosis;Monoresistant isoniazid;5;Belgium;4,815471747;NRC;NRC_samples;5,669301876;4,090233446;735;oscilate;
+2013;M. tuberculosis;Monoresistant isoniazid;4,9;Belgium;4,852702579;NRC;NRC_samples;5,57755931;4,222047854;728;oscilate;
+2014;M. tuberculosis;Monoresistant isoniazid;4,3;Belgium;4,89022126;NRC;NRC_samples;5,51008886;4,340086808;701;oscilate;
+2015;M. tuberculosis;Monoresistant isoniazid;5,8;Belgium;4,928030017;NRC;NRC_samples;5,478941897;4,432512757;745;oscilate;
+2016;M. tuberculosis;Monoresistant isoniazid;4,6;Belgium;4,966131093;NRC;NRC_samples;5,497769853;4,485902228;769;oscilate;
+2017;M. tuberculosis;Monoresistant isoniazid;5,9;Belgium;5,004526748;NRC;NRC_samples;5,573154709;4,493915794;729;oscilate;
+2018;M. tuberculosis;Monoresistant isoniazid;5;Belgium;5,043219258;NRC;NRC_samples;5,699040076;4,462867456;695;oscilate;
+2019;M. tuberculosis;Monoresistant isoniazid;3,4;Belgium;5,08221092;NRC;NRC_samples;5,863221357;4,405234983;707;oscilate;
+2020;M. tuberculosis;Monoresistant isoniazid;6,2;Belgium;5,121504046;NRC;NRC_samples;6,055286476;4,331719695;613;oscilate;
+2021;M. tuberculosis;Monoresistant isoniazid;5,1;Belgium;5,161100966;NRC;NRC_samples;6,268583242;4,249279647;624;oscilate;
+2011;M. tuberculosis;MDR;2;Belgium;2,01990205;NRC;NRC_samples;2,740191583;1,488948552;754;oscilate;
+2012;M. tuberculosis;MDR;2,7;Belgium;1,951135081;NRC;NRC_samples;2,53289436;1,502995215;735;oscilate;
+2013;M. tuberculosis;MDR;1,8;Belgium;1,884709263;NRC;NRC_samples;2,35379088;1,509109851;728;oscilate;
+2014;M. tuberculosis;MDR;1,5;Belgium;1,820544892;NRC;NRC_samples;2,206194686;1,5023079;701;oscilate;
+2015;M. tuberculosis;MDR;2;Belgium;1,758564979;NRC;NRC_samples;2,095041105;1,476128931;745;oscilate;
+2016;M. tuberculosis;MDR;1,3;Belgium;1,698695154;NRC;NRC_samples;2,023447603;1,426063724;769;oscilate;
+2017;M. tuberculosis;MDR;0,7;Belgium;1,640863579;NRC;NRC_samples;1,987729733;1,354526845;729;oscilate;
+2018;M. tuberculosis;MDR;1;Belgium;1,585000862;NRC;NRC_samples;1,978453813;1,269793471;695;oscilate;
+2019;M. tuberculosis;MDR;2,1;Belgium;1,531039976;NRC;NRC_samples;1,986302901;1,180123841;707;oscilate;
+2020;M. tuberculosis;MDR;2,3;Belgium;1,478916172;NRC;NRC_samples;2,004916528;1,090914766;613;oscilate;
+2021;M. tuberculosis;MDR;1,4;Belgium;1,428566908;NRC;NRC_samples;2,030515861;1,00506647;624;oscilate;
+2011;S. aureus;Methicillin;18,3;Belgium;19,70942162;EARS;Blood_CSF;21,26432571;18,26821625;1346;downward_arrow;***
+2012;S. aureus;Methicillin;16,5;Belgium;17,35621215;EARS;Blood_CSF;18,51882435;16,26658878;1575;downward_arrow;***
+2013;S. aureus;Methicillin;16,9;Belgium;15,2839645;EARS;Blood_CSF;16,1595052;14,45586161;1612;downward_arrow;***
+2014;S. aureus;Methicillin;13,5;Belgium;13,45913318;EARS;Blood_CSF;14,14397993;12,80744648;987;downward_arrow;***
+2015;S. aureus;Methicillin;11,9;Belgium;11,85217788;EARS;Blood_CSF;12,43245807;11,29898204;1031;downward_arrow;***
+2016;S. aureus;Methicillin;12,2;Belgium;10,43708526;EARS;Blood_CSF;10,97955861;9,921414197;1364;downward_arrow;***
+2017;S. aureus;Methicillin;8,5;Belgium;9,190947836;EARS;Blood_CSF;9,735346429;8,676991902;1510;downward_arrow;***
+2018;S. aureus;Methicillin;8,9;Belgium;8,093593188;EARS;Blood_CSF;8,656211212;7,567543015;1733;downward_arrow;***
+2019;S. aureus;Methicillin;6,3;Belgium;7,127257369;EARS;Blood_CSF;7,710297347;6,588305914;1276;downward_arrow;***
+2020;S. aureus;Methicillin;6,8;Belgium;6,276297366;EARS;Blood_CSF;6,875336399;5,729451817;1580;downward_arrow;***
+2021;S. aureus;Methicillin;4,6;Belgium;5,526937864;EARS;Blood_CSF;6,135132978;4,979035054;1835;downward_arrow;***
+2011;S. aureus;Methicillin;14,94;Neighbouring countries;14,88623358;EARS;Blood_CSF;15,5495081;14,25125147;9323;downward_arrow;***
+2012;S. aureus;Methicillin;14,21;Neighbouring countries;13,73142064;EARS;Blood_CSF;14,2581047;13,2241919;10199;downward_arrow;***
+2013;S. aureus;Methicillin;11,92;Neighbouring countries;12,66619335;EARS;Blood_CSF;13,08055838;12,26495455;11621;downward_arrow;***
+2014;S. aureus;Methicillin;12,06;Neighbouring countries;11,68360203;EARS;Blood_CSF;12,00994333;11,36612827;11648;downward_arrow;***
+2015;S. aureus;Methicillin;11,19;Neighbouring countries;10,77723611;EARS;Blood_CSF;11,04102682;10,51974785;13480;downward_arrow;***
+2016;S. aureus;Methicillin;9,8;Neighbouring countries;9,941182341;EARS;Blood_CSF;10,16908242;9,718389749;18672;downward_arrow;***
+2017;S. aureus;Methicillin;9,17;Neighbouring countries;9,169986194;EARS;Blood_CSF;9,386756321;8,958221979;22845;downward_arrow;***
+2018;S. aureus;Methicillin;8,02;Neighbouring countries;8,45861628;EARS;Blood_CSF;8,682282523;8,240711954;22586;downward_arrow;***
+2019;S. aureus;Methicillin;7,4;Neighbouring countries;7,802431526;EARS;Blood_CSF;8,042659426;7,569379044;21847;downward_arrow;***
+2020;S. aureus;Methicillin;7,52;Neighbouring countries;7,197150894;EARS;Blood_CSF;7,457331491;6,946047799;28187;downward_arrow;***
+2021;S. aureus;Methicillin;6,81685196;Neighbouring countries;6,63882545;EARS;Blood_CSF;6,918761973;6,370215298;30762;downward_arrow;***
+2011;S. aureus;Methicillin;16,31;Europe;16,8873703;EARS;Blood_CSF;17,73246174;16,08255412;36003;downward_arrow;***
+2012;S. aureus;Methicillin;16,15;Europe;16,34837199;EARS;Blood_CSF;17,05136075;15,67436585;37321;downward_arrow;***
+2013;S. aureus;Methicillin;16,01;Europe;15,82657702;EARS;Blood_CSF;16,40658388;15,2670746;41833;downward_arrow;***
+2014;S. aureus;Methicillin;15,88;Europe;15,3214363;EARS;Blood_CSF;15,80182057;14,85565599;41275;downward_arrow;***
+2015;S. aureus;Methicillin;15,91;Europe;14,83241829;EARS;Blood_CSF;15,2429928;14,43290272;46173;downward_arrow;***
+2016;S. aureus;Methicillin;13,88;Europe;14,35900838;EARS;Blood_CSF;14,73632574;13,99135208;57730;downward_arrow;***
+2017;S. aureus;Methicillin;12,86;Europe;13,90070841;EARS;Blood_CSF;14,28267314;13,52895865;66120;downward_arrow;***
+2018;S. aureus;Methicillin;13,96;Europe;13,45703612;EARS;Blood_CSF;13,87410988;13,05250013;72882;downward_arrow;***
+2019;S. aureus;Methicillin;12,86;Europe;13,02752462;EARS;Blood_CSF;13,49887175;12,57263575;74718;downward_arrow;***
+2020;S. aureus;Methicillin;13,23;Europe;12,61172194;EARS;Blood_CSF;13,14728272;12,09797748;72314;downward_arrow;***
+2021;S. aureus;Methicillin;11,74188954;Europe;12,20919054;EARS;Blood_CSF;12,81308582;11,63375753;78633;downward_arrow;***
+2013;N. gonorrhea;Ciprofloxacin;51,4;Belgium;47,18967386;NRC;NRC_samples;52,70280733;42,25325807;592;oscilate;
+2014;N. gonorrhea;Ciprofloxacin;53,9;Belgium;47,81766338;NRC;NRC_samples;52,51777833;43,53818848;558;oscilate;
+2015;N. gonorrhea;Ciprofloxacin;46,3;Belgium;48,45401005;NRC;NRC_samples;52,42887587;44,78049645;627;oscilate;
+2016;N. gonorrhea;Ciprofloxacin;45,9;Belgium;49,09882507;NRC;NRC_samples;52,50008914;45,91791486;593;oscilate;
+2017;N. gonorrhea;Ciprofloxacin;43,4;Belgium;49,75222114;NRC;NRC_samples;52,82907923;46,85456466;601;oscilate;
+2018;N. gonorrhea;Ciprofloxacin;42,4;Belgium;50,41431247;NRC;NRC_samples;53,5137169;47,49441916;682;oscilate;
+2019;N. gonorrhea;Ciprofloxacin;54,1;Belgium;51,08521475;NRC;NRC_samples;54,57343064;47,81995809;650;oscilate;
+2020;N. gonorrhea;Ciprofloxacin;52,1;Belgium;51,76504525;NRC;NRC_samples;55,93789577;47,90348069;495;oscilate;
+2021;N. gonorrhea;Ciprofloxacin;55,9;Belgium;52,45392278;NRC;NRC_samples;57,52060467;47,83353775;558;oscilate;
+2022;N. gonorrhea;Ciprofloxacin;56,3;Belgium;53,15196774;NRC;NRC_samples;59,26153265;47,67226813;675;oscilate;
+2013;N. gonorrhea;Azithromycin;0,2;Belgium;0,829693236;NRC;NRC_samples;1,121187268;0,613983841;592;upward_arrow;***
+2014;N. gonorrhea;Azithromycin;1,3;Belgium;1,24812916;NRC;NRC_samples;1,623292388;0,959670858;558;upward_arrow;***
+2015;N. gonorrhea;Azithromycin;0,8;Belgium;1,877593226;NRC;NRC_samples;2,351703911;1,499064702;627;upward_arrow;***
+2016;N. gonorrhea;Azithromycin;5,2;Belgium;2,824512428;NRC;NRC_samples;3,410328526;2,339326078;593;upward_arrow;***
+2017;N. gonorrhea;Azithromycin;3,7;Belgium;4,248987664;NRC;NRC_samples;4,953871988;3,644401028;601;upward_arrow;***
+2018;N. gonorrhea;Azithromycin;7,2;Belgium;6,391862888;NRC;NRC_samples;7,218819758;5,659638633;682;upward_arrow;***
+2019;N. gonorrhea;Azithromycin;9,4;Belgium;9,615445941;NRC;NRC_samples;10,58634291;8,733592087;650;upward_arrow;***
+2020;N. gonorrhea;Azithromycin;16;Belgium;14,46476595;NRC;NRC_samples;15,71865577;13,31089992;495;upward_arrow;***
+2021;N. gonorrhea;Azithromycin;18,6;Belgium;21,75972442;NRC;NRC_samples;23,76564036;19,92311588;558;upward_arrow;***
+2022;N. gonorrhea;Azithromycin;33,6;Belgium;32,7337206;NRC;NRC_samples;36,4977882;29,35784651;675;upward_arrow;***
+2013;N. gonorrhea;Ceftriaxone;0;Belgium;0,120637289;NRC;NRC_samples;0,410083557;0,035488756;592;oscilate;
+2014;N. gonorrhea;Ceftriaxone;0;Belgium;0,135487935;NRC;NRC_samples;0,386981008;0,047436386;558;oscilate;
+2015;N. gonorrhea;Ceftriaxone;0,2;Belgium;0,15216672;NRC;NRC_samples;0,369170164;0,062720969;627;oscilate;
+2016;N. gonorrhea;Ceftriaxone;0;Belgium;0,17089869;NRC;NRC_samples;0,358605079;0,081444363;593;oscilate;
+2017;N. gonorrhea;Ceftriaxone;0,3;Belgium;0,191936596;NRC;NRC_samples;0,35922772;0,102552378;601;oscilate;
+2018;N. gonorrhea;Ceftriaxone;0,7;Belgium;0,215564302;NRC;NRC_samples;0,378251984;0,122849239;682;oscilate;
+2019;N. gonorrhea;Ceftriaxone;0,2;Belgium;0,242100618;NRC;NRC_samples;0,425972998;0,137597241;650;oscilate;
+2020;N. gonorrhea;Ceftriaxone;0,4;Belgium;0,271903597;NRC;NRC_samples;0,512621557;0,144222507;495;oscilate;
+2021;N. gonorrhea;Ceftriaxone;0,4;Belgium;0,305375371;NRC;NRC_samples;0,647402989;0,144043384;558;oscilate;
+2022;N. gonorrhea;Ceftriaxone;0;Belgium;0,342967575;NRC;NRC_samples;0,842142843;0,139675541;675;oscilate;
+2011;P. aeruginosa;MDR;12,2;Belgium;9,607962509;EARS;Blood_CSF;12,18161779;7,578052864;196;downward_arrow;**
+2012;P. aeruginosa;MDR;8,9;Belgium;9,137988845;EARS;Blood_CSF;11,22240368;7,440726829;246;downward_arrow;**
+2013;P. aeruginosa;MDR;10,9;Belgium;8,691003952;EARS;Blood_CSF;10,36560379;7,286941625;359;downward_arrow;**
+2014;P. aeruginosa;MDR;6,7;Belgium;8,265883333;EARS;Blood_CSF;9,613687234;7,107036626;253;downward_arrow;**
+2015;P. aeruginosa;MDR;3,9;Belgium;7,861557497;EARS;Blood_CSF;8,974281411;6,886800564;203;downward_arrow;**
+2016;P. aeruginosa;MDR;6,5;Belgium;7,477009267;EARS;Blood_CSF;8,457059394;6,61053269;278;downward_arrow;**
+2017;P. aeruginosa;MDR;6,7;Belgium;7,111271221;EARS;Blood_CSF;8,062344451;6,272391199;360;downward_arrow;**
+2018;P. aeruginosa;MDR;5,5;Belgium;6,763423258;EARS;Blood_CSF;7,770887508;5,886572688;366;downward_arrow;**
+2019;P. aeruginosa;MDR;6,1;Belgium;6,432590284;EARS;Blood_CSF;7,552118905;5,479020959;442;downward_arrow;**
+2020;P. aeruginosa;MDR;6,7;Belgium;6,117940012;EARS;Blood_CSF;7,379467143;5,072072178;493;downward_arrow;**
+2021;P. aeruginosa;MDR;7,4;Belgium;5,818680863;EARS;Blood_CSF;7,235456439;4,679324279;462;downward_arrow;**
+2017;P. aeruginosa;MDR;3,9;Belgium;3,919307547;EARS;Urine;4,447492884;3,453849629;3161;equals;
+2018;P. aeruginosa;MDR;4,2;Belgium;3,9060195;EARS;Urine;4,271508638;3,571803225;4601;equals;
+2019;P. aeruginosa;MDR;3,7;Belgium;3,892776504;EARS;Urine;4,163503962;3,639652813;4696;equals;
+2020;P. aeruginosa;MDR;3,5;Belgium;3,879578407;EARS;Urine;4,179409409;3,601257294;4812;equals;
+2021;P. aeruginosa;MDR;4,1;Belgium;3,866425058;EARS;Urine;4,295298641;3,480373305;6360;equals;
+2011;P. aeruginosa;MDR;14,79;Neighbouring countries;16,0272537;EARS;Blood_CSF;17,56882327;14,62094855;10176;downward_arrow;***
+2012;P. aeruginosa;MDR;14,36;Neighbouring countries;15,05835019;EARS;Blood_CSF;16,29627538;13,91446237;10891;downward_arrow;***
+2013;P. aeruginosa;MDR;13,63;Neighbouring countries;14,14802029;EARS;Blood_CSF;15,13451007;13,22583137;12153;downward_arrow;***
+2014;P. aeruginosa;MDR;14,48;Neighbouring countries;13,29272301;EARS;Blood_CSF;14,08337231;12,54646126;11939;downward_arrow;***
+2015;P. aeruginosa;MDR;13,63;Neighbouring countries;12,48913144;EARS;Blood_CSF;13,1459541;11,86512618;12863;downward_arrow;***
+2016;P. aeruginosa;MDR;11,72;Neighbouring countries;11,7341198;EARS;Blood_CSF;12,32448286;11,17203609;15628;downward_arrow;***
+2017;P. aeruginosa;MDR;10,92;Neighbouring countries;11,02475124;EARS;Blood_CSF;11,61114607;10,46797096;17117;downward_arrow;***
+2018;P. aeruginosa;MDR;11,22;Neighbouring countries;10,35826649;EARS;Blood_CSF;10,98539334;9,766940646;19306;downward_arrow;***
+2019;P. aeruginosa;MDR;9,91;Neighbouring countries;9,732073078;EARS;Blood_CSF;10,42408527;9,086000734;20406;downward_arrow;***
+2020;P. aeruginosa;MDR;9,72;Neighbouring countries;9,143735244;EARS;Blood_CSF;9,909955255;8,436757994;20421;downward_arrow;***
+2021;P. aeruginosa;MDR;6,789540013;Neighbouring countries;8,590964489;EARS;Blood_CSF;9,432157565;7,824791977;6348;downward_arrow;***
+2011;P. aeruginosa;MDR;12,93;Europe;10,73064142;EARS;Blood_CSF;12,98605747;8,866945603;2575;downward_arrow;*
+2012;P. aeruginosa;MDR;10,68;Europe;10,31105582;EARS;Blood_CSF;12,15611077;8,746043374;2743;downward_arrow;*
+2013;P. aeruginosa;MDR;9,71;Europe;9,9078767;EARS;Blood_CSF;11,40625705;8,60633074;3121;downward_arrow;*
+2014;P. aeruginosa;MDR;9,63;Europe;9,520462545;EARS;Blood_CSF;10,74324063;8,436859061;3148;downward_arrow;*
+2015;P. aeruginosa;MDR;8,73;Europe;9,148196916;EARS;Blood_CSF;10,17897609;8,221800115;3563;downward_arrow;*
+2016;P. aeruginosa;MDR;7,91;Europe;8,790487481;EARS;Blood_CSF;9,726084011;7,944890262;4095;downward_arrow;*
+2017;P. aeruginosa;MDR;7,19;Europe;8,446765068;EARS;Blood_CSF;9,384871207;7,602431461;4397;downward_arrow;*
+2018;P. aeruginosa;MDR;7,03;Europe;8,116482764;EARS;Blood_CSF;9,135371894;7,211232692;4551;downward_arrow;*
+2019;P. aeruginosa;MDR;6,32;Europe;7,799115036;EARS;Blood_CSF;8,948829611;6,7971118;4920;downward_arrow;*
+2020;P. aeruginosa;MDR;6,99;Europe;7,494156905;EARS;Blood_CSF;8,801775522;6,380802098;6972;downward_arrow;*
+2021;P. aeruginosa;MDR;10,33676675;Europe;7,201123135;EARS;Blood_CSF;8,67920774;5,974758982;13689;downward_arrow;*
+2011;P. aeruginosa;MDR;0;Belgium;5,415621481;AMR;All sample types;6,346605825;4,621203338;137;upward_arrow;*
+2012;P. aeruginosa;MDR;6,6;Belgium;5,556131547;AMR;All sample types;6,36909665;4,846935047;6838;upward_arrow;*
+2013;P. aeruginosa;MDR;5;Belgium;5,700287192;AMR;All sample types;6,40064723;5,076560684;14595;upward_arrow;*
+2014;P. aeruginosa;MDR;5,5;Belgium;5,848183003;AMR;All sample types;6,447172403;5,304844093;18954;upward_arrow;*
+2015;P. aeruginosa;MDR;5,8;Belgium;5,999916019;AMR;All sample types;6,519045164;5,522126527;19307;upward_arrow;*
+2016;P. aeruginosa;MDR;6;Belgium;6,155585797;AMR;All sample types;6,632216881;5,713208296;22065;upward_arrow;*
+2017;P. aeruginosa;MDR;7,7;Belgium;6,315294479;AMR;All sample types;6,803112595;5,862455428;19584;upward_arrow;*
+2018;P. aeruginosa;MDR;7,2;Belgium;6,479146854;AMR;All sample types;7,036445672;5,965987079;20743;upward_arrow;*
+2019;P. aeruginosa;MDR;6,7;Belgium;6,647250433;AMR;All sample types;7,32321604;6,033679476;18990;upward_arrow;*
+2020;P. aeruginosa;MDR;6,7;Belgium;6,819715514;AMR;All sample types;7,651622383;6,078256005;18109;upward_arrow;*
+2021;P. aeruginosa;MDR;6;Belgium;6,996655258;AMR;All sample types;8,013551839;6,108799916;19717;upward_arrow;*
+2011;S. pneumoniae;Penicillin;10,76;Belgium;8,992964155;NRC;NRC_samples;10,60997865;7,622390859;1868;upward_arrow;**
+2012;S. pneumoniae;Penicillin;9,88;Belgium;9,365951242;NRC;NRC_samples;10,82142342;8,106238823;1761;upward_arrow;**
+2013;S. pneumoniae;Penicillin;10,04;Belgium;9,754408131;NRC;NRC_samples;11,05585091;8,606165075;1653;upward_arrow;**
+2014;S. pneumoniae;Penicillin;9,22;Belgium;10,15897644;NRC;NRC_samples;11,32480841;9,11316099;1215;upward_arrow;**
+2015;S. pneumoniae;Penicillin;10,37;Belgium;10,58032439;NRC;NRC_samples;11,64639163;9,611840963;1369;upward_arrow;**
+2016;S. pneumoniae;Penicillin;9,34;Belgium;11,01914793;NRC;NRC_samples;12,04520138;10,08049739;1339;upward_arrow;**
+2017;S. pneumoniae;Penicillin;10,02;Belgium;11,47617187;NRC;NRC_samples;12,54530232;10,4981544;1497;upward_arrow;**
+2018;S. pneumoniae;Penicillin;10,27;Belgium;11,95215107;NRC;NRC_samples;13,15796244;10,85684169;1558;upward_arrow;**
+2019;S. pneumoniae;Penicillin;9,88;Belgium;12,44787172;NRC;NRC_samples;13,87873485;11,16452703;1589;upward_arrow;**
+2020;S. pneumoniae;Penicillin;14,85;Belgium;12,9641526;NRC;NRC_samples;14,69687778;11,43571139;882;upward_arrow;**
+2021;S. pneumoniae;Penicillin;18,38;Belgium;13,50184645;NRC;NRC_samples;15,60363045;11,68316937;854;upward_arrow;**
+2022;S. pneumoniae;Penicillin;14,12;Belgium;14,06184138;NRC;NRC_samples;16,59436396;11,91581572;1487;upward_arrow;**
+2011;S. pneumoniae;Penicillin;1,15;Neighbouring countries;0,474417696;EARS;Blood_CSF;0,922363324;0,244016804;3053;upward_arrow;***
+2012;S. pneumoniae;Penicillin;0,28;Neighbouring countries;0,59608219;EARS;Blood_CSF;1,057999108;0,335835801;2462;upward_arrow;***
+2013;S. pneumoniae;Penicillin;0,21;Neighbouring countries;0,748947564;EARS;Blood_CSF;1,222852295;0,458700086;2818;upward_arrow;***
+2014;S. pneumoniae;Penicillin;0,44;Neighbouring countries;0,941015287;EARS;Blood_CSF;1,430720728;0,618925659;2519;upward_arrow;***
+2015;S. pneumoniae;Penicillin;0,83;Neighbouring countries;1,182338808;EARS;Blood_CSF;1,706641976;0,819108563;3354;upward_arrow;***
+2016;S. pneumoniae;Penicillin;1,03;Neighbouring countries;1,485549785;EARS;Blood_CSF;2,094122055;1,053834545;4000;upward_arrow;***
+2017;S. pneumoniae;Penicillin;2,3;Neighbouring countries;1,866519266;EARS;Blood_CSF;2,65839343;1,310526174;4180;upward_arrow;***
+2018;S. pneumoniae;Penicillin;3,89;Neighbouring countries;2,345188431;EARS;Blood_CSF;3,482127999;1,579467722;4760;upward_arrow;***
+2019;S. pneumoniae;Penicillin;3,91;Neighbouring countries;2,946612381;EARS;Blood_CSF;4,666762942;1,860502587;4624;upward_arrow;***
+2020;S. pneumoniae;Penicillin;4,52;Neighbouring countries;3,702271599;EARS;Blood_CSF;6,347277189;2,159479504;2766;upward_arrow;***
+2021;S. pneumoniae;Penicillin;2,434456929;Neighbouring countries;4,651719745;EARS;Blood_CSF;8,712543666;2,483602656;3204;upward_arrow;***
+2011;S. pneumoniae;Penicillin;1,96;Europe;1,86621904;EARS;Blood_CSF;2,400195216;1,4510376;12735;upward_arrow;*
+2012;S. pneumoniae;Penicillin;1,93;Europe;1,957034841;EARS;Blood_CSF;2,430941422;1,575515285;11114;upward_arrow;*
+2013;S. pneumoniae;Penicillin;2,19;Europe;2,05227001;EARS;Blood_CSF;2,46999777;1,705188663;11612;upward_arrow;*
+2014;S. pneumoniae;Penicillin;2,17;Europe;2,152139608;EARS;Blood_CSF;2,522605614;1,836079674;10781;upward_arrow;*
+2015;S. pneumoniae;Penicillin;2,35;Europe;2,256869159;EARS;Blood_CSF;2,597203447;1,961131851;12185;upward_arrow;*
+2016;S. pneumoniae;Penicillin;2,99;Europe;2,366695164;EARS;Blood_CSF;2,704775883;2,070872501;15666;upward_arrow;*
+2017;S. pneumoniae;Penicillin;1,53;Europe;2,48186563;EARS;Blood_CSF;2,8541007;2,158177882;17163;upward_arrow;*
+2018;S. pneumoniae;Penicillin;1,96;Europe;2,602640635;EARS;Blood_CSF;3,046818638;2,223216766;18676;upward_arrow;*
+2019;S. pneumoniae;Penicillin;2,06;Europe;2,729292914;EARS;Blood_CSF;3,27951134;2,271387118;18237;upward_arrow;*
+2020;S. pneumoniae;Penicillin;3,86;Europe;2,862108471;EARS;Blood_CSF;3,548633905;2,308399548;8032;upward_arrow;*
+2021;S. pneumoniae;Penicillin;3,431660595;Europe;3,001387231;EARS;Blood_CSF;3,852508444;2,338301251;8509;upward_arrow;*
+2011;S. pneumoniae;Macrolide;26,12;Belgium;23,82584124;NRC;NRC_samples;27,40196068;20,71642672;1868;downward_arrow;***
+2012;S. pneumoniae;Macrolide;25,1;Belgium;22,69789076;NRC;NRC_samples;25,59264752;20,13055682;1761;downward_arrow;***
+2013;S. pneumoniae;Macrolide;23,65;Belgium;21,62333913;NRC;NRC_samples;23,95356573;19,51979927;1653;downward_arrow;***
+2014;S. pneumoniae;Macrolide;17,53;Belgium;20,59965835;NRC;NRC_samples;22,49602681;18,86314983;1215;downward_arrow;***
+2015;S. pneumoniae;Macrolide;18,41;Belgium;19,62444014;NRC;NRC_samples;21,2389993;18,13261751;1369;downward_arrow;***
+2016;S. pneumoniae;Macrolide;15,91;Belgium;18,69539019;NRC;NRC_samples;20,19605128;17,30623523;1339;downward_arrow;***
+2017;S. pneumoniae;Macrolide;14,96;Belgium;17,81032284;NRC;NRC_samples;19,35136637;16,3920001;1497;downward_arrow;***
+2018;S. pneumoniae;Macrolide;15,34;Belgium;16,96715588;NRC;NRC_samples;18,65820468;15,42937188;1558;downward_arrow;***
+2019;S. pneumoniae;Macrolide;15,73;Belgium;16,16390569;NRC;NRC_samples;18,06631612;14,46182195;1589;downward_arrow;***
+2020;S. pneumoniae;Macrolide;19,5;Belgium;15,39868254;NRC;NRC_samples;17,53981399;13,51892467;882;downward_arrow;***
+2021;S. pneumoniae;Macrolide;16,51;Belgium;14,6696862;NRC;NRC_samples;17,05698707;12,61651265;854;downward_arrow;***
+2022;S. pneumoniae;Macrolide;14,66039005;Belgium;;NRC;NRC_samples;;;;downward_arrow;***
+2011;S. pneumoniae;Macrolide;14,23;Neighbouring countries;12,10848214;EARS;Blood_CSF;14,07416766;10,41733645;3184;oscilate;
+2012;S. pneumoniae;Macrolide;12,16;Neighbouring countries;11,83889486;EARS;Blood_CSF;13,47702652;10,39987799;2573;oscilate;
+2013;S. pneumoniae;Macrolide;12,4;Neighbouring countries;11,57530976;EARS;Blood_CSF;12,93026564;10,36233901;3088;oscilate;
+2014;S. pneumoniae;Macrolide;9,54;Neighbouring countries;11,31759321;EARS;Blood_CSF;12,44425733;10,29293372;2621;oscilate;
+2015;S. pneumoniae;Macrolide;11,01;Neighbouring countries;11,06561454;EARS;Blood_CSF;12,03503943;10,17427702;3415;oscilate;
+2016;S. pneumoniae;Macrolide;10,01;Neighbouring countries;10,81924601;EARS;Blood_CSF;11,71983848;9,98785814;4085;oscilate;
+2017;S. pneumoniae;Macrolide;8,56;Neighbouring countries;10,57836271;EARS;Blood_CSF;11,50337333;9,727734147;4289;oscilate;
+2018;S. pneumoniae;Macrolide;9,58;Neighbouring countries;10,34284251;EARS;Blood_CSF;11,36944668;9,408935569;4779;oscilate;
+2019;S. pneumoniae;Macrolide;9,96;Neighbouring countries;10,11256602;EARS;Blood_CSF;11,29243666;9,055972115;4678;oscilate;
+2020;S. pneumoniae;Macrolide;9,37;Neighbouring countries;9,88741648;EARS;Blood_CSF;11,25114168;8,688985297;2892;oscilate;
+2021;S. pneumoniae;Macrolide;12,61315631;Neighbouring countries;9,667279744;EARS;Blood_CSF;11,23195017;8,320576238;3314;oscilate;
+2011;S. pneumoniae;Macrolide;14,65;Europe;13,4355758;EARS;Blood_CSF;15,24749157;11,83897668;12670;oscilate;
+2012;S. pneumoniae;Macrolide;14,73;Europe;13,26930235;EARS;Blood_CSF;14,79711699;11,89923583;11286;oscilate;
+2013;S. pneumoniae;Macrolide;13,81;Europe;13,10508662;EARS;Blood_CSF;14,38384199;11,94001544;12212;oscilate;
+2014;S. pneumoniae;Macrolide;12,01;Europe;12,94290317;EARS;Blood_CSF;14,0191981;11,94923856;11036;oscilate;
+2015;S. pneumoniae;Macrolide;11,06;Europe;12,78272684;EARS;Blood_CSF;13,7206119;11,90895177;16036;oscilate;
+2016;S. pneumoniae;Macrolide;12,66;Europe;12,62453279;EARS;Blood_CSF;13,50706983;11,79965974;12682;oscilate;
+2017;S. pneumoniae;Macrolide;10,58;Europe;12,46829648;EARS;Blood_CSF;13,38550788;11,6139349;17587;oscilate;
+2018;S. pneumoniae;Macrolide;10,89;Europe;12,3139937;EARS;Blood_CSF;13,34222165;11,36500687;19217;oscilate;
+2019;S. pneumoniae;Macrolide;11,25;Europe;12,1616005;EARS;Blood_CSF;13,3537421;11,07588612;18948;oscilate;
+2020;S. pneumoniae;Macrolide;13,38;Europe;12,01109327;EARS;Blood_CSF;13,40026758;10,7659314;8362;oscilate;
+2021;S. pneumoniae;Macrolide;14,16723472;Europe;11,86244865;EARS;Blood_CSF;13,46895544;10,44755762;8802;oscilate;
+2019;Salmonella;Ciprofloxacin;13,4;Belgium;13,43076861;NRC;NRC_samples;21,18608829;8,514339364;96;upward_arrow;**
+2020;Salmonella;Ciprofloxacin;17,8;Belgium;17,58156057;NRC;NRC_samples;23,70192132;13,04161244;73;upward_arrow;**
+2021;Salmonella;Ciprofloxacin;22,1;Belgium;23,01515878;NRC;NRC_samples;29,28441891;18,08803293;68;upward_arrow;**
+2022;Salmonella;Ciprofloxacin;30,5;Belgium;30,12801574;NRC;NRC_samples;42,23956688;21,48926704;95;upward_arrow;**
+2019;Salmonella;3GC;0,8;Belgium;1,496212787;NRC;NRC_samples;5,837200743;0,383514771;96;oscilate;
+2020;Salmonella;3GC;2,7;Belgium;1,985628113;NRC;NRC_samples;4,842300865;0,814224294;73;oscilate;
+2021;Salmonella;3GC;2,9;Belgium;2,635132541;NRC;NRC_samples;5,367059054;1,293804193;68;oscilate;
+2022;Salmonella;3GC;3,2;Belgium;3,497091657;NRC;NRC_samples;9,444975513;1,294831314;95;oscilate;
+2019;Salmonella;Azithromycin;1,4;Belgium;1,422118173;NRC;NRC_samples;6,770626224;0,298705028;96;oscilate;
+2020;Salmonella;Azithromycin;1,4;Belgium;0,985947747;NRC;NRC_samples;3,128462616;0,310725452;73;oscilate;
+2021;Salmonella;Azithromycin;1,5;Belgium;0,68355287;NRC;NRC_samples;3,254273143;0,143578767;68;oscilate;
+2022;Salmonella;Azithromycin;0;Belgium;0,473903945;NRC;NRC_samples;5,201941323;0,043173295;95;oscilate;
+2011;Shigella spp.;Ciprofloxacin;18,1;Belgium;11,5747649;NRC;NRC_samples;16,40267206;8,167887641;127;upward_arrow;***
+2012;Shigella spp.;Ciprofloxacin;11,4;Belgium;12,88243032;NRC;NRC_samples;17,46710232;9,50111862;324;upward_arrow;***
+2013;Shigella spp.;Ciprofloxacin;9,9;Belgium;14,33782997;NRC;NRC_samples;18,65712312;11,01849235;321;upward_arrow;***
+2014;Shigella spp.;Ciprofloxacin;10,7;Belgium;15,95765419;NRC;NRC_samples;20,02189458;12,71841315;399;upward_arrow;***
+2015;Shigella spp.;Ciprofloxacin;18,1;Belgium;17,76047895;NRC;NRC_samples;21,64390936;14,57382802;392;upward_arrow;***
+2016;Shigella spp.;Ciprofloxacin;14,4;Belgium;19,76697882;NRC;NRC_samples;23,6535175;16,51904211;367;upward_arrow;***
+2017;Shigella spp.;Ciprofloxacin;28,6;Belgium;22,00016412;NRC;NRC_samples;26,22253084;18,45768527;353;upward_arrow;***
+2018;Shigella spp.;Ciprofloxacin;41,5;Belgium;24,48564476;NRC;NRC_samples;29,51655305;20,31222271;427;upward_arrow;***
+2019;Shigella spp.;Ciprofloxacin;23,9;Belgium;27,25192394;NRC;NRC_samples;33,65214953;22,06894266;421;upward_arrow;***
+2020;Shigella spp.;Ciprofloxacin;29,8;Belgium;30,33072502;NRC;NRC_samples;38,7153894;23,76194311;114;upward_arrow;***
+2021;Shigella spp.;Ciprofloxacin;23,3;Belgium;33,75735536;NRC;NRC_samples;44,8031363;25,43480512;197;upward_arrow;***
+2022;Shigella spp.;Ciprofloxacin;38;Belgium;37,57111114;NRC;NRC_samples;52,04428232;27,12283327;297;upward_arrow;***
+2011;Shigella spp.;ESBL;0;Belgium;1,300752898;NRC;NRC_samples;1,807486074;0,936083618;127;upward_arrow;***
+2012;Shigella spp.;ESBL;1,6;Belgium;1,747776824;NRC;NRC_samples;2,342044828;1,304297761;324;upward_arrow;***
+2013;Shigella spp.;ESBL;3,4;Belgium;2,34842746;NRC;NRC_samples;3,036707825;1,816148228;321;upward_arrow;***
+2014;Shigella spp.;ESBL;2,5;Belgium;3,155501012;NRC;NRC_samples;3,941275502;2,52638686;399;upward_arrow;***
+2015;Shigella spp.;ESBL;4,8;Belgium;4,239937919;NRC;NRC_samples;5,123079175;3,50903684;392;upward_arrow;***
+2016;Shigella spp.;ESBL;3,1;Belgium;5,697058403;NRC;NRC_samples;6,675770761;4,861831781;367;upward_arrow;***
+2017;Shigella spp.;ESBL;10,9;Belgium;7,65494096;NRC;NRC_samples;8,735796074;6,707816964;353;upward_arrow;***
+2018;Shigella spp.;ESBL;12,1;Belgium;10,28568025;NRC;NRC_samples;11,51434841;9,18812029;427;upward_arrow;***
+2019;Shigella spp.;ESBL;13,8;Belgium;13,82051394;NRC;NRC_samples;15,34869815;12,44448249;421;upward_arrow;***
+2020;Shigella spp.;ESBL;10,5;Belgium;18,57014809;NRC;NRC_samples;20,74283231;16,62503919;114;upward_arrow;***
+2021;Shigella spp.;ESBL;19,3;Belgium;24,95206775;NRC;NRC_samples;28,36809378;21,94739237;197;upward_arrow;***
+2022;Shigella spp.;ESBL;37;Belgium;33,52723317;NRC;NRC_samples;39,10222487;28,74709477;297;upward_arrow;***
+2011;Shigella spp.;Azithromycin;11;Belgium;5,478944457;NRC;NRC_samples;11,92646174;2,516993977;127;upward_arrow;**
+2012;Shigella spp.;Azithromycin;2,2;Belgium;6,636783913;NRC;NRC_samples;13,09372585;3,363969981;324;upward_arrow;**
+2013;Shigella spp.;Azithromycin;13,4;Belgium;8,039304114;NRC;NRC_samples;14,47978868;4,463491288;321;upward_arrow;**
+2014;Shigella spp.;Azithromycin;0,5;Belgium;9,738212284;NRC;NRC_samples;16,1922298;5,856684328;399;upward_arrow;**
+2015;Shigella spp.;Azithromycin;9,2;Belgium;11,7961427;NRC;NRC_samples;18,42134156;7,553683429;392;upward_arrow;**
+2016;Shigella spp.;Azithromycin;5,4;Belgium;14,28896582;NRC;NRC_samples;21,49237141;9,499861153;367;upward_arrow;**
+2017;Shigella spp.;Azithromycin;22;Belgium;17,30858549;NRC;NRC_samples;25,89891934;11,56755336;353;upward_arrow;**
+2018;Shigella spp.;Azithromycin;37,2;Belgium;20,96632711;NRC;NRC_samples;32,27176109;13,62140948;427;upward_arrow;**
+2019;Shigella spp.;Azithromycin;23,6;Belgium;25,397042;NRC;NRC_samples;41,34188934;15,60184483;421;upward_arrow;**
+2020;Shigella spp.;Azithromycin;34,2;Belgium;30,76407894;NRC;NRC_samples;54,00350106;17,52531845;114;upward_arrow;**
+2021;Shigella spp.;Azithromycin;37,5;Belgium;37,26530646;NRC;NRC_samples;71,44782582;19,43660356;197;upward_arrow;**
+2022;Shigella spp.;Azithromycin;39,1;Belgium;45,14040768;NRC;NRC_samples;95,30980676;21,37929427;297;upward_arrow;**
+2012;Acinetobacter;Carbapenem;57,12511642;Europe;50,70139879;EARS;Blood_CSF;57,90472392;44,39416451;3221;oscilate;
+2013;Acinetobacter;Carbapenem;51,60116448;Europe;51,36005639;EARS;Blood_CSF;57,48692612;45,88617918;4122;oscilate;
+2014;Acinetobacter;Carbapenem;52,24784533;Europe;52,02727056;EARS;Blood_CSF;57,19925405;47,32294026;4293;oscilate;
+2015;Acinetobacter;Carbapenem;55,05617978;Europe;52,70315245;EARS;Blood_CSF;57,12532577;48,62330746;5073;oscilate;
+2016;Acinetobacter;Carbapenem;48,30840456;Europe;53,38781467;EARS;Blood_CSF;57,39201612;49,66298359;5616;oscilate;
+2017;Acinetobacter;Carbapenem;48,39748752;Europe;54,08137127;EARS;Blood_CSF;58,12444992;50,31952514;6209;oscilate;
+2018;Acinetobacter;Carbapenem;49,87009017;Europe;54,78393781;EARS;Blood_CSF;59,3444869;50,57386118;6543;oscilate;
+2019;Acinetobacter;Carbapenem;46,10487519;Europe;55,49563134;EARS;Blood_CSF;60,95963947;50,52137979;5969;oscilate;
+2020;Acinetobacter;Carbapenem;59,42932979;Europe;56,21657041;EARS;Blood_CSF;62,85873016;50,27627476;7535;oscilate;
+2021;Acinetobacter;Carbapenem;69,60720587;Europe;56,94687514;EARS;Blood_CSF;64,96533058;49,91811108;10769;oscilate;
+2012;Acinetobacter;Carbapenem;4,326123128;Neighbouring countries;5,51912065;EARS;Blood_CSF;6,679195159;4,560533422;601;downward_arrow;**
+2013;Acinetobacter;Carbapenem;6,011730205;Neighbouring countries;5,284396453;EARS;Blood_CSF;6,217040533;4,491662186;682;downward_arrow;**
+2014;Acinetobacter;Carbapenem;3;Neighbouring countries;5,059654905;EARS;Blood_CSF;5,800495366;4,413434739;700;downward_arrow;**
+2015;Acinetobacter;Carbapenem;5,773672055;Neighbouring countries;4,844471452;EARS;Blood_CSF;5,433316936;4,319443155;866;downward_arrow;**
+2016;Acinetobacter;Carbapenem;5,182341651;Neighbouring countries;4,638439595;EARS;Blood_CSF;5,123145865;4,1995919;1042;downward_arrow;**
+2017;Acinetobacter;Carbapenem;4,533565824;Neighbouring countries;4,441170124;EARS;Blood_CSF;4,878763232;4,042826251;1147;downward_arrow;**
+2018;Acinetobacter;Carbapenem;5,294619983;Neighbouring countries;4,25229038;EARS;Blood_CSF;4,699895616;3,847313845;1171;downward_arrow;**
+2019;Acinetobacter;Carbapenem;5,087881591;Neighbouring countries;4,071443555;EARS;Blood_CSF;4,571796141;3,625851221;1081;downward_arrow;**
+2020;Acinetobacter;Carbapenem;2,95735901;Neighbouring countries;3,898288014;EARS;Blood_CSF;4,475818481;3,395278317;1454;downward_arrow;**
+2021;Acinetobacter;Carbapenem;3,227931489;Neighbouring countries;3,732496652;EARS;Blood_CSF;4,398670795;3,167213894;1518;downward_arrow;**
+2011;E.coli;Ciprofloxacin;18,16575562;Neighbouring countries;18,47287904;EARS;Blood_CSF;19,3841292;17,60446685;18111;downward_arrow;***
+2012;E.coli;Ciprofloxacin;17,97769741;Neighbouring countries;18,19684654;EARS;Blood_CSF;18,96865094;17,45644563;19908;downward_arrow;***
+2013;E.coli;Ciprofloxacin;17,55721772;Neighbouring countries;17,92493868;EARS;Blood_CSF;18,57293001;17,29955512;22327;downward_arrow;***
+2014;E.coli;Ciprofloxacin;17,41779336;Neighbouring countries;17,65709382;EARS;Blood_CSF;18,20245557;17,1280716;23964;downward_arrow;***
+2015;E.coli;Ciprofloxacin;17,1841971;Neighbouring countries;17,39325126;EARS;Blood_CSF;17,86564596;16,93334739;27438;downward_arrow;***
+2016;E.coli;Ciprofloxacin;17,37276403;Neighbouring countries;17,13335118;EARS;Blood_CSF;17,57214545;16,70551405;36114;downward_arrow;***
+2017;E.coli;Ciprofloxacin;17,9679725;Neighbouring countries;16,87733469;EARS;Blood_CSF;17,32636559;16,43994089;44212;downward_arrow;***
+2018;E.coli;Ciprofloxacin;17,85208735;Neighbouring countries;16,62514374;EARS;Blood_CSF;17,122253;16,14246702;43093;downward_arrow;***
+2019;E.coli;Ciprofloxacin;16,60948537;Neighbouring countries;16,37672117;EARS;Blood_CSF;16,94787609;15,82481457;44595;downward_arrow;***
+2020;E.coli;Ciprofloxacin;15,93395591;Neighbouring countries;16,13201068;EARS;Blood_CSF;16,79267655;15,49733706;54933;downward_arrow;***
+2021;E.coli;Ciprofloxacin;14,57183845;Neighbouring countries;15,8909568;EARS;Blood_CSF;16,64968225;15,16680644;54372;downward_arrow;***
+2011;A. baumanii;Carbapenem;0;Belgium;7,239258937;AMR;All samples;10,42078531;5,029071074;14;oscilate;
+2012;A. baumanii;Carbapenem;6,652806653;Belgium;7,20164299;AMR;All samples;9,848173939;5,266322678;481;oscilate;
+2013;A. baumanii;Carbapenem;12,15616681;Belgium;7,164222499;AMR;All samples;9,337474057;5,496784645;1127;oscilate;
+2014;A. baumanii;Carbapenem;6,464485235;Belgium;7,12699645;AMR;All samples;8,901139557;5,706469163;1253;oscilate;
+2015;A. baumanii;Carbapenem;4,797353184;Belgium;7,08996383;AMR;All samples;8,562646234;5,870566848;1209;oscilate;
+2016;A. baumanii;Carbapenem;5,0330033;Belgium;7,053123636;AMR;All samples;8,357872603;5,952059261;1212;oscilate;
+2017;A. baumanii;Carbapenem;6,060606061;Belgium;7,016474868;AMR;All samples;8,318735796;5,91807707;1221;oscilate;
+2018;A. baumanii;Carbapenem;7,563694268;Belgium;6,98001653;AMR;All samples;8,441580827;5,771505569;1256;oscilate;
+2019;A. baumanii;Carbapenem;6,746987952;Belgium;6,943747634;AMR;All samples;8,689326844;5,548833882;830;oscilate;
+2020;A. baumanii;Carbapenem;7,283950617;Belgium;6,907667194;AMR;All samples;9,023893112;5,287725095;810;oscilate;
+2021;A. baumanii;Carbapenem;8,117647059;Belgium;6,871774233;AMR;All samples;9,42072066;5,01249138;850;oscilate;
+2011;K.pneumoniae;AG, FQ And 3GC;12,4025974;Neighbouring countries;13,82070864;EARS;Blood_CSF;15,50157097;12,32210513;3080;downward_arrow;***
+2012;K.pneumoniae;AG, FQ And 3GC;10,44992743;Neighbouring countries;13,19525918;EARS;Blood_CSF;14,56936974;11,9507479;2756;downward_arrow;***
+2013;K.pneumoniae;AG, FQ And 3GC;14,02487431;Neighbouring countries;12,59811413;EARS;Blood_CSF;13,71159311;11,57505757;3779;downward_arrow;***
+2014;K.pneumoniae;AG, FQ And 3GC;13,89400922;Neighbouring countries;12,02799259;EARS;Blood_CSF;12,93199001;11,18718818;4340;downward_arrow;***
+2015;K.pneumoniae;AG, FQ And 3GC;12,07364341;Neighbouring countries;11,48367162;EARS;Blood_CSF;12,23811981;10,7757332;5160;downward_arrow;***
+2016;K.pneumoniae;AG, FQ And 3GC;11,12700229;Neighbouring countries;10,96398364;EARS;Blood_CSF;11,63852729;10,32853507;6992;downward_arrow;***
+2017;K.pneumoniae;AG, FQ And 3GC;10,81282625;Neighbouring countries;10,46781388;EARS;Blood_CSF;11,13335533;9,842057869;8046;downward_arrow;***
+2018;K.pneumoniae;AG, FQ And 3GC;10,61267855;Neighbouring countries;9,994098045;EARS;Blood_CSF;10,70743149;9,328287169;8471;downward_arrow;***
+2019;K.pneumoniae;AG, FQ And 3GC;9,610361341;Neighbouring countries;9,54181999;EARS;Blood_CSF;10,33818531;8,806799842;9188;downward_arrow;***
+2020;K.pneumoniae;AG, FQ And 3GC;8,994708995;Neighbouring countries;9,110009558;EARS;Blood_CSF;10,00687396;8,293526479;11718;downward_arrow;***
+2021;K.pneumoniae;AG, FQ And 3GC;7,594936709;Neighbouring countries;8,697740497;EARS;Blood_CSF;9,701439005;7,797883357;12087;downward_arrow;***
+2011;K.pneumoniae;AG, FQ And 3GC;21,47496883;Europe;20,88977025;EARS;Blood_CSF;21,91958445;19,90833824;15241;downward_arrow;***
+2012;K.pneumoniae;AG, FQ And 3GC;20,97514942;Europe;20,58964776;EARS;Blood_CSF;21,46240031;19,75238504;15895;downward_arrow;***
+2013;K.pneumoniae;AG, FQ And 3GC;19,85553595;Europe;20,29383711;EARS;Blood_CSF;21,0269927;19,58624471;18136;downward_arrow;***
+2014;K.pneumoniae;AG, FQ And 3GC;20,71358799;Europe;20,00227636;EARS;Blood_CSF;20,6195971;19,40343731;19451;downward_arrow;***
+2015;K.pneumoniae;AG, FQ And 3GC;20,2610261;Europe;19,71490446;EARS;Blood_CSF;20,24978279;19,19415441;22220;downward_arrow;***
+2016;K.pneumoniae;AG, FQ And 3GC;18,33789584;Europe;19,43166121;EARS;Blood_CSF;19,92855606;18,94715584;29589;downward_arrow;***
+2017;K.pneumoniae;AG, FQ And 3GC;17,9729644;Europe;19,15248731;EARS;Blood_CSF;19,66105724;18,65707249;31514;downward_arrow;***
+2018;K.pneumoniae;AG, FQ And 3GC;18,52842094;Europe;18,87732429;EARS;Blood_CSF;19,44056264;18,33040427;37402;downward_arrow;***
+2019;K.pneumoniae;AG, FQ And 3GC;17,82716663;Europe;18,60611453;EARS;Blood_CSF;19,25361507;17,98038947;40270;downward_arrow;***
+2020;K.pneumoniae;AG, FQ And 3GC;18,70898304;Europe;18,33880122;EARS;Blood_CSF;19,08826313;17,61876541;38094;downward_arrow;***
+2021;K.pneumoniae;AG, FQ And 3GC;19,41091609;Europe;18,0753284;EARS;Blood_CSF;18,93660519;17,25322429;41590;downward_arrow;***
+2011;E. faecium;vancomycin;4,521432766;Neighbouring countries;4,160985644;EARS;Blood_CSF;5,331109034;3,247692257;1703;upward_arrow;***
+2012;E. faecium;vancomycin;5,808080808;Neighbouring countries;4,766137217;EARS;Blood_CSF;5,903121679;3,848144288;1980;upward_arrow;***
+2013;E. faecium;vancomycin;5,907172996;Neighbouring countries;5,459298808;EARS;Blood_CSF;6,554378643;4,547180609;2370;upward_arrow;***
+2014;E. faecium;vancomycin;3,973509934;Neighbouring countries;6,253270126;EARS;Blood_CSF;7,309375572;5,349757566;2416;upward_arrow;***
+2015;E. faecium;vancomycin;5,478991597;Neighbouring countries;7,1627124;EARS;Blood_CSF;8,208380891;6,250251981;2975;upward_arrow;***
+2016;E. faecium;vancomycin;6,856990395;Neighbouring countries;8,204419111;EARS;Blood_CSF;9,313224889;7,22762456;3748;upward_arrow;***
+2017;E. faecium;vancomycin;10,01540832;Neighbouring countries;9,397626093;EARS;Blood_CSF;10,70033821;8,253512591;4543;upward_arrow;***
+2018;E. faecium;vancomycin;13,44050011;Neighbouring countries;10,76436674;EARS;Blood_CSF;12,43955853;9,314767162;4479;upward_arrow;***
+2019;E. faecium;vancomycin;16,01879539;Neighbouring countries;12,32987886;EARS;Blood_CSF;14,58758499;10,42159567;4682;upward_arrow;***
+2020;E. faecium;vancomycin;13,21653604;Neighbouring countries;14,12307071;EARS;Blood_CSF;17,20264306;11,59479539;6507;upward_arrow;***
+2021;E. faecium;vancomycin;13,64957717;Neighbouring countries;16,17705484;EARS;Blood_CSF;20,35729435;12,85520063;7568;upward_arrow;***
+2011;E. faecium;vancomycin;7,063420499;Europe;6,940365576;EARS;Blood_CSF;7,607257883;6,331936563;6654;upward_arrow;***
+2012;E. faecium;vancomycin;7,926664869;Europe;7,718780229;EARS;Blood_CSF;8,355436363;7,130635151;7418;upward_arrow;***
+2013;E. faecium;vancomycin;8,643262658;Europe;8,584499991;EARS;Blood_CSF;9,186294179;8,022129345;8631;upward_arrow;***
+2014;E. faecium;vancomycin;8,822154709;Europe;9,547316793;EARS;Blood_CSF;10,11578907;9,01079069;8558;upward_arrow;***
+2015;E. faecium;vancomycin;9,473346179;Europe;10,6181208;EARS;Blood_CSF;11,16752854;10,09574222;9342;upward_arrow;***
+2016;E. faecium;vancomycin;11,46990648;Europe;11,80902361;EARS;Blood_CSF;12,37482639;11,2690905;12511;upward_arrow;***
+2017;E. faecium;vancomycin;14,22626605;Europe;13,13349519;EARS;Blood_CSF;13,77595158;12,52100046;14178;upward_arrow;***
+2018;E. faecium;vancomycin;16,75837919;Europe;14,60651632;EARS;Blood_CSF;15,40268551;13,85150134;15992;upward_arrow;***
+2019;E. faecium;vancomycin;17,23366971;Europe;16,24474794;EARS;Blood_CSF;17,27740012;15,2738163;16549;upward_arrow;***
+2020;E. faecium;vancomycin;16,63269241;Europe;18,06671966;EARS;Blood_CSF;19,4210057;16,80687213;18151;upward_arrow;***
+2021;E. faecium;vancomycin;18,95401424;Europe;20,09303934;EARS;Blood_CSF;21,85909924;18,46966453;22333;upward_arrow;***
+2011;E. faecium;vancomycin;6,989247312;Belgium;3,247422371;EARS;Blood_CSF;6,572260465;1,604585228;186;oscilate;
+2012;E. faecium;vancomycin;1,395348837;Belgium;3,15062981;EARS;Blood_CSF;5,79609224;1,712613911;215;oscilate;
+2013;E. faecium;vancomycin;1,70212766;Belgium;3,056722244;EARS;Blood_CSF;5,151770998;1,813658037;235;oscilate;
+2014;E. faecium;vancomycin;3,076923077;Belgium;2,965613684;EARS;Blood_CSF;4,63648153;1,89688333;195;oscilate;
+2015;E. faecium;vancomycin;1,058201058;Belgium;2,877220703;EARS;Blood_CSF;4,255744764;1,945229197;189;oscilate;
+2016;E. faecium;vancomycin;1,730103806;Belgium;2,791462359;EARS;Blood_CSF;4,020372375;1,938194122;289;oscilate;
+2017;E. faecium;vancomycin;5,51558753;Belgium;2,708260127;EARS;Blood_CSF;3,933331239;1,864748344;417;oscilate;
+2018;E. faecium;vancomycin;1,834862385;Belgium;2,627537817;EARS;Blood_CSF;3,976851279;1,736035495;436;oscilate;
+2019;E. faecium;vancomycin;0,837988827;Belgium;2,549221513;EARS;Blood_CSF;4,120522562;1,577113151;358;oscilate;
+2020;E. faecium;vancomycin;3,564727955;Belgium;2,473239503;EARS;Blood_CSF;4,338049591;1,410060791;533;oscilate;
+2021;E. faecium;vancomycin;2,788844622;Belgium;2,39952221;EARS;Blood_CSF;4,612954552;1,248160321;502;oscilate;
+2011;S. aureus;Methicillin;18,43256782;Belgium;18,76560894;AMR;All samples;20,05443555;17,55961059;33137;downward_arrow;***
+2012;S. aureus;Methicillin;16,60253508;Belgium;17,8121327;AMR;All samples;18,86092558;16,82165967;35344;downward_arrow;***
+2013;S. aureus;Methicillin;17,4548607;Belgium;16,90710236;AMR;All samples;17,75417483;16,10044471;33452;downward_arrow;***
+2014;S. aureus;Methicillin;15,24999255;Belgium;16,0480564;AMR;All samples;16,73606692;15,38832962;33541;downward_arrow;***
+2015;S. aureus;Methicillin;15,40598414;Belgium;15,23265837;AMR;All samples;15,81129864;14,67519438;34558;downward_arrow;***
+2016;S. aureus;Methicillin;15,7047131;Belgium;14,45869052;AMR;All samples;14,98397636;13,95181937;35518;downward_arrow;***
+2017;S. aureus;Methicillin;14,43080324;Belgium;13,7240478;AMR;All samples;14,24965905;13,2178242;33477;downward_arrow;***
+2018;S. aureus;Methicillin;14,2296369;Belgium;13,02673211;AMR;All samples;13,5924443;12,48456465;33627;downward_arrow;***
+2019;S. aureus;Methicillin;12,3818672;Belgium;12,36484687;AMR;All samples;12,9932424;11,76684259;32273;downward_arrow;***
+2020;S. aureus;Methicillin;10,57622702;Belgium;11,73659186;AMR;All samples;12,43735625;11,07531101;27628;downward_arrow;***
+2021;S. aureus;Methicillin;10,65634348;Belgium;11,14025835;AMR;All samples;11,91538821;10,41555288;28415;downward_arrow;***
+2014;E.coli;3GC;7,608344983;Belgium;7,156590916;AMR;All samples;9,79724704;5,22767195;37196;oscilate;
+2015;E.coli;3GC;8,62246706;Belgium;7,421169932;AMR;All samples;9,572859708;5,75311504;62082;oscilate;
+2016;E.coli;3GC;3,951970916;Belgium;7,695530429;AMR;All samples;9,451946006;6,26550221;138083;oscilate;
+2017;E.coli;3GC;8,033386328;Belgium;7,980034029;AMR;All samples;9,515611212;6,692259875;62900;oscilate;
+2018;E.coli;3GC;10,10406595;Belgium;8,27505572;AMR;All samples;9,866670591;6,940187831;96189;oscilate;
+2019;E.coli;3GC;9,865026718;Belgium;8,580984357;AMR;All samples;10,5374846;6,987748528;86832;oscilate;
+2020;E.coli;3GC;9,208050303;Belgium;8,898223169;AMR;All samples;11,47522303;6,899942194;87152;oscilate;
+2021;E.coli;3GC;7,844203884;Belgium;9,227190294;AMR;All samples;12,62818206;6,742145489;91915;oscilate;
+2015;E.coli;Carbapenem;0,051003848;Belgium;0,072256076;AMR;All samples;0,124125663;0,042061733;86268;oscilate;
+2016;E.coli;Carbapenem;0,046194581;Belgium;0,077466148;AMR;All samples;0,118430114;0,050671268;177510;oscilate;
+2017;E.coli;Carbapenem;0,126914956;Belgium;0,083051896;AMR;All samples;0,116140908;0,059390076;89036;oscilate;
+2018;E.coli;Carbapenem;0,118034671;Belgium;0,089040408;AMR;All samples;0,120105034;0,066010508;97429;oscilate;
+2019;E.coli;Carbapenem;0,131288004;Belgium;0,095460726;AMR;All samples;0,133309474;0,068357859;86832;oscilate;
+2020;E.coli;Carbapenem;0,100211942;Belgium;0,102343985;AMR;All samples;0,156122321;0,067090286;86816;oscilate;
+2021;E.coli;Carbapenem;0,055486047;Belgium;0,109723565;AMR;All samples;0,188006276;0,064036484;91915;oscilate;
+2011;A. fumigatus;Azole;28,57;Belgium;;NRC;NRC_samples;;;7;;
+2012;A. fumigatus;Azole;41,18;Belgium;;NRC;NRC_samples;;;17;;
+2013;A. fumigatus;Azole;12,12;Belgium;;NRC;NRC_samples;;;33;;
+2014;A. fumigatus;Azole;14,81;Belgium;;NRC;NRC_samples;;;27;;
+2015;A. fumigatus;Azole;13,1;Belgium;;NRC;NRC_samples;;;84;;
+2016;A. fumigatus;Azole;9,48;Belgium;6,901347762;NRC;NRC_samples;9,724087674;4,898002006;559;oscilate;
+2017;A. fumigatus;Azole;5,77;Belgium;7,076756489;NRC;NRC_samples;9,271332398;5,401648895;589;oscilate;
+2018;A. fumigatus;Azole;5,82;Belgium;7,256623508;NRC;NRC_samples;8,97817002;5,865180167;567;oscilate;
+2019;A. fumigatus;Azole;6,96;Belgium;7,441062132;NRC;NRC_samples;8,963435384;6,177252726;589;oscilate;
+2020;A. fumigatus;Azole;7,87;Belgium;7,630188558;NRC;NRC_samples;9,341538504;6,232354275;648;oscilate;
+2021;A. fumigatus;Azole;5,41;Belgium;7,824121933;NRC;NRC_samples;10,08077524;6,072636532;684;oscilate;
+2022;A. fumigatus;Azole;10,61;Belgium;8,022984433;NRC;NRC_samples;11,0841919;5,807214437;933;oscilate;

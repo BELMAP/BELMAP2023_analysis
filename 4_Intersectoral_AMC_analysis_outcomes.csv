@@ -1,0 +1,44 @@
+Year,Measurement,Value,Unit,Sector,kg.active.product,tonnes.of.biomass,Category,Year_simple,icon,signif
+,,,,,,,,,,
+2011,Total,146.5,mg/kg biomass,Veterinary,298654.021,2038594,Veterinary_Total,0,downward_arrow,***
+2012,Total,136.5,mg/kg biomass,Veterinary,277916.457,2036018,Veterinary_Total,1,downward_arrow,***
+2013,Total,127.9,mg/kg biomass,Veterinary,259505.9025,2028975,Veterinary_Total,2,downward_arrow,***
+2014,Total,129.4,mg/kg biomass,Veterinary,268035.925,2071375,Veterinary_Total,3,downward_arrow,***
+2015,Total,123.2,mg/kg biomass,Veterinary,260227.968,2112240,Veterinary_Total,4,downward_arrow,***
+2016,Total,117.3,mg/kg biomass,Veterinary,242583.438,2068060,Veterinary_Total,5,downward_arrow,***
+2017,Total,108.5,mg/kg biomass,Veterinary,222674.55,2052300,Veterinary_Total,6,downward_arrow,***
+2018,Total,94.8,mg/kg biomass,Veterinary,197917.278,2087735,Veterinary_Total,7,downward_arrow,***
+2019,Total,87.3,mg/kg biomass,Veterinary,176559.885,2022450,Veterinary_Total,8,downward_arrow,***
+2020,Total,87.8,mg/kg biomass,Veterinary,182233.729,2075555,Veterinary_Total,9,downward_arrow,***
+2021,Total,81.2,mg/kg biomass,Veterinary,171705.114,2114595,Veterinary_Total,10,downward_arrow,***
+2022,Total,61.4,mg/kg biomass,Veterinary,122415.022,1993730,Veterinary_Total,11,downward_arrow,***
+2012,Total,141.9120681,mg/kg biomass,Human -Ambulatory,97525.18941,687222.6636,Human -Ambulatory_Total,0,downward_arrow,***
+2013,Total,127.4075729,mg/kg biomass,Human -Ambulatory,88047.81969,691072.106,Human -Ambulatory_Total,1,downward_arrow,***
+2014,Total,126.2285198,mg/kg biomass,Human -Ambulatory,87566.32385,693712.6728,Human -Ambulatory_Total,2,downward_arrow,***
+2015,Total,128.2308799,mg/kg biomass,Human -Ambulatory,89410.21614,697259.6323,Human -Ambulatory_Total,3,downward_arrow,***
+2016,Total,127.6181848,mg/kg biomass,Human -Ambulatory,89592.20229,702033.1974,Human -Ambulatory_Total,4,downward_arrow,***
+2017,Total,120.9388445,mg/kg biomass,Human -Ambulatory,85236.19521,704787.577,Human -Ambulatory_Total,5,downward_arrow,***
+2018,Total,120.7554096,mg/kg biomass,Human -Ambulatory,85505.7905,708090.7663,Human -Ambulatory_Total,6,downward_arrow,***
+2019,Total,115.5250844,mg/kg biomass,Human -Ambulatory,82268.60087,712127.5983,Human -Ambulatory_Total,7,downward_arrow,***
+2020,Total,86.23159718,mg/kg biomass,Human -Ambulatory,61823.96566,716952.5753,Human -Ambulatory_Total,8,downward_arrow,***
+2021,Total,91.31767428,mg/kg biomass,Human -Ambulatory,65727.38557,719766.3113,Human -Ambulatory_Total,9,downward_arrow,***
+2012,Total,25.66156316,mg/kg biomass,Human - Hospital,17635.20779,687222.6636,Human - Hospital_Total,0,equals,
+2013,Total,25.14112112,mg/kg biomass,Human - Hospital,17374.32752,691072.106,Human - Hospital_Total,1,equals,
+2014,Total,25.35903222,mg/kg biomass,Human - Hospital,17591.88202,693712.6728,Human - Hospital_Total,2,equals,
+2015,Total,25.99712462,mg/kg biomass,Human - Hospital,18126.74556,697259.6323,Human - Hospital_Total,3,equals,
+2016,Total,26.06531805,mg/kg biomass,Human - Hospital,18298.71857,702033.1974,Human - Hospital_Total,4,equals,
+2017,Total,26.02050303,mg/kg biomass,Human - Hospital,18338.92728,704787.577,Human - Hospital_Total,5,equals,
+2018,Total,26.48844689,mg/kg biomass,Human - Hospital,18756.22466,708090.7663,Human - Hospital_Total,6,equals,
+2019,Total,25.99022668,mg/kg biomass,Human - Hospital,18508.3577,712127.5983,Human - Hospital_Total,7,equals,
+2020,Total,24.07686005,mg/kg biomass,Human - Hospital,17261.96681,716952.5753,Human - Hospital_Total,8,equals,
+2021,Total,24.13188568,mg/kg biomass,Human - Hospital,17369.31834,719766.3113,Human - Hospital_Total,9,equals,
+2012,Total,167.5736312,mg/kg biomass,Human,115160.3972,687222.6636,Human_Total,0,downward_arrow,**
+2013,Total,152.548694,mg/kg biomass,Human,105422.1472,691072.106,Human_Total,1,downward_arrow,**
+2014,Total,151.587552,mg/kg biomass,Human,105158.2059,693712.6728,Human_Total,2,downward_arrow,**
+2015,Total,154.2280045,mg/kg biomass,Human,107536.9617,697259.6323,Human_Total,3,downward_arrow,**
+2016,Total,153.6835028,mg/kg biomass,Human,107890.9209,702033.1974,Human_Total,4,downward_arrow,**
+2017,Total,146.9593476,mg/kg biomass,Human,103575.1225,704787.577,Human_Total,5,downward_arrow,**
+2018,Total,147.2438565,mg/kg biomass,Human,104262.0152,708090.7663,Human_Total,6,downward_arrow,**
+2019,Total,141.5153111,mg/kg biomass,Human,100776.9586,712127.5983,Human_Total,7,downward_arrow,**
+2020,Total,110.3084572,mg/kg biomass,Human,79085.93248,716952.5753,Human_Total,8,downward_arrow,**
+2021,Total,115.44956,mg/kg biomass,Human,83096.70391,719766.3113,Human_Total,9,downward_arrow,**

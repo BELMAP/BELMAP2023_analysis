@@ -1,0 +1,140 @@
+[1] "GLM analysis of A. fumigatus_Azole_Belgium_NRC_samples"
+[1] "SELECTED MODEL----------------------------"
+
+Call:  glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 10.69929769, link = log)
+
+Coefficients:
+(Intercept)  Year_simple  
+   -1.74945     -0.09349  
+
+Degrees of Freedom: 11 Total (i.e. Null);  10 Residual
+Null Deviance:	    17.42 
+Residual Deviance: 11.69 	AIC: 88.53
+
+Call:
+glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 10.69929769, link = log)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.47017  -0.52388  -0.07725   0.31024   1.87229  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -1.74945    0.30363  -5.762 8.32e-09 ***
+Year_simple -0.09349    0.04033  -2.318   0.0205 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(10.6993) family taken to be 1)
+
+    Null deviance: 17.423  on 11  degrees of freedom
+Residual deviance: 11.692  on 10  degrees of freedom
+AIC: 88.533
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  10.70 
+          Std. Err.:  6.14 
+Warning while fitting theta: limite d'alternation atteinte 
+
+ 2 x log-likelihood:  -82.533 
+[1] "TEST FOR DISPERSION-------------------- "
+[1] "dispersal parameter=  5.17869820176854 If >1 then overdispersed"
+
+	Overdispersion test
+
+data:  glmpoissonirr
+z = 1.8875, p-value = 0.02955
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  3.745172 
+
+
+	Underdispersion test
+
+data:  glmpoissonirr
+z = 1.8875, p-value = 0.9705
+alternative hypothesis: true dispersion is less than 1
+sample estimates:
+dispersion 
+  3.745172 
+
+[1] "ANOVA COMPARING MODELS-------------------- "
+[1] "Likelihood Ratio Test Poisson vs NB model   "
+Likelihood ratio test
+
+Model 1: Number_resistants ~ Year_simple + offset(log(Sample_size))
+Model 2: Number_resistants ~ Year_simple + offset(log(Sample_size))
+  #Df  LogLik Df  Chisq Pr(>Chisq)    
+1   2 -49.027                         
+2   3 -41.266  1 15.521  8.161e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "AIC of Poisson model: 95.3622693726026"
+[2] "AIC of Poisson model: 100.40635421613" 
+[1] "AIC of NB model: 88.5328387771874"
+[1] "MODELS-------------------- "
+[1] "Output from Poisson model"
+
+Call:
+glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.2536  -1.1514   0.7372   1.3317   3.2255  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -2.38925    0.18892  -12.65   <2e-16 ***
+Year_simple -0.01788    0.02265   -0.79     0.43    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 41.733  on 11  degrees of freedom
+Residual deviance: 41.113  on 10  degrees of freedom
+AIC: 102.05
+
+Number of Fisher Scoring iterations: 4
+
+[1] "Output from Neg Binomial model"
+
+Call:
+glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 10.69929769, link = log)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.47017  -0.52388  -0.07725   0.31024   1.87229  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -1.74945    0.30363  -5.762 8.32e-09 ***
+Year_simple -0.09349    0.04033  -2.318   0.0205 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(10.6993) family taken to be 1)
+
+    Null deviance: 17.423  on 11  degrees of freedom
+Residual deviance: 11.692  on 10  degrees of freedom
+AIC: 88.533
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  10.70 
+          Std. Err.:  6.14 
+Warning while fitting theta: limite d'alternation atteinte 
+
+ 2 x log-likelihood:  -82.533 
+[1] "Poisson ZI test= "
+NULL
+[1] "NB ZI test= "
+NULL

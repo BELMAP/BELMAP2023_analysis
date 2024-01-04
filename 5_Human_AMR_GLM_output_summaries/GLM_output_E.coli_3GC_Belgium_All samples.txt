@@ -1,0 +1,137 @@
+[1] "GLM analysis of E.coli_3GC_Belgium_All samples"
+[1] "SELECTED MODEL----------------------------"
+
+Call:  glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 16.96945422, link = log)
+
+Coefficients:
+(Intercept)  Year_simple  
+    -2.6371       0.0363  
+
+Degrees of Freedom: 7 Total (i.e. Null);  6 Residual
+Null Deviance:	    8.993 
+Residual Deviance: 8.072 	AIC: 145.8
+
+Call:
+glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 16.96945422, link = log)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.4689  -0.1421   0.1978   0.5988   0.8501  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -2.63714    0.15703 -16.793   <2e-16 ***
+Year_simple  0.03630    0.03752   0.967    0.333    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(16.9695) family taken to be 1)
+
+    Null deviance: 8.9930  on 7  degrees of freedom
+Residual deviance: 8.0722  on 6  degrees of freedom
+AIC: 145.78
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  16.97 
+          Std. Err.:  8.42 
+
+ 2 x log-likelihood:  -139.78 
+[1] "TEST FOR DISPERSION-------------------- "
+[1] "dispersal parameter=  572.130257664566 If >1 then overdispersed"
+
+	Overdispersion test
+
+data:  glmpoissonirr
+z = 1.9686, p-value = 0.0245
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  429.0397 
+
+
+	Underdispersion test
+
+data:  glmpoissonirr
+z = 1.9686, p-value = 0.9755
+alternative hypothesis: true dispersion is less than 1
+sample estimates:
+dispersion 
+  429.0397 
+
+[1] "ANOVA COMPARING MODELS-------------------- "
+[1] "Likelihood Ratio Test Poisson vs NB model   "
+Likelihood ratio test
+
+Model 1: Number_resistants ~ Year_simple + offset(log(Sample_size))
+Model 2: Number_resistants ~ Year_simple + offset(log(Sample_size))
+  #Df   LogLik Df  Chisq Pr(>Chisq)    
+1   2 -1896.17                         
+2   3   -69.89  1 3652.6  < 2.2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "AIC of Poisson model: 3789.12045361328" "AIC of Poisson model: 3795.19712504176"
+[1] "AIC of NB model: 145.779756233082"
+[1] "MODELS-------------------- "
+[1] "Output from Poisson model"
+
+Call:
+glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-47.29   -1.71    7.52   15.49   23.10  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -2.768699   0.009453 -292.88   <2e-16 ***
+Year_simple  0.058158   0.002066   28.15   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 4504.2  on 7  degrees of freedom
+Residual deviance: 3707.9  on 6  degrees of freedom
+AIC: 3796.3
+
+Number of Fisher Scoring iterations: 4
+
+[1] "Output from Neg Binomial model"
+
+Call:
+glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 16.96945422, link = log)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.4689  -0.1421   0.1978   0.5988   0.8501  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -2.63714    0.15703 -16.793   <2e-16 ***
+Year_simple  0.03630    0.03752   0.967    0.333    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(16.9695) family taken to be 1)
+
+    Null deviance: 8.9930  on 7  degrees of freedom
+Residual deviance: 8.0722  on 6  degrees of freedom
+AIC: 145.78
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  16.97 
+          Std. Err.:  8.42 
+
+ 2 x log-likelihood:  -139.78 
+[1] "Poisson ZI test= "
+NULL
+[1] "NB ZI test= "
+NULL
