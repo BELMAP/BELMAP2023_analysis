@@ -1,0 +1,671 @@
+---
+title: "![](BELMAP-logo.png){width=6in}"
+subtitle: 7. Zoonotic Pathogens in Humans and the Food Chain
+date: "Last compiled on `r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: 
+      latex_engine: lualatex
+  word_document:
+    reference_docx: "word-styles-reference-01.docx"
+  html_document:
+    df_print: paged
+css: style.css
+editor_options:
+  markdown:
+    wrap: 72
+header-includes:
+- \usepackage{placeins}
+- \usepackage{caption}
+- \captionsetup[figure]{labelformat=empty}
+- \captionsetup[table]{labelformat=empty}
+- \usepackage{fontspec}
+- \setmainfont{Gill Sans MT}
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[LE,RO]{BELMAP2023|  \thepage}
+---
+
+```{r setup5, include=FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE
+)
+```
+
+```{r load_data_and_themes5, include=FALSE}
+
+library(tidyverse)
+library(patchwork)
+library(jpeg)
+library(scales)
+library(extrafont)
+library(remotes)
+library(extrafontdb)
+library(magrittr)
+library(AER)
+library(AICcmodavg)
+library(pscl)
+library(MASS)
+library(COMPoissonReg)
+library(performance)
+library(grid)
+library(ggtext)
+library(showtext)
+library(flextable)
+library(ftExtra)
+
+
+BELMAP_colourscheme <- c("#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c",
+                         "#fdbf6f","#ff7f00","#cab2d6")
+
+moiras_graph_theme<- function(..., base_size = 12){theme(
+   panel.background = element_blank(), #transparent panel bg
+  plot.background = element_blank(), #transparent plot bg
+  panel.grid.major.y =  element_line(colour = "#ccc6c4"), #grey y major gridlines
+  panel.grid.major.x =  element_blank(), #remove major gridlines
+  panel.grid.minor = element_blank(), #remove minor gridlines
+  # legend.background = element_rect(fill='#001f3f'), #transparent legend bg
+  legend.title = element_text(size = 16),
+  legend.text = element_text(size = 14),
+  #  legend.box.background = element_rect(fill='#001f3f'),
+ # text = element_text( family = "Gill Sans MT"),
+  axis.text = element_text(size = 14),
+  #plot.background=element_blank(),#, , size = 10, family = "calibri"
+  axis.title = element_text(size = 16),
+  axis.ticks.x = element_blank(),
+  axis.text.x = element_text(angle = 90,vjust = 0.5, hjust = 0.5),
+  strip.background = element_blank(),
+ # strip.text = element_text(size = 16),
+  legend.position = "top",
+  legend.direction = "horizontal"
+)}
+
+
+
+# adding icons to figures ------------------------------------
+
+# Important step to enable showtext font rendering!
+showtext_auto()
+
+font_add('fa-solid', '../font_awesome_font_files/fontawesome-free-6.4.0-desktop/otfs/Font Awesome 6 Free-Solid-900.otf')
+
+font_add("Gill Sans MT", "GIL_____.TTF")
+font_add("ITC Avant Garde Gothic", "./font_awesome_font_files/fontawesome-free-6.4.0-desktop/otfs/ITC_Avant_Garde_Gothic_Medium.otf")
+
+upward_arrow <- "<span style='font-family:fa-solid'>&#xf062;</span>"
+downward_arrow <- "<span style='font-family:fa-solid'>&#xf063;</span>" 
+equals <- "<span style='font-family:fa-solid'>&#xf52c;</span>"   #" = " 
+oscillate <- "<span style='font-family:fa-solid'>&#xf83e;</span>"   #" ~ "
+
+
+BELMAP_Indicator_colourscheme <- c("MDR"="#e31a1c",
+                                    "pan-S" = "#33a02c",
+                                    "MRSA" = "#1f78b4",
+                                    "ESBL producers" = "#a6cee3",
+                                    "Ciprofloxacin resistance" = "#b2df8a",
+                                    "Colistin resistance" = "#1f78b4")
+                                    #"#33a02c","#e31a1c","#fdbf6f","#ff7f00","#cab2d6", "#6a3d9a","#ffff99") #
+#-----------------------------------------------------------------------------------
+#2. Load data-----
+
+Zoonoses_data_campylobacter <- read_csv2("Data/2.AMR/Zoonotic_AMR/C.jejuni/Campylobacter_data.csv",
+                                na = c("", "NA"),
+                                trim_ws = TRUE
+  ) %>%
+  filter(!is.na(Sample_size)) %>%
+  group_by(Year, Host, Pathogen,Indicator) %>%
+  summarise(                       # combine CHU Liege and ULB data
+    Sample_size = sum(Sample_size),
+    Number_resistants = sum(Number_resistants)
+  ) %>%
+  ungroup()%>%
+  mutate(Year_simple = Year - 2011,
+         Percent_resistance = Number_resistants/Sample_size*100,
+         Host = str_to_title(Host),  
+         Indicator = str_to_title(Indicator))
+
+
+Zoonoses_data_salmonella<- read_csv2("Data/2.AMR/Zoonotic_AMR/Salmonella/Salmonella_data_2023.csv",
+                                         na = c("", "NA"),
+                                         trim_ws = TRUE
+) %>%
+  filter(!is.na(Sample_size)) %>%
+  mutate(Year_simple = Year - 2011,
+         Percent_resistance = Number_resistants/Sample_size*100,
+         Host = str_to_title(Host),  
+         Indicator = str_to_title(Indicator),
+         Pathogen = str_to_title(Pathogen)) %>%
+  mutate(Indicator = if_else(Indicator=="Cipofloxacin","Ciprofloxacin",Indicator))
+  
+
+
+
+
+Zoonoses_data <-  rbind(Zoonoses_data_campylobacter,Zoonoses_data_salmonella) %>%
+  mutate(Source = Host) %>%
+  mutate(Host = case_when(
+         Source == "Human" ~ "Human",
+         Source == "Broiler_carcass" ~"Poultry",
+         Source == "Poultry_meat" ~ "Poultry",
+         Source == "Pork_caecum" ~ "Porcine",
+         Source == "Veal_calf_caecum" ~ "Veal",
+         Source == "Pork/Bovine_carcases" ~ "Porcine/Bovine",    
+         Source == "Pork Caecum" ~"Porcine",
+         Source == "Bovine Caecum" ~ "Bovine",
+         Source == "Chicken_neck Skin From Carcases" ~ "Poultry",
+         Source == "Chicken_swabs Before Slaughter" ~ "Poultry"))
+
+
+BELMAP_Zoonoses_colourscheme <- c("Gentamicin"="#33a02c",
+                                   "Tetracycline" ="#b2df8a",# ,
+                                   "Ciprofloxacin" = "#1f78b4",
+                                   "Erythromycin" = "#a6cee3",
+                                  "Pork/Bovine carcases" = "#ef6548" ,
+                                  "Pork Caecum"  = "#a50026",
+                                  "Bovine Caecum" ="#fed976"
+                                  )
+
+
+#load graph data --------------------------------------------------
+
+
+graph_data_models <- read.csv("7_zoonoses_data_and_GLM_predictions.csv") %>%
+  mutate(x_line_data = NA)
+
+graph_data_no_models <- Zoonoses_data %>%    #get data for those without glm
+  mutate(category1 = paste(Host,Pathogen,Indicator,sep = ".")) %>%
+  filter(!grepl("Human|Poultry.Campylobacter",category1)) %>%
+  mutate(category = paste(Source,Pathogen,Indicator,sep = ".")) %>%
+    mutate(
+  Percent_resistance_predict= NA,
+  CI_upper=NA,
+  CI_lower=NA,
+  Sample_size.x=Sample_size,
+  icon=NA,
+  signif_level=NA,
+  x_line_data=case_when(
+    grepl("Poultry.Salmonella",category) ~ 2021.5,
+    grepl("Por|Bovin",category) ~ 2020,
+    grepl("Veal",category)~2020)
+) %>% 
+  dplyr::select(c(Year,Pathogen,Host,Source,Indicator,Percent_resistance,Percent_resistance_predict,
+  CI_upper,CI_lower,Sample_size.x,icon,signif_level,x_line_data))
+
+
+graph_data_complete <- rbind(graph_data_models,graph_data_no_models)%>%
+  mutate(label_icon = case_when(
+    icon == "upward_arrow" ~ upward_arrow,
+    icon == "downward_arrow" ~ downward_arrow,
+    icon == "equals" ~ equals,
+    icon == "oscilate" ~ oscillate,
+    is.na(icon) ~ NA
+  )) %>%
+  mutate(label = if_else(signif_level == "", label_icon, paste(label_icon,signif_level,sep=" "))) %>%
+  mutate(Host2 = if_else(grepl("Porc|Bov", Host), "Porcine/Bovine",Host))
+
+
+y_coords <- graph_data_complete %>%
+  filter(Year == 2022) %>%
+  group_by(Source,Pathogen)%>%
+  mutate(rank = rank(Percent_resistance_predict))%>%
+  ungroup() %>%
+  mutate(y_coord = case_when(
+    rank == 1 ~ 10,
+    rank == 2 ~ 30,
+    rank == 3 ~ 50
+  )) %>%
+  dplyr::select(Host,Pathogen,Indicator,y_coord)
+
+graph_data_complete_labels <- left_join(graph_data_complete,y_coords, by = c("Host","Pathogen","Indicator"))%>%
+  mutate(Indicator = if_else(Indicator=="Cipofloxacin","Ciprofloxacin",Indicator))
+
+
+
+Salmonella_table <-tribble(
+  ~Serotype, ~`N. total (a)`, ~`% total (a)`, ~`Serotype `, ~`N. total (b)`, ~`% total (b)`, ~`Serotype  `, ~`N. total (b) `, ~`% total (b) `, 
+"Typhimurium","11,651","50.3","Infantis","271","38.2","Typhimurium","209","48.3",
+
+"Enteritidis","4,810","20.7","Paratyphi B var, L(+) Tartrate+","150","21.2","Derby","112","25.9",
+
+"Infantis", "480","2.1","Enteritidis",  "78", "11.0","Rissen", "14", "3.2") 
+
+
+     
+
+
+```
+
+\newpage
+
+# 7. Zoonotic pathogens in humans and the food chain
+
+**Contents**
+
+7.1 [Methodology](#paragraph61z)\
+7.2 [*Salmonella*](#paragraph62z)\
+7.3 [*Campylobacter*](#paragraph63z)
+
+A zoonosis is an infectious disease caused by a pathogen that has jumped
+from an animal to human host. Zoonotic pathogens may be bacterial, viral
+or parasitic, and may spread to humans through direct contact or through
+food, water or the environment. Many of these micro-organisms are
+commonly found in the intestines of healthy, food-producing animals. The
+most common zoonotic diseases are caused by consuming food or drinking
+water contaminated with pathogenic bacteria, such as *Salmonella* spp.
+and Campylobacter spp. AMR can be a complicating factor in the control
+of a severe zoonotic infection. *Salmonella* infections are primarily
+transmitted through food and *Salmonella* is not a permanent coloniser
+of the human gut. *Salmonella* bacteria are thus not commonly exposed to
+antimicrobials that are consumed by humans, except during the infection
+itself. Additionally, most infections in humans are not treated with
+antimicrobials. Consequently, it is not expected to find associations
+between the consumption of certain antimicrobial classes in humans and
+resistance to these antimicrobial classes in humans.
+
+## 7.1 Methodology {#paragraph61z}
+
+Data on AMR in human salmonellosis were collected from the NRC
+Salmonella, which receives approx. 3,000 samples annually and is the
+only laboratory in Belgium performing routine serotyping of *S.
+enterica*. A 2021 study concluded that the coverage of the NRC
+surveillance system was estimated to be 83--85%, allowing reliable
+estimates of national resistance levels based on NRC data
+[[56]](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8389443/). In
+contrast, national AMR data of *C. jejuni* and *C. coli* could not be
+based on data from the NRC Campylobacter, as only invasive and/or
+multi-resistant strains are sent to the NRC, not reflecting the actual
+epidemiology. Instead, we collected ciprofloxacin and erythromycin
+resistance data from routine analysis of *C. jejuni* isolated from stool
+specimens (2011-2022, n=4,522) in two large university laboratories,
+LHUB-ULB and the lab of CHU Liège.
+
+For non-human samples, the European Directive 2003/99/EC requires Member
+States to ensure a monitoring system is in place that provides
+comparable data on the occurrence of AMR in zoonotic agents and other
+agents threatening public health. This monitoring should supplement the
+monitoring of human isolates conducted in accordance with Decision No
+1082/2013/EU. Commission Implementing Decision (EU) 2020/1729, which
+applies from 2021 to 2027 repealing the former Implementing Decision
+2013/652/EU applied from 2024 to 2020 , harmonizes the monitoring of AMR
+in *Salmonella* spp., *Campylobacter coli (C. coli), Campylobacter
+jejuni (C. jejuni)* in the major domestically produced animal
+populations and their derived meat.
+
+Since 1st January 2021, the Commission Implementing Decision 2020/1729
+updated the panel of antimicrobials to be monitored and added a new
+antibiotic, amikacin, to the monitoring of E.coli and Salmonella spp.
+isolates. It also removed nalidixic acid and streptomycin while adding
+ertapenem and chloramphenicol to the monitoring of *C. coli* and *C.
+jejuni*. In even years in Belgium, Salmonella spp. isolates are
+collected from poultry populations (broilers and fattening turkeys)
+before slaughter in the framework of the national control program to
+comply with the EC No 2160/2003 regulation. In odd years, *Salmonella*
+spp. isolates are collected from caecal samples at the slaughterhouse
+from fattening pigs and veal calves. In addition, isolates of
+*Salmonella* spp . collected in the framework of the official sampling
+of feed and the food chain are tested for antimicrobial susceptibility,
+following the same method described in the Decision 2020/1729, and
+included in the AMR surveillance.
+
+Antimicrobial surveillance of *C. jejuni* isolated from food producing
+animals includes sampling the caecal contents of broilers and turkeys at
+slaughter as described by the European Decision 2013/652/EU. With the
+implementation of the Decision 2020/1729, this surveillance was extended
+to isolates of *C. coli*, including sampling of the caecal contents of
+fattening pigs for the surveillance of *C. coli* and veal calves for *C.
+coli* and *C. jejuni*. A minimum of 170 *C. jejuni* and *C. coli*,
+isolated from caecal samples at the slaughter house, are tested for
+resistance to ciprofloxacin, tetracycline, erythromycin, gentamycin; in
+addition to streptomycin and nalidixic acid (included from 2011 to 2020)
+and ertapenem and chloramphenicol (since 2021) according to the
+methodology described by the European Decisions 2013/652/EU and
+2020/1729. From 2021, isolation is performed according to the
+EURL-Campylobacter protocol described for isolation, identification and
+storage of *C. jejuni* and/or *C. coli* in the framework of for AMR
+monitoring
+(<https://www.sva.se/en/about-us/eurl-campylobacter/laboratory-procedures/>).
+
+Antimicrobial surveillance of *C. jejuni* and *C. coli* isolated from
+isolated from food samples taken in the framework of the official
+sampling includes poultry meat. during the official sampling are tested
+for antimicrobial susceptibility following the same method described in
+the decision 2020/1729. In food samples, *C. jejuni* and *C. coli* were
+isolated from broiler carcasses and poultry meat according to [ISO
+10272--1](https://www.iso.org/standard/63225.html).
+
+\FloatBarrier
+
+## 7.2 *Salmonella* {#paragraph62z}
+
+Non-typhoidal *Salmonella* (NTS) serovars are considered as the second
+main cause of food-borne outbreaks. As resistance patterns of Salmonella
+are strongly serovar-specific, we present data from the three most
+prevalent serotypes from human isolates, food-producing animals and food
+sources, covering \>70% of all *Salmonella* samples in all sectors
+(Table 3). One issue with the *Salmonella* data is the relatively low
+number of isolates per serovar from the monitoring in food-producing
+animals. Salmonella serovars differ in their prevalence in different
+animal species. At the same time, there is an association between the
+serovar and the likelihood of resistance to certain antimicrobials. The
+limited prevalence of *Salmonella* in many farm animal populations
+results in a scarcity of isolates available from active monitoring
+conducted under Commission Implementing Decision 4183 (EU) 2020/1729. In
+order to obtain the requested 170 isolates required for statistical
+purposes, an excessively high number of samples would need to be tested.
+Furthermore, the small number of isolates is spread across multiple
+serovars, posing challenges for a valid analysis of serovar-level data.
+
+```{r 6.2_salmonella_table}
+
+
+Salmonella_flextable <- flextable(Salmonella_table)%>%
+  add_header_row(values = c("Human Sector","Chickens", "Porcine/bovine"), colwidths = c(3, 3,3) ) %>%
+  add_footer_lines("(a) Analysed at the NRC between 01/01/2014 and 31/12/2022.  All isolates are from human patients.") %>%
+    add_footer_lines("(b) Analysed at the National Reference Laboratory (NRL) AMR between 01/01/2014 and 31/12/2022.  All isolates are from animal carcasses.") %>%
+  set_caption(    caption = as_paragraph(
+      as_chunk("Table 3. Overview of the most prevalent", 
+               props = fp_text_default(font.family = "Gill Sans MT", bold = FALSE,italic = FALSE)),
+      as_chunk(" Salmonella ", 
+               props = fp_text_default(font.family = "Gill Sans MT", bold = FALSE,italic = TRUE)),
+            as_chunk("serotypes identified across sectors in Belgium, 2014-2022.", 
+               props = fp_text_default(font.family = "Gill Sans MT", bold = FALSE,italic = FALSE))))%>%
+  fontsize(size = 10, part="all") %>%
+  colformat_md(part = "all") %>%
+  
+  font(fontname  = "Gill Sans MT", part = "all")
+
+set_table_properties(Salmonella_flextable, width = 1, layout = "autofit")
+
+```
+
+Since 2014, resistance in non-typhoid *Salmonella* serovars remains
+generally low across sectors, with 13% of human *Salmonella* isolates
+reported to be MDR in 2022 (all serotypes combined). Ciprofloxacin
+resistance (MIC~CIP~ \>0.064 ug/ml) recently increased in human *S.*
+Typhimurium and *S.* Infantis isolates (Figure 34). However, high levels
+of ciprofloxacin resistance (MIC~CIP~ \>2 ug/ml) remain rare (3.8% in
+2022), and mainly confined to isolates from serovar Kentucky which
+represents only 2% of human infections. In non-human samples, highest
+levels of ciprofloxacin resistance are observed in *S.* Infantis
+isolates from broilers.
+
+Regarding beta-lactam resistance, ampicillin resistance is high in
+serovars Typhimurium across sectors. The occurrence of extended spectrum
+beta-lactamases is \<5% for all serotypes and sectors, apart from a peak
+of 9.1% in human serovars Infantis isolates in 2018. The resistance
+against macrolides (MIC~AZM~\>16 ug/ml) remained below 5% in the last
+five years across sectors and serovars.
+
+Within human samples, a relatively high proportion of multidrug
+resistance is observed in *S.* Infantis (30% in 2022). Apart from
+ciprofloxacin resistance due to GyrA mutations, this may be linked to
+the international spread of the pESI megaplasmid , carrying multiple AMR
+genes, in *S.* Infantis isolated from humans and
+poultry[[57]](https://doi.org/10.1099/mgen.0.000365). While the
+phenotype associated with pESI megaplasmid is yet to be identified in
+Belgian poultry samples, a clearer picture will soon be available thanks
+to the genomic sequencing and analysis of all *Salmonella* isolates from
+food producing animals and food in 2023. In *Salmonella* samples from
+pork and bovine, resistance to critical antibiotics is rare (\<5%).
+However, when comparing patterns between host species it is again
+important to highlight the potential impact of highly variable sample
+sizes (e.g. 2022 isolates of *S.* Typhimurium -- 377 isolates from
+humans vs 24 from porcine/bovine samples, see appendix for full
+dataset).
+
+```{r 6.2_salmonella, fig.dim=c(18,18), fig.cap="**Figure 34**. Overview of ciprofloxacin resistance in the main *Salmonella* serovars isolated from humans, broilers and bovine/pork. In all isolates, the breakpoint of 0.064 ug/ml is used to define ciprofloxacin resistance. Light grey years indicate years with no data collection, years with data collection indicated in black. Red vertical lines indicate a change in methodology, in pork/bovine: sampling pre 2021 comprised swabs from carcasses, post 2021 this comprises caecal samples; in broilers: sampling pre 2021 comprised neck skin from broiler carcasses while 2022 data corresponds to isolates from boot swabs at farm level for broilers before slaughter. These changes in methodology mean direct comparisons should not be made and therefore no models were fit to this data. Data source: NRC *Salmonella* and NRL, 2014–2022."}
+
+# 4.2 Salmonella -------------------------------------------
+graph_data_Salmonella_h <- graph_data_complete_labels %>%
+  filter(grepl("Salmonella",Pathogen)) %>%
+  filter(grepl("Human",Host)) %>% # sep into hosts
+  filter(grepl("Typhi|Ent|Infant",Pathogen))
+
+graph_data_Salmonella_p <- graph_data_complete_labels %>%#select species to report for humans
+  filter(grepl("Salmonella",Pathogen)) %>%
+  filter(grepl("Chicken",Source)) %>%
+  mutate(Host = "Broilers")
+
+graph_data_Salmonella_pb <- graph_data_complete_labels %>%
+  filter(grepl("Salmonella",Pathogen))  %>%
+  filter(grepl("Por|Bov",Host)) %>%
+  mutate(Source = str_replace_all(Source,"_"," "))
+
+
+
+Salmonella_graph_h <- graph_data_Salmonella_h %>%
+    ggplot()+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistance), fill = Indicator), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Indicator, ymin = CI_lower, ymax = CI_upper, y = Percent_resistance_predict), alpha = 0.1)+
+    geom_smooth(aes(x=Year, colour = Indicator, y = Percent_resistance_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Zoonoses_colourscheme)+
+    scale_colour_manual(values = BELMAP_Zoonoses_colourscheme)+
+    geom_richtext(aes(x = 2023.5, y = y_coord, 
+                      label = label, 
+                      fill = Indicator), stat = "unique", 
+                  colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+    facet_grid(Host ~ Pathogen)+
+    scale_y_continuous(limits = c(-10,100), breaks = seq(0,100,50))+
+   geom_text(aes(x = 2014, y = -1, label = "2014"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+  geom_text(aes(x = 2015, y = -1, label = "2015"), size = 3.5, angle = 90, colour = "light grey", hjust = 1)+  #years without data
+  geom_text(aes(x = 2016, y = -1, label = "2016"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+  geom_text(aes(x = 2017, y = -1, label = "2017"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+  geom_text(aes(x = 2018, y = -1, label = "2018"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+  geom_text(aes(x = 2019, y = -1, label = "2019"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+  geom_text(aes(x = 2020, y = -1, label = "2020"),  size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+  geom_text(aes(x = 2021, y = -1, label = "2021"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+ #years without data
+  geom_text(aes(x = 2022, y = -1, label = "2022"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+  geom_text(aes(x = Year, y = -1, label = Year), na.rm = TRUE, size = 3.5, angle = 90, colour = "black", hjust = 1)+ #add years with data in dark
+  moiras_graph_theme()+
+  labs(y= "% Resistance", x= "")+
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.position = "none",
+          strip.text=element_text(size = 14)) 
+
+
+
+
+
+Salmonella_graph_p <- graph_data_Salmonella_p %>%
+    ggplot()+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistance), fill = Indicator), stat="identity", position = "dodge")+
+    geom_vline(aes(xintercept = 2021), colour = "red", linetype= "dashed")+
+    scale_fill_manual(values = BELMAP_Zoonoses_colourscheme)+
+    scale_fill_manual(values = BELMAP_Zoonoses_colourscheme)+
+    scale_colour_manual(values = BELMAP_Zoonoses_colourscheme)+
+    geom_richtext(aes(x = 2023.5, y = y_coord, 
+                      label = label, 
+                      fill = Indicator), stat = "unique", 
+                  colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+    facet_grid(Host ~ Pathogen)+
+    scale_y_continuous(limits = c(-10,100), breaks = seq(0,100,50))+
+    geom_text(aes(x = 2014, y = -1, label = "2014"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2015, y = -1, label = "2015"), size = 3.5, angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2016, y = -1, label = "2016"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2017, y = -1, label = "2017"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2018, y = -1, label = "2018"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2019, y = -1, label = "2019"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2020, y = -1, label = "2020"),  size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2021, y = -1, label = "2021"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+ #years without data
+    geom_text(aes(x = 2022, y = -1, label = "2022"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = Year, y = -1, label = Year), na.rm = TRUE, size = 3.5, angle = 90, colour = "black", hjust = 1)+  #add years with data in dark
+    moiras_graph_theme()+
+    labs(y= "% Resistance", x= "")+
+    theme(axis.text.x = element_blank(),
+          axis.ticks.x = element_blank(),
+          legend.position = "none",
+          strip.text=element_text(size = 14))
+
+Salmonella_graph_pb <- graph_data_Salmonella_pb %>%
+    ggplot()+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistance), fill = Indicator,colour = Source), stat="identity", position = "dodge", size = 1)+
+    geom_vline(aes(xintercept =2020), colour = "red", linetype= "dashed")+
+    # geom_ribbon(aes(x=Year, fill = Indicator, ymin = CI_lower, ymax = CI_upper, y = Percent_resistance_predict), alpha = 0.1)+
+    # geom_smooth(aes(x=Year, colour = Indicator, y = Percent_resistance_predict),stat = "identity")+
+    # geom_richtext(aes(x = 2023.5, y = y_coord, 
+    #                   label = label, 
+    #                   fill = Indicator), stat = "unique", 
+    #               colour= "white", show.legend = FALSE)+
+    # # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+    facet_grid(Host2~ Pathogen )+
+    scale_fill_manual(values = BELMAP_Zoonoses_colourscheme)+
+    scale_colour_manual(values = BELMAP_Zoonoses_colourscheme)+
+    scale_y_continuous(limits = c(-10,100), breaks = seq(0,100,50))+
+    geom_text(aes(x = 2014, y = -1, label = "2014"), size = 3,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2015, y = -1, label = "2015"), size = 3, angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2016, y = -1, label = "2016"), size = 3,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2017, y = -1, label = "2017"), size = 3,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2018, y = -1, label = "2018"), size = 3,  angle = 90, colour = "light grey", hjust = 1)+ #years without data
+    geom_text(aes(x = 2019, y = -1, label = "2019"), size = 3,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2020, y = -1, label = "2020"),  size = 3,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2021, y = -1, label = "2021"), size = 3,  angle = 90, colour = "light grey", hjust = 1)+ #years without data
+    geom_text(aes(x = 2022, y = -1, label = "2022"), size = 3,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = Year, y = -1, label = Year), na.rm = TRUE, size = 3, angle = 90, colour = "black", hjust = 1)+  #add years with data in dark
+    moiras_graph_theme()+
+    labs(y= "% Resistance", x= "")+
+    theme(axis.text.x = element_blank(),
+          axis.ticks.x = element_blank(),
+          legend.position = "bottom",
+          strip.text=element_text(size = 14))
+
+Salmonella_graph_h/Salmonella_graph_p/(Salmonella_graph_pb+plot_spacer() + plot_layout(widths=c(2,1)))
+
+```
+
+\FloatBarrier
+
+## 7.3 *Campylobacter* {#paragraph63z}
+
+Although campylobacteriosis is not often treated with antimicrobials,
+some severe infections need to be treated; then macrolides are a
+preferred first-line antibiotic, while fluoroquinolones, tetracyclines
+and aminoglycosides remain as alternative therapeutics. Poultry are a
+major source of *Campylobacter*, and in particular *C. jejuni*, the
+species most frequently associated with digestive campylobacteriosis in
+humans. Very similar, stable resistance levels to ciprofloxacin are
+observed among *C. jejuni* isolates across the four sectors with \>50%
+resistant isolates (Figure 35). Almost half of the isolates from poultry
+meat also show a combined pattern of resistance including ciprofloxacin,
+nalidixic acid and
+tetracycline[[58]](https://www.favv-afsca.be/productionanimale/antibioresistance/resultats/#sciensano).
+In contrast, resistance levels for erythromycin remain below 1% in
+samples from the human sector, but increased in samples from the poultry
+sector in 2022 (17.3% in broiler carcasses and 10.9% in poultry meat).
+
+```{r 6.3_campy, fig.dim=c(18,14), fig.cap="**Figure 35**. An overview of resistance to ciprofloxacin, erythromycin, gentamycin and tetracycline in *C. jejuni* and *C. coli* isolated from humans, poultry, porcine and bovine samples. Human samples represent *C. jejuni* isolated from routine stool specimens in LHUB-ULB and CHU Liège (2011-2022, n = 4,522) Light grey years indicate years with no data collection, years with data collection indicated in black. Red vertical lines indicate a change in methodology, here the expansion of surveillance, without sufficient data points no statistical analysis was performed for the *C. jejuni* isolates from veal calf caecum or the *C. coli* data. Data source: LHUB-ULB, CHU Liège and NRL-AMR Food Pathogens, 2014–2022."}
+
+#6.3 Campylobacter_species -----------------------------------
+
+
+C.jejuni_graph <- graph_data_complete_labels %>%
+    filter(grepl("Campylobacter je",Pathogen)) %>%
+   mutate(Source2 = str_replace_all(Source,"_"," ")) %>%
+  mutate(Source2 =fct_relevel(Source2, c("Human", "Broiler carcass","Poultry meat",
+                                                    "Veal calf caecum")))%>%
+   ggplot(aes(label = label_icon))+
+   geom_bar(aes(x=Year, y = as.numeric(Percent_resistance), fill = Indicator), stat="identity", position = "dodge")+
+   geom_vline(aes(xintercept =x_line_data), colour = "red", linetype= "dashed")+ 
+   geom_ribbon(aes(x=Year, fill = Indicator, ymin = CI_lower, ymax = CI_upper, y = as.numeric(Percent_resistance_predict)), alpha = 0.25)+
+   geom_smooth(aes(x=Year, colour = Indicator, y = as.numeric(Percent_resistance_predict)),stat = "identity")+
+   scale_fill_manual(values = BELMAP_Zoonoses_colourscheme)+
+   scale_colour_manual(values = BELMAP_Zoonoses_colourscheme)+
+   facet_grid(Pathogen ~ Source2, scales = "free_x", space = "free")+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+   #scale_x_continuous(pretty_breaks())+
+   # scale_x_continuous(
+   #   breaks = unique(graph_data_complete_labels$Year),
+   #   labels = unique(graph_data_complete_labels$Year))+
+   scale_y_continuous(limits = c(-10,100), breaks = seq(0,100,50))+
+   geom_richtext(aes(x = 2023.5, y = y_coord, 
+                     label = label, 
+                     fill = Indicator), stat = "unique", 
+                 colour= "white", show.legend = FALSE)+
+   # fill = NA, label.color = NA, # remove background and outline
+   # label.padding = grid::unit(rep(0, 4), "pt")) +
+   # annotate(geom = text, x = seq(min(graph_data_complete_labels$Year, na.rm = TRUE),max(graph_data_complete_labels$Year, na.rm = TRUE),by=1), y = -3, 
+   #          label = seq(min(graph_data_complete_labels$Year, na.rm = TRUE), size = 2.5, angle = 90, colour = "light grey")+  #make this additional for interactive report
+   geom_text(aes(x = 2011, y = -1, label = "2011"), size = 3.5, angle = 90, colour = "light grey", hjust = 1)+  #years without data
+   geom_text(aes(x = 2012, y = -1, label = "2012"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+   geom_text(aes(x = 2013, y = -1, label = "2013"), size = 3.5, angle = 90, colour = "light grey", hjust = 1)+ #years without data
+   geom_text(aes(x = 2014, y = -1, label = "2014"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+   geom_text(aes(x = 2015, y = -1, label = "2015"), size = 3.5, angle = 90, colour = "light grey", hjust = 1)+  #years without data
+   geom_text(aes(x = 2016, y = -1, label = "2016"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+   geom_text(aes(x = 2017, y = -1, label = "2017"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+   geom_text(aes(x = 2018, y = -1, label = "2018"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+   geom_text(aes(x = 2019, y = -1, label = "2019"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+   geom_text(aes(x = 2020, y = -1, label = "2020"),  size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+ #years without data
+   geom_text(aes(x = 2021, y = -1, label = "2021"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+ #years without data
+   geom_text(aes(x = 2022, y = -1, label = "2022"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+   geom_text(aes(x = Year, y = -1, label = Year), na.rm = TRUE, size = 3.5, angle = 90, colour = "black", hjust = 1)+ #add years with data in dark
+   moiras_graph_theme()+
+   labs(y= "% Resistance", x= "")&
+   theme(axis.text.x = element_blank(),
+         axis.ticks.x = element_blank(),
+         strip.text.x = element_text(size = 16),
+         strip.text.y = element_text(size = 16, face = "italic"))
+
+
+C.coli_graph <- graph_data_complete_labels %>%
+    filter(grepl("Campylobacter co",Pathogen)) %>%
+    mutate(Host = if_else(Host == "Porcine", "Porcine ceacum", "Veal calf caecum")) %>%
+    ggplot()+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistance), fill = Indicator), stat="identity", position = "dodge")+
+    geom_vline(aes(xintercept =x_line_data), colour = "red", linetype= "dashed")+ 
+    geom_ribbon(aes(x=Year, fill = Indicator, ymin = CI_lower, ymax = CI_upper, y = as.numeric(Percent_resistance_predict)), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Indicator, y = as.numeric(Percent_resistance_predict)),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Zoonoses_colourscheme)+
+    scale_colour_manual(values = BELMAP_Zoonoses_colourscheme)+
+    facet_grid(Pathogen ~ Host)+
+    scale_y_continuous(limits = c(-10,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord, 
+                      label = label, 
+                      fill = Indicator), stat = "unique", 
+                  colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+    # annotate(geom = text, x = seq(min(graph_data_complete_labels$Year, na.rm = TRUE),max(graph_data_complete_labels$Year, na.rm = TRUE),by=1), y = -3, 
+    #          label = seq(min(graph_data_complete_labels$Year, na.rm = TRUE), size = 2.5, angle = 90, colour = "light grey")+  #make this additional for interactive report
+    geom_text(aes(x = 2011, y = -1, label = "2011"), size = 3.5, angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2012, y = -1, label = "2012"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2013, y = -1, label = "2013"), size = 3.5, angle = 90, colour = "light grey", hjust = 1)+ #years without data
+    geom_text(aes(x = 2014, y = -1, label = "2014"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2015, y = -1, label = "2015"), size = 3.5, angle = 90, colour = "light grey", hjust = 1)+ #years without data
+    geom_text(aes(x = 2016, y = -1, label = "2016"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2017, y = -1, label = "2017"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2018, y = -1, label = "2018"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2019, y = -1, label = "2019"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2020, y = -1, label = "2020"),  size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = 2021, y = -1, label = "2021"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+ #years without data
+    geom_text(aes(x = 2022, y = -1, label = "2022"), size = 3.5,  angle = 90, colour = "light grey", hjust = 1)+  #years without data
+    geom_text(aes(x = Year, y = -1, label = Year), na.rm = TRUE, size = 3.5, angle = 90, colour = "black", hjust = 1)+  #add years with data in dark
+    moiras_graph_theme()+
+    labs(y= "% Resistance", x= "")&
+    theme(axis.text.x = element_blank(),
+          axis.ticks.x = element_blank(),
+          legend.position = "none",
+         strip.text.x = element_text(size = 16),
+         strip.text.y = element_text(size = 16, face = "italic"))
+
+
+C.jejuni_graph/(C.coli_graph + plot_spacer()) + plot_layout(widths = c(2|1))
+
+
+```
+
+While worrying high levels of resistance may be observed in *C. jejuni*
+and *C. coli* isolates from porcine and veal samples (e.g. \>90%
+resistance to ciprofloxacin and tetracycline in *C. coli* isolates from
+veal calf caeca), it is important to highlight that prevalence remains
+very low. Whole genome sequencing of 5 *C. coli* isolates from veal
+caeca in 2021 revealed all five belonged to the same sequence type (ST)
+clonal complex (CC). This is of course a small sample size, but may
+suggest that AST data may represent clonal spread of a highly resistant
+CC, but at very low prevalence. Further genomic sequencing in 2023
+should provide more information.

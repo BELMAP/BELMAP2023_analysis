@@ -1,0 +1,2 @@
+[1] "GLM analysis of C. difficile_Moxifloxacin_Belgium_NA"
+[1] "SELECTED MODEL----------------------------"

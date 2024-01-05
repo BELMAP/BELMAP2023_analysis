@@ -1,0 +1,137 @@
+[1] "GLM analysis of E. faecium_vancomycin_Europe_NA"
+[1] "SELECTED MODEL----------------------------"
+
+Call:  glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 194.1196101, link = log)
+
+Coefficients:
+(Intercept)  Year_simple  
+    -2.6813       0.1104  
+
+Degrees of Freedom: 9 Total (i.e. Null);  8 Residual
+Null Deviance:	    172.5 
+Residual Deviance: 9.55 	AIC: 125.6
+
+Call:
+glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 194.1196101, link = log)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.4606  -0.8398   0.2565   0.5090   1.6685  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -2.681253   0.048179  -55.65   <2e-16 ***
+Year_simple  0.110447   0.008684   12.72   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(194.1196) family taken to be 1)
+
+    Null deviance: 172.5139  on 9  degrees of freedom
+Residual deviance:   9.5501  on 8  degrees of freedom
+AIC: 125.55
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  194.1 
+          Std. Err.:  97.8 
+
+ 2 x log-likelihood:  -119.553 
+[1] "TEST FOR DISPERSION-------------------- "
+[1] "dispersal parameter=  13.4056960404213 If >1 then overdispersed"
+
+	Overdispersion test
+
+data:  glmpoissonirr
+z = 2.22, p-value = 0.01321
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  10.73134 
+
+
+	Underdispersion test
+
+data:  glmpoissonirr
+z = 2.22, p-value = 0.9868
+alternative hypothesis: true dispersion is less than 1
+sample estimates:
+dispersion 
+  10.73134 
+
+[1] "ANOVA COMPARING MODELS-------------------- "
+[1] "Likelihood Ratio Test Poisson vs NB model   "
+Likelihood ratio test
+
+Model 1: Number_resistants ~ Year_simple + offset(log(Sample_size))
+Model 2: Number_resistants ~ Year_simple + offset(log(Sample_size))
+  #Df  LogLik Df  Chisq Pr(>Chisq)    
+1   2 -98.432                         
+2   3 -59.776  1 77.312  < 2.2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "AIC of Poisson model: 193.746471982569" "AIC of Poisson model: 199.671964971324"
+[1] "AIC of NB model: 125.552980551234"
+[1] "MODELS-------------------- "
+[1] "Output from Poisson model"
+
+Call:
+glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-5.6479  -2.2531   0.1125   1.7971   6.1879  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -2.662447   0.021337 -124.78   <2e-16 ***
+Year_simple  0.107745   0.003183   33.85   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 1332.66  on 9  degrees of freedom
+Residual deviance:  107.19  on 8  degrees of freedom
+AIC: 200.86
+
+Number of Fisher Scoring iterations: 3
+
+[1] "Output from Neg Binomial model"
+
+Call:
+glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 194.1196101, link = log)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.4606  -0.8398   0.2565   0.5090   1.6685  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -2.681253   0.048179  -55.65   <2e-16 ***
+Year_simple  0.110447   0.008684   12.72   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(194.1196) family taken to be 1)
+
+    Null deviance: 172.5139  on 9  degrees of freedom
+Residual deviance:   9.5501  on 8  degrees of freedom
+AIC: 125.55
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  194.1 
+          Std. Err.:  97.8 
+
+ 2 x log-likelihood:  -119.553 
+[1] "Poisson ZI test= "
+NULL
+[1] "NB ZI test= "
+NULL
