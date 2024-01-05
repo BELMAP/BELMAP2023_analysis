@@ -1,0 +1,426 @@
+---
+title: "![](BELMAP-logo.png){width=6in}"
+subtitle: 3. Human AMC
+date: "Last compiled on `r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: default
+  word_document:
+    reference_docx: "word-styles-reference-01.docx"
+  html_document:
+    df_print: paged
+css: style.css
+editor_options:
+  markdown:
+    wrap: 72
+header-includes:
+- \captionsetup[figure]{labelformat=empty}
+- \captionsetup[table]{labelformat=empty}
+---
+
+```{r setup1, include=FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE
+)
+```
+
+```{r load_data_and_themes1, include=FALSE}
+
+library(tidyverse)
+library(patchwork)
+library(jpeg)
+library(scales)
+library(extrafont)
+library(remotes)
+library(extrafontdb)
+library(magrittr)
+library(AER)
+library(AICcmodavg)
+library(pscl)
+library(MASS)
+library(COMPoissonReg)
+library(performance)
+library(grid)
+library(ggtext)
+library(showtext)
+
+
+BELMAP_colourscheme <- c("#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c",
+                         "#fdbf6f","#ff7f00","#cab2d6")
+
+moiras_graph_theme<- function(..., base_size = 12){theme(
+   panel.background = element_blank(), #transparent panel bg
+  plot.background = element_blank(), #transparent plot bg
+  panel.grid.major.y =  element_line(colour = "#ccc6c4"), #grey y major gridlines
+  panel.grid.major.x =  element_blank(), #remove major gridlines
+  panel.grid.minor = element_blank(), #remove minor gridlines
+  # legend.background = element_rect(fill='#001f3f'), #transparent legend bg
+  legend.title = element_text(size = 20),
+  legend.text = element_text(size = 18),
+  #  legend.box.background = element_rect(fill='#001f3f'),
+  text = element_text( family = "Gill Sans MT"),
+  axis.text = element_text(size = 18),
+  #plot.background=element_blank(),#, , size = 10, family = "calibri"
+  axis.title = element_text(size = 20),
+  axis.ticks.x = element_blank(),
+  axis.text.x = element_text(angle = 90,vjust = 0.5, hjust = 0.5),
+  strip.background = element_blank(),
+  strip.text = element_text(size = 20),
+  legend.position = "top",
+  legend.direction = "horizontal"
+)}
+
+font_add("Gill Sans MT", "GIL_____.TTF")
+
+# adding icons to figures ------------------------------------
+
+# Important step to enable showtext font rendering!
+showtext_auto()
+
+font_add('fa-solid', '../font_awesome_font_files/fontawesome-free-6.4.0-desktop/otfs/Font Awesome 6 Free-Solid-900.otf')
+
+upward_arrow <- "<span style='font-family:fa-solid'>&#xf062;</span>"
+downward_arrow <- "<span style='font-family:fa-solid'>&#xf063;</span>" 
+equals <- "<span style='font-family:fa-solid'>&#xf52c;</span>"   #" = " 
+oscillate <- "<span style='font-family:fa-solid'>&#xf83e;</span>"   #" ~ "
+
+
+BELMAP_location_colourscheme <- c("Belgium"="#fc8d59",
+                                  "Neighbours" = "#99d594",
+                                  "Hospital Lab"="#fc8d59",
+                                  "Private lab" = "#99d594",
+                                  "Europe" = "#3288bd")
+
+
+BELMAP_Human_AntiB_colourscheme <- c("Glycopeptides" = "#33a02c",
+                                     "3rd and 4th generation\ncephalosporins" = "#1a1a1a",
+                                     "Fluoroquinolones" = "#fdbf6f",
+                                     "Polymixins" = "#1a1a1a",
+                                     "Piperacillin + INH" = "#1f78b4",
+                                     "Linezolid" = "#ff7f00",
+                                     "Carbapenems" = "#a6cee3")
+
+#-----------------------------------------------------------------------------------
+#2. Load data-----
+Human_AMC_Data <- read_csv2("Data/1.AMC/Human_AMC/Human_AMC_2023.csv",
+                            na = c("", "NA", "-"),
+                            trim_ws = TRUE)%>%
+  mutate(Year_simple= Year - 2011)
+
+
+
+#load graph data --------------------------------------------------
+
+Hospital_proportions_graph_data <-read.csv("3_Human_AMC_analysis_outcomes.csv", header = TRUE, sep = ";")
+
+```
+
+\newpage
+
+# 3. Human antimicrobial consumption
+
+**Contents**    
+
+3.1 [Methodology](#paragraph11)    
+3.2 [Community](#paragraph12)    
+3.3 [Hospitals](#paragraph13)    
+3.4 [Research](#paragraph14)     
+
+
+## 3.1 Methodology {#paragraph11}
+
+ESAC-Net (European Surveillance of Antimicrobial Consumption Network) is the European network of national surveillance systems  for the monitoring antimicrobial consumption (AMC), organized by the ECDC. Using a standardised protocol, European countries collect AMC data in the community   and/or hospital sector. This consumption is expressed in Defined Daily Doses (DDDs) per 1000 inhabitants per day (DID), using the country’s population as the denominator [[1]](https://www.ecdc.europa.eu/en/about-us/partnerships-and-networks/disease-and-laboratory-networks/esac-net). For Belgium, reimbursement data from the National Institute for Health and Disability Insurance (NIHDI) are used for ESAC-Net. The data for the community include all antimicrobial packages dispensed in community pharmacies (including nursing homes that receive medication from community pharmacies, which is the majority in Belgium). Hospital data include all prescriptions delivered in hospital pharmacies.   As reimbursement data only considers the insured population (99% coverage in 2021), this data is extrapolated to estimate consumption of the complete Belgian population.
+
+
+Of note, the current delay of reimbursement data from hospitals and corrections, which are legally allowed up to two years after the actual consumption, leads to an underestimation of the (reimbursed) hospital AMC in  the latest reporting year. To compensate for this, an estimation of the hospital consumption in 2022 is made by extrapolating the current reimbursement data by +18%. This will be updated by the actual consumption in the next reporting year. 
+
+Besides ESAC-Net, Belgium has a more detailed national surveillance system for AMC in hospitals called BeH-SAC (Belgian Hospitals - Surveillance of Antimicrobial Consumption). BeH-SAC also relies on NIHDI reimbursement data, and allows for benchmarking between hospitals. In BeH-SAC , AMC is expressed in DDDs/1000 patient days and DDDs/1000 admissions, using the hospital population as the denominator. Data are reported by hospital type (acute, categorical and psychiatric). The presented data include inpatient wards (excluding outpatient wards and day hospitalizations) and the latest reporting year is 2021[[2]](https://www.sciensano.be/en/projects/belgian-hospitals-surveillance-antimicrobial-consumption). Due to the change of status of categorical hospitals in 2019, which no longer fall under the federal authorities, denominator data are missing for this hospital type and no BeH-SAC data can be reported. 
+
+It is important to note that ESAC-Net and BeH-SAC only consider reimbursed consumption, excluding non-reimbursed, off-label use or imported antimicrobial agents. This may result in a slight but sometimes meaningful underestimation. This may be particularly important in the case of consumption of fluoroquinolones for which the more strict reimbursement criteria were introduced in [2018](https://academic.oup.com/jac/article/76/10/2725/6347334) as well as for new broad-spectrum antibiotics like cefiderocol, which may indicate the emergence of drug resistant organisms. Of note, sales data obtained from IQVIA are annually used to estimate the total volume of fluoroquinolones consumed in the community. 
+
+Consumed units/packages per drug were translated to DDDs based on the DDD classification of the World Health Organization (WHO) Collaborating Centre for Drugs Statistics and Methodology (version January 2023)[[3]](https://www.whocc.no/atc_ddd_index/). Administration routes that are included are oral, intravenous, intramuscular, subcutaneous, inhalation and rectal.
+
+In addition to these surveillance systems, point-prevalence studies (PPS) of health-care associated infections and antimicrobial use are organized in hospitals and long-term care facilities at regular time points [[4]](https://www.sciensano.be/nl/biblio/zorginfecties-en-antimicrobieel-gebruik-belgische-woonzorgcentra-resultaten-van-de-halt-3), [[5]](https://www.sciensano.be/en/biblio/puntprevalentiestudie-van-zorginfecties-en-antimicrobieel-gebruik-chronische-zorginstellingen-halt), [[6]](https://www.ecdc.europa.eu/en/healthcare-associated-infections-long-term-care-facilities.
+), [[7]]( https://www.global-pps.com/). In all these PPS studies, data were collected from each hospital ward or facility on a single day by a local data collector. The observed prevalence of patients/residents receiving at least one antimicrobial was calculated by dividing the number of patients/residents receiving at least one antimicrobial by the total number of eligible patients/residents. Observed prevalence data are presented along with their 95% confidence intervals (95%CI). More information on the methodology of the different surveillances and studies can be found in the respective protocols and the latest national reporting of AMC in humans [[8]](https://www.sciensano.be/sites/default/files/sciensano_national_report_antimicrobial_consumption_2010-2019_version_20210329.pdf), [[9]](https://www.nosoinfo.be/nosoinfos/antimicrobiele-consumptie-in-belgie-resultaten-van-de-esac-net-en-beh-sac-monitoring/?lang=nl).  
+
+\FloatBarrier
+
+## 3.2 Community {#paragraph12}
+
+In the Belgian community setting, there was a significant increase in the use of systemic (reimbursed) antibiotics (J01) in 2022 compared to 2021, with a rise of +18,8%. This follows a decade of reducing consumption (33% reduction between 2012 and 2021, p=0.001), with a sharp decline in 2020 (-4.52 DID, -22.9% in comparison with 2019), and a marginal increase in 2021 (+0.75 DID, +4.9%   in comparison to 2020). The 2021 to 2022 surge can be attributed to the relaxation of COVID-19 measures since the fall of 2021 leading to a return to a more typical healthcare scenario encompassing social interactions, disease transmission, healthcare utilisation patterns and prescription practices. When comparing the data to the pre-COVID reference year of 2019, we observe that the consumption in 2022 remains lower than that period, with J01 consumption declining from 19.78 DID to 19.01 DID, representing a decrease of -3.9%, but is consistently above the EU average (see Figure 2).
+
+
+
+```{r 2.2_community1, fig.dim=c(18,8), fig.cap="**Figure 2** — Consumption of antibacterials for systemic use (ATC group J01) in the community in Belgium (orange), and EU/ EEA (blue), expressed as Defined Daily Doses per 1,000 inhabitants and per day (DIDs). Red dashed line represents national target reduction by 2024 to 40% of 2019 consumption  . Data source: ESAC-Net"}
+
+Community_DID <- Human_AMC_Data %>%
+  filter(Sector == "Ambulant",
+         Unit == "DDD/1000 inhabitants/day",
+         `ATC group` == "J01")
+
+
+ (Community_DID_graph <- Community_DID %>%
+  mutate(label = case_when(
+    Region == "Belgium" ~ paste(downward_arrow,"***",sep=" "),
+    Region == "Europe" ~ equals)) %>%
+   mutate(NAP_Target = 11.86)%>%
+   mutate(ycoord = case_when(
+     Region == "Belgium" ~ 20,
+     Region == "Europe" ~ 15)) %>%
+  ggplot()+
+  geom_bar(aes(x= Year, y = Value, fill = Region),position = "dodge", stat = "identity") +
+   geom_hline(aes(yintercept=NAP_Target), colour = "red", linetype = "dashed", linewidth = 1.5)+
+   scale_fill_manual(values = BELMAP_location_colourscheme)+
+   scale_colour_manual(values = BELMAP_location_colourscheme)+
+      scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+   geom_richtext(aes(x = 2023.5, y = ycoord, 
+                     label = label, 
+                     fill = Region), stat = "unique", 
+                 colour= "white", show.legend = FALSE, size = 6)+
+   labs(y= "DDD/1000 inhabitants/day", x="")&
+   moiras_graph_theme()
+)
+
+
+
+```
+
+In comparison with 2021, a mild to moderate increase in the consumption of all main (reimbursed) antibacterial subgroups was observed in 2022: J01CA ‘Penicillins with extended spectrum’ with 1.32 DID (+37.94%), J01CR ‘Combinations of penicillins, incl. beta-lactamase inhibitors’ with 0.79 DID (+20.96%), J01DC ‘Second-generation cephalosporins’ with 0.16 DID (+20.45%), J01FA ‘Macrolides’ with 0.70 DID (+30.58%, azithromycin:+32.59%), J01MA ‘Fluoroquinolones’ with 0.03 DID (+6.45%) and J01XE ‘Nitrofuran derivatives’ with -0.03 DID (+1.11%). Only the consumption of J01AA ‘Tetracyclines’ (-0.09 DID, -4.76%) slightly decreased. In comparison with 2019 however, a greater or lesser decrease in all these main (reimbursed) antibacterial subgroups was observed in 2022, in descending order : J01FA with -25.89%, J01MA with -22.09%, J01DC with -20.94%, J01AA with -7.43%, J01CR with -3.41%, J01XE with -2.97% and J01CA with -0.66%.
+
+
+After the implementation of more strict reimbursement criteria for fluoroquinolones in 2018, fluoroquinolone consumption reduced significantly. For the first time since these changes, the consumption of non-reimbursed fluoroquinolones has increased in 2022  . Based on total sales data, we estimate that the total consumption of fluoroquinolones in 2022 was ±1.31 DID (6.6% of J01 , +12.6%) in comparison with 2021.
+
+
+The ratio of broad-to narrow spectrum antibiotics continued to decline, from 2.4 DIDs in 2012 to 1.7 DIDs in 2022 (Figure 3). This ratio is lower than the increasing EU mean (2.5 in 2012 to 3.9 in 2022  ).
+
+
+The ratio of amoxicillin to amoxicillin/clavulanic acid in the community returned to the pre-COVID value of 51:49 (identical in 2019 and 2022). This remains far from the national target of 80:20, which aims to encourage greater use of the more narrow spectrum amoxicillin.
+
+```{r 2.2_community2, fig.dim=c(18,8), fig.cap="**Figure 3** — Ratio of consumption (DIDs) of broad-spectrum penicillins, fluoroquinolones, macrolides (except erythromycin) and cephalosporins to consumption of narrow spectrum penicillins, cephalosporins and erythromycin in the community sector in Belgium (orange) and EU/EEA (blue). Data source: ESAC-Net."}
+
+Community_ratio_broad_narrow <- Human_AMC_Data %>%
+  filter(Sector == "Ambulant",
+         Measurement == "Ratio of broad spectrum antibiotics")
+
+
+(Community_ratio_broad_narrow_graph <- Community_ratio_broad_narrow %>%
+   mutate(label = case_when(
+     Region == "Belgium" ~ paste(downward_arrow,"***",sep=" "),
+     Region == "Europe" ~ paste(upward_arrow,"***",sep=" "))) %>%
+   #mutate(NAP_Target = 11.86)%>%
+   mutate(ycoord = case_when(
+     Region == "Belgium" ~ 2,
+     Region == "Europe" ~ 2.5)) %>%
+   ggplot()+
+   geom_bar(aes(x= Year, y = Value, fill = Region),position = "dodge", stat = "identity") +
+  # geom_hline(aes(yintercept=NAP_Target), colour = "red", linetype = "dashed")+
+   scale_fill_manual(values = BELMAP_location_colourscheme)+
+   scale_colour_manual(values = BELMAP_location_colourscheme)+
+   scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+   geom_richtext(aes(x = 2023.5, y = ycoord, 
+                     label = label, 
+                     fill = Region), stat = "unique", 
+                 colour= "white", show.legend = FALSE, size = 6)+
+   labs(y= "Ratio of Broad : Narrow spectrum\nantimicrobials consumption", x="")&
+   moiras_graph_theme()
+)
+
+
+
+```
+
+
+Notably, Belgium has a particular high usage of antimycotic and antifungal agents for systemic use (ATC groups J02 and D01B) in the community setting. With 3.1 DIDs in 2022, we are among the highest consumers in EU, which had a mean of 1.0 DIDs in 2022. The consumption of (reimbursed) antimycotics for systemic use (J02) in the community (1.09 DID) also slightly increased in comparison with 2021 (+0.013 DID, +1.17%), but is still lower than in 2019 (-0.09 DID, -7.59%). 
+
+\FloatBarrier
+## 3.3 Hospitals {#paragraph13}    
+
+In Belgian hospitals, if expressed in DDDs per 1000 inhabitants/day (DIDs) as in ESAC-Net, the overall consumption of (reimbursed) antibacterials for systemic use (J01) has increased marginally since 2020 (+1%), with an overall decrease of 14% between 2013 and 2022. The observed 1.4 DIDs in Belgium in 2022 is below the EU mean (1.6 DID). Although the total consumption is larger than in The Netherlands (0.7 DIDs), the consumption in DIDs in Belgium is lower than in France (1.8 DIDs), Denmark (1.8 DIDs) and Sweden (1.6 DIDs).  
+
+
+To more precisely describe the exerted sector-specific antimicrobial selective pressure, it is preferred to use the hospital population as the denominator (BeHSAC). As shown in Figure 4 below, a median of 500 DDDs/1000 patient days is recorded in the Belgian acute care hospitals. Of note, the trend towards shorter hospital stays in acute care hospitals is reflected by a gradual increase in DDDs/1000 patient days (from 482.7 in 2012 to 522.2 in 2021, + 8.2%), coupled with a significant decrease in the median DDDs/1000 admissions (from 3566.4 in 2011 to 3409.72 in 2020, -4. 4%). Large differences exist between acute, categorical^[ Categorical hospitals offer specialized, isolated or chronic care, i.e. treating a condition which is not
+acute.] and psychiatric hospitals, also when compared per type of hospital (primary, secondary, tertiary).
+
+According to the most recent data available (2021 ), the five most used products in acute hospitals (non-psychiatric inpatients wards) were amoxicillin/clavulanic acid, piperacillin/tazobactam, cefazolin, flucloxallin and ciprofloxacin.
+
+
+```{r 2.2_hospital1, fig.dim=c(18,8), fig.cap="**Figure 4** — Median consumption of antibacterials for systemic use (ATC group J01) expressed in DDDs per 1,000 patient days, in Belgian acute (light blue), categorical (dark blue) and psychiatric (green) hospitals. Included inpatient wards: surgery, internal medicine, geriatrics, pediatrics, intensive and non-intensive neonatology, maternity, infectious disease, burn unit, intensive care unit (ICU) and specialized care; psychiatry and day hospitalizations excluded. Data source: BeH-SAC"}
+
+
+Hospital_DDD_patient_days <- Human_AMC_Data %>%
+  filter(grepl("Hospitals",Sector),
+         Unit == "DDD/1000 patients/day")
+
+(Hospital_DDD_patient_days_graph <- Hospital_DDD_patient_days %>%
+   mutate(label = case_when(
+     Sector == "Acute Hospitals" ~ paste(upward_arrow,"***",sep=" "),
+     Sector == "Chronic Hospitals" ~ equals,
+     Sector == "Psychiatric Hospitals" ~ oscillate
+     )) %>%
+   #mutate(NAP_Target = 11.86)%>%
+   mutate(ycoord = case_when(
+     Sector == "Acute Hospitals" ~ 250,
+     Sector == "Chronic Hospitals" ~ 150,
+     Sector == "Psychiatric Hospitals" ~ 50)) %>%
+   ggplot()+
+   geom_bar(aes(x= Year, y = Value, fill = Sector),position = "dodge", stat = "identity") +
+   # geom_hline(aes(yintercept=NAP_Target), colour = "red", linetype = "dashed")+
+   scale_fill_manual(values = BELMAP_colourscheme)+
+   scale_colour_manual(values = BELMAP_colourscheme)+
+   scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+   geom_richtext(aes(x = 2023.5, y = ycoord, 
+                     label = label, 
+                     fill = Sector), stat = "unique", 
+                 colour= "white", show.legend = FALSE, size = 6)+
+   labs(y= "Median DDD per 1000 patient days", x="")&
+   moiras_graph_theme()
+)
+
+
+
+
+```
+
+
+The last point prevalence study of antimicrobial prescription in acute hospitals dates from 2019 (Global-PPS), and reported 27.8% (95%CI 27.1–28.4) of patients with at least one prescription on the day of the PPS. In psychiatric hospitals in 2017, this prevalence was 3.8% (95%CI 3.2–4.3%). Data for the 2022 PPS was collected across Belgian hospitals in December 2022, and is currently under validation.
+
+
+The proportion of selected broad-spectrum antibiotic use in all Belgian hospitals (30.1% in 2022) has remained stable over time (“broad-spectrum” defined as per the BAPCOC guidelines [for hospitals](https://www.sciensano.be/sites/default/files/sciensano_national_report_antimicrobial_consumption_2010-2019_version_20210329.pdf): ATC groups J01XA, J01DD, J01DE, J01DF, J01DH, J01MA, J01XB, J01CR05, J01XX08, J01XX11 and  J01XX09, Figure 5). High variation in this proportion between hospitals has been reported in BeH-SAC. In the EU countries which participated in the ECDC-PPS 2016–2017, the percentage of broad-spectrum antibiotic use in acute hospitals ranged from approximately 20% (Scotland, Lithuania) to more than 60% (Italy, Bulgaria) [[11]](https://doi.org/10.2807/1560-7917.ES.23.46.1800393). 
+
+
+
+```{r 2.2_hospital2, fig.dim=c(18,8), fig.cap="**Figure 5** — Evolution of proportion (%) of selected broad-spectrum antibiotics (glycopeptides, third and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor , linezolid) out of total hospital consumption (DDD per 1 000 inhabitants per day) of antibacterials for systemic use in Belgian hospitals (orange), as compared to the EU mean (blue). Data source: ESAC-Net. 2022 data correspond to extrapolated estimates."}
+
+Hospital_ratio_broad_narrow <- Human_AMC_Data %>%
+  filter(Sector == "Hospital",
+         grepl("proportion of glycopeptides, third- and fourth-generation cephalosporins",Measurement))
+
+(Hospital_ratio_broad_narrow_graph <- Hospital_ratio_broad_narrow %>%
+   mutate(label = case_when(
+     Region == "Belgium" ~ equals,
+     Region == "Europe" ~ paste(upward_arrow,"*",sep=" "))) %>%
+   #mutate(NAP_Target = 11.86)%>%
+   mutate(ycoord = case_when(
+     Region == "Belgium" ~ 0.3,
+     Region == "Europe" ~ 0.4)) %>%
+   ggplot()+
+   geom_bar(aes(x= Year, y = Value, fill = Region),position = "dodge", stat = "identity") +
+   # geom_hline(aes(yintercept=NAP_Target), colour = "red", linetype = "dashed")+
+   scale_fill_manual(values = BELMAP_location_colourscheme)+
+   scale_colour_manual(values = BELMAP_location_colourscheme)+
+   scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+   geom_richtext(aes(x = 2023.5, y = ycoord,
+                     label = label,
+                     fill = Region), stat = "unique",
+                 colour= "white", show.legend = FALSE, size = 6)+
+   labs(y= "Proportion of broad antibitiocs\nof total consumption", x="")&
+   moiras_graph_theme()
+)
+
+
+
+```
+
+
+
+Between 2012 and 2022, the largest absolute increase in consumption was detected for the classes beta-lactamase resistant penicillins and penicillins with extended spectrum. The largest absolute decrease was seen for fluoroquinolones and carbapenems. In contrast to the community setting, the prescription of antimycotics and antifungals in all hospitals is overall in line with EU mean, and decreased significantly from 0.123 DIDs in 2012 to 0.087 DIDs in 2022.
+
+
+Looking at the proportions of the different broad-spectrum classes, the largest, and very significant decrease is observed for the fluoroquinolones (-32% between 2012 and 2022). While the proportion of fluoroquinolones decreased, the proportion of piperacillin in combination with tazobactam (+52%), glycopeptides (+17.8%) and 3rd and 4th generation cephalosporins (+7.5%) significantly increased over time (Figure 6).
+
+
+```{r 2.2_hospital3, fig.dim=c(18,10), fig.cap="**Figure 6** — The proportion of third- and fourth generation cephalosporins, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor (INH), linezolid, glycopeptides and carbapenems out of total antibiotics consumption (expressed in defined daily doses per 1,000 inhabitants and per day) in Belgian hospitals . For proportions source: ESAC-Net, all types of hospitals combined."}
+
+# Hospital proportions ratio graph ------------
+(Hospital_proportions_graph <- Hospital_proportions_graph_data %>%
+   mutate(ycoord = 0.1,
+          Antibiotic = case_when(
+            grepl("glycopeptides",Measurement) ~ "Glycopeptides",
+            grepl("CSP",Measurement) ~ "3rd and 4th generation\ncephalosporins",
+            grepl("FQ",Measurement) ~ "Fluoroquinolones",
+            grepl("Polymixins",Measurement) ~ "Polymyxins",
+            grepl("piperacillin",Measurement) ~ "Piperacillin + INH",
+            grepl("Linezolid",Measurement) ~ "Linezolid",
+            grepl("carbapenems",Measurement) ~ "Carbapenems"
+          )) %>%
+   mutate(label_icon = case_when(
+     icon == "upward_arrow" ~ upward_arrow,
+     icon == "downward_arrow" ~ downward_arrow,
+     icon == "equals" ~ equals,
+     icon == "oscilate" ~ oscillate,
+     .default = ""
+   )) %>%
+   mutate(label = if_else((is.na(signif) | signif == ""), label_icon, paste(label_icon,signif,sep=" "))) %>%
+   ggplot()+
+   geom_bar(aes(x= Year, y = Value),position = "dodge", stat = "identity", fill = "#3288bd") +
+   # geom_hline(aes(yintercept=NAP_Target), colour = "red", linetype = "dashed")+
+   facet_wrap(~Antibiotic, nrow=2) +
+ #  scale_fill_manual(values = BELMAP_Human_AntiB_colourscheme )+
+ #  scale_colour_manual(values = BELMAP_Human_AntiB_colourscheme )+
+   scale_y_continuous(limits = c(0,0.2), breaks = seq(0,0.2,0.1))+
+   scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+   geom_richtext(aes(x = 2023.5, y = ycoord,
+                     label = label), stat = "unique", fill = "#3288bd",
+                 colour= "white", show.legend = FALSE, size = 6)+
+   labs(y= "Proportion of hospital antimicrobial consumption", x="")&
+   moiras_graph_theme()
+)
+
+
+```
+
+\FloatBarrier
+## 3.4 Ongoing Research {#paragraph14} 
+
+### 3.4.1 AMC Monitoring in the community
+-Lucy Catteau, Sciensano
+While BeH-SAC provides comprehensive, institution - level surveillance for the hospital sector, there is currently no equivalent surveillance system in place for the community sector, where all data is aggregated at the national level. To address this gap, the AMC-PRIM (Sciensano) project will use reimbursement data from National Institute for Health and Disability Insurance (NIHDI) and total antimicrobial sales data from IQVIA to offer a more detailed and comprehensive overview of the consumption of antimicrobials and prescribing behavior among specialists in the community sector.
+
+
+The initial phase of the project considered patient and prescriber demographic data to describe in detail antimicrobial consumption and prescriber behaviour in the community sector. This comprises in depth analysis of consumption and prescription within target subgroups, such as AMC in nursing homes and dental practices. In a second phase, reimbursement data (as submitted to ESAC-Net) will be compared with the total national antimicrobial sales data. This comparative analysis aims to identify and quantify any gaps in the current surveillance system, providing a more accurate understanding of AMC in the community sector. To facilitate collaboration and ensure the project’s success, a working group composed of members from BAPCOC, KCE, IMA and INAMI has been established. This group will discuss the outcomes of the project and ensure that its findings align with both national and international guidelines.
+
+### 3.4.2 Evaluation of the implementation process of “point of care tests for C-reactive protein” (POCT-CRP) in general practice in adults with cough.
+-Prof Dr Jan Verbakel, KU Leuven 
+
+AMR is an important and growing problem with a lasting impact on our medical care in the coming decades [[6.1]](https://doi.org/10.1016/s0140-6736(07)60235-9),[[6.2]](https://doi.org/10.1093/jac/dkw234).In the
+ambulatory care, most antibiotics are prescribed by general
+practitioners (GP)
+[[6.3]](https://www.riziv.fgov.be/nl/statistieken/geneesmiddel/Paginas/geneesmiddelen-groepvoorschrijvers.aspx).
+Although acute respiratory tract infections are generally self-limiting,
+Belgian GPs often write an antibiotic for it
+[[6.4]](https://doi.org/10.1093/jac/dkab172). Over
+the past decade, several interventions, such as point-of-care testing
+(POCT) were developed, launched and assessed, both in Belgium and in
+other (European) countries. But many of these interventions, including
+POCT, have not been widely implemented or evaluated in the Belgian
+context
+[[6.6]](https://kce.fgov.be/sites/default/files/2021-11/KCE_311A_Antibioticabeleid_Synthese.pdf).
+Clinical studies in primary care (general practice) have demonstrated
+the use of C-reactive protein (CRP) POCT to direct antibiotic
+prescription resulting in a significant reduction of prescribing
+antibiotics without harming the patient. This intervention on adults
+with acute cough has also proven cost-effective, as well as effective in
+the longer term.[[6.7]](https://doi.org/10.1016/S0140-6736(13)60994-0),
+[[6.8]](https://doi.org/10.3399/bjgp13X669185). In several European
+countries, POCT-CRP testing is part of the guidelines for good medical
+practice for acute cough/respiratory infections in general practice, for
+example in the Netherlands
+[[6.9]](https://richtlijnen.nhg.org/standaarden/acuut-hoesten). Before
+POCT-CRP can be introduced nationally in Belgium, a number of
+organizational aspects need to be addressed, as analysed in this study.
+
+In 2023, a team led by Prof. J. Verbakel (KULeuven) has installed clinically validated POCT-CRP devices in 27 GP practices and provided the necessary IT support and training. Care was taken to link the devices with  lab information systems via middleware (Roche Cobas Infinity POC), enabling medical validation by the clinical laboratory and structuring in the GP’s electronic medical record (EMR) through the calibrated channels.
+
+During the study period, capillary blood samples will be prospectively collected from patients at the GP practices after written informed consent, and will be immediately analyzed with the POCT-CRP device. Imprecision as part of routine quality assurance will be evaluated in a subset of 15 practices using a patient lithium heparin plasma pool (+/-20 mg/L) in addition to manufacturer specific internal quality control (iQC) material with low and high CRP concentration. Imprecision will be evaluated according to CLSI EP05-A3. 
+
+For qualitative tests, one of the selected QC material should be
+negative and one positive. Imprecision as part of routine quality
+assurance will be evaluated in a subset of 15 practices using a patient
+lithium heparin plasma pool (+/-20 mg/L) in addition to manufacturer
+specific internal quality control (iQC) material with low and high CRP
+concentration. Imprecision will be evaluated according to CLSI EP05-A3.
+
+In 2023 and 2024, the team will organise a survey and focus group discussions of relevant stakeholders involved in this pilot project and the implementation of the POCT-CRP device using a survey and focus group discussions. From the experiences of the relevant stakeholders, we want to describe: how the implementation went in terms of organisation, evaluation of feasibility, feasibility, barriers and facilitators of implementation.
+
+The project is expected to be completed by Q1 of 2024.

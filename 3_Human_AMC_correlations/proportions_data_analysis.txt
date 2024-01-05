@@ -1,0 +1,505 @@
+[1] "Analysis of Human AMC proportions data"
+[1] "Analysis for : Proportion glycopeptides"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Value
+W = 0.91233, p-value = 0.2285
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+t = 5.4991, df = 10, p-value = 0.0002621
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.5830644 0.9621242
+sample estimates:
+      cor 
+0.8668869 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+z = 3.6056, p-value = 0.0003115
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+     tau 
+0.812897 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+S = 26.724, p-value = 4.787e-05
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.9065608 
+
+[1] "Analysis for : Proportion glycopeptides"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+t = 5.4991, df = 10, p-value = 0.0002621
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.5830644 0.9621242
+sample estimates:
+      cor 
+0.8668869 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+z = 3.6056, p-value = 0.0003115
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+     tau 
+0.812897 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+S = 26.724, p-value = 4.787e-05
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.9065608 
+
+[1] "Analysis for : Proportion glycopeptides"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Value
+W = 0.91233, p-value = 0.2285
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+t = 5.4991, df = 10, p-value = 0.0002621
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.5830644 0.9621242
+sample estimates:
+      cor 
+0.8668869 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+z = 3.6056, p-value = 0.0003115
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+     tau 
+0.812897 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+S = 26.724, p-value = 4.787e-05
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.9065608 
+
+[1] "Analysis for : Proportion glycopeptides"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+[1] "Analysis for : Proportion glycopeptides"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Value
+W = 0.91233, p-value = 0.2285
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+t = 5.4991, df = 10, p-value = 0.0002621
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.5830644 0.9621242
+sample estimates:
+      cor 
+0.8668869 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+z = 3.6056, p-value = 0.0003115
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+     tau 
+0.812897 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+S = 26.724, p-value = 4.787e-05
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.9065608 
+
+[1] "Analysis for : Proportion 3rd and 4th generation CSP"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Value
+W = 0.88318, p-value = 0.09627
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+t = 3.7848, df = 10, p-value = 0.003574
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.3457688 0.9311902
+sample estimates:
+      cor 
+0.7673914 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+z = 2.7559, p-value = 0.005853
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+      tau 
+0.6154575 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+S = 57.199, p-value = 0.001782
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.8000049 
+
+[1] "Analysis for : Proportion FQ"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Value
+W = 0.87906, p-value = 0.08524
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+t = -14.341, df = 10, p-value = 5.38e-08
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.9935942 -0.9160020
+sample estimates:
+       cor 
+-0.9765409 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+T = 2, p-value = 3.215e-07
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+       tau 
+-0.9393939 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+S = 568, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+-0.986014 
+
+[1] "Analysis for : Proportion Polymixins"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Value
+W = 0.97056, p-value = 0.9166
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+t = -0.75818, df = 10, p-value = 0.4658
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.7118088  0.3933878
+sample estimates:
+       cor 
+-0.2331515 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+z = -0.76455, p-value = 0.4445
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+       tau 
+-0.1733628 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+S = 346.64, p-value = 0.5083
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+-0.212026 
+
+[1] "Analysis for : Proportion piperacillin + INH"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Value
+W = 0.95604, p-value = 0.7262
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+t = 14.958, df = 10, p-value = 3.591e-08
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.9223856 0.9940992
+sample estimates:
+      cor 
+0.9783757 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+T = 63, p-value = 1.466e-06
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+      tau 
+0.9090909 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+S = 8, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+     rho 
+0.972028 
+
+[1] "Analysis for : Proportion Linezolid"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Value
+W = 0.94989, p-value = 0.6354
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+t = -2.7447, df = 10, p-value = 0.02067
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.8933274 -0.1307677
+sample estimates:
+       cor 
+-0.6554772 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+z = -2.0354, p-value = 0.04181
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+       tau 
+-0.4647293 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+S = 470.58, p-value = 0.02342
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+       rho 
+-0.6454004 
+
+[1] "Analysis for : Proportions carbapenems (%)"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_proportions$Value
+W = 0.91902, p-value = 0.2779
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+t = -0.94721, df = 10, p-value = 0.3659
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.7391251  0.3435345
+sample estimates:
+       cor 
+-0.2869385 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+z = -0.2062, p-value = 0.8366
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+        tau 
+-0.04580286 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_proportions$Year_simple and dataset_proportions$Value
+S = 305.03, p-value = 0.8372
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+        rho 
+-0.06655001 
+

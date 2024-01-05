@@ -1,0 +1,121 @@
+Year;Measurement;ATC_group;Value;Unit;Sector;Region;Source;Year_simple;icon;signif
+2011;Proportion glycopeptides;J01XA;0.0229;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;0;upward_arrow;***
+2012;Proportion glycopeptides;J01XA;0.0236;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;1;upward_arrow;***
+2013;Proportion glycopeptides;J01XA;0.0246;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;2;upward_arrow;***
+2014;Proportion glycopeptides;J01XA;0.0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;3;upward_arrow;***
+2015;Proportion glycopeptides;J01XA;0.0251;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;4;upward_arrow;***
+2016;Proportion glycopeptides;J01XA;0.0251;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;5;upward_arrow;***
+2017;Proportion glycopeptides;J01XA;0.0256;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;6;upward_arrow;***
+2018;Proportion glycopeptides;J01XA;0.0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;7;upward_arrow;***
+2019;Proportion glycopeptides;J01XA;0.0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;8;upward_arrow;***
+2020;Proportion glycopeptides;J01XA;0.0285;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;9;upward_arrow;***
+2021;Proportion glycopeptides;J01XA;0.0306;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;10;upward_arrow;***
+2022;Proportion glycopeptides;J01XA;0.0278;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;11;upward_arrow;***
+2011;Proportion glycopeptides;J01XA;0.0229;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;0;upward_arrow;***
+2012;Proportion glycopeptides;J01XA;0.0236;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;1;upward_arrow;***
+2013;Proportion glycopeptides;J01XA;0.0246;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;2;upward_arrow;***
+2014;Proportion glycopeptides;J01XA;0.0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;3;upward_arrow;***
+2015;Proportion glycopeptides;J01XA;0.0251;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;4;upward_arrow;***
+2016;Proportion glycopeptides;J01XA;0.0251;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;5;upward_arrow;***
+2017;Proportion glycopeptides;J01XA;0.0256;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;6;upward_arrow;***
+2018;Proportion glycopeptides;J01XA;0.0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;7;upward_arrow;***
+2019;Proportion glycopeptides;J01XA;0.0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;8;upward_arrow;***
+2020;Proportion glycopeptides;J01XA;0.0285;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;9;upward_arrow;***
+2021;Proportion glycopeptides;J01XA;0.0306;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;10;upward_arrow;***
+2022;Proportion glycopeptides;J01XA;0.0278;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;11;upward_arrow;***
+2011;Proportion glycopeptides;J01XA;0.0229;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;0;upward_arrow;***
+2012;Proportion glycopeptides;J01XA;0.0236;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;1;upward_arrow;***
+2013;Proportion glycopeptides;J01XA;0.0246;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;2;upward_arrow;***
+2014;Proportion glycopeptides;J01XA;0.0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;3;upward_arrow;***
+2015;Proportion glycopeptides;J01XA;0.0251;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;4;upward_arrow;***
+2016;Proportion glycopeptides;J01XA;0.0251;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;5;upward_arrow;***
+2017;Proportion glycopeptides;J01XA;0.0256;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;6;upward_arrow;***
+2018;Proportion glycopeptides;J01XA;0.0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;7;upward_arrow;***
+2019;Proportion glycopeptides;J01XA;0.0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;8;upward_arrow;***
+2020;Proportion glycopeptides;J01XA;0.0285;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;9;upward_arrow;***
+2021;Proportion glycopeptides;J01XA;0.0306;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;10;upward_arrow;***
+2022;Proportion glycopeptides;J01XA;0.0278;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;11;upward_arrow;***
+2011;Proportion glycopeptides;J01XA;0.0229;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;0;upward_arrow;***
+2012;Proportion glycopeptides;J01XA;0.0236;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;1;upward_arrow;***
+2013;Proportion glycopeptides;J01XA;0.0246;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;2;upward_arrow;***
+2014;Proportion glycopeptides;J01XA;0.0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;3;upward_arrow;***
+2015;Proportion glycopeptides;J01XA;0.0251;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;4;upward_arrow;***
+2016;Proportion glycopeptides;J01XA;0.0251;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;5;upward_arrow;***
+2017;Proportion glycopeptides;J01XA;0.0256;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;6;upward_arrow;***
+2018;Proportion glycopeptides;J01XA;0.0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;7;upward_arrow;***
+2019;Proportion glycopeptides;J01XA;0.0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;8;upward_arrow;***
+2020;Proportion glycopeptides;J01XA;0.0285;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;9;upward_arrow;***
+2021;Proportion glycopeptides;J01XA;0.0306;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;10;upward_arrow;***
+2022;Proportion glycopeptides;J01XA;0.0278;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;11;upward_arrow;***
+2011;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0.0641;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;0;upward_arrow;**
+2012;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0.0635;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;1;upward_arrow;**
+2013;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0.0652;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;2;upward_arrow;**
+2014;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0.0636;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;3;upward_arrow;**
+2015;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0.067;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;4;upward_arrow;**
+2016;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0.0638;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;5;upward_arrow;**
+2017;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0.0652;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;6;upward_arrow;**
+2018;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0.066;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;7;upward_arrow;**
+2019;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0.0704;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;8;upward_arrow;**
+2020;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0.0737;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;9;upward_arrow;**
+2021;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0.0704;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;10;upward_arrow;**
+2022;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0.0683;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;11;upward_arrow;**
+2011;Proportion FQ;J01MA;0.1351;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;0;downward_arrow;***
+2012;Proportion FQ;J01MA;0.1373;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;1;downward_arrow;***
+2013;Proportion FQ;J01MA;0.1323;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;2;downward_arrow;***
+2014;Proportion FQ;J01MA;0.1284;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;3;downward_arrow;***
+2015;Proportion FQ;J01MA;0.1272;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;4;downward_arrow;***
+2016;Proportion FQ;J01MA;0.1214;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;5;downward_arrow;***
+2017;Proportion FQ;J01MA;0.1166;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;6;downward_arrow;***
+2018;Proportion FQ;J01MA;0.1055;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;7;downward_arrow;***
+2019;Proportion FQ;J01MA;0.0996;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;8;downward_arrow;***
+2020;Proportion FQ;J01MA;0.0954;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;9;downward_arrow;***
+2021;Proportion FQ;J01MA;0.0942;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;10;downward_arrow;***
+2022;Proportion FQ;J01MA;0.0943;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;11;downward_arrow;***
+2011;Proportion Polymixins;J01XB;0.0017;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;0;oscilate;
+2012;Proportion Polymixins;J01XB;0.0016;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;1;oscilate;
+2013;Proportion Polymixins;J01XB;0.0019;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;2;oscilate;
+2014;Proportion Polymixins;J01XB;0.0019;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;3;oscilate;
+2015;Proportion Polymixins;J01XB;0.0017;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;4;oscilate;
+2016;Proportion Polymixins;J01XB;0.0021;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;5;oscilate;
+2017;Proportion Polymixins;J01XB;0.002;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;6;oscilate;
+2018;Proportion Polymixins;J01XB;0.0016;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;7;oscilate;
+2019;Proportion Polymixins;J01XB;0.0015;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;8;oscilate;
+2020;Proportion Polymixins;J01XB;0.0019;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;9;oscilate;
+2021;Proportion Polymixins;J01XB;0.0018;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;10;oscilate;
+2022;Proportion Polymixins;J01XB;0.0014;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;11;oscilate;
+2011;Proportion piperacillin + INH;J01CR05;0.0433;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;0;upward_arrow;***
+2012;Proportion piperacillin + INH;J01CR05;0.0495;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;1;upward_arrow;***
+2013;Proportion piperacillin + INH;J01CR05;0.0521;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;2;upward_arrow;***
+2014;Proportion piperacillin + INH;J01CR05;0.0553;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;3;upward_arrow;***
+2015;Proportion piperacillin + INH;J01CR05;0.0571;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;4;upward_arrow;***
+2016;Proportion piperacillin + INH;J01CR05;0.0599;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;5;upward_arrow;***
+2017;Proportion piperacillin + INH;J01CR05;0.0627;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;6;upward_arrow;***
+2018;Proportion piperacillin + INH;J01CR05;0.0657;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;7;upward_arrow;***
+2019;Proportion piperacillin + INH;J01CR05;0.0643;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;8;upward_arrow;***
+2020;Proportion piperacillin + INH;J01CR05;0.0757;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;9;upward_arrow;***
+2021;Proportion piperacillin + INH;J01CR05;0.0774;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;10;upward_arrow;***
+2022;Proportion piperacillin + INH;J01CR05;0.0755;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;11;upward_arrow;***
+2011;Proportion Linezolid;J01XX08;0.0041;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;0;downward_arrow;*
+2012;Proportion Linezolid;J01XX08;0.0039;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;1;downward_arrow;*
+2013;Proportion Linezolid;J01XX08;0.0042;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;2;downward_arrow;*
+2014;Proportion Linezolid;J01XX08;0.0043;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;3;downward_arrow;*
+2015;Proportion Linezolid;J01XX08;0.0038;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;4;downward_arrow;*
+2016;Proportion Linezolid;J01XX08;0.0039;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;5;downward_arrow;*
+2017;Proportion Linezolid;J01XX08;0.0035;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;6;downward_arrow;*
+2018;Proportion Linezolid;J01XX08;0.0039;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;7;downward_arrow;*
+2019;Proportion Linezolid;J01XX08;0.0037;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;8;downward_arrow;*
+2020;Proportion Linezolid;J01XX08;0.0036;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;9;downward_arrow;*
+2021;Proportion Linezolid;J01XX08;0.0039;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;10;downward_arrow;*
+2022;Proportion Linezolid;J01XX08;0.0036;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;11;downward_arrow;*
+2011;Proportions carbapenems (%);J01DH;0.0299;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;0;equals;
+2012;Proportions carbapenems (%);J01DH;0.0301;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;1;equals;
+2013;Proportions carbapenems (%);J01DH;0.0304;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;2;equals;
+2014;Proportions carbapenems (%);J01DH;0.0325;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;3;equals;
+2015;Proportions carbapenems (%);J01DH;0.032;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;4;equals;
+2016;Proportions carbapenems (%);J01DH;0.0308;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;5;equals;
+2017;Proportions carbapenems (%);J01DH;0.0302;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;6;equals;
+2018;Proportions carbapenems (%);J01DH;0.0304;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;7;equals;
+2019;Proportions carbapenems (%);J01DH;0.0295;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;8;equals;
+2020;Proportions carbapenems (%);J01DH;0.0319;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;9;equals;
+2021;Proportions carbapenems (%);J01DH;0.031;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;10;equals;
+2022;Proportions carbapenems (%);J01DH;0.0272;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net;11;equals;
