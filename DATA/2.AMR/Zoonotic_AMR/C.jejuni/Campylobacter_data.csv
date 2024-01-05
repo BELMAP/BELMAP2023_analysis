@@ -1,0 +1,109 @@
+Year;Pathogen;Sample_size;Number_resistants;Host;Indicator;Location
+2011;Campylobacter jejuni;307;158;human;Ciprofloxacin;LHUB-ULB
+2012;Campylobacter jejuni;304;165;human;Ciprofloxacin;LHUB-ULB
+2013;Campylobacter jejuni;358;222;human;Ciprofloxacin;LHUB-ULB
+2014;Campylobacter jejuni;330;217;human;Ciprofloxacin;LHUB-ULB
+2015;Campylobacter jejuni;270;170;human;Ciprofloxacin;LHUB-ULB
+2016;Campylobacter jejuni;254;163;human;Ciprofloxacin;LHUB-ULB
+2017;Campylobacter jejuni;220;131;human;Ciprofloxacin;LHUB-ULB
+2018;Campylobacter jejuni;203;124;human;Ciprofloxacin;LHUB-ULB
+2019;Campylobacter jejuni;267;169;human;Ciprofloxacin;LHUB-ULB
+2020;Campylobacter jejuni;167;111;human;Ciprofloxacin;LHUB-ULB
+2021;Campylobacter jejuni;177;106;human;Ciprofloxacin;LHUB-ULB
+2022;Campylobacter jejuni;160;89;human;Ciprofloxacin;LHUB-ULB
+2011;Campylobacter jejuni;307;6;human;Erythromycin;LHUB-ULB
+2012;Campylobacter jejuni;304;6;human;Erythromycin;LHUB-ULB
+2013;Campylobacter jejuni;358;1;human;Erythromycin;LHUB-ULB
+2014;Campylobacter jejuni;330;2;human;Erythromycin;LHUB-ULB
+2015;Campylobacter jejuni;270;2;human;Erythromycin;LHUB-ULB
+2016;Campylobacter jejuni;254;2;human;Erythromycin;LHUB-ULB
+2017;Campylobacter jejuni;220;2;human;Erythromycin;LHUB-ULB
+2018;Campylobacter jejuni;203;0;human;Erythromycin;LHUB-ULB
+2019;Campylobacter jejuni;267;7;human;Erythromycin;LHUB-ULB
+2020;Campylobacter jejuni;167;1;human;Erythromycin;LHUB-ULB
+2021;Campylobacter jejuni;177;2;human;Erythromycin;LHUB-ULB
+2022;Campylobacter jejuni;160;1;human;Erythromycin;LHUB-ULB
+2011;Campylobacter jejuni;100;56;human;Ciprofloxacin;CHU Liege
+2012;Campylobacter jejuni;93;50;human;Ciprofloxacin;CHU Liege
+2013;Campylobacter jejuni;126;82;human;Ciprofloxacin;CHU Liege
+2014;Campylobacter jejuni;163;103;human;Ciprofloxacin;CHU Liege
+2015;Campylobacter jejuni;141;79;human;Ciprofloxacin;CHU Liege
+2016;Campylobacter jejuni;154;87;human;Ciprofloxacin;CHU Liege
+2017;Campylobacter jejuni;133;84;human;Ciprofloxacin;CHU Liege
+2018;Campylobacter jejuni;138;77;human;Ciprofloxacin;CHU Liege
+2019;Campylobacter jejuni;130;83;human;Ciprofloxacin;CHU Liege
+2020;Campylobacter jejuni;112;75;human;Ciprofloxacin;CHU Liege
+2021;Campylobacter jejuni;104;61;human;Ciprofloxacin;CHU Liege
+2022;Campylobacter jejuni;111;56;human;Ciprofloxacin;CHU Liege
+2011;Campylobacter jejuni;100;1;human;Erythromycin;CHU Liege
+2012;Campylobacter jejuni;93;0;human;Erythromycin;CHU Liege
+2013;Campylobacter jejuni;126;1;human;Erythromycin;CHU Liege
+2014;Campylobacter jejuni;163;0;human;Erythromycin;CHU Liege
+2015;Campylobacter jejuni;141;0;human;Erythromycin;CHU Liege
+2016;Campylobacter jejuni;154;1;human;Erythromycin;CHU Liege
+2017;Campylobacter jejuni;133;1;human;Erythromycin;CHU Liege
+2018;Campylobacter jejuni;138;1;human;Erythromycin;CHU Liege
+2019;Campylobacter jejuni;130;1;human;Erythromycin;CHU Liege
+2020;Campylobacter jejuni;112;1;human;Erythromycin;CHU Liege
+2021;Campylobacter jejuni;104;1;human;Erythromycin;CHU Liege
+2022;Campylobacter jejuni;111;1;human;Erythromycin;CHU Liege
+2014;Campylobacter jejuni;92;56;Broiler_carcass;Ciprofloxacin;
+2015;Campylobacter jejuni;;;Broiler_carcass;Ciprofloxacin;
+2016;Campylobacter jejuni;;;Broiler_carcass;Ciprofloxacin;
+2017;Campylobacter jejuni;108;67;Broiler_carcass;Ciprofloxacin;
+2018;Campylobacter jejuni;79;45;Broiler_carcass;Ciprofloxacin;
+2019;Campylobacter jejuni;;;Broiler_carcass;Ciprofloxacin;
+2020;Campylobacter jejuni;92;59;Broiler_carcass;Ciprofloxacin;
+2021;Campylobacter jejuni;;;Broiler_carcass;Ciprofloxacin;
+2022;Campylobacter jejuni;52;31;Broiler_carcass;Ciprofloxacin;
+2014;Campylobacter jejuni;289;166;Poultry_meat;Ciprofloxacin;
+2015;Campylobacter jejuni;386;239;Poultry_meat;Ciprofloxacin;
+2016;Campylobacter jejuni;370;209;Poultry_meat;Ciprofloxacin;
+2017;Campylobacter jejuni;378;231;Poultry_meat;Ciprofloxacin;
+2018;Campylobacter jejuni;269;167;Poultry_meat;Ciprofloxacin;
+2019;Campylobacter jejuni;91;67;Poultry_meat;Ciprofloxacin;
+2020;Campylobacter jejuni;66;39;Poultry_meat;Ciprofloxacin;
+2021;Campylobacter jejuni;45;26;Poultry_meat;Ciprofloxacin;
+2022;Campylobacter jejuni;46;29;Poultry_meat;Ciprofloxacin;
+2014;Campylobacter jejuni;92;1;Broiler_carcass;Erythromycin;
+2015;Campylobacter jejuni;;;Broiler_carcass;Erythromycin;
+2016;Campylobacter jejuni;;;Broiler_carcass;Erythromycin;
+2017;Campylobacter jejuni;108;0;Broiler_carcass;Erythromycin;
+2018;Campylobacter jejuni;79;0;Broiler_carcass;Erythromycin;
+2019;Campylobacter jejuni;;;Broiler_carcass;Erythromycin;
+2020;Campylobacter jejuni;92;0;Broiler_carcass;Erythromycin;
+2021;Campylobacter jejuni;;;Broiler_carcass;Erythromycin;
+2022;Campylobacter jejuni;52;9;Broiler_carcass;Erythromycin;
+2014;Campylobacter jejuni;289;2;Poultry_meat;Erythromycin;
+2015;Campylobacter jejuni;386;5;Poultry_meat;Erythromycin;
+2016;Campylobacter jejuni;370;9;Poultry_meat;Erythromycin;
+2017;Campylobacter jejuni;378;3;Poultry_meat;Erythromycin;
+2018;Campylobacter jejuni;269;8;Poultry_meat;Erythromycin;
+2019;Campylobacter jejuni;91;1;Poultry_meat;Erythromycin;
+2020;Campylobacter jejuni;66;0;Poultry_meat;Erythromycin;
+2021;Campylobacter jejuni;45;0;Poultry_meat;Erythromycin;
+2022;Campylobacter jejuni;46;5;Poultry_meat;Erythromycin;
+2021;Campylobacter coli;165;72;Pork_caecum;ciprofloxacin;
+2022;Campylobacter coli;165;76;Pork_caecum;ciprofloxacin;
+2021;Campylobacter coli;165;138;Pork_caecum;tetracycline;
+2022;Campylobacter coli;165;130;Pork_caecum;tetracycline;
+2021;Campylobacter coli;165;15;Pork_caecum;erythromycin;
+2022;Campylobacter coli;165;33;Pork_caecum;erythromycin;
+2021;Campylobacter coli;165;2;Pork_caecum;gentamicin;
+2022;Campylobacter coli;165;4;Pork_caecum;gentamicin;
+2021;Campylobacter coli;72;67;Veal_calf_caecum;ciprofloxacin;
+2022;Campylobacter coli;74;72;Veal_calf_caecum;ciprofloxacin;
+2021;Campylobacter coli;72;72;Veal_calf_caecum;tetracycline;
+2022;Campylobacter coli;74;73;Veal_calf_caecum;tetracycline;
+2021;Campylobacter coli;72;56;Veal_calf_caecum;erythromycin;
+2022;Campylobacter coli;74;49;Veal_calf_caecum;erythromycin;
+2021;Campylobacter coli;72;9;Veal_calf_caecum;gentamicin;
+2022;Campylobacter coli;74;17;Veal_calf_caecum;gentamicin;
+2021;Campylobacter jejuni;146;97;Veal_calf_caecum;ciprofloxacin;
+2022;Campylobacter jejuni;137;86;Veal_calf_caecum;ciprofloxacin;
+2021;Campylobacter jejuni;146;129;Veal_calf_caecum;tetracycline;
+2022;Campylobacter jejuni;137;118;Veal_calf_caecum;tetracycline;
+2021;Campylobacter jejuni;146;7;Veal_calf_caecum;erythromycin;
+2022;Campylobacter jejuni;137;25;Veal_calf_caecum;erythromycin;
+2021;Campylobacter jejuni;146;0;Veal_calf_caecum;gentamicin;
+2022;Campylobacter jejuni;137;6;Veal_calf_caecum;gentamicin;

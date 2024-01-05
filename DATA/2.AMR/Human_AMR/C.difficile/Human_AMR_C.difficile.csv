@@ -1,0 +1,15 @@
+Year;Pathogen;Antibiotic;Sample_size;Percent_resistant;Number_resistants;Region;Surveillance;Matrix
+2019;C. difficile;Moxifloxacin;73;26,3;19;Belgium;;
+2020;C. difficile;Moxifloxacin;74;12,2;9;Belgium;;
+2021;C. difficile;Moxifloxacin;70;11,4;8;Belgium;;
+2022;C. difficile;Moxifloxacin;100;10;10;Belgium;;
+2019;C. difficile;Rifampicin;73;4,1;3;Belgium;;
+2020;C. difficile;Rifampicin;74;1,4;1;Belgium;;
+2021;C. difficile;Rifampicin;70;1,4;1;Belgium;;
+2022;C. difficile;Rifampicin;100;0;0;Belgium;;
+2019;C. difficile;Vancomycin;74;0;0;Belgium;;
+2020;C. difficile;Vancomycin;73;0;0;Belgium;;
+2021;C. difficile;Vancomycin;70;0;0;Belgium;;
+2022;C. difficile;Vancomycin;100;0;0;Belgium;;
+2021;C. difficile;Fidaxomicin;70;0;0;Belgium;;
+2022;C. difficile;Fidaxomicin;100;0;0;Belgium;;
