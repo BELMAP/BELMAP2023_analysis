@@ -1,0 +1,323 @@
+---
+title: '![](BELMAP-logo.png){width=6in}'
+subtitle: 5. Intersectoral Comparisons of Antimicrobial Consumption
+date: "Last compiled on `r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  word_document:
+    reference_docx: "word-styles-reference-01.docx"
+css: style.css
+editor_options:
+  markdown:
+    wrap: 72
+---
+
+```{r setup3, include=FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE
+)
+```
+
+```{r load_data_and_themes3, include=FALSE}
+
+library(tidyverse)
+library(patchwork)
+library(jpeg)
+library(scales)
+library(extrafont)
+library(remotes)
+library(extrafontdb)
+library(magrittr)
+library(AER)
+library(AICcmodavg)
+library(pscl)
+library(MASS)
+library(COMPoissonReg)
+library(performance)
+library(grid)
+library(ggtext)
+library(showtext)
+
+
+BELMAP_colourscheme <- c("#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c",
+                         "#fdbf6f","#ff7f00","#cab2d6")
+
+moiras_graph_theme<- function(..., base_size = 12){theme(
+   panel.background = element_blank(), #transparent panel bg
+  plot.background = element_blank(), #transparent plot bg
+  panel.grid.major.y =  element_line(colour = "#ccc6c4"), #grey y major gridlines
+  panel.grid.major.x =  element_blank(), #remove major gridlines
+  panel.grid.minor = element_blank(), #remove minor gridlines
+  # legend.background = element_rect(fill='#001f3f'), #transparent legend bg
+  legend.title = element_text(size = 18),
+  legend.text = element_text(size = 16),
+  #  legend.box.background = element_rect(fill='#001f3f'),
+  text = element_text( family = "Gill Sans MT"),
+  axis.text = element_text(size = 16),
+  #plot.background=element_blank(),#, , size = 10, family = "calibri"
+  axis.title = element_text(size = 18),
+  axis.ticks.x = element_blank(),
+  axis.text.x = element_text(angle = 90,vjust = 0.5, hjust = 0.5),
+  strip.background = element_blank(),
+  strip.text = element_text(size = 18),
+  legend.position = "top",
+  legend.direction = "horizontal"
+)}
+
+font_add("Gill Sans MT", "GIL_____.TTF")
+
+# adding icons to figures ------------------------------------
+
+# Important step to enable showtext font rendering!
+showtext_auto()
+
+font_add('fa-solid', '../font_awesome_font_files/fontawesome-free-6.4.0-desktop/otfs/Font Awesome 6 Free-Solid-900.otf')
+
+upward_arrow <- "<span style='font-family:fa-solid'>&#xf062;</span>"
+downward_arrow <- "<span style='font-family:fa-solid'>&#xf063;</span>" 
+equals <- "<span style='font-family:fa-solid'>&#xf52c;</span>"   #" = " 
+oscillate <- "<span style='font-family:fa-solid'>&#xf83e;</span>"   #" ~ "
+
+BELMAP_intersect_AMC_colourscheme<-c("Veterinary" = "#99d594",
+                                     "Human - Hospital" = "#9ecae1",
+                                     "Human - Community" = "#4292c6",
+                                     "Human" = "#08519c",
+                                     "Human - Total" = "#08519c")
+
+
+#-----------------------------------------------------------------------------------
+#2. Load data-----
+
+Human_vet_AMC <- read.csv2("Data/1.AMC/Combined_AMC/AMC_vet_human_mg_kg.csv") %>%
+  mutate(Category = paste(Sector,Measurement,sep = "_")) %>%
+  mutate(Sector = case_when(
+    Sector == "Veterinary" ~ "Veterinary",
+    Sector == "Human -Ambulatory" ~ "Human - Community",
+    Sector == "Human - Hospital" ~ "Human - Hospital",
+    Sector == "Human" ~ "Human - Total"))
+
+# load graph data ----
+comparative_graph_data <- read_csv("5_Intersectoral_AMC_analysis_outcomes.csv") %>%
+  mutate(label_icon = case_when(
+    icon == "upward_arrow" ~ upward_arrow,
+    icon == "downward_arrow" ~ downward_arrow,
+    icon == "equals" ~ equals,
+    icon == "oscilate" ~ oscillate,
+    .default = ""
+  )) %>%
+  mutate(label = if_else((is.na(signif) | signif == ""), label_icon, paste(label_icon,signif,sep=" "))) %>%
+  mutate(label = if_else(Year == 2021, label,NA)) %>%
+      filter(Year > 2011) %>%
+  filter( Year < 2022) %>%
+  mutate(y_coord = case_when(
+    Sector == "Veterinary" ~ 60,
+    Sector == "Human -Ambulatory" ~ 90,
+    Sector == "Human - Hospital" ~ 30,
+    Sector == "Human" ~ 120)) %>%
+  mutate(Species = if_else(grepl("Veterinary", Sector), "Veterinary", "Human")) %>%
+  mutate(Sector = case_when(
+    Sector == "Veterinary" ~ "Veterinary",
+    Sector == "Human -Ambulatory" ~ "Human - Community",
+    Sector == "Human - Hospital" ~ "Human - Hospital",
+    Sector == "Human" ~ "Human - Total")) %>%    
+  mutate(Sector = factor(Sector, 
+                              levels = c("Human - Total", "Human - Community","Human - Hospital", "Veterinary")))
+
+#make line for 2021 to add icon
+
+add_line <-  tibble(
+  "Year" = c(2021,2021),
+  "Measurement" = c("none","none"),
+  "Value" = c(0,0),
+  "Unit" = c("mg","mg"),
+  "Sector"  =  c("none","none"),
+  "kg.active.product" = c(NA,NA),
+  "tonnes.of.biomass" = c(NA,NA),
+  "Category"= c(NA,NA),
+  "Year_simple"= c(NA,NA),
+  "icon"= c(NA,NA),
+  "signif"= c(NA,NA),
+  "label_icon"= c(NA,NA),
+  "label" = c(NA,NA),
+  "y_coord"= c(NA,NA),
+  "Species"= c("You","Zoo"))
+
+
+comparative_graph_data1<-rbind(comparative_graph_data,add_line)
+
+
+```
+   
+\FloatBarrier                    
+              
+\newpage      
+
+\FloatBarrier     
+
+# 5. Intersectoral antimicrobial consumption
+
+**Contents**
+
+5.1 [Methodology](#paragraph48)\
+5.2 [Total consumption](#paragraph49)\
+5.3 [Consumption by class](#paragraph410)
+
+Central to the BELMAP report is the “One Health” concept, and the understanding that tackling AMR requires intersectoral exchanges and cooperation. It is challenging to compare between sectors without common metrics. In this chapter we use a common measurement (antibiotic consumption (mg)/ estimated biomass(kg)) to discuss AMC across the human and veterinary sectors.
+
+## 5.1 Methodology {#paragraph48}
+
+In order to enable comparisons with previous European level reports, our calculations mimic the methodology of the JIACRA reports[[14]](https://data.europa.eu/doi/10.2900/056892), with small modifications to the groups of veterinary medications included in the total consumption analysis - here adapted to be aligned with the BelVet-SAC reporting. The rationale for the selection of antimicrobial classes for further analysis can be found in Table 3 of the JIACRA III report.
+
+Human consumption data for Belgium, categorised by sector (community or hospital) were retrieved from the TESSy database, hosted by ECDC, in August 2023. To convert these volumes into mg of active product we followed the JIACRA methodology, in short the TESSy database reports AMC at the substance level (ATC codes, 5th ATC group level) including information on the route of administration (e.g. oral, parenteral, inhalation) expressed in defined daily doses (DDD) as defined by the WHO Collaborating Centre for Drug Statistics Methodology (WHO CC). We included consumption of antimicrobials from ATC group J01, antibacterials for systemic use, reported from 2012 to 2021 in  Belgium, using the 2019 ATC/DDD index from the WHO CC. The latest ATC/DDD index is available at http://www.whocc.no/atc_ddd_index and contains all valid ATC codes and corresponding DDDs. As the database includes information on product strength, the mass of active product can be calculated based on the DDD consumed. This data was then aggregated by antimicrobial class. 
+
+Annual human biomass in Belgium was estimated based on the population demography (population count by age and gender, provided by Eurostat [[15]](https://ec.europa.eu/eurostat/cache/metadata/en/demo_pop_esms.html)) and estimates of body mass by gender and age (provided by the European Food Safety Agency in their report ‘Guidance on selected default values to be used by the EFSA Scientific Committee, Scientific Panels and Units in the absence of actual measured data’[[16]](https://www.efsa.europa.eu/en/efsajournal/pub/2579)).
+
+Data on antimicrobial sales in animals were already available expressed in mg/kg biomass, as reported in the BelVet-SAC reports[[17]](https://belvetsac.ugent.be/)  and Chapter 3 of this report.
+
+
+## 5.2 Total Consumption {#paragraph49}
+
+In 2021, 83 and 172 tonnes of active antimicrobial substances were sold for consumption in humans and animals, respectively. The estimated biomass for humans and animals in Belgium in 2021 were 720 and 2,114 thousand tonnes respectively.
+
+Figure 9 shows the comparison of population-weighted consumption of antimicrobials in humans (indicating relative contributions of community and hospital sectors) and animals, expressed in mg per kg of estimated biomass.
+
+We observe significant reductions in total antimicrobial consumption (expressed in mg/kg estimated biomass) over time in humans and animals. There was also a significant association between the consumption in humans and animals within years (Spearman’s rank correlation coefficient, rho = 0.842, p = 0.004), suggesting that antimicrobial stewardship efforts led to reductions AMC in both sectors at similar time points.  
+
+While the overall reductions in human and veterinary consumption are in line with patterns observed Europe-wide in the JIACRA report[[14]](https://data.europa.eu/doi/10.2900/056892), comparisons with the European data highlight some deviation in the Belgian data. Firstly, Europe-wide, 2016 was the first year reporting higher average consumption in humans than animals; in Belgium this has been a consistent pattern throughout the surveillance period. Secondly, while European reports stated hospital consumption comprises on average 10% of consumption, Belgian hospitals made up 20.9% of human AMC in 2021. Furthermore, while considerable reductions are observed in community AMC, consumption within hospitals has remained stationary resulting in a year-on-year increase in the relative contribution of hospitals to total consumption (range = 15.3% 2012, to 20.9% in 2021).
+
+
+```{r 4.2_AMC_total, fig.dim=c(18,10), fig.cap="**Figure 9** — Population-weighted mean of the total consumption of antimicrobials in humans and food-producing animals, for 2011 - 2021. Source: Human data: ESAC-Net[[17]](https://www.ecdc.europa.eu/en/about-us/partnerships-and-networks/disease-and-laboratory-networks/esac-net), Veterinary: BelVet-SAC report.[[19]](https://belvetsac.ugent.be/)"}
+
+
+(Comparative_graph_AMC <- comparative_graph_data1 %>%
+     ggplot()+
+    geom_bar(data = comparative_graph_data1[!(comparative_graph_data1$Sector == "Human"),], aes(x=Species, y = as.numeric(Value), fill = Sector, colour = Species), stat="identity", position = "stack", size = 1.5)+
+    scale_fill_manual(values = BELMAP_intersect_AMC_colourscheme )+
+      scale_colour_manual(values = BELMAP_intersect_AMC_colourscheme,breaks = NULL)+
+    facet_wrap(~Year, nrow=1, switch = "x", scales = "free_x")+
+  #  scale_alpha_manual(values = c("Primary" = 1, "Secondary" = 0.5))+
+    # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+  #  scale_x_continuous(limits = c(0,4), breaks ="none")+
+    scale_y_continuous(limits = c(-1,175), breaks = seq(0,150,50))+
+    geom_richtext(aes(x = 3.5, y = y_coord,
+                      label = label,
+                      fill = Sector), stat = "unique",
+                  colour= "white", show.legend = FALSE, size = 4)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+    #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(y= "Antimicrobial Consumption (mg/kg biomass)", x = "")&
+    moiras_graph_theme()+
+    theme(axis.text.x = element_blank(),
+          strip.background = element_blank(),
+          panel.border = element_blank(),
+          panel.grid = element_blank(),
+          panel.background = element_blank(),
+          axis.ticks.x = element_blank(),
+          strip.text.x.bottom = element_text(size = 14)
+          ))
+
+
+# # proportion hospital
+# 
+# proportion_hospital <- Human_vet_AMC %>%
+#   filter(grepl("Total", Measurement)) %>%
+#   filter(Sector == "Human"|Sector == "Human - Hospital") %>%
+#   dplyr::select(Year,Value,Sector) %>%
+#   pivot_wider(names_from = Sector, values_from = Value) %>%
+#   filter(Year > 2011) %>%
+#   filter(Year <2022) %>%
+#   mutate(Hosp_contribution = `Human - Hospital`/Human )
+# 
+# proportion_hospital
+# 
+# # 
+# #spearmans rank correlation - 
+# # human and veterinary totals correlate ? 
+# dataset_AMC <- Human_vet_AMC %>%
+#   filter(grepl("Total", Measurement)) %>%
+#   filter(Sector == "Human"|Sector == "Veterinary") %>%
+#   dplyr::select(Year,Value,Sector) %>%
+#   pivot_wider(names_from = Sector, values_from = Value) %>%
+#   filter(Year > 2011) %>%
+#   filter(Year <2022)
+
+  # #Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.
+  # Scor_Value <- cor(dataset_AMC$Veterinary , dataset_AMC$Human, method = "spearman")
+  # Scortest_Value <- cor.test(dataset_AMC$Veterinary , dataset_AMC$Human, method = "spearman")
+  # Scor_Value
+  # #[1] -0.9818182
+  # 
+  # Scortest_Value
+
+
+#      rho 
+#0.8424242      p-value = 0.004459
+
+```
+
+## 5.3 Consumption by class {#paragraph410}
+
+Figure 10 shows consumption of selected antimicrobial classes in 2021. In line with European averages, penicillins  , first- and second-generation cephalosporins and macrolides were the highest selling classes in human medicine, when expressed in milligrams per kilogram of estimated biomass. We observe that consumption in hospitals accounts for a significant proportion of the consumption of penicillins and first- and second- generation cephalosporins, but minimal macrolide consumption. Carbapenems and 3rd and 4th generation cephalosporins are almost exclusively consumed in hospital settings, with virtually all human polymyxin consumption also occurring in the hospital setting.
+
+For animals, penicillins  , trimethoprim and sulphonamides molecules, and tetracyclines were the highest selling classes in 2021 in milligrams per kilogram of   biomass. It should be noted that no veterinary medicinal products containing carbapenems have been, nor are, licensed for use in animals.
+
+We observe higher overall population-corrected consumption, expressed in mg per kg of estimated biomass, in humans for penicillins, cephalosporins (all generations) and quinolones in humans. Consumption of other considered antimicrobial classes was higher in animals.
+
+
+```{r 4.3_AMC_molecule, fig.dim=c(8,6), fig.cap="**Figure 10** — Comparison of consumption of antimicrobial classes in humans and food-producing animals, 2021 Source: Human data: ESAC-Net[[17]](https://www.ecdc.europa.eu/en/about-us/partnerships-and-networks/disease-and-laboratory-networks/esac-net), Veterinary: BelVet-SAC report.[[19]](https://belvetsac.ugent.be/)"}
+
+
+category_AMC_2021 <- Human_vet_AMC %>%
+  
+  filter(!grepl("Total",Measurement)) %>%
+  filter(Year == 2021) %>%
+  filter(Sector != "Human - Total") %>% 
+  mutate(Species = if_else(grepl("Veterinary", Sector), "Veterinary", "Human"))
+
+
+# category_AMC_2021b <- Human_vet_AMC %>%
+#   filter(!grepl("Total",Measurement)) %>%
+#   filter(Year == 2021) %>%
+#   filter(Sector == "Human - Total"| Sector == "Food producing animal")
+
+(category_graph1<-    category_AMC_2021 %>%
+  mutate(volume = if_else(Species == "Veterinary", -Value, Value)) %>%
+  ggplot() +
+  geom_bar(aes(x = Measurement, y = volume, fill = Sector), stat = "identity",
+           position = "stack")+  #, colour = Species
+  #geom_vline(yintercept = 0, colour = "black")+
+    scale_fill_manual(values = BELMAP_intersect_AMC_colourscheme)+
+    scale_colour_manual(values = BELMAP_intersect_AMC_colourscheme, guide = 'none')+
+  coord_flip()+
+  scale_y_continuous(limits = c(-90,85),breaks = c(-80,-40,0,40,80),labels = c(80,40,0,40,80))+
+  #   geom_text(aes(y = -78, x = -0.1, label = "80"), size = 3.5,  angle = 90, colour = "black", hjust = 1.5)+
+  # geom_text(aes(y = -40, x = -0.1, label = "40"), size = 3.5,  angle = 90, colour = "black", hjust = 1.5)+
+  # geom_text(aes(y = 0, x = -0.1, label = "0"), size = 3.5,  angle = 90, colour = "black", hjust = 1.5)+
+  # geom_text(aes(y = 40, x = -0.1, label = "40"), size = 3.5,  angle = 90, colour = "black", hjust = 1.5)+
+  # geom_text(aes(y = 80, x = -0.1, label = "80"), size = 3.5,  angle = 90, colour = "black", hjust = 1.5)+
+    labs(x = "Antimicrobial group", y = "Consumption (mg/kg)")+
+    #  moiras_graph_theme()+
+    theme(#text = element_text(family = "Gill Sans MT"),
+          panel.background = element_blank(), #transparent panel bg
+          plot.background = element_blank(), #transparent plot bg
+          panel.grid.major.y =  element_line(colour = "#ccc6c4"), #grey y major gridlines
+          panel.grid.major.x =  element_blank(), #remove major gridlines
+          panel.grid.minor = element_blank(), #remove minor gridlines
+  # legend.background = element_rect(fill='#001f3f'), #transparent legend bg
+  legend.title = element_text(size = 14),
+  legend.text = element_text(size = 10),
+  #  legend.box.background = element_rect(fill='#001f3f'),
+  axis.text = element_text(size = 10),
+  #plot.background=element_blank(),#, , size = 10, family = "calibri"
+  axis.title = element_text(size = 14),
+  legend.position = "top",
+  legend.direction = "horizontal")+
+    guides(fill =guide_legend(nrow=2,byrow=TRUE)))
+
+
+```
