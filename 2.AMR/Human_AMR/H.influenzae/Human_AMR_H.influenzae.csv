@@ -1,0 +1,13 @@
+Year;Pathogen;Antibiotic;Sample_size;Percent_resistant;Number_resistants;Region;Surveillance;Matrix
+2011;H. influenzae;Ampicillin;82;20,73170732;17;Belgium;;
+2012;H. influenzae;Ampicillin;87;18,3908046;16;Belgium;;
+2013;H. influenzae;Ampicillin;86;20,93023256;18;Belgium;;
+2014;H. influenzae;Ampicillin;94;27,65957447;26;Belgium;;
+2015;H. influenzae;Ampicillin;98;16,32653061;16;Belgium;;
+2016;H. influenzae;Ampicillin;92;27,17391304;25;Belgium;;
+2017;H. influenzae;Ampicillin;98;13,26530612;13;Belgium;;
+2018;H. influenzae;Ampicillin;129;18,60465116;24;Belgium;;
+2019;H. influenzae;Ampicillin;155;22,58064516;35;Belgium;;
+2020;H. influenzae;Ampicillin;81;24,69135802;20;Belgium;;
+2021;H. influenzae;Ampicillin;84;20,23809524;17;Belgium;;
+2022;H. influenzae;Ampicillin;146;13,70;20;Belgium;;

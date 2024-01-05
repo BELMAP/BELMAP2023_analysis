@@ -1,0 +1,88 @@
+Year;Sample_size;Number_resistants;Host;Indicator;Pathogen
+2014;468;12;human;Cipofloxacin;Salmonella Typhimurium
+2015;485;45;human;Cipofloxacin;Salmonella Typhimurium
+2016;455;34;human;Cipofloxacin;Salmonella Typhimurium
+2017;502;94;human;Cipofloxacin;Salmonella Typhimurium
+2018;464;52;human;Cipofloxacin;Salmonella Typhimurium
+2019;427;46;human;Cipofloxacin;Salmonella Typhimurium
+2020;325;42;human;Cipofloxacin;Salmonella Typhimurium
+2021;378;52;human;Cipofloxacin;Salmonella Typhimurium
+2022;337;44;human;Cipofloxacin;Salmonella Typhimurium
+2018;40;6;human;Cipofloxacin;Salmonella derby
+2019;33;1;human;Cipofloxacin;Salmonella derby
+2020;37;0;human;Cipofloxacin;Salmonella derby
+2021;27;1;human;Cipofloxacin;Salmonella derby
+2014;274;55;human;Cipofloxacin;Salmonella Enteritidis
+2015;285;35;human;Cipofloxacin;Salmonella Enteritidis
+2016;287;48;human;Cipofloxacin;Salmonella Enteritidis
+2017;281;70;human;Cipofloxacin;Salmonella Enteritidis
+2018;191;51;human;Cipofloxacin;Salmonella Enteritidis
+2019;254;82;human;Cipofloxacin;Salmonella Enteritidis
+2020;183;48;human;Cipofloxacin;Salmonella Enteritidis
+2021;255;27;human;Cipofloxacin;Salmonella Enteritidis
+2022;366;69;human;Cipofloxacin;Salmonella Enteritidis
+2014;55;15;human;Cipofloxacin;Salmonella Infantis
+2015;67;8;human;Cipofloxacin;Salmonella Infantis
+2016;63;18;human;Cipofloxacin;Salmonella Infantis
+2017;44;19;human;Cipofloxacin;Salmonella Infantis
+2018;55;27;human;Cipofloxacin;Salmonella Infantis
+2019;58;23;human;Cipofloxacin;Salmonella Infantis
+2020;44;29;human;Cipofloxacin;Salmonella Infantis
+2021;47;21;human;Cipofloxacin;Salmonella Infantis
+2022;33;20;human;Cipofloxacin;Salmonella Infantis
+2014;;;human;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2015;;;human;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2016;;;human;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2017;13;4;human;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2018;30;8;human;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2019;25;6;human;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2020;15;1;human;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2021;12;1;human;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2022;13;1;human;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2014;;;Pork/bovine_carcases;Cipofloxacin;Salmonella Typhimurium
+2015;74;0;Pork/bovine_carcases;Cipofloxacin;Salmonella Typhimurium
+2016;;;Pork/bovine_carcases;Cipofloxacin;Salmonella Typhimurium
+2017;52;4;Pork/bovine_carcases;Cipofloxacin;Salmonella Typhimurium
+2018;;;Pork/bovine_carcases;Cipofloxacin;Salmonella Typhimurium
+2019;59;4;Pork/bovine_carcases;Cipofloxacin;Salmonella Typhimurium
+2020;;;Pork/bovine_carcases;Cipofloxacin;Salmonella Typhimurium
+2021;24;1;Pork caecum;Cipofloxacin;Salmonella Typhimurium
+2022;23;0;Pork caecum;Cipofloxacin;Salmonella Typhimurium
+2021;2;0;Bovine caecum;Cipofloxacin;Salmonella Typhimurium
+2022;1;0;Bovine caecum;Cipofloxacin;Salmonella Typhimurium
+2014;;;Pork/bovine_carcases;Cipofloxacin;Salmonella derby
+2015;67;1;Pork/bovine_carcases;Cipofloxacin;Salmonella derby
+2016;;;Pork/bovine_carcases;Cipofloxacin;Salmonella derby
+2017;17;0;Pork/bovine_carcases;Cipofloxacin;Salmonella derby
+2018;;;Pork/bovine_carcases;Cipofloxacin;Salmonella derby
+2019;21;0;Pork/bovine_carcases;Cipofloxacin;Salmonella derby
+2020;;;Pork/bovine_carcases;Cipofloxacin;Salmonella derby
+2021;11;1;Pork caecum;Cipofloxacin;Salmonella derby
+2022;7;0;Pork caecum;Cipofloxacin;Salmonella derby
+2014;11;0;chicken_neck skin from carcases;Cipofloxacin;Salmonella Enteritidis
+2015;;;chicken_neck skin from carcases;Cipofloxacin;Salmonella Enteritidis
+2016;20;7;chicken_neck skin from carcases;Cipofloxacin;Salmonella Enteritidis
+2017;;;chicken_neck skin from carcases;Cipofloxacin;Salmonella Enteritidis
+2018;25;5;chicken_neck skin from carcases;Cipofloxacin;Salmonella Enteritidis
+2019;;;chicken_neck skin from carcases;Cipofloxacin;Salmonella Enteritidis
+2020;20;2;chicken_neck skin from carcases;Cipofloxacin;Salmonella Enteritidis
+2021;;;chicken_neck skin from carcases;Cipofloxacin;Salmonella Enteritidis
+2022;2;0;chicken_swabs before slaughter;Cipofloxacin;Salmonella Enteritidis
+2014;4;3;chicken_neck skin from carcases;Cipofloxacin;Salmonella Infantis
+2015;;;chicken_neck skin from carcases;Cipofloxacin;Salmonella Infantis
+2016;71;67;chicken_neck skin from carcases;Cipofloxacin;Salmonella Infantis
+2017;;;chicken_neck skin from carcases;Cipofloxacin;Salmonella Infantis
+2018;69;68;chicken_neck skin from carcases;Cipofloxacin;Salmonella Infantis
+2019;;;chicken_neck skin from carcases;Cipofloxacin;Salmonella Infantis
+2020;61;59;chicken_neck skin from carcases;Cipofloxacin;Salmonella Infantis
+2021;;;chicken_neck skin from carcases;Cipofloxacin;Salmonella Infantis
+2022;66;59;chicken_swabs before slaughter;Cipofloxacin;Salmonella Infantis
+2014;35;26;chicken_neck skin from carcases;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2015;;;chicken_neck skin from carcases;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2016;19;8;chicken_neck skin from carcases;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2017;;;chicken_neck skin from carcases;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2018;33;12;chicken_neck skin from carcases;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2019;;;chicken_neck skin from carcases;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2020;21;12;chicken_neck skin from carcases;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2021;;;chicken_neck skin from carcases;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 
+2022;42;32;chicken_swabs before slaughter;Cipofloxacin;Salmonella Paratyphi B var, L(+) Tartrate+, 

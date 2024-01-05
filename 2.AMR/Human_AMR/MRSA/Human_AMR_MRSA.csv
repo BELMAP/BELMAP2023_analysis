@@ -1,0 +1,45 @@
+Year;Pathogen;Antibiotic;Sample_size;Percent_resistant;Number_resistants;Region;Surveillance;Matrix
+2011;S. aureus;Methicillin;1346;18,3;246;Belgium;EARS;Blood/CSF
+2012;S. aureus;Methicillin;1575;16,5;260;Belgium;EARS;Blood/CSF
+2013;S. aureus;Methicillin;1612;16,9;272;Belgium;EARS;Blood/CSF
+2014;S. aureus;Methicillin;987;13,5;133;Belgium;EARS;Blood/CSF
+2015;S. aureus;Methicillin;1031;11,9;123;Belgium;EARS;Blood/CSF
+2016;S. aureus;Methicillin;1364;12,2;166;Belgium;EARS;Blood/CSF
+2017;S. aureus;Methicillin;1510;8,5;128;Belgium;EARS;Blood/CSF
+2018;S. aureus;Methicillin;1733;8,9;154;Belgium;EARS;Blood/CSF
+2019;S. aureus;Methicillin;1276;6,3;80;Belgium;EARS;Blood/CSF
+2020;S. aureus;Methicillin;1580;6,8;107;Belgium;EARS;Blood/CSF
+2021;S. aureus;Methicillin;1835;4,6;84;Belgium;EARS;Blood/CSF
+2011;S. aureus;Methicillin;9323;14,94;1393;Neighbours;EARS;
+2012;S. aureus;Methicillin;10199;14,21;1449;Neighbours;EARS;
+2013;S. aureus;Methicillin;11621;11,92;1385;Neighbours;EARS;
+2014;S. aureus;Methicillin;11648;12,06;1405;Neighbours;EARS;
+2015;S. aureus;Methicillin;13480;11,19;1508;Neighbours;EARS;
+2016;S. aureus;Methicillin;18672;9,8;1829;Neighbours;EARS;
+2017;S. aureus;Methicillin;22845;9,17;2095;Neighbours;EARS;
+2018;S. aureus;Methicillin;22586;8,02;1811;Neighbours;EARS;
+2019;S. aureus;Methicillin;21847;7,4;1617;Neighbours;EARS;
+2020;S. aureus;Methicillin;28187;7,52;2119;Neighbours;EARS;
+2021;S. aureus;Methicillin;;;;Neighbours;EARS;
+2011;S. aureus;Methicillin;36003;16,31;5871;Europe;EARS;
+2012;S. aureus;Methicillin;37321;16,15;6029;Europe;EARS;
+2013;S. aureus;Methicillin;41833;16,01;6699;Europe;EARS;
+2014;S. aureus;Methicillin;41275;15,88;6554;Europe;EARS;
+2015;S. aureus;Methicillin;46173;15,91;7347;Europe;EARS;
+2016;S. aureus;Methicillin;57730;13,88;8013;Europe;EARS;
+2017;S. aureus;Methicillin;66120;12,86;8500;Europe;EARS;
+2018;S. aureus;Methicillin;72882;13,96;10173;Europe;EARS;
+2019;S. aureus;Methicillin;74718;12,86;9610;Europe;EARS;
+2020;S. aureus;Methicillin;72314;13,23;9564;Europe;EARS;
+2021;S. aureus;Methicillin;;;;Europe;EARS;
+2011;S. aureus;Methicillin;33137;18,4;6108;Belgium;AMR;All samples
+2012;S. aureus;Methicillin;35344;16,6;5868;Belgium;AMR;All samples
+2013;S. aureus;Methicillin;33452;17,5;5839;Belgium;AMR;All samples
+2014;S. aureus;Methicillin;33541;15,2;5115;Belgium;AMR;All samples
+2015;S. aureus;Methicillin;34558;15,4;5324;Belgium;AMR;All samples
+2016;S. aureus;Methicillin;35518;15,7047131;5578;Belgium;AMR;All samples
+2017;S. aureus;Methicillin;33477;14,4;4831;Belgium;AMR;All samples
+2018;S. aureus;Methicillin;33627;14,2;4785;Belgium;AMR;All samples
+2019;S. aureus;Methicillin;32273;12,4;3996;Belgium;AMR;All samples
+2020;S. aureus;Methicillin;27628;10,6;2922;Belgium;AMR;All samples
+2021;S. aureus;Methicillin;28415;10,7;3028;Belgium;AMR;All samples
