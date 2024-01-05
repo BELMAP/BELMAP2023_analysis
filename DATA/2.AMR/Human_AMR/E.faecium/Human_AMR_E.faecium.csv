@@ -1,0 +1,56 @@
+Year;Pathogen;Antibiotic;Sample_size;Percent_resistant;Number_resistants;Region;Surveillance;Matrix
+2011;E. faecium;vancomycin;186;7;13;Belgium;EARS;Blood/CSF
+2012;E. faecium;vancomycin;215;1,4;3;Belgium;EARS;Blood/CSF
+2013;E. faecium;vancomycin;235;1,7;4;Belgium;EARS;Blood/CSF
+2014;E. faecium;vancomycin;195;3,1;6;Belgium;EARS;Blood/CSF
+2015;E. faecium;vancomycin;189;1,1;2;Belgium;EARS;Blood/CSF
+2016;E. faecium;vancomycin;289;1,7;5;Belgium;EARS;Blood/CSF
+2017;E. faecium;vancomycin;417;5,5;23;Belgium;EARS;Blood/CSF
+2018;E. faecium;vancomycin;436;1,8;8;Belgium;EARS;Blood/CSF
+2019;E. faecium;vancomycin;358;0,8;3;Belgium;EARS;Blood/CSF
+2020;E. faecium;vancomycin;533;3,6;19;Belgium;EARS;Blood/CSF
+2021;E. faecium;vancomycin;502;2,8;14;Belgium;EARS;Blood/CSF
+2011;E. faecium;vancomycin;na;na;na;Belgium;EARS;Urine
+2012;E. faecium;vancomycin;na;na;na;Belgium;EARS;Urine
+2013;E. faecium;vancomycin;na;na;na;Belgium;EARS;Urine
+2014;E. faecium;vancomycin;na;na;na;Belgium;EARS;Urine
+2015;E. faecium;vancomycin;na;na;na;Belgium;EARS;Urine
+2016;E. faecium;vancomycin;1073;1,5;16;Belgium;EARS;Urine
+2017;E. faecium;vancomycin;1492;1,6;24;Belgium;EARS;Urine
+2018;E. faecium;vancomycin;1591;2,5;40;Belgium;EARS;Urine
+2019;E. faecium;vancomycin;2095;1,7;36;Belgium;EARS;Urine
+2020;E. faecium;vancomycin;2614;1;26;Belgium;EARS;Urine
+2021;E. faecium;vancomycin;571;2,6;15;Belgium;EARS;Urine
+2011;E. faecium;vancomycin;1703;4,52;77;Neighbours;EARS;
+2012;E. faecium;vancomycin;1980;5,81;115;Neighbours;EARS;
+2013;E. faecium;vancomycin;2370;5,91;140;Neighbours;EARS;
+2014;E. faecium;vancomycin;2416;3,97;96;Neighbours;EARS;
+2015;E. faecium;vancomycin;2975;5,48;163;Neighbours;EARS;
+2016;E. faecium;vancomycin;3748;6,86;257;Neighbours;EARS;
+2017;E. faecium;vancomycin;4543;10,02;455;Neighbours;EARS;
+2018;E. faecium;vancomycin;4479;13,44;602;Neighbours;EARS;
+2019;E. faecium;vancomycin;4682;16,02;750;Neighbours;EARS;
+2020;E. faecium;vancomycin;6507;13,22;860;Neighbours;EARS;
+2021;E. faecium;vancomycin;;;;Neighbours;EARS;
+2011;E. faecium;vancomycin;6654;7,06;470;Europe;EARS;
+2012;E. faecium;vancomycin;7418;7,93;588;Europe;EARS;
+2013;E. faecium;vancomycin;8631;8,64;746;Europe;EARS;
+2014;E. faecium;vancomycin;8558;8,82;755;Europe;EARS;
+2015;E. faecium;vancomycin;9342;9,47;885;Europe;EARS;
+2016;E. faecium;vancomycin;12511;11,47;1435;Europe;EARS;
+2017;E. faecium;vancomycin;14178;14,23;2017;Europe;EARS;
+2018;E. faecium;vancomycin;15992;16,76;2680;Europe;EARS;
+2019;E. faecium;vancomycin;16549;17,23;2852;Europe;EARS;
+2020;E. faecium;vancomycin;18151;16,63;3019;Europe;EARS;
+2021;E. faecium;vancomycin;;;;Europe;EARS;
+2011;E. faecium;vancomycin;na;na;na;Belgium;AMR;All sample types
+2012;E. faecium;vancomycin;na;na;na;Belgium;AMR;All sample types
+2013;E. faecium;vancomycin;na;na;na;Belgium;AMR;All sample types
+2014;E. faecium;vancomycin;2226;4,22;94;Belgium;AMR;All sample types
+2015;E. faecium;vancomycin;3779;3,49;132;Belgium;AMR;All sample types
+2016;E. faecium;vancomycin;6194;3,57;221;Belgium;AMR;All sample types
+2017;E. faecium;vancomycin;6915;1,72;119;Belgium;AMR;All sample types
+2018;E. faecium;vancomycin;8102;2,32;188;Belgium;AMR;All sample types
+2019;E. faecium;vancomycin;8335;2;167;Belgium;AMR;All sample types
+2020;E. faecium;vancomycin;8167;1,7;139;Belgium;AMR;All sample types
+2021;E. faecium;vancomycin;8829;1,25;110;Belgium;AMR;All sample types
