@@ -1,0 +1,289 @@
+---
+title: "![](BELMAP-logo.png){width=6in}"
+subtitle: 4. Veterinary AMC
+date: "Last compiled on `r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: default
+  word_document:
+    reference_docx: "word-styles-reference-01.docx"
+css: style.css
+editor_options:
+  markdown:
+    wrap: 72
+header-includes: 
+- \usepackage{placeins}   
+- \usepackage{caption}
+- \captionsetup[figure]{labelformat=empty}
+- \captionsetup[table]{labelformat=empty}
+---
+
+```{r setup2, include=FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE
+)
+```
+
+```{r load_data_and_themes2, include=FALSE}
+
+library(tidyverse)
+library(patchwork)
+library(jpeg)
+library(scales)
+library(extrafont)
+library(remotes)
+library(extrafontdb)
+library(magrittr)
+library(AER)
+library(AICcmodavg)
+library(pscl)
+library(MASS)
+library(COMPoissonReg)
+library(performance)
+library(grid)
+library(ggtext)
+library(showtext)
+library(knitr)
+library(flextable)
+
+
+
+BELMAP_colourscheme <- c("#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c",
+                         "#fdbf6f","#ff7f00","#cab2d6")
+
+moiras_graph_theme<- function(..., base_size = 12){theme(
+   panel.background = element_blank(), #transparent panel bg
+  plot.background = element_blank(), #transparent plot bg
+  panel.grid.major.y =  element_line(colour = "#ccc6c4"), #grey y major gridlines
+  panel.grid.major.x =  element_blank(), #remove major gridlines
+  panel.grid.minor = element_blank(), #remove minor gridlines
+  # legend.background = element_rect(fill='#001f3f'), #transparent legend bg
+  legend.title = element_text(size = 16),
+  legend.text = element_text(size = 14),
+  #  legend.box.background = element_rect(fill='#001f3f'),
+  text = element_text( family = "Gill Sans MT"),
+  axis.text = element_text(size = 14),
+  #plot.background=element_blank(),#, , size = 10, family = "calibri"
+  axis.title = element_text(size = 16),
+  axis.ticks.x = element_blank(),
+  axis.text.x = element_text(angle = 90,vjust = 0.5, hjust = 0.5),
+  strip.background = element_blank(),
+  strip.text = element_text(size = 16),
+  legend.position = "top",
+  legend.direction = "horizontal"
+)}
+
+font_add("Gill Sans MT", "GIL_____.TTF")
+
+# adding icons to figures ------------------------------------
+
+# Important step to enable showtext font rendering!
+showtext_auto()
+
+font_add('fa-solid', '../font_awesome_font_files/fontawesome-free-6.4.0-desktop/otfs/Font Awesome 6 Free-Solid-900.otf')
+
+upward_arrow <- "<span style='font-family:fa-solid'>&#xf062;</span>"
+downward_arrow <- "<span style='font-family:fa-solid'>&#xf063;</span>" 
+equals <- "<span style='font-family:fa-solid'>&#xf52c;</span>"   #" = " 
+oscillate <- "<span style='font-family:fa-solid'>&#xf83e;</span>"   #" ~ "
+
+
+BELMAP_Indicator_colourscheme <- c("MDR"="#e31a1c",
+                                    "pan-S" = "#33a02c",
+                                    "MRSA" = "#1f78b4",
+                                    "ESBL producers" = "#a6cee3",
+                                    "Ciprofloxacin resistance" = "#b2df8a",
+                                    "Colistin resistance" = "#1f78b4")
+                                    #"#33a02c","#e31a1c","#fdbf6f","#ff7f00","#cab2d6", "#6a3d9a","#ffff99") #
+#-----------------------------------------------------------------------------------
+#2. Load data-----
+
+Vet_AMC_Data <- read.csv2("\\\\sciensano.be/fs/1220_BactDis_Scientist/Scientists/Moira/BELMAP 2023/Data/1.AMC/Veterinary_AMC/Veterinary_AMC_2023.csv",
+                         sep = ";", header = TRUE)%>%
+  mutate(Year_simple= Year - 2011) %>%
+  dplyr::select(-X)
+
+Vet_AMC_sales <-  Vet_AMC_Data %>%
+  filter(grepl("mg/kg biomass", Unit))
+  
+Vet_AMC_use <-  Vet_AMC_Data %>%
+  filter(grepl("Median BD100", Unit))
+
+
+#load graph data --------------------------------------------------
+
+graph_data_complete_use <- read.csv("3_vet_AMC_analysis_outcomes_use.csv", header = TRUE,
+                                sep = ",") %>%
+  mutate(label_icon = case_when(
+    icon == "upward_arrow" ~ upward_arrow,
+    icon == "downward_arrow" ~ downward_arrow,
+    icon == "equals" ~ equals,
+    icon == "oscilate" ~ oscillate
+  )) %>%
+  mutate(label = if_else(signif == "", label_icon, paste(label_icon,signif,sep=" ")))
+
+
+graph_data_complete <- read.csv("3_vet_AMC_analysis_outcomes.csv", header = TRUE,
+                                sep = ",") %>%
+  mutate(label_icon = case_when(
+    icon == "upward_arrow" ~ upward_arrow,
+    icon == "downward_arrow" ~ downward_arrow,
+    icon == "equals" ~ equals,
+    icon == "oscilate" ~ oscillate
+  )) %>%
+  mutate(label = if_else(signif == "", label_icon, paste(label_icon,signif,sep=" ")))
+
+
+
+```
+
+\newpage
+
+
+# 4. Veterinary antimicrobial consumption
+
+**Contents**
+
+4.1 [Methodology](#paragraph25)    
+4.2 [Antibiotic Sales](#paragraph26)    
+4.3 [Antibiotic Use](#paragraph27)    
+
+
+
+## 4.1 Methodology {#paragraph25}    
+Data on antimicrobial use (AMU) in veterinary medicine is based on both sales and usage. Commissioned by the Federal Agency for Medicines and Health Products (FAMHP), data on antibacterial sales at the level of the wholesaler-distributors and compound feed producers licensed to produce medicated feed have been collected since 2007. This data comprises all animal species (food producing and non-food producing).
+
+The use data originate from the secured online data collection system Sanitel-Med[[12]](https://www.fagg-afmps.be/nl/SANITEL-MED), which has been developed and maintained by the FAMHP. Since 27 February 2017, veterinarians are legally obliged (Royal Decree (RD) of 21.07.2016  ) to register therein all antibacterial products (pharmaceuticals as well as premixes) prescribed, administered and delivered on Belgian farms that keep pigs, broilers, laying hens or veal calves. Sanitel-Med is accessible as a web application or through automated data transfer using xml. Further details about the methodology of data collection and data analysis for both sales and use data are provided in the yearly Belgian Veterinary Surveillance of Antibacterial Consumption (BelVet-SAC) reports[[13]](https://belvetsac.ugent.be/).
+
+\FloatBarrier
+
+## 4.2 Antibiotic Sales {#paragraph26}   
+
+In veterinary medicine, 2011 is used as the reference year for sales data to quantify subsequent reductions in antibiotic use. Since 2011, total sales (mg/kg biomass) significantly decreased with a cumulative reduction of 58.2% in 2022 (Figure 7). While we observe a reduction (-5.7%) in the total biomass production in Belgium in 2022, veterinary antimicrobial sales decreased more dramatically (-28.8% decrease in total antibacterial sales by volume), representing a 24.5% decrease in sales expressed in mg/kg biomass, the largest drop in antibacterial sales since the start of the BelVet-SAC reporting. As for human AMC, targets for AMC in the veterinary sector are laid out in the NAP-AMR 2020-2024. In 2022,  the target reductions were achieved for premix, polymyxins, quinolones and 3rd and 4th generation cephalosporins sales, with good progress made towards the goal of a 65% reduction in total sales by 2024 (red lines in Figure 7).
+
+Sales of the critically important antibiotics quinolones and cephalosporines of 3rd and 4th generation had a cumulative reduction of 82.7% in 2022 compared to 2011 (a 1.1% increase compared to 2021, but remaining above the 75% reduction target), while the sales data of polymyxins showed a significant cumulative reduction of 88% in 2022 compared to 2011, reducing to 0.52 mg/kg (below the NAP-AMR 1 mg/kg target, Figure 7). Antibacterial premixes had a significant cumulative reduction of 83.5% in 2022 compared to 2011 (well above the 75% target set for the end of 2024).
+
+
+
+```{r 3.2_vet_ams, fig.dim=c(18,10), fig.cap="**Figure 7**. Evolution of antibacterial sales in the animal sector in the period 2011–2022, indicating total sales, sales of quinolones+ 3rd- and 4th-generation cephalosporins, sales of premixes and sales of polymyxins, expressed as mg/kg biomass. Source: BelVet-SAC reports."}
+
+(Sales_graph <- graph_data_complete %>%
+  filter(Measurement!="")%>%
+  group_by(Measurement) %>%
+  mutate(ycoord = min(Value)) %>%
+  ungroup()%>%
+  mutate(Measurement = fct_relevel(Measurement, c("Total sales (mg/kg biomass)",
+                                                  "Sales quinolones+ 3rd- and 4th-generation cephalosporins (mg/kg biomass)",
+                                                  "Sales premixes (mg/kg biomass)",                                                  
+                                                  "Sales polymyxins (mg/kg biomass)" )))%>%
+  ggplot()+
+  geom_bar(aes(x = Year, y = Value,fill = Measurement), stat="identity", position = "dodge")+
+  geom_hline(aes(yintercept=Target), colour = "red", linetype = "dashed", linewidth = 1.5)+
+  scale_fill_manual(values = BELMAP_colourscheme)+
+  scale_colour_manual(values = BELMAP_colourscheme)+
+  facet_wrap( ~ Measurement, nrow = 2, scales = "free_y", labeller = label_wrap_gen(width=55))+
+  # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+  scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+  geom_richtext(aes(x = 2023.5, y = ycoord, 
+                    label = label, 
+                    fill = Measurement), stat = "unique", 
+                colour= "white", show.legend = FALSE)+
+  labs(y= "Sales (mg/kg biomass)", x= "")&
+  moiras_graph_theme()+
+    theme(legend.position = "none",
+          strip.text = element_text(size = 14))) 
+
+
+
+```
+
+\FloatBarrier
+
+## 4.3 Antibiotic Use {#paragraph27}     
+
+Comparison of the Sanitel-Med use data with the sales data from 2022 indicates that over 70% of total sales (in tonnes) in all animals was covered by the use in the three species included in Sanitel-Med, with pig farms clearly consuming the largest mass of antibiotics (Table 1). Some antibiotic classes appear to be predominantly used in these three species, for example macrolides, polymyxins, tetracyclines and penicillins, while cephalosporins are mostly used in other species. Eighty-nine percent of quinolones sold are used in species included in Sanitel-Med, predominantly in poultry (more specifically in broilers).
+
+
+In 2021, a remarkably large difference between the sales and use data (over 50 tonnes, >10 tonnes more than in previous years) led to speculation that vets may be stockpiling antibiotics, and therefore a subsequent drop in sales may be observed in 2022. Indeed, the gap between sales and use observed in 2022 (32 tonnes) was much lower, representing the lowest level since the start of the Sanitel-Med data-collection. This is further supported by the observation that for the first time for some products, e.g. macrolides (more specifically, the lincomycin-spectinomycin antibiotics) and colistin, the volume used exceeded the sold quantities. Another phenomenon potentially contributing to these observations is the entry into force of Regulation EU 2019/6 in January 2022, permitting the purchasing of antimicrobials in other European countries or directly from the marketing authorisation holder for use in Belgium. It may be that subsequently more antibiotics have been bought outside Belgium, such that the reported Belgian antimicrobial sales data less accurately reflects the actual volume of antimicrobials purchased for use in Belgium.    
+
+\newpage
+
+```{r 3.3_vet_ams_table, fig.dim=c(18,10), fig.cap=""}
+
+belvetsac_table <- read.csv2("belvetsac_table.csv", header = T)
+
+names(belvetsac_table) <- c("Group","tonnes","tonne",   "% sales" ,"tonne ","% sales " ,"tonne  ", "% sales  ", " tonne " ,   "% sales   ")
+
+#print(belvetsac_table)
+
+#belvet_ft <- 
+
+flextable(belvetsac_table) %>%
+    add_header_row(values = c("Antimicrobial","Sales 2022", "Total Use","Pig", "Poultry", "Veal"), colwidths = c(1,1,2, 2,2,2) ) %>%
+  fontsize( size = 8, part = "all" ) %>%
+  set_caption("Table 1. Total tonnes per antibacterial class sold in 2022 (Sales 2022) and total tonnes used in pigs, poultry and veal calves (Use 2022). Next to the tonnes used by each species the proportion this covers of the sales data (% sales) is shown. Source: BelVet-SAC report") %>%
+  font(fontname = "Gill Sans MT", part = "all") %>%
+  align(align = "center", part = "all") %>%
+  autofit()
+
+#set_table_properties(belvet_ft, width = 1.5, layout = "autofit")
+
+
+```
+
+\newpage
+
+In the veterinary sector, antimicrobial use is expressed per production sector using the unit BD~100~. This represents the number of treatment days (with antibiotics) out of 100 days present at the farm, thus signifying the percentage of time an animal is treated with antibiotics. At the sector level, between 2021 and 2022, and considering all antibiotics, the BD~100~ decreased by -28,2% for pigs and -9,8% for veal calves; it however increased by +11% for poultry. This contributes to total reductions of -42,7% for pigs, -40,7% for poultry and -43,9% for veal calves over the past five years.
+
+
+The distribution of the use in each animal category is further studied based on the yearly-average BD~100~-values of the farms in the benchmark reference population per animal category (excluding zero-use farms). These distributions are currently all skewed with a long tail of high-using farms. In Figure 8  , the evolution between 2018 and 2022 of the median BD~100~ from each animal category distribution is shown. In the veal calf and porcine fattener sectors, the median BD~100~ consistently reduced year–on–year throughout the study period, while in broilers we observed a significant decrease between 2020-2021 followed by a partial rebound between 2021 and 2022. The veal calf sector displays the most significant reductions in BD~100~ (representing on average two weeks fewer of antimicrobial treatment per Belgian calf), however, this remains the sector with the highest antibiotic use, closely followed by weaned piglets.
+  
+
+
+```{r 3.4_vet_am_use, fig.dim=c(18,8), fig.cap="**Figure 8.** Evolution of antibacterial use, expressed as treatment days per 100 production days (BD~100~), by production category in the porcine, poultry and veal calf sectors in the period 2018–2022. Source: BelVet-SAC reports."}
+
+(use_graph <- graph_data_complete_use %>%
+    group_by(Measurement) %>%
+    filter(!Measurement=="") %>%
+    mutate(ycoord = min(Value)) %>%
+    ungroup()%>%
+    # mutate(Measurement1 = case_when(
+    #   Measurement == "Breeding pigs" ~ "A) Breeding pigs",
+    #   Measurement == "Sucklers" ~ "B) Sucklers",
+    #   Measurement == "Weaners" ~ "C) Weaners",
+    #   Measurement == "Fatteners" ~ "D) Fatteners",
+    #   Measurement == "Laying hens" ~ "E) Laying hens",
+    #   Measurement == "Broilers" ~ "F) Broilers",
+    #   Measurement == "Veal calves" ~ "G) Veal calves"
+    # )) %>%
+    mutate(Measurement = fct_relevel(Measurement, c("Breeding pigs", "Sucklers",
+                                                    "Weaners","Fatteners",
+                                                    "Laying hens",  "Broilers",                                               
+                                                    "Veal calves" )))%>%
+    
+    ggplot()+
+    geom_bar(aes(x = Year, y = Value,fill = Measurement), stat="identity", position = "dodge")+
+    scale_fill_manual(values = BELMAP_colourscheme)+
+    scale_colour_manual(values = BELMAP_colourscheme)+
+    facet_wrap( ~ Measurement, nrow = 1)+   #, scales = "free_y"
+    # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2017,2024), breaks = seq(2018,2022,1))+
+    geom_richtext(aes(x = 2023.5, y = ycoord, 
+                      label = label, 
+                      fill = Measurement), stat = "unique", 
+                  colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+    #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(y= "Antimicrobial Use - BD100", x= "")&
+    moiras_graph_theme()+
+    theme(legend.position = "none")) 
+
+```
+
+\FloatBarrier
+
+\newpage
+
+    

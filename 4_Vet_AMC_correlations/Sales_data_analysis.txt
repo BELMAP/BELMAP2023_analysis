@@ -1,0 +1,202 @@
+[1] "Analysis of Veterinary Sales data"
+[1] "Analysis for : Total sales (mg/kg biomass)"
+[1] "Analysis for : Total sales (mg/kg biomass)"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_sales$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_sales$Value
+W = 0.96078, p-value = 0.795
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_sales$Year_simple and dataset_sales$Value
+t = -17.322, df = 10, p-value = 8.707e-09
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.9955721 -0.9412315
+sample estimates:
+       cor 
+-0.9837413 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_sales$Year_simple and dataset_sales$Value
+T = 2, p-value = 3.215e-07
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+       tau 
+-0.9393939 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_sales$Year_simple and dataset_sales$Value
+S = 568, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+-0.986014 
+
+[1] "Analysis for : Sales fluoro(quinolones)+ 3rd- and 4th-generation cephalosporins (mg/kg biomass)"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_sales$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_sales$Value
+W = 0.82248, p-value = 0.01707
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_sales$Year_simple and dataset_sales$Value
+t = -5.6225, df = 10, p-value = 0.0002207
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.9635314 -0.5956520
+sample estimates:
+       cor 
+-0.8716007 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_sales$Year_simple and dataset_sales$Value
+z = -2.8181, p-value = 0.004831
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+       tau 
+-0.6259724 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_sales$Year_simple and dataset_sales$Value
+S = 523.42, p-value = 0.0008314
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+       rho 
+-0.8301239 
+
+[1] "Analysis for : Sales premixes (mg/kg biomass)"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_sales$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_sales$Value
+W = 0.8316, p-value = 0.02192
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_sales$Year_simple and dataset_sales$Value
+t = -9.9142, df = 10, p-value = 1.72e-06
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.9869727 -0.8357825
+sample estimates:
+       cor 
+-0.9527101 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_sales$Year_simple and dataset_sales$Value
+z = -4.3303, p-value = 1.489e-05
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+       tau 
+-0.9618601 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_sales$Year_simple and dataset_sales$Value
+S = 569.5, p-value = 3.992e-10
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+-0.991245 
+
+[1] "Analysis for : Sales polymyxins (mg/kg biomass)"
+[1] "Testing Normality of year"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_sales$Year_simple
+W = 0.9669, p-value = 0.8757
+
+[1] "Testing Normality of Values"
+
+	Shapiro-Wilk normality test
+
+data:  dataset_sales$Value
+W = 0.90368, p-value = 0.1769
+
+[1] "#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.\n"
+
+	Pearson's product-moment correlation
+
+data:  dataset_sales$Year_simple and dataset_sales$Value
+t = -9.3523, df = 10, p-value = 2.926e-06
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.9854565 -0.8182788
+sample estimates:
+       cor 
+-0.9473118 
+
+[1] "#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.\n"
+
+	Kendall's rank correlation tau
+
+data:  dataset_sales$Year_simple and dataset_sales$Value
+T = 1, p-value = 5.01e-08
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+      tau 
+-0.969697 
+
+[1] "#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.\n"
+
+	Spearman's rank correlation rho
+
+data:  dataset_sales$Year_simple and dataset_sales$Value
+S = 570, p-value < 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+-0.993007 
+
