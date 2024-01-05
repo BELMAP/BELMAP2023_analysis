@@ -1,0 +1,1249 @@
+---
+output:
+  pdf_document: 
+      latex_engine: lualatex
+  word_document:
+    reference_docx: "word-styles-reference-01.docx"
+  html_document:
+    df_print: paged
+css: style.css
+editor_options:
+  markdown:
+    wrap: 72
+header-includes:
+- \usepackage{placeins}
+- \usepackage{caption}
+- \captionsetup[figure]{labelformat=empty}
+- \captionsetup[table]{labelformat=empty}
+- \usepackage{fontspec}
+- \setmainfont{Gill Sans MT}
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[LE,RO]{BELMAP2023|\thepage}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE
+)
+```
+
+```{r load_data_and_themes, include=FALSE}
+
+library(tidyverse)
+library(patchwork)
+library(jpeg)
+library(scales)
+library(extrafont)
+library(remotes)
+library(extrafontdb)
+library(magrittr)
+library(AER)
+library(AICcmodavg)
+library(pscl)
+library(MASS)
+library(COMPoissonReg)
+library(performance)
+library(grid)
+library(ggtext)
+library(showtext)
+library(flextable)
+library(ftExtra)
+
+
+BELMAP_colourscheme <- c("#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c",
+                         "#fdbf6f","#ff7f00","#cab2d6")
+
+moiras_graph_theme<- function(..., base_size = 12){theme(
+   panel.background = element_blank(), #transparent panel bg
+  plot.background = element_blank(), #transparent plot bg
+  panel.grid.major.y =  element_line(colour = "#ccc6c4"), #grey y major gridlines
+  panel.grid.major.x =  element_blank(), #remove major gridlines
+  panel.grid.minor = element_blank(), #remove minor gridlines
+  # legend.background = element_rect(fill='#001f3f'), #transparent legend bg
+  legend.title = element_text(size = 20),
+  legend.text = element_text(size = 18),
+  #  legend.box.background = element_rect(fill='#001f3f'),
+  text = element_text( family = "Gill Sans MT"),
+  axis.text = element_text(size = 18),
+  #plot.background=element_blank(),#, , size = 10, family = "calibri"
+  axis.title = element_text(size = 20),
+  axis.ticks.x = element_blank(),
+  axis.text.x = element_text(angle = 90,vjust = 0.5, hjust = 0.5),
+  strip.background = element_blank(),
+  strip.text = element_text(size = 20),
+  legend.position = "top",
+  legend.direction = "horizontal",
+  title = element_text(size = 22)
+)}
+
+ font_add("Gill Sans MT", "GIL_____.TTF")
+
+# adding icons to figures ------------------------------------
+
+# Important step to enable showtext font rendering!
+showtext_auto()
+
+font_add('fa-solid', '../font_awesome_font_files/fontawesome-free-6.4.0-desktop/otfs/Font Awesome 6 Free-Solid-900.otf')
+
+upward_arrow <- "<span style='font-family:fa-solid'>&#xf062;</span>"
+downward_arrow <- "<span style='font-family:fa-solid'>&#xf063;</span>" 
+equals <- "<span style='font-family:fa-solid'>&#xf52c;</span>"   #" = " 
+oscillate <- "<span style='font-family:fa-solid'>&#xf83e;</span>"   #" ~ "
+
+
+BELMAP_location_colourscheme <- c("Belgium"="#fc8d59",
+                                  "Neighbours" = "#99d594",
+                                  "Hospital Lab"="#fc8d59",
+                                  "Private lab" = "#99d594",
+                                  "Europe" = "#3288bd")
+
+BELMAP_Indicator_colourscheme <- c("MDR"="#e31a1c",
+                                    "pan-S" = "#33a02c",
+                                    "MRSA" = "#1f78b4",
+                                    "ESBL producers" = "#a6cee3",
+                                    "Ciprofloxacin resistance" = "#b2df8a",
+                                    "Colistin resistance" = "#1f78b4")
+
+BELMAP_Human_AntiB_colourscheme <- c("Glycopeptides" = "#33a02c",
+                                     "3rd and 4th generation\ncephalosporins" = "#1a1a1a",
+                                     "Fluoroquinolones" = "#fdbf6f",
+                                     "Polymixins" = "#1a1a1a",
+                                     "Piperacillin + inhibitor" = "#1f78b4",
+                                     "Linezolid" = "#ff7f00",
+                                     "Carbapenems" = "#a6cee3")
+
+#-----------------------------------------------------------------------------------
+#2. Load amc data-----
+Human_AMC_Data <- read_csv2("Data/1.AMC/Human_AMC/Human_AMC_2023.csv",
+                            na = c("", "NA", "-"),
+                            trim_ws = TRUE)%>%
+  mutate(Year_simple= Year - 2011)
+
+
+
+#load amc graph data --------------------------------------------------
+
+Hospital_proportions_graph_data <-read.csv("3_Human_AMC_analysis_outcomes.csv", header = TRUE, sep = ";")
+
+
+Community_DID <- Human_AMC_Data %>%
+  filter(Sector == "Ambulant",
+         Unit == "DDD/1000 inhabitants/day",
+         `ATC group` == "J01",
+         Region == "Belgium")
+
+# load vet amc data -----------------------------------
+
+Vet_AMC_Data <- read.csv2("Data/1.AMC/Veterinary_AMC/Veterinary_AMC_2023.csv",
+                         sep = ";", header = TRUE)%>%
+  mutate(Year_simple= Year - 2011) %>%
+  dplyr::select(-X)
+
+Vet_AMC_sales <-  Vet_AMC_Data %>%
+  filter(grepl("mg/kg biomass", Unit))
+  
+Vet_AMC_use <-  Vet_AMC_Data %>%
+  filter(grepl("Median BD100", Unit))
+
+
+graph_data_vet_complete_use <- read.csv("3_vet_AMC_analysis_outcomes_use.csv", header = TRUE,
+                                sep = ",") %>%
+  mutate(label_icon = case_when(
+    icon == "upward_arrow" ~ upward_arrow,
+    icon == "downward_arrow" ~ downward_arrow,
+    icon == "equals" ~ equals,
+    icon == "oscilate" ~ oscillate
+  )) %>%
+  mutate(label = if_else(signif == "", label_icon, paste(label_icon,signif,sep=" ")))
+
+
+graph_data_vet_complete <- read.csv("3_vet_AMC_analysis_outcomes.csv", header = TRUE,
+                                sep = ",") %>%
+  mutate(label_icon = case_when(
+    icon == "upward_arrow" ~ upward_arrow,
+    icon == "downward_arrow" ~ downward_arrow,
+    icon == "equals" ~ equals,
+    icon == "oscilate" ~ oscillate
+  )) %>%
+  mutate(label = if_else(signif == "", label_icon, paste(label_icon,signif,sep=" ")))
+
+# load Human AMR data -------------------------------
+
+graph_data_complete_human <- read_csv2("5_Human_AMR_data_and_GLM_predictions.csv") %>%
+  mutate(label_icon = case_when(
+    icon == "upward_arrow" ~ upward_arrow,
+    icon == "downward_arrow" ~ downward_arrow,
+    icon == "equals" ~ equals,
+    icon == "oscilate" ~ oscillate,
+    .default = ""
+  )) %>%
+  mutate(label = if_else((is.na(signif_level) | signif_level == ""), label_icon, paste(label_icon,signif_level,sep=" "))) %>%
+  mutate(Year=as.numeric(Year)) %>%
+  mutate(Surveillance = if_else(Surveillance == "AMR", "NSIH-AMR", Surveillance)) %>%
+  mutate(Matrix = if_else(Matrix == "Blood_CSF", "Blood or CSF", Matrix)) %>%
+  mutate(Antibiotic = if_else(grepl("Monoresistant|MDR|ESBL",Antibiotic), Antibiotic, paste(Antibiotic," Resistance", sep = ""))) %>%
+  mutate(Category = paste(Pathogen, Antibiotic, sep = "-"))
+
+unique(graph_data_complete_human$Category)
+
+# select primary and secondary 
+
+Primary <- c("K.pneumoniae-Carbapenem Resistance","E.coli-3GC Resistance",
+             "S. aureus-Methicillin Resistance")
+Secondary <- c("K.pneumoniae-AG, FQ and 3GC Resistance", "S. pneumoniae-Macrolide Resistance",
+               "S. pneumoniae-Penicillin Resistance", "E.coli-Colistin Resistance", 
+               "E.coli-Ciprofloxacin Resistance")
+
+selected <- c("E.coli-Colistin Resistance_Blood or CSF", "E.coli-3GC Resistance_Blood or CSF",
+              "E.coli-Ciprofloxacin Resistance_Urine", "K.pneumoniae-Carbapenem Resistance_Blood or CSF",
+              "K.pneumoniae-AG, FQ and 3GC Resistance_Blood or CSF", "S. aureus-Methicillin Resistance_Blood or CSF",
+              "S. pneumoniae-Penicillin Resistance_NRC_samples", "S. pneumoniae-Macrolide Resistance_NRC_samples")
+Human_indicators <- graph_data_complete_human %>%
+  mutate(Category2 = paste(Category,Matrix, sep = "_")) %>%
+  filter(Category2 %in% selected,
+         Region == "Belgium") %>%
+    mutate(Indicator = if_else(Category %in% Primary, "Primary Indicators", "Secondary Indicators"))
+
+# load food prod AMR data -----------------------------------
+graph_data_food_prod_complete <- read.csv("7_food_producing_data_and_GLM_predictions.csv") %>%
+  mutate(label_icon = case_when(
+  icon == "upward_arrow" ~ upward_arrow,
+  icon == "downward_arrow" ~ downward_arrow,
+  icon == "equals" ~ equals,
+  icon == "oscilate" ~ oscillate
+)) %>%
+  mutate(label = if_else(signif_level == "", label_icon, paste(label_icon,signif_level,sep=" ")))
+
+
+y_coords_oth <- graph_data_food_prod_complete %>%
+  mutate(Level_indicator = if_else(grepl("MDR|pan-S",Indicator), "Primary","Secondary")) %>%
+  filter(!grepl("MRSA",Pathogen))%>%
+  filter(Year == 2022) %>%
+  group_by(Host,Pathogen,Level_indicator)%>%
+  mutate(rank = rank(Percent_resistance_predict))%>%
+  ungroup() %>%
+  mutate(y_coord = case_when(
+    rank == 1 ~ 10,
+    rank == 2 ~ 30,
+    rank == 3 ~ 50
+  )) %>%
+  dplyr::select(Host,Pathogen,Indicator,y_coord)
+
+y_coords_mr <- graph_data_food_prod_complete %>%
+  mutate(Level_indicator = if_else(grepl("MDR|pan-S",Indicator), "Primary","Secondary")) %>%
+  filter(grepl("MRSA",Pathogen))%>%
+  filter(grepl("2020|2021|2022",Year)) %>%
+  filter(!is.na(Percent_resistance_predict))%>%
+  group_by(Host,Pathogen,Level_indicator)%>%
+  mutate(rank = rank(Percent_resistance_predict))%>%
+  ungroup() %>%
+  mutate(y_coord = case_when(
+    rank == 1 ~ 10,
+    rank == 2 ~ 30,
+    rank == 3 ~ 50
+  )) %>%
+dplyr::select(Host,Pathogen,Indicator,y_coord)
+
+
+y_coords<-rbind(y_coords_mr,y_coords_oth) 
+  
+
+graph_data_food_prod_complete_labels <- left_join(graph_data_food_prod_complete,y_coords, by = c("Host","Pathogen","Indicator"))
+
+
+
+
+
+```
+
+\FloatBarrier
+
+\newpage
+
+# Editorial {#paragraph00}
+
+Antimicrobial agents have revolutionized modern medicine, playing a
+vital role in the treatment of infectious diseases in both humans and
+animals. They facilitate essential therapies and medical procedures.
+However, in the 21st century, the continued use of antimicrobials faces
+two significant challenges. Firstly, the targeted microbes develop
+resistance to these drugs over time. Secondly, the traditional
+reimbursement models for antibiotic discovery and development are no
+longer economically sustainable. While there have been promising
+developments in addressing the latter challenge, it is evident that
+preserving the effectiveness of existing and potential future
+antimicrobial agents requires diligent efforts.
+
+This preservation effort involves careful monitoring of drug usage and
+resistance. It forms the foundation for establishing optimal empirical
+guidelines, guiding infection control programs, and devising and
+evaluating intervention strategies. In Belgium, comprehensive national
+monitoring programs exist for both tracking the consumption of
+antimicrobial agents (AMC) and the emergence of resistance (AMR) in
+bacteria from various sources, including humans, food-producing animals,
+and the food supply chain. Additionally, there are programs for
+monitoring antimicrobial residues in the environment. These diverse
+programs have distinct aims and primary objectives. Due to the
+fragmented nature of databases, stakeholders, and reports, it can be challenging to gain a clear overview of the trends in
+AMR and AMC across sectors in Belgium.
+
+Hence, one of the key actions defined in the National Action Plan for
+AMR (2021--2024) involves the creation of a 'One Health' report on AMC
+and AMR in Belgium. The first edition of this BELMAP report was
+published in 2021. It's important to note that the BELMAP report does
+not replace detailed sector-specific reporting. Interested readers are
+directed to the individual annual monitoring reports, with references
+provided in footnotes throughout the BELMAP report. The primary goal of
+BELMAP is to summarize the findings and trends from existing monitoring
+programs, identify potential gaps, and make recommendations for
+improving future monitoring.
+
+To achieve this, a cross-sectoral editorial board has formulated and
+updated "key indicators" for monitoring AMC and AMR. These indicators
+draw inspiration from those proposed by the European Centre for Disease
+Prevention and Control (ECDC), the European Food Safety Authority
+(EFSA), and the European Medicines Agency (EMA) in 2017. To better align with the national context and the One Health perspective of AMR they
+have been adapted accordingly within BELMAP.
+
+In this year's edition, BELMAP has been expanded to incorporate an
+analysis of AMC in both the human and veterinary sectors, using a
+standardized unit (mg/kg biomass), based on the methodology from the
+joint inter-agency antimicrobial consumption and resistance analysis
+(JIACRA) report. Consequently, we can now directly compare antimicrobial
+consumption in the human sector (comprising community and hospital
+settings) and the veterinary sector in Belgium, along with comparisons
+to European averages. This year's report also incorporates, for the
+first time, data on the use of antimicrobial agents in the agricultural sector for crops, seeds and forestry in
+Belgium. A final addition to this year's report is spotlighting of
+emerging resistant strains that pose particular concerns and research
+projects focused on innovating AMR and AMC monitoring in humans,
+animals, and the environment.
+
+This third edition of BELMAP presents data from 2022, a period marked by
+the world's recovery from the SARS-CoV-2 pandemic. This era had a
+profound impact on the prevalence of communicable diseases in society
+and, notably, on the landscape of AMC and AMR. It has driven a
+substantial shift toward genomics-based surveillance. A significant
+challenge in the years ahead is to harness this capability for the
+definitive transition to 'One Health' AMR surveillance, encompassing
+humans, animals, and the environment.
+
+We hope you find this report both informative and enlightening.
+
+\FloatBarrier
+
+\newpage
+
+# 1. Executive Summary {#paragraph001}
+
+BELMAP makes use of **key outcome indicators** to summarize trends in
+antimicrobial consumption (AMC) and antimicrobial resistance (AMR) in
+humans and food-producing animals in Belgium. The selected indicators,
+slightly modified from those recommended by [ECDC, EFSA and EMA in
+2017](https://www.efsa.europa.eu/en/efsajournal/pub/5017), are divided
+into primary and secondary indicators.
+
+Primary indicators broadly reflect the situation concerning AMC and AMR.
+They do not cover all aspects of AMC and AMR epidemiology and remain
+arbitrary, but can be used to provide a **general assessment of the
+overall situation**. Secondary indicators are designed to provide
+information on more specific issues that are also considered important
+for public health, but have a more restricted scope, or to encompass
+areas that are not fully covered by the primary indicators. The level of
+statistical significance of up-and downward trends are indicated with
+asterisks, and national targets are depicted with red dashed lines (see
+Chapter 2 for more details on methods on figures). In addition to these
+indicators presented in the executive summary, the BELMAP report brings
+together further AMC and AMR surveillance data to complete the overview
+of the Belgian situation.
+
+\FloatBarrier
+
+### 1.1 Antimicrobial Consumption {#subparagraph001}
+
+#### Human Sector
+
+In 2022, the consumption of systemic (reimbursed) antibiotics (J01) in
+the community experienced a significant increase compared to 2021, with
+a rise of+18,8%. This follows a notable reduction in AMC during the
+Covid-19 pandemic in 2020 (-22.9% compared to 2019), with a marginal
+increase seen between 2020 and 2021 (+4.58%). Changes in behaviour and
+the pattern of care during the pandemic may have contributed to these
+significant reductions. Considering the last decade, we observe a 15.8%
+reduction in consumption of systemic antibiotics (J01) in the community
+(-3.56 Defined Daily Doses per 1000 inhabitants (DID) from 2013 to
+2022).
+
+```{r 1.1_humanamc1, fig.dim=c(18,8), fig.cap=""}
+
+Community_DID_graph <- Community_DID %>%
+    mutate(label = case_when(
+      Region == "Belgium" ~ paste(downward_arrow,"***",sep=" "),
+      Region == "Europe" ~ equals)) %>%
+    mutate(NAP_Target = 11.86)%>%
+    mutate(ycoord = case_when(
+      Region == "Belgium" ~ 20,
+      Region == "Europe" ~ 15)) %>%
+    ggplot()+
+    geom_bar(aes(x= Year, y = Value),position = "dodge", stat = "identity", fill = "#3288bd") +
+    geom_hline(aes(yintercept=NAP_Target), colour = "red", linetype = "dashed", linewidth = 1.5)+
+    scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+    geom_richtext(aes(x = 2023.5, y = ycoord, 
+                      label = label), 
+                      fill = "#3288bd", stat = "unique", 
+                  colour= "white", show.legend = FALSE, size = 6)+
+    labs(y= "DDD/1000 inhabitants/day", title = "Primary Indicator - Community", x="")&
+    moiras_graph_theme()
+
+
+Community_ratio_broad_narrow <- Human_AMC_Data %>%
+  filter(Sector == "Ambulant",
+         Measurement == "Ratio of broad spectrum antibiotics",
+         Region == "Belgium")
+
+
+Community_ratio_broad_narrow_graph <- Community_ratio_broad_narrow %>%
+    mutate(label = case_when(
+      Region == "Belgium" ~ paste(downward_arrow,"***",sep=" "),
+      Region == "Europe" ~ paste(upward_arrow,"***",sep=" "))) %>%
+    #mutate(NAP_Target = 11.86)%>%
+    mutate(ycoord = case_when(
+      Region == "Belgium" ~ 2,
+      Region == "Europe" ~ 2.5)) %>%
+    ggplot()+
+    geom_bar(aes(x= Year, y = Value),fill = "#3288bd", position = "dodge", stat = "identity") +
+    # geom_hline(aes(yintercept=NAP_Target), colour = "red", linetype = "dashed")+
+    scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+    geom_richtext(aes(x = 2023.5, y = ycoord, 
+                      label = label), 
+                   fill = "#3288bd", stat = "unique", 
+                  colour= "white", show.legend = FALSE, size = 6)+
+    labs(y= "Ratio of Broad : Narrow spectrum\nantimicrobials consumption", title = "Secondary Indicator - Community", x="")&
+    moiras_graph_theme()
+
+
+Community_DID_graph + Community_ratio_broad_narrow_graph  & theme(legend.position = "none")
+
+
+```
+
+Worryingly, the ratio of amoxicillin to amoxicillin/clavulanic acid has
+slightly reduced in the last decade (from 54:46 in 2013 to 51:49 in
+2022). This indicator remains at the pre-pandemic level (51:49 in 2019)
+and is still far from the Belgian Antibiotic Policy Coordination
+Committee (BAPCOC) target of 80:20. Likewise, 2022 saw the first
+increase in the consumption of fluoroquinolones (1.31 DID including
+non-reimbursable, +12.6% from 2021) since the introduction of stricter
+reimbursement criteria in 2018, with the proportional use of
+fluoroquinolones (6.6% of the total J01 consumption in 2021, taking
+non-reimbursed consumption into account) still far from the 5% target
+set for 2018. On the positive side, the overall ratio of broad-to-narrow
+spectrum antibiotics declined significantly (-24.1% from 2013 to 2022).
+
+In the Belgian acute care hospitals (data 2012--2021), around 522
+Defined Daily Doses (DDDs) per 1000 patient days are recorded, and this
+consumption increased (+7.4%) over the last decade. Large differences
+exist between antimicrobial consumption in acute, categorical and
+psychiatric hospitals, also when compared per type of hospital (primary,
+secondary, tertiary). The proportion of broad-spectrum use in Belgian
+hospitals (30.1% in 2022) remained stable over time. Also for this
+parameter, a high variation between hospitals has been reported in
+BeH-SAC.
+
+```{r 1.2_humanamc2, fig.dim=c(18,8), fig.cap=""}
+
+
+Hospital_DDD_patient_days <- Human_AMC_Data %>%
+  filter(grepl("Hospitals",Sector),
+         Unit == "DDD/1000 patients/day")
+
+Hospital_DDD_patient_days_graph <- Hospital_DDD_patient_days %>%
+    mutate(label = case_when(
+      Sector == "Acute Hospitals" ~ paste(upward_arrow,"***",sep=" "),
+      Sector == "Chronic Hospitals" ~ equals,
+      Sector == "Psychiatric Hospitals" ~ oscillate
+    )) %>%
+    #mutate(NAP_Target = 11.86)%>%
+    mutate(ycoord = case_when(
+      Sector == "Acute Hospitals" ~ 250,
+      Sector == "Chronic Hospitals" ~ 150,
+      Sector == "Psychiatric Hospitals" ~ 50)) %>%
+    ggplot()+
+    geom_bar(aes(x= Year, y = Value, fill = Sector),position = "dodge", stat = "identity") +
+    # geom_hline(aes(yintercept=NAP_Target), colour = "red", linetype = "dashed")+
+    scale_fill_manual(values = BELMAP_colourscheme)+
+    scale_colour_manual(values = BELMAP_colourscheme)+
+    scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+    geom_richtext(aes(x = 2023.5, y = ycoord, 
+                      label = label, 
+                      fill = Sector), stat = "unique", 
+                  colour= "white", show.legend = FALSE, size = 6)+
+    labs(y= "Median DDD per 1000 patient days", title = "Primary Indicator - Hospital", x="")&
+    moiras_graph_theme() #&
+   # theme(#legend.position = "none"),
+          # text = element_text(size = 9),
+          # title = element_text(size = 14))
+
+
+Hospital_ratio_broad_narrow <- Human_AMC_Data %>%
+  filter(Sector == "Hospital",
+         grepl("proportion of glycopeptides, third- and fourth-generation cephalosporins",Measurement),
+         Region == "Belgium")
+
+Hospital_ratio_broad_narrow_graph <- Hospital_ratio_broad_narrow %>%
+    mutate(label = case_when(
+      Region == "Belgium" ~ equals,
+      Region == "Europe" ~ paste(upward_arrow,"*",sep=" "))) %>%
+    #mutate(NAP_Target = 11.86)%>%
+    mutate(ycoord = case_when(
+      Region == "Belgium" ~ 0.3,
+      Region == "Europe" ~ 0.4)) %>%
+    ggplot()+
+    geom_bar(aes(x= Year, y = Value, fill = Region),position = "dodge", stat = "identity") +
+    # geom_hline(aes(yintercept=NAP_Target), colour = "red", linetype = "dashed")+
+    scale_fill_manual(values = BELMAP_location_colourscheme)+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+    geom_richtext(aes(x = 2023.5, y = ycoord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                  colour= "white", show.legend = FALSE, size = 6)+
+    labs(y= "Proportion of broad antibitiocs of total consumption", title = "Secondary Indicator - Hospital", x="") &
+    moiras_graph_theme() &
+    theme(legend.position = "none") #,
+          # text = element_text(size = 9),
+          # title = element_text(size = 14))
+
+
+
+Hospital_DDD_patient_days_graph + Hospital_ratio_broad_narrow_graph
+
+
+```
+
+Looking at the proportions of the total hospital AMC which are
+broad-spectrum antibiotics, a very significant decrease is observed in
+the proportion of the use of fluoroquinolones (-28.6% between 2013 and
+2022). In contrast, the proportion of piperacillin in combination with
+tazobactam (+44.3%) and glycopeptides (+13%) of the total hospital AMC
+increased significantly over time.
+
+```{r 1.3_humanamc3, fig.dim=c(18,8), fig.cap=""}
+
+(Hospital_proportions_graph <- Hospital_proportions_graph_data %>%
+    mutate(ycoord = 0.08,
+           Antibiotic = case_when(
+             grepl("glycopeptides",Measurement) ~ "Glycopeptides",
+             grepl("CSP",Measurement) ~ "3rd and 4th gen\ncephalosporins",
+             grepl("FQ",Measurement) ~ "Fluoroquinolones",
+             grepl("Polymixins",Measurement) ~ "Polymixins",
+             grepl("piperacillin",Measurement) ~ "Piperacillin\n+ inhibitor",
+             grepl("Linezolid",Measurement) ~ "Linezolid",
+             grepl("carbapenems",Measurement) ~ "Carbapenems"
+           )) %>%
+    mutate(label_icon = case_when(
+      icon == "upward_arrow" ~ upward_arrow,
+      icon == "downward_arrow" ~ downward_arrow,
+      icon == "equals" ~ equals,
+      icon == "oscilate" ~ oscillate,
+      .default = ""
+    )) %>%
+    mutate(label = if_else((is.na(signif) | signif == ""), label_icon, paste(label_icon,signif,sep=" "))) %>%
+    ggplot()+
+    geom_bar(aes(x= Year, y = Value),position = "dodge", stat = "identity", fill = "#3288bd") +
+    # geom_hline(aes(yintercept=NAP_Target), colour = "red", linetype = "dashed")+
+    facet_wrap(~Antibiotic, nrow=1) +
+    #  scale_fill_manual(values = BELMAP_Human_AntiB_colourscheme )+
+    #  scale_colour_manual(values = BELMAP_Human_AntiB_colourscheme )+
+    scale_y_continuous(limits = c(0,0.15), breaks = seq(0,0.15,0.075))+
+    scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,2))+
+    geom_richtext(aes(x = 2023.5, y = ycoord,
+                      label = label), stat = "unique", fill = "#3288bd",
+                  colour= "white", show.legend = FALSE, size = 3)+
+    labs(y= "Proportion of hospital antimicrobial consumption", x="")&
+    moiras_graph_theme()
+)
+
+
+```
+
+\FloatBarrier
+
+#### Veterinary Sector
+
+The total sales of antimicrobials in the veterinary sector, measured in
+mg/kg biomass, has markedly decreased, demonstrating a cumulative
+reduction of 58.2% between 2011 and 2022. The decline is even more
+evident in the secondary indicators (sales specified per antibiotic
+group), as antibiotics classified by the WHO as "critically important"
+for human medicine (fluoroquinolones and cephalosporins of 3^rd^ and 4th
+generation) had a cumulative reduction of 82.7% in 2022 compared to
+2011. A similar reduction (88%) was achieved for polymyxins, while
+antibacterial premixes had a cumulative reduction of 83.5% in the same
+period.
+
+```{r 1.4_vetamc1, fig.dim=c(18,14), fig.cap=""}
+
+# (Sales_graph <- graph_data_vet_complete %>%
+#   filter(Measurement!="")%>%
+#   group_by(Measurement) %>%
+#   mutate(ycoord = min(Value)) %>%
+#   ungroup()%>%
+#   mutate(Measurement = fct_relevel(Measurement, c("Total sales (mg/kg biomass)",
+#                                                   "Sales quinolones+ 3rd- and 4th-generation cephalosporins (mg/kg biomass)",
+#                                                   "Sales premixes (mg/kg biomass)",                                                  
+#                                                   "Sales polymyxins (mg/kg biomass)" )))%>%
+#   ggplot()+
+#   geom_bar(aes(x = Year, y = Value,fill = Measurement), stat="identity", position = "dodge")+
+#   geom_hline(aes(yintercept=Target), colour = "red", linetype = "dashed", linewidth = 1.5)+
+#   scale_fill_manual(values = BELMAP_colourscheme)+
+#   scale_colour_manual(values = BELMAP_colourscheme)+
+#   facet_wrap( ~ Measurement, nrow = 2, scales = "free_y", labeller = label_wrap_gen(width=55))+
+#   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+#   scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+#   geom_richtext(aes(x = 2023.5, y = ycoord, 
+#                     label = label, 
+#                     fill = Measurement), stat = "unique", 
+#                 colour= "white", show.legend = FALSE)+
+#   labs(y= "Sales (mg/kg biomass)")&
+#   moiras_graph_theme()+
+#     theme(legend.position = "none",
+#           strip.text = element_text(size = 14))) 
+
+    vet_sales_prim <- graph_data_vet_complete %>%
+      mutate(Indicator = if_else(grepl("Total", Measurement), "Primary Indicator", "Secondary Indicator")) %>%
+      filter(Indicator == "Primary Indicator") %>%
+      filter(Measurement!="")%>%
+      group_by(Measurement) %>%
+      mutate(ycoord = min(Value)) %>%
+      ungroup()%>%
+    #  mutate(Indicator = if_else(grepl("Total", Measurement), "Primary Indicator", "Seconday Indicator")) %>%
+      mutate(Measurement = fct_relevel(Measurement, c("Total sales (mg/kg biomass)",
+                                                      "Sales quinolones+ 3rd- and 4th-generation cephalosporins (mg/kg biomass)",
+                                                      "Sales premixes (mg/kg biomass)",                                                  
+                                                      "Sales polymyxins (mg/kg biomass)" )))%>%
+      ggplot()+
+      geom_bar(aes(x = Year, y = Value), fill = "#3288bd", stat="identity", position = "dodge")+
+      geom_hline(aes(yintercept=Target), colour = "red", linetype = "dashed", linewidth = 1.5)+
+      # scale_fill_manual(values = Lets_Talk_colours)+
+      # scale_colour_manual(values = Lets_Talk_colours)+
+      facet_grid(Indicator~Measurement,  scales = "free_y", labeller = label_wrap_gen())+
+      # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+      scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+      geom_richtext(aes(x = 2023.5, y = ycoord, 
+                        label = label), 
+                        fill = "#3288bd", stat = "unique", 
+                    colour= "white", show.legend = FALSE)+
+      labs(y= "Sales (mg/kg biomass)", x = "")&
+      moiras_graph_theme()+
+      theme(legend.position = "none")#,
+            # strip.text = element_text(size = 14),
+            # title = element_text(size = 14))
+    
+    vet_sales_sec <- graph_data_vet_complete %>%
+      mutate(Indicator = if_else(grepl("Total", Measurement), "Primary Indicator", "Secondary Indicator")) %>%
+      filter(Indicator == "Secondary Indicator") %>%
+      filter(Measurement!="")%>%
+      group_by(Measurement) %>%
+      mutate(ycoord = min(Value)) %>%
+      ungroup()%>%
+      #  mutate(Indicator = if_else(grepl("Total", Measurement), "Primary Indicator", "Seconday Indicator")) %>%
+      mutate(Measurement = fct_relevel(Measurement, c("Total sales (mg/kg biomass)",
+                                                      "Sales quinolones+ 3rd- and 4th-generation cephalosporins (mg/kg biomass)",
+                                                      "Sales premixes (mg/kg biomass)",                                                  
+                                                      "Sales polymyxins (mg/kg biomass)" )))%>%
+      ggplot()+
+      geom_bar(aes(x = Year, y = Value), fill = "#3288bd", stat="identity", position = "dodge")+
+      geom_hline(aes(yintercept=Target), colour = "red", linetype = "dashed", linewidth = 1.5)+
+      # scale_fill_manual(values = Lets_Talk_colours)+
+      # scale_colour_manual(values = Lets_Talk_colours)+
+      facet_grid(Indicator~Measurement,  scales = "free_y", labeller = label_wrap_gen())+
+      # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+      scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+      geom_richtext(aes(x = 2023.5, y = ycoord, 
+                        label = label), 
+                    fill = "#3288bd", stat = "unique", 
+                    colour= "white", show.legend = FALSE)+
+      labs(y= "Sales (mg/kg biomass)", x = "")&
+      moiras_graph_theme()+
+      theme(legend.position = "none")#,
+            # strip.text = element_text(size = 14),
+            # title = element_text(size = 14))
+    
+    (vet_sales_prim+plot_spacer())/vet_sales_sec
+
+
+```
+
+In Belgium, data monitoring the use of antibiotics per sector and animal
+category, collected at farm level, has been available since 2018 for
+pigs, broilers, laying hens and veal calves. This data is expressed as
+BD~100~, that is the percentage of time an animal is treated with
+antibiotics (percentage behandeldagen, BD). For multiple categories
+(veal calves, suckling and fattening pigs), the median BD~100~ has
+steadily reduced year-on-year during this period, with the greatest
+reductions observed in veal calves. However, this remains the sector
+with the highest antibiotic use, closely followed by weaner piglets.
+
+```{r 1.5_vetamc2, fig.dim=c(18,10), fig.cap=""}
+
+(use_graph <- graph_data_vet_complete_use %>%
+    group_by(Measurement) %>%
+    filter(!Measurement=="") %>%
+    mutate(ycoord = min(Value)) %>%
+    ungroup()%>%
+    # mutate(Measurement1 = case_when(
+    #   Measurement == "Breeding pigs" ~ "A) Breeding pigs",
+    #   Measurement == "Sucklers" ~ "B) Sucklers",
+    #   Measurement == "Weaners" ~ "C) Weaners",
+    #   Measurement == "Fatteners" ~ "D) Fatteners",
+    #   Measurement == "Laying hens" ~ "E) Laying hens",
+    #   Measurement == "Broilers" ~ "F) Broilers",
+    #   Measurement == "Veal calves" ~ "G) Veal calves"
+    # )) %>%
+    mutate(Measurement = fct_relevel(Measurement, c("Breeding pigs", "Sucklers",
+                                                    "Weaners","Fatteners",
+                                                    "Laying hens",  "Broilers",                                               
+                                                    "Veal calves" )))%>%
+    
+    ggplot()+
+    geom_bar(aes(x = Year, y = Value), fill = "#3288bd", stat="identity", position = "dodge")+
+    scale_fill_manual(values = BELMAP_colourscheme)+
+    scale_colour_manual(values = BELMAP_colourscheme)+
+    facet_wrap( ~ Measurement, nrow = 1)+   #, scales = "free_y"
+    # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2017,2024), breaks = seq(2018,2022,1))+
+    geom_richtext(aes(x = 2023.5, y = ycoord, 
+                      label = label),fill = "#3288bd", stat = "unique", 
+                  colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+    #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(y= "Antimicrobial Use - BD100", x="")&
+    moiras_graph_theme()+
+    theme(legend.position = "none")) 
+
+
+
+```
+
+\FloatBarrier
+
+### 1.2 Antimicrobial Resistance {#subparagraph002}
+
+#### Among Human Pathogens
+
+BELMAP proposes slight modifications to the key EMA/ECDC indicators for
+AMR in human pathogens, according to their clinical importance within
+Belgium. The prevalence of carbapenem-resistant *Klebsiella pneumoniae*
+was prioritized as a primary indicator, and ciprofloxacin resistance in
+*Salmonella* and *Campylobacter* spp. were removed from the secondary
+indicator list. Data are collected retrospectively (year -1), thus the
+latest recording year is 2021, and aggregated at the hospital level.
+
+In the last decade in Belgium, the proportion of methicillin-resistant
+*Staphylococcus aureus* (MRSA) isolates has steadily decreased. This
+contrasted the growing proportion of invasive *Escherichia coli*
+isolates resistant to 3^rd^ generation cephalosporins observed between
+2011--2014, but this has subsequently remained stable around 10%.
+Throughout the study period, the prevalence of carbapenem-resistant *K.
+pneumoniae* increased significantly, reaching 1.4% in 2021. The
+proportion of multi-drug resistant (MDR) *K. pneumoniae* strains,
+resistant to 3^rd^ generation cephalosporins, aminoglycosides and
+fluoroquinolones, increased across the 2014--2020 period from 7.9% to
+10.4%, decreasing to 7.6% in 2021, which remains below the (declining)
+European mean. Colistin resistance in invasive *E. coli*, added to the
+key indicators to account for the use of polymyxins in both humans and
+animals, remains close to 1%.
+
+```{r 1.6_humanamr1, fig.dim=c(18,14), fig.cap=""}
+
+# Human_Indicators_graph_prim <- Human_indicators %>%
+#   mutate(y_coord = 30) %>%
+#   filter(Indicator == "Primary") %>%
+#   ggplot(aes(label = label_icon))+
+#   geom_bar(aes(x=Year, y = as.numeric(Percent_resistant)),fill = "#3288bd", stat="identity", position = "dodge")+
+#   geom_ribbon(aes(x=Year,  ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25, fill = "#3288bd")+
+#   geom_smooth(aes(x=Year,  y = Percent_resistant_predict),stat = "identity", colour = "#3288bd")+
+#   facet_wrap(~Category, nrow = 1)+
+#   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+#   scale_x_continuous(limits = c(2011,2023), breaks = seq(2012,2022,2))+
+#   scale_y_continuous(limits = c(-5,100), breaks = seq(0,100,50))+
+#   geom_richtext(aes(x = 2022.5, y = y_coord,
+#                     label = label),
+#                 fill = "#3288bd", stat = "unique",
+#                 colour= "white", show.legend = FALSE)+
+#   labs(x="", y= "% Resistance", title = "Primary Indicators")&
+#   moiras_graph_theme()
+# 
+# Human_Indicators_graph_sec <- Human_indicators %>%
+#   mutate(y_coord = 30) %>%
+#   filter(Indicator == "Secondary") %>%
+#   ggplot(aes(label = label_icon))+
+#   geom_bar(aes(x=Year, y = as.numeric(Percent_resistant)),fill = "#3288bd", stat="identity", position = "dodge")+
+#   geom_ribbon(aes(x=Year,  ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25, fill = "#3288bd")+
+#   geom_smooth(aes(x=Year,  y = Percent_resistant_predict),stat = "identity", colour = "#3288bd")+
+#   facet_wrap(~Category, nrow = 1, labeller = label_wrap_gen())+
+#   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+#   scale_x_continuous(limits = c(2011,2023), breaks = seq(2012,2022,2))+
+#   scale_y_continuous(limits = c(-5,100), breaks = seq(0,100,50))+
+#   geom_richtext(aes(x = 2022.5, y = y_coord,
+#                     label = label),
+#                 fill = "#3288bd", stat = "unique",
+#                 colour= "white", show.legend = FALSE)+
+#   labs(x="", y= "% Resistance", title = "Secondary Indicators")&
+#   moiras_graph_theme()
+# 
+# Human_Indicators_graph_prim/Human_Indicators_graph_sec 
+  
+   Human_Indicators_graph_prim <- Human_indicators %>%
+      mutate(y_coord = 30) %>%
+      filter(Indicator == "Primary Indicators") %>%
+      ggplot(aes(label = label_icon))+
+      geom_bar(aes(x=Year, y = as.numeric(Percent_resistant)),fill = "#3288bd", stat="identity", position = "dodge")+
+      geom_ribbon(aes(x=Year,  ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25, fill = "#3288bd")+
+      geom_smooth(aes(x=Year,  y = Percent_resistant_predict),stat = "identity", colour = "#3288bd")+
+      facet_grid(Indicator~Category)+
+      # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+     # geom_text(aes(x = Year, y = 5, label = Sample_size),colour = "black", size = 2.5, angle = 90)+  #make this additional for interactive report
+      scale_x_continuous(limits = c(2011,2023), breaks = seq(2012,2022,2))+
+      scale_y_continuous(limits = c(-5,100), breaks = seq(0,100,50))+
+      geom_richtext(aes(x = 2022.5, y = y_coord,
+                        label = label),
+                    fill = "#3288bd", stat = "unique",
+                    colour= "white", show.legend = FALSE)+
+      labs(x="", y= "% Resistance", x = "")&
+      moiras_graph_theme() #+
+  # theme(strip.text.x = element_text(size = 14),
+  #       strip.text.y = element_text(size = 16))
+    
+    Human_Indicators_graph_sec <- Human_indicators %>%
+      mutate(y_coord = 30) %>%
+      filter(Indicator == "Secondary Indicators") %>%
+      ggplot(aes(label = label_icon))+
+      geom_bar(aes(x=Year, y = as.numeric(Percent_resistant)),fill = "#3288bd", stat="identity", position = "dodge")+
+      geom_ribbon(aes(x=Year,  ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25, fill = "#3288bd")+
+      geom_smooth(aes(x=Year,  y = Percent_resistant_predict),stat = "identity", colour = "#3288bd")+
+      facet_grid(Indicator~Category, labeller = label_wrap_gen())+
+      # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+      scale_x_continuous(limits = c(2011,2023), breaks = seq(2012,2022,2))+
+      scale_y_continuous(limits = c(-5,100), breaks = seq(0,100,50))+
+     # geom_text(aes(x = Year, y = 5, label = Sample_size),colour = "black", size = 2.5, angle = 90)+  #make this additional for interactive report
+      geom_richtext(aes(x = 2022.5, y = y_coord,
+                        label = label),
+                    fill = "#3288bd", stat = "unique",
+                    colour= "white", show.legend = FALSE)+
+      labs(x="", y= "% Resistance",  x = "")& #title = "Secondary Indicators",
+       moiras_graph_theme() +
+  theme(strip.text.x = element_text(size = 16),
+        strip.text.y = element_text(size = 20))
+    
+    Human_Indicators_graph_prim/Human_Indicators_graph_sec 
+
+```
+
+Between 2020 and 2022, increased penicillin resistance was observed
+among invasive *S. pneumoniae* strains, contrasting previously stable
+penicillin resistance rates around 10% (2011--2019). This may be the
+result of changes to the interpretation of susceptibility testing
+results at the National Reference Center (NRC) from 2019 onwards. For
+macrolides, following an increase in the rate of resistance during the
+Covid-19 crisis, 2022 saw a return to the resistance rate around 15%
+that was consistently observed for the period 2015--2019.
+
+\FloatBarrier
+
+#### Among indicators isolated from healthy food-producing animals
+
+According to recommendations for reporting AMR
+[1](https://www.efsa.europa.eu/en/efsajournal/pub/5017), BELMAP uses AMR
+data on commensal bacteria from healthy animals as a general indicator
+for resistance among food-producing animals. They can acquire and
+preserve resistance genes from other organisms in the environment and in
+animal populations. Therefore, their resistance levels reflect the
+magnitude of the pressure exerted by antibiotics in the population
+[1](https://www.efsa.europa.eu/en/efsajournal/pub/5017). Bacteria
+isolated from different animal groups show very different resistance
+profiles. The highest proportion of fully sensitive *E. coli* strains
+are isolated from beef cattle, however, this has oscillated during the
+study period, with high levels (\>76%) of pan-susceptibility (pan-S)
+observed in 2020 and 2021 but only 53% pan-susceptibility observed in
+2022. In two of the monitored food-producing animal populations
+(fattening pigs and veal calves) the proportion of fully susceptible *E.
+coli* strains increased across the study period. The second primary
+indicator, the proportion of multidrug resistant (MDR) *E. coli*
+declined in fattening pigs, broilers and veal calves, with the highest
+levels of MDR *E. coli* observed in broilers.
+
+When considering the entire
+2011--2022 period, we observe in commensal *E. coli* significant decreases in
+ciprofloxacin resistance in broilers and veal calves, with decreasing Extended Spectrum Beta-Lactamase (ESBL) production in broilers and
+decreasing colistin resistance veal calves. These secondary indicators showed oscillations, but
+no significantly increasing or decreasing trend, in the other monitored
+food-producing populations.
+
+```{r 1.7_vetamr1, fig.dim=c(18,14), fig.cap=""}
+
+(E_coli_graph <- graph_data_food_prod_complete_labels %>%
+  filter(Pathogen == "E. coli") %>%
+   mutate(Host = gsub("Pigs", "Fattening pigs", Host))%>%
+      mutate(Host = gsub("Poultry", "Broilers", Host))%>%
+    mutate(Level_indicator = if_else(grepl("MDR|pan-S",Indicator), "Primary","Secondary")) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistance), fill = Indicator), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Indicator, ymin = CI_lower, ymax = CI_upper, y = Percent_resistance_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Indicator, y = Percent_resistance_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Indicator_colourscheme,breaks=c("MDR", "pan-S", "Ciprofloxacin resistance", "Colistin resistance", "ESBL producers"))+
+    scale_colour_manual(values = BELMAP_Indicator_colourscheme,guide = "none")+
+    facet_grid(Level_indicator ~ Host)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2021,1))+
+    scale_y_continuous(limits = c(-5,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord, 
+                      label = label, 
+                      fill = Indicator), stat = "unique", 
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(y= "% Resistance", x = "", fill = "E. coli Indicator")&
+    moiras_graph_theme())   +
+  theme(strip.text.x = element_text(size = 16),
+        strip.text.y = element_text(size = 20))
+
+
+```
+
+\FloatBarrier
+
+\newpage
+
+### 1.3 Abbreviations {#subparagraph003}
+
+```{r 1.8_abbreviations_table, fig.dim=c(12,20), fig.cap=""}
+Abbreviations <- tribble(  
+~Abbreviation, ~Definition,
+      "3GC", "3rd Generation Cephalosporins",
+      "AMC", "Antimicrobial Consumption",
+      "AMU", "Antimicrobial Use",
+      "AMR", "Antimicrobial Resistance",
+      "AMCRA", "AntiMicrobial Consumption and Resistance in Animals",
+      "ARSIA", "Association Régionale de Santé et d’Identification Animales",
+      "ATC", "Anatomical Therapeutic Chemical classification",
+      "BAPCOC", "Belgian Antibiotic Policy Coordination Committee",
+      "BD100", "Treatment days ('Behandlingdagen, BD') out of 100 days present on the farm",
+      "BeH-SAC", "Belgian Hospitals - Surveillance of AMC",
+      "BelVet-SAC", "Belgian Veterinary Surveillance of Antibacterial Consumption",
+      "BRD","Bovine Respiratory Disease",
+      "BSI", "Blood stream infections",
+      "CRKP", "Carbapenem-Resistant *Klebsiella pneumoniae*",
+      "CI", "Confidence Interval",
+      "CRE", "Carbapenem Resistant *Enterobacterales*",
+"CRPA", "Carbapenem-resistant *Pseudomonas aeruginosa*",
+      "CPE", "Carbapenemase Producing *Enterobacterales*",
+      "CSF", "Cerebrospinal fluid",
+      "DDD", "Defined Daily Dose",
+      "DGZ", "Dierengezondheidszorg Vlaanderen",
+      "DID", "Defined Daily Dose per 1000 inhabitants per day",
+      "EARS-BE", "European Antimicrobial Resistance Surveillance Belgium",
+      "EARS-NET", "European Antimicrobial Resistance Surveillance Network",
+      "ECDC", "European Centre for Disease Prevention and Control",
+      "ECOFF", "Epidemiological cut-off values",
+      "EFSA", "European Food Safety Agency",
+      "EMA", "European Medicines Agency",
+      "ESAC-Net", "European Surveillance of Antimicrobial consumption network",
+      "ESBL", "Extended spectrum beta-lactamase",
+      "ESKAPE","*Enterococcus faecium, Staphylococcus aureus, Klebsiella pneumoniae, Acinetobacter baumannii,\nPseudomonas aeruginosa*, and *Enterobacter* spp.",
+      "ESVAC", "European Surveillance of Veterinary Antimicrobial Consumption",
+      "EUCAST", "European Committee on Antimicrobial Susceptibility Testing",
+      "FAMHP", "Federal Agency for Medicines and Health Products",
+      "FASFC", "Federal Agency for the Safety of the Food Chain",
+      "FQL", "Fluoroquinolones",
+      "HABSI", "Healthcare-Associated Bloodstream Infections",
+      "HAI-AMR", "Healthcare Associated Infections and Antimicrobial Resistance",
+      "INAMI", "Institut National D’Assurance Maladie-Invalidité",
+      "ICU", "Intensive Care Unit",
+      "ILVO", "Instituut voor Landbouw-, Visserij- en Voedingsonderzoek",
+      "IPD", "Invasive Pneumococcal Disease",
+      "JIACRA", "Joint Inter-agency Antimicrobial Consumption and Resistance Analysis",
+      "MALT", "Mucosa-Associated Lymphoid-Tissue",
+      "MCC", "Milk Control Center Flanders",
+      "MDR", "Multidrug resistance",
+      "MDRO", "Multidrug Resistant Organism",
+      "MIC", "Minimal Inhibitory Concentration",
+      "MRGN", "Multi-resistant Gram-negative bacteria",
+      "MRSA", "Methicillin resistant Staphylococcus aureus",
+      "MSM", "Men who have sex with men",
+      "NAP-AMR", "National Action Plan on Antimicrobial Resistance",
+      "NIHDI", "National Institute for Health and Disability Insurance",
+      "NSIH", "National Surveillance of Infections in Healthcare Settings",
+      "NSIH-AMR", "National surveillance of antimicrobial resistance",
+      "NTHi", "Non-typeable *Haemophilus influenzae*",
+      "NRC", "National Reference Centre",
+            "NRL", "National Reference Laboratory",
+      "PNEC", "Predicted No Effect Concentration",
+      "PPS", "Point-Prevalence Study",
+      "PCV", "Pneumococcal Conjugate Vaccines",
+      "RIZIV", "Rijksinstituut voor ziekte- en invaliditeitsverzekering",
+      "SPW", "Service Public de Wallonie",
+      "SWDE", "Société Wallonne des Eaux",
+      "TC-MDRO", "Technical Committee Multidrug Resistant Organisms",
+      "TMP-SMX", "Trimethoprim-sulfamethoxazole",
+      "VMM", "Vlaamse Milieu  Maatschappij",
+      "VRE", "Vancomycin Resistant *Enterococci*",
+      "WGS", "Whole Genome Sequencing",
+      "WHO", "World Health Organization"
+)
+
+
+ft_abbrev<- flextable(Abbreviations) %>%
+  font(fontname = "Gill Sans MT", part = "all") %>%
+  fontsize(size = 9, part = "all") %>%
+  colformat_md()
+
+#ft_abbrev
+
+set_table_properties(ft_abbrev, width = 1, layout = "autofit")
+```
+
+```{=tex}
+\FloatBarrier
+\newpage
+```
+
+# 2. Introduction {#paragraph002}
+
+**Contents**
+
+2.1 [A National Action Plan](#subparagraph004)\
+2.2 [Break-points](#subparagraph005)\
+2.3 [Statistical analysis and reporting](#subparagraph006)\
+2.4 [Contributors](#subparagraph007)
+
+The discovery of penicillin in 1928 marked a monumental advancement in
+medicine, revolutionizing our society and economy by saving countless
+lives. The emergence of resistance among many pathogens to
+commonly used antibiotics, coupled with a dearth of new antimicrobial
+therapies, now poses a serious threat. This threat harkens back to the
+era before antibiotics, where even minor wounds and infections could
+inflict significant harm and, tragically, death. Consequently, routine
+medical procedures carry an elevated risk.
+
+The danger is palpable, with 35,000 people in Europe succumbing to
+infections caused by bacteria resistant to antibiotics each year. In
+fact, the burden of infections displaying bacterial resistance to
+antibiotics in Europe is comparable to the impacts of [influenza,
+tuberculosis, and HIV/AIDS combined](https://www.ecdc.europa.eu/en/publications-data/antimicrobial-resistance-surveillance-europe-2022-2020-data).
+
+Antimicrobial resistance (AMR) stands as the quintessential illustration of a
+'One Health' challenge. It is now widely accepted that human and animal
+health are intricately intertwined. Since diseases can move between
+humans and animals, it is imperative to address these issues
+holistically in both domains. Moreover, there is a growing
+acknowledgment of the environment's role in fostering the emergence and
+dissemination of AMR, particularly in areas at high
+risk, exposed to the discharge of human, animal, crops and industrial waste
+streams.
+
+Considering the significant and interconnected aspects of antimicrobial
+resistance in the realms of human health, animal health, and the
+environment, it becomes imperative to adopt a One Health approach when
+tackling this multifaceted problem.
+
+### 2.1 A National Action Plan {#subparagraph004}
+
+The National Action Plan against AMR (NAP-AMR) has been developed to clarify and establish mechanisms for
+multi-sectoral cooperation. Its primary aim is to promote effective
+coordination among partners, presenting a common vision and uniting the
+various initiatives within Belgium. This plan is structured around two
+central challenges: (i) **preventing and controlling infections**, thus
+reducing the transmission of micro-organisms and resistance, and (ii)
+**ensuring the prudent use of antimicrobials**.
+
+To meet these challenges effectively, it is imperative to gain a
+comprehensive understanding of the situation in Belgium. This includes
+assessing the impact of implemented measures and taking appropriate
+actions based on these evaluations. While Belgium has had effective
+surveillance systems in place for antimicrobial consumption (AMC) and
+antimicrobial resistance (AMR) for several years (as depicted in Figure
+1), there has been a lack of a clear, overarching view of developments
+across different sectors.
+
+Following the 'One Health' approach, the BELMAP report not only aims to
+present the primary available data but also facilitates an analysis of
+the relationship between consumption and resistance within and across
+various sectors. This approach is crucial for a more holistic and
+integrated response to AMR, aligning human, animal,
+and environmental dimensions.
+
+\newpage
+
+![**Figure 1.** Overview of data flows used to generate the BELMAP 2023
+report. Details are found in the following sections. MRSA, methicillin
+resistant Staphylococcus aureus; MRGN, multi-resistant Gram-negative
+bacteria; VRE, Vancomycin Resistant Enterococci; NRC, National Reference
+Centre, FASFC, Federal Agency for the Safety of the Food Chain; DGZ,
+DierenGezondheid Vlaanderen, ARSIA, Association Regionale de Santé et
+d'Identification Animales, NIHDI, National Institute for Health and
+Disability Insurance; NSIH, Sciensano service of Healthcare-Associated
+Infections and Antimicrobial Resistance; Vet-Epi, Sciensano unit
+Veterinary Epidemiology; VMM, Vlaamse Milieumaatschappij; BE, Brussels
+Environment; SWDE, Société Wallonne des Eaux. FAMHP, Federal Agency for
+Medicines and Health Products;  MCC, Milk Control Center Flanders; AMCRA, AntiMicrobial Consumption and Resistance in Animals.](www/BELMAP_data_structure.JPG)
+
+\newpage
+
+\FloatBarrier
+
+### 2.2 Break-points {#subparagraph005}
+
+Based on a recent survey among 117 clinical labs[^1], 91.4% of all
+Belgian laboratories adhere to the guidelines of The European Committee
+on Antimicrobial Susceptibility Testing
+[(EUCAST)](https://%20eucast.org/). This committee establishes
+breakpoints and technical aspects of phenotypic in vitro antimicrobial
+susceptibility testing, and functions as the breakpoint committee of EMA
+and ECDC. In this report, human antibiogram data was (for the majority
+of hospitals) interpreted according to EUCAST breakpoints which were
+valid in the year of reporting. For indicator bacteria from
+food-producing animals and food, epidemiological cut-off values (ECOFF)
+are used which are specified in the dedicated sections. In this report,
+as in European reports, multidrug resistance (MDR) is defined as
+resistance to at least three different classes of antibiotics unless
+specified otherwise.
+
+[^1]: Kris Vernelen, personal communication,
+    <https://www.sciensano.be/en/about-sciensano/sciensanos-organogram/quality-laboratories/external-quality-assessment>
+
+This year, the National Antibiogram Committee examined the national
+implementation of EUCAST's [new 'I'
+category](https://www.eucast.org/newsiandr), which no longer stands for
+'Intermediate' but for 'Susceptible at increased exposure'. In May
+2023, 91/101 (90.1%) of contacted labs reported to have made the switch, with 9 of the remaining 10 labs reporting they would do so before 31/12/23.
+
+### 2.3 Statistical analysis and reporting {#subparagraph006}
+
+Plots were generated in R (version R- 4.2.1) using the ggplot2 package.
+For each yearly observed percentage of samples testing resistant (number
+of resistant/total sample size \* 100) or where noted number of resistant
+cases per 1000 patient days), bars represent the observed value. We used
+a Log-linear Poisson regression analysis to evaluate the effect of time
+(year) on the number of instances antimicrobial resistance occurred. An
+exposure variable (offset option in R) was included in the model to
+indicate the number of times resistance could have occurred in theory,
+i.e. sample size. In case of overdispersion, quasi-Poisson or negative
+binomial analyses were performed. The best fit regression is depicted by
+a line graph, with ribbons representing the 95% confidence intervals,
+calculated based on the link function of the glm (fit data +/-
+2\*Standard Error based on link scale). For datasets with sample sizes
+under 30 (a threshold for the central limit theory) per year no
+statistical analysis or graphical representation was performed, with the
+observed resistance proportion discussed in the text in the context of
+sample size. Pearson (normally distributed data) and Spearman
+correlation tests were performed to explore the relation between the
+consumption of antimicrobial agents and time. All statistical analyses
+were conducted in R and all code and data are available on the [BELMAP
+Github](https://github.com/BELMAP/BELMAP2023_analysis), along with the publication of all data from the report in
+the appendix.
+
+Symbols are included on figures to represent results of statistical
+analyses:
+
+```{r fig.dim=c(10,2)}
+
+explaining_graphs <- tribble(
+  ~x , ~ y, ~x1, ~Label, ~Label1,
+  1, 2.5, 1.5,  upward_arrow, "represents an increasing trend",
+  1, 2, 1.5, downward_arrow, "represents a decreasing trend",
+  1, 1.5, 1.5, oscillate, "represents data with no significant increasing or decreasing trend, but with notable variation-\nhere defined as data for which the data range is greater than 25% of the mean",
+  1, 1, 1.5, equals, "indicate no increasing or decreasing trend, without large variation (range less than 25% of the mean)."
+  
+)
+
+ggplot(explaining_graphs)+
+  geom_richtext(aes(x = x, y = y, label = Label), 
+                      fill = "black", stat = "unique", 
+                      colour= "white", show.legend = FALSE)+
+  geom_text(aes(x = x1, y = y, label = Label1, family = "Gill Sans MT"), colour = "black", size = 4, hjust = 0)+
+  theme(text = element_blank(),
+        axis.ticks = element_blank(),
+           panel.background = element_blank(), #transparent panel bg
+  plot.background = element_blank(), #transparent plot bg
+  panel.grid.major =  element_blank(), #grey y major gridlines
+  panel.grid.minor = element_blank())+ #remove minor gridlines)
+  ylim(0.9,2.6)+xlim(0.999,7)
+```
+
+Results are indicated as \*, \*\* and \*\*\* for results with p-values
+0.05\<p\<0.01, 0.01\<p\<0.001 and p\<0.001, respectively. To enable
+clearer visualisation of trends, figures depicting only resistance
+percentages under 20% will be shown on a "zoomed in" scale, with this
+clearly highlighted in the legend. For resistance data from veterinary
+samples, standardised description of resistance levels will be applied,
+consistent with the [EFSA
+criteria](https://www.efsa.europa.eu/en/efsajournal/pub/4036): "rare:
+\<0.1%", "very low: 0.1% to 1.0%", "low: 1% to 10.0%", "moderate: 10.0%
+to 20.0%", "high: 20.0% to 50.0%", "very high: 50.0% to 70.0%",
+"extremely high:\> 70.0%". These terms are applied to all
+antimicrobials. However, the significance of a given level of resistance
+will depend on the antimicrobial in question and its importance in human
+and veterinary medicine.
+
+```{=tex}
+\FloatBarrier
+\newpage
+```
+### 2.4 Contributors {#subparagraph007}
+
+```{r 1.8_contributors_table, fig.dim=c(12,20), fig.cap=""}
+
+Contributors_list <- tribble(
+~Contributors,~` `,
+"AMCRA", "Fabiana Dal Pozzo, Bénédicte Callens and Wannes Vanderhaeghen",
+"ARSIA", "Marc Saulmont",
+"Brussels Environment", "Audrey Marescaux",
+"CHU Liège", "Cécile Meex",
+"DGZ and MCC", "Nadine Botteldoorn, Evelyne De Graef and Zyncke Lipkens",
+"EARS-BE", "Katrien Latour and Aline Vilain (Sciensano)",
+"BeH-SAC/ESAC-NET", "Lucy Catteau, Laura Bonacini and Boudewijn Catry (Sciensano)", 
+"FAMHP", "Antita Adriaens and Liesbeth Van Nieuwenhove",
+"FASFC", "Marième Decroix",
+"FPS Public Health", "Gaëlle Vandermeulen, Harun Yaras, Annemie Vlayen, Vincent Dehon",
+"","Katie Vermeersch, Mélissa Rousseau, Ivo Deckers, Christophe Vermeulen" ,
+"ISSep", "Leslie Crettels",
+"ILVO", "Geertrui Rasschaert",
+"National Reference Laboratory for AMR", "François Bricteux, Cristina Garcia-Graells, Cécile Boland\n and Carole Kowalewicz (Sciensano)",
+"NRC AMR in Gram-  Negative Bacteria", "Olivier Denis and Daniel Huang (UCLouvain, Mont-Godinne)",
+"NRC *Campylobacter*", "Delphine Martiny (LHUB-ULB)", 
+"NRC *Clostridioides*", "Ahalieyah Anantharajah (UCLouvain)",
+"NRC Enterococci", "Veerle Matheeussen (UZA)",
+"NRC Causative agents of mycosis", "Lize Cuypers and Katrien Lagrou (UZ and KU Leuven)",
+"NRC *Haemophilus influenzae*", "Delphine Martiny (LHUB - ULB)",
+"NRC Invasive *Streptococcus pneumoniae*", "Lize Cuypers and Stefanie Desmet (UZ and KU Leuven)",
+"NRC * Salmonella, Shigella* and Mycobacteria", "Pieter-Jan Ceyssens, Vanessa Mathys (Sciensano)",
+"NRC Sexually Transmitted Infections", "Irith De Baetselier, Dorien Van den Bossche (ITG)", 
+"NRC Staphylococci", "Nicolas Yin (LHUB-ULB)",
+"Mycology and aerobiology (Sciensano)", "Hanne Debergh, Ann Packeu (Mycology)",
+"Société Publique de Gestion de l'Eau", "Rosalie Pype",
+"Service public de Wallonie", "Frédéric Hourlay, Elisabeth Chouters, Benoît Baelen,\n Emmanuel Combe and Sven Abras",
+"Statistical analysis and data compilation and editing", "Moira Kelly, Margo Maex and Pieter-Jan Ceyssens (Sciensano)",
+"TC-MDRO", "Lucy Catteau (Sciensano) and Olivier Denis (UCLouvain, Mont-Godinne)",
+"UGent", "Jeroen Dewulf and Ilias Chantziaras",
+"Veterinary Epidemiology", "Mickael Cargnel (Sciensano)",
+"VMM","Philippe De Maesschalck and Ann De Meester"
+)
+
+
+ft_contrib<- flextable(Contributors_list) %>%
+    font(fontname = "Gill Sans MT", part = "all") %>%
+  fontsize(size = 9, part = "all") %>%
+  colformat_md()
+
+#ft_contrib
+
+#width(ft_contrib, width = 1.5)
+set_table_properties(ft_contrib, width = 1, layout = "autofit")
+```
