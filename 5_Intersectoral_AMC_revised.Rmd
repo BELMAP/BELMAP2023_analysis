@@ -261,6 +261,7 @@ While the overall reductions in human and veterinary consumption are in line wit
 
 ```
 
+\FloatBarrier 
 ## 5.3 Consumption by class {#paragraph410}
 
 Figure 10 shows consumption of selected antimicrobial classes in 2021. In line with European averages, penicillins  , first- and second-generation cephalosporins and macrolides were the highest selling classes in human medicine, when expressed in milligrams per kilogram of estimated biomass. We observe that consumption in hospitals accounts for a significant proportion of the consumption of penicillins and first- and second- generation cephalosporins, but minimal macrolide consumption. Carbapenems and 3rd and 4th generation cephalosporins are almost exclusively consumed in hospital settings, with virtually all human polymyxin consumption also occurring in the hospital setting.

@@ -351,188 +351,188 @@ Human_vet_AMC <- read.csv2("Data/1.AMC/Combined_AMC/AMC_vet_human_mg_kg.csv") %>
   mutate(Category = paste(Sector,Measurement,sep = "_"))
 
 
-# #4. Comparative AMC - for loop for totals------
-# names(Human_vet_AMC)
-# 
-# 
-# start_data_frame <- tibble(
-#   "Year" = "",
-#   "Measurement" = "",
-#   "Value"= "",
-#   "Unit" = "",
-#   "Sector" = "",
-#   "kg.active.product" = "",
-#   "tonnes.of.biomass" = "",
-#   "Category" = "",
-#   "Year_simple"= "",
-#   "icon" = "",
-#   "signif" = ""
-# )
-# 
-# write_csv(start_data_frame,file = "5_Intersectoral_AMC_analysis_outcomes.csv")
-# 
-# # list AMC indicators
-# 
-# AMC_categories<- unique(Human_vet_AMC[Human_vet_AMC$Measurement == "Total",]$Category)
-# 
-# #mkae output test results file
-# capture.output(print("Analysis of Comparative AMC data"),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt")
-# 
-# 
-# #make list for overdispersion plots
-# qq_plot_list<- list()
-# #open for loop AMC ---------------------------
-# 
-# for(i in AMC_categories){
-# 
-#   # 1. check assumptions for Pearsons
-#   dataset_AMC<- Human_vet_AMC %>%
-#     filter(grepl(i,Category,  fixed = TRUE))
-#   min_year = min(dataset_AMC$Year)
-#   max_year = max(dataset_AMC$Year)
-# 
-#   dataset_AMC <- dataset_AMC  %>%
-#   mutate(Year_simple = Year - min_year) %>%
-#     distinct()
-# 
-# 
-# 
-#   capture.output(print(paste("Analysis for",i,sep = " : ")),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
-# 
-#   #save qq plot
-# 
-#   #Normality check
-#   # qqnorm(dataset_AMC$Year_simple, pch =1, frame = FALSE)
-#   # qqline(dataset_AMC$Year_simple, col = "steelblue", lwd = 2)
-#   #
-#   # qqnorm(dataset_AMC$Value, pch =1, frame = FALSE)
-#   # qqline(dataset_AMC$Value, col = "steelblue", lwd = 2)
-# 
-# 
-#   # qqPlot(dataset_AMC$Value)
-#   # qqPlot_value<- recordPlot()
-#   #
-#   # qqPlot(dataset_AMC$Year)
-#   # qqPlot_year<- recordPlot()
-#   #
-#   # #assign to local environment
-#   # assign(paste(i,"qqplot_value"),print(qqPlot_value))
-#   # assign(paste(i,"qqplot_year"),print(qqPlot_year))
-#   #
-#   # #Shapiro test: if the  p-values are greater than the significance level 0.05 => the distribution of the data are not significantly different from normal distribution
-#   # # Shapiro-Wilk normality test for Year_simple
-#   #
-#   Shapiro_year <- shapiro.test(dataset_AMC$Year_simple) #p-value = 0.8698
-#   capture.output(print("Testing Normality of year"),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
-#   capture.output(print(Shapiro_year),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
-# 
-# 
-#   # Shapiro-Wilk normality test for Value
-#   Shapiro_value <- shapiro.test(dataset_AMC$Value) #p-value = 0.4784
-# 
-#   capture.output(print("Testing Normality of Values"),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
-#   capture.output(print(Shapiro_value),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
-# 
-# 
-#   # 2. calculate correlation tests
-# 
-#   #Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.
-#   Pcor_Value <- cor(dataset_AMC$Year_simple, dataset_AMC$Value, method = "pearson")
-#   Pcortest_Value <- cor.test(dataset_AMC$Year_simple, dataset_AMC$Value, method = "pearson")
-#   Pcor_Value
-#   #        cor -0.9856587; p-value = 2.905e-08
-#   Pcortest_Value
-#   #        cor -0.9856587; p-value = 2.905e-08
-# 
-#   capture.output(print("#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.
-# "),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
-#   capture.output(print(Pcortest_Value),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
-# 
-# 
-#   #Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.
-#   Kcor_Value <- cor(dataset_AMC$Year_simple, dataset_AMC$Value, method = "kendall")
-#   Kcortest_Value <- cor.test(dataset_AMC$Year_simple, dataset_AMC$Value, method = "kendall")
-#   Kcor_Value
-#   # [1] -0.9272727
-# 
-#   Kcortest_Value
-#   #  tau -0.9272727;  p-value = 3.257e-06
-# 
-#   capture.output(print("#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.
-# "),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt",  append = TRUE)
-#   capture.output(print(Kcortest_Value),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
-# 
-# 
-# 
-#   #Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.
-#   Scor_Value <- cor(dataset_AMC$Year_simple, dataset_AMC$Value, method = "spearman")
-#   Scortest_Value <- cor.test(dataset_AMC$Year_simple, dataset_AMC$Value, method = "spearman")
-#   Scor_Value
-#   #[1] -0.9818182
-# 
-#   Scortest_Value
-# 
-#   capture.output(print("#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.
-# "),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt",  append = TRUE)
-#   capture.output(print(Scortest_Value),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
-# 
-# 
-#   # manually check that results of correlation tests are aligned
-# 
-# 
-#   # 3. select correlation and save icon-------------
-#   #select model
-#   if(Shapiro_value$p.value >  0.05 ){   # if Shapiro > 0.05 - can be treated as normally distributed
-#     select_correlation_value <-  Pcortest_Value$estimate
-#     select_correlation_pvalue <-  Pcortest_Value$p.value
-#   }else if(Shapiro_value$p.value <  0.05){ # if Shapiro < 0.05 - not normally distributed
-#     select_correlation_value <-  Scortest_Value$estimate
-#     select_correlation_pvalue <-  Scortest_Value$p.value
-#   }else{
-#     print(paste("ERROR no model selected for",i))
-#   }
-# 
-#   #if signif - extract direction of model
-#   if(select_correlation_pvalue<0.05){
-#     if(select_correlation_value > 0){
-#       model_icon <- "upward_arrow"
-#       signif = case_when(
-#         select_correlation_pvalue > 0.01 && select_correlation_pvalue < 0.05 ~ "*",
-#         select_correlation_pvalue > 0.001 && select_correlation_pvalue < 0.01 ~ "**",
-#         select_correlation_pvalue < 0.001 ~ "***"
-#       )
-#     }else if(select_correlation_value < 0){
-#       model_icon = "downward_arrow"
-#       signif = case_when(
-#         select_correlation_pvalue > 0.01 && select_correlation_pvalue < 0.05 ~ "*",
-#         select_correlation_pvalue > 0.001 && select_correlation_pvalue < 0.01 ~ "**",
-#         select_correlation_pvalue < 0.001 ~ "***"
-#       )
-#     }
-#   } else if(select_correlation_pvalue>0.05){
-#     if((max(dataset_AMC$Value)-min(dataset_AMC$Value))/mean(dataset_AMC$Value) > 0.25){
-#       model_icon <- "oscilate"
-#       signif = ""
-#     }else if((max(dataset_AMC$Value)-min(dataset_AMC$Value))/mean(dataset_AMC$Value) < 0.25){
-#       model_icon <- "equals"
-#       signif <- ""
-#     }
-#   }
-# 
-# 
-#   # Add labels-------------------------
-#   dataset_AMC_analysis <- dataset_AMC %>%
-#     mutate(icon = model_icon) %>%
-#     mutate(signif = signif)
-# 
-#   # Save output to dataframe for graphs ---------------------
-# 
-#   write_csv(dataset_AMC_analysis,file = "5_Intersectoral_AMC_analysis_outcomes.csv", append = TRUE)
-# 
-# 
-#   #close for loop  ---------------------------
-# 
-# }
+#4. Comparative AMC - for loop for totals------
+names(Human_vet_AMC)
+
+
+start_data_frame <- tibble(
+  "Year" = "",
+  "Measurement" = "",
+  "Value"= "",
+  "Unit" = "",
+  "Sector" = "",
+  "kg.active.product" = "",
+  "tonnes.of.biomass" = "",
+  "Category" = "",
+  "Year_simple"= "",
+  "icon" = "",
+  "signif" = ""
+)
+
+write_csv(start_data_frame,file = "5_Intersectoral_AMC_analysis_outcomes.csv")
+
+# list AMC indicators
+
+AMC_categories<- unique(Human_vet_AMC[Human_vet_AMC$Measurement == "Total",]$Category)
+
+#mkae output test results file
+capture.output(print("Analysis of Comparative AMC data"),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt")
+
+
+#make list for overdispersion plots
+qq_plot_list<- list()
+#open for loop AMC ---------------------------
+
+for(i in AMC_categories){
+
+  # 1. check assumptions for Pearsons
+  dataset_AMC<- Human_vet_AMC %>%
+    filter(grepl(i,Category,  fixed = TRUE))
+  min_year = min(dataset_AMC$Year)
+  max_year = max(dataset_AMC$Year)
+
+  dataset_AMC <- dataset_AMC  %>%
+  mutate(Year_simple = Year - min_year) %>%
+    distinct()
+
+
+
+  capture.output(print(paste("Analysis for",i,sep = " : ")),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
+
+  #save qq plot
+
+  #Normality check
+  # qqnorm(dataset_AMC$Year_simple, pch =1, frame = FALSE)
+  # qqline(dataset_AMC$Year_simple, col = "steelblue", lwd = 2)
+  #
+  # qqnorm(dataset_AMC$Value, pch =1, frame = FALSE)
+  # qqline(dataset_AMC$Value, col = "steelblue", lwd = 2)
+
+
+  # qqPlot(dataset_AMC$Value)
+  # qqPlot_value<- recordPlot()
+  #
+  # qqPlot(dataset_AMC$Year)
+  # qqPlot_year<- recordPlot()
+  #
+  # #assign to local environment
+  # assign(paste(i,"qqplot_value"),print(qqPlot_value))
+  # assign(paste(i,"qqplot_year"),print(qqPlot_year))
+  #
+  # #Shapiro test: if the  p-values are greater than the significance level 0.05 => the distribution of the data are not significantly different from normal distribution
+  # # Shapiro-Wilk normality test for Year_simple
+  #
+  Shapiro_year <- shapiro.test(dataset_AMC$Year_simple) #p-value = 0.8698
+  capture.output(print("Testing Normality of year"),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
+  capture.output(print(Shapiro_year),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
+
+
+  # Shapiro-Wilk normality test for Value
+  Shapiro_value <- shapiro.test(dataset_AMC$Value) #p-value = 0.4784
+
+  capture.output(print("Testing Normality of Values"),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
+  capture.output(print(Shapiro_value),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
+
+
+  # 2. calculate correlation tests
+
+  #Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.
+  Pcor_Value <- cor(dataset_AMC$Year_simple, dataset_AMC$Value, method = "pearson")
+  Pcortest_Value <- cor.test(dataset_AMC$Year_simple, dataset_AMC$Value, method = "pearson")
+  Pcor_Value
+  #        cor -0.9856587; p-value = 2.905e-08
+  Pcortest_Value
+  #        cor -0.9856587; p-value = 2.905e-08
+
+  capture.output(print("#Pearson (parametric test, assumes linearity and normality) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <cor> and a p-value of <p-value>.
+"),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
+  capture.output(print(Pcortest_Value),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
+
+
+  #Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.
+  Kcor_Value <- cor(dataset_AMC$Year_simple, dataset_AMC$Value, method = "kendall")
+  Kcortest_Value <- cor.test(dataset_AMC$Year_simple, dataset_AMC$Value, method = "kendall")
+  Kcor_Value
+  # [1] -0.9272727
+
+  Kcortest_Value
+  #  tau -0.9272727;  p-value = 3.257e-06
+
+  capture.output(print("#Kendall (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <tau> and a p-value of <p-value>.
+"),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt",  append = TRUE)
+  capture.output(print(Kcortest_Value),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
+
+
+
+  #Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.
+  Scor_Value <- cor(dataset_AMC$Year_simple, dataset_AMC$Value, method = "spearman")
+  Scortest_Value <- cor.test(dataset_AMC$Year_simple, dataset_AMC$Value, method = "spearman")
+  Scor_Value
+  #[1] -0.9818182
+
+  Scortest_Value
+
+  capture.output(print("#Spearman (non-parametric test) if p-value is less than 0.05. We can conclude that Year_simple and Value are significantly correlated with a correlation coefficient of <rho> and a p-value of <p-value>.
+"),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt",  append = TRUE)
+  capture.output(print(Scortest_Value),file = "5_Intersectoral_AMC_correlations/AMC_data_analysis.txt", append = TRUE)
+
+
+  # manually check that results of correlation tests are aligned
+
+
+  # 3. select correlation and save icon-------------
+  #select model
+  if(Shapiro_value$p.value >  0.05 ){   # if Shapiro > 0.05 - can be treated as normally distributed
+    select_correlation_value <-  Pcortest_Value$estimate
+    select_correlation_pvalue <-  Pcortest_Value$p.value
+  }else if(Shapiro_value$p.value <  0.05){ # if Shapiro < 0.05 - not normally distributed
+    select_correlation_value <-  Scortest_Value$estimate
+    select_correlation_pvalue <-  Scortest_Value$p.value
+  }else{
+    print(paste("ERROR no model selected for",i))
+  }
+
+  #if signif - extract direction of model
+  if(select_correlation_pvalue<0.05){
+    if(select_correlation_value > 0){
+      model_icon <- "upward_arrow"
+      signif = case_when(
+        select_correlation_pvalue > 0.01 && select_correlation_pvalue < 0.05 ~ "*",
+        select_correlation_pvalue > 0.001 && select_correlation_pvalue < 0.01 ~ "**",
+        select_correlation_pvalue < 0.001 ~ "***"
+      )
+    }else if(select_correlation_value < 0){
+      model_icon = "downward_arrow"
+      signif = case_when(
+        select_correlation_pvalue > 0.01 && select_correlation_pvalue < 0.05 ~ "*",
+        select_correlation_pvalue > 0.001 && select_correlation_pvalue < 0.01 ~ "**",
+        select_correlation_pvalue < 0.001 ~ "***"
+      )
+    }
+  } else if(select_correlation_pvalue>0.05){
+    if((max(dataset_AMC$Value)-min(dataset_AMC$Value))/mean(dataset_AMC$Value) > 0.25){
+      model_icon <- "oscilate"
+      signif = ""
+    }else if((max(dataset_AMC$Value)-min(dataset_AMC$Value))/mean(dataset_AMC$Value) < 0.25){
+      model_icon <- "equals"
+      signif <- ""
+    }
+  }
+
+
+  # Add labels-------------------------
+  dataset_AMC_analysis <- dataset_AMC %>%
+    mutate(icon = model_icon) %>%
+    mutate(signif = signif)
+
+  # Save output to dataframe for graphs ---------------------
+
+  write_csv(dataset_AMC_analysis,file = "5_Intersectoral_AMC_analysis_outcomes.csv", append = TRUE)
+
+
+  #close for loop  ---------------------------
+
+}
 
 
 
