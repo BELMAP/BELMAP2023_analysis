@@ -92,6 +92,7 @@ BELMAP_intersect_AMC_colourscheme<-c("Veterinary" = "#99d594",
 #-----------------------------------------------------------------------------------
 #2. Load data-----
 
+
 Human_vet_AMC <- read.csv2("Data/1.AMC/Combined_AMC/AMC_vet_human_mg_kg.csv") %>%
   mutate(Category = paste(Sector,Measurement,sep = "_")) %>%
   mutate(Sector = case_when(
