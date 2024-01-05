@@ -1,0 +1,190 @@
+Year;Measurement;ATC group;Value;Unit;Sector;Region;Source
+2011;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;23,6;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2012;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;23,94;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2013;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;22,57;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2014;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;22,36;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2015;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;22,75;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2016;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;22,53;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2017;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;21,15;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2018;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;20,68;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2019;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;19,77;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2020;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;15,25;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2021;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;16;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2022;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;19,01;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2011;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;17,75;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2012;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;17,83;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2013;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;18,21;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2014;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;17,87;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2015;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;18,21;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2016;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;18,56;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2017;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;18,11;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2018;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;17,9;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2019;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;17,67;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2020;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;14,73;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2021;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;14,77;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2022;Consumption of antibacterials for systemic use (DDD per 1,000 inhabitants and per day);J01;17,37;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2011;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,39;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2012;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,37;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2013;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,02;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2014;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,2;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2015;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,21;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2016;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,2;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2017;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,19;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2018;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,06;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2019;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);1,86;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2020;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,08;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2021;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);1,92;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2022;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);1,73;DDD/1000 inhabitants/day;Ambulant;Belgium;ESAC-Net
+2011;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,59;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2012;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,53;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2013;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,57;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2014;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,77;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2015;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,84;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2016;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,69;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2017;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,72;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2018;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,8;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2019;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);2,81;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2020;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);3,42;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2021;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);3,68;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2022;Ratio of broad spectrum antibiotics;(J01[CR+DC+DD]+[F-FA01]+[MA])/(J01[CA+CE+CF+DB+FA01]);3,93;DDD/1000 inhabitants/day;Ambulant;Europe;ESAC-Net
+2011;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;479,47;DDD/1000 patients/day;Acute Hospitals;Belgium;BeH-SAC
+2012;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;486,18;DDD/1000 patients/day;Acute Hospitals;Belgium;BeH-SAC
+2013;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;481,57;DDD/1000 patients/day;Acute Hospitals;Belgium;BeH-SAC
+2014;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;470,93;DDD/1000 patients/day;Acute Hospitals;Belgium;BeH-SAC
+2015;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;493,54;DDD/1000 patients/day;Acute Hospitals;Belgium;BeH-SAC
+2016;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;491,53;DDD/1000 patients/day;Acute Hospitals;Belgium;BeH-SAC
+2017;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;497,89;DDD/1000 patients/day;Acute Hospitals;Belgium;BeH-SAC
+2018;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;508,5;DDD/1000 patients/day;Acute Hospitals;Belgium;BeH-SAC
+2019;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;505,92;DDD/1000 patients/day;Acute Hospitals;Belgium;BeH-SAC
+2020;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;532,04;DDD/1000 patients/day;Acute Hospitals;Belgium;BeH-SAC
+2021;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;522,24;DDD/1000 patients/day;Acute Hospitals;Belgium;BeH-SAC
+2011;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;145,14;DDD/1000 patients/day;Chronic Hospitals;Belgium;BeH-SAC
+2012;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;134,26;DDD/1000 patients/day;Chronic Hospitals;Belgium;BeH-SAC
+2013;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;127,36;DDD/1000 patients/day;Chronic Hospitals;Belgium;BeH-SAC
+2014;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;138,67;DDD/1000 patients/day;Chronic Hospitals;Belgium;BeH-SAC
+2015;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;150,51;DDD/1000 patients/day;Chronic Hospitals;Belgium;BeH-SAC
+2016;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;142,94;DDD/1000 patients/day;Chronic Hospitals;Belgium;BeH-SAC
+2017;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;135,04;DDD/1000 patients/day;Chronic Hospitals;Belgium;BeH-SAC
+2018;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;123,15;DDD/1000 patients/day;Chronic Hospitals;Belgium;BeH-SAC
+2019;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;NA;DDD/1000 patients/day;Chronic Hospitals;Belgium;BeH-SAC
+2020;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;NA;DDD/1000 patients/day;Chronic Hospitals;Belgium;BeH-SAC
+2021;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;NA;DDD/1000 patients/day;Chronic Hospitals;Belgium;BeH-SAC
+2011;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;50,29;DDD/1000 patients/day;Psychiatric Hospitals;Belgium;BeH-SAC
+2012;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;47,71;DDD/1000 patients/day;Psychiatric Hospitals;Belgium;BeH-SAC
+2013;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;43,92;DDD/1000 patients/day;Psychiatric Hospitals;Belgium;BeH-SAC
+2014;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;48,72;DDD/1000 patients/day;Psychiatric Hospitals;Belgium;BeH-SAC
+2015;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;44,21;DDD/1000 patients/day;Psychiatric Hospitals;Belgium;BeH-SAC
+2016;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;42,41;DDD/1000 patients/day;Psychiatric Hospitals;Belgium;BeH-SAC
+2017;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;43,89;DDD/1000 patients/day;Psychiatric Hospitals;Belgium;BeH-SAC
+2018;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;41,33;DDD/1000 patients/day;Psychiatric Hospitals;Belgium;BeH-SAC
+2019;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;36,67;DDD/1000 patients/day;Psychiatric Hospitals;Belgium;BeH-SAC
+2020;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;44,06;DDD/1000 patients/day;Psychiatric Hospitals;Belgium;BeH-SAC
+2021;Consumption of antibacterials for systemic use, expressed as DDD per 1,000 patient days ;J01;51,83;DDD/1000 patients/day;Psychiatric Hospitals;Belgium;BeH-SAC
+2011;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,302;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2012;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,311;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2013;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,313;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2014;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,315;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2015;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,317;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2016;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,31;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2017;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,309;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2018;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,302;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2019;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,298;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2020;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,314;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2021;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,312;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2022;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,301;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2011;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,337;DDD/1000 inhabitants/day;Hospital;Europe;ESAC-Net
+2012;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,347;DDD/1000 inhabitants/day;Hospital;Europe;ESAC-Net
+2013;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,316;DDD/1000 inhabitants/day;Hospital;Europe;ESAC-Net
+2014;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,313;DDD/1000 inhabitants/day;Hospital;Europe;ESAC-Net
+2015;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,305;DDD/1000 inhabitants/day;Hospital;Europe;ESAC-Net
+2016;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,325;DDD/1000 inhabitants/day;Hospital;Europe;ESAC-Net
+2017;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,328;DDD/1000 inhabitants/day;Hospital;Europe;ESAC-Net
+2018;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,338;DDD/1000 inhabitants/day;Hospital;Europe;ESAC-Net
+2019;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,337;DDD/1000 inhabitants/day;Hospital;Europe;ESAC-Net
+2020;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,384;DDD/1000 inhabitants/day;Hospital;Europe;ESAC-Net
+2021;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,41;DDD/1000 inhabitants/day;Hospital;Europe;ESAC-Net
+2022;The proportion of glycopeptides, third- and fourth-generation cephalosporins, monobactams, carbapenems, fluoroquinolones, polymyxins, piperacillin and enzyme inhibitor, linezolid, tedizolid and daptomycin (DDD per 1 000 inhabitants per day) out of total hospital consumption of antibacterials for systemic use,;J01XA+J01DD+J01DE+J01DF+J01DH+J01MA+J01XB+J01CR05+J01XX08+J01XX11+J01XX09;0,392;DDD/1000 inhabitants/day;Hospital;Europe;ESAC-Net
+2011;Proportion glycopeptides;J01XA;0,0229;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2012;Proportion glycopeptides;J01XA;0,0236;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2013;Proportion glycopeptides;J01XA;0,0246;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2014;Proportion glycopeptides;J01XA;0,0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2015;Proportion glycopeptides;J01XA;0,0251;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2016;Proportion glycopeptides;J01XA;0,0251;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2017;Proportion glycopeptides;J01XA;0,0256;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2018;Proportion glycopeptides;J01XA;0,0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2019;Proportion glycopeptides;J01XA;0,0257;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2020;Proportion glycopeptides;J01XA;0,0285;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2021;Proportion glycopeptides;J01XA;0,0306;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2022;Proportion glycopeptides;J01XA;0,0278;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2011;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0,0641;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2012;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0,0635;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2013;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0,0652;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2014;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0,0636;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2015;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0,067;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2016;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0,0638;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2017;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0,0652;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2018;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0,066;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2019;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0,0704;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2020;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0,0737;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2021;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0,0704;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2022;Proportion 3rd and 4th generation CSP;J01DD & J01DE;0,0683;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2011;Proportion FQ;J01MA;0,1351;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2012;Proportion FQ;J01MA;0,1373;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2013;Proportion FQ;J01MA;0,1323;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2014;Proportion FQ;J01MA;0,1284;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2015;Proportion FQ;J01MA;0,1272;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2016;Proportion FQ;J01MA;0,1214;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2017;Proportion FQ;J01MA;0,1166;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2018;Proportion FQ;J01MA;0,1055;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2019;Proportion FQ;J01MA;0,0996;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2020;Proportion FQ;J01MA;0,0954;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2021;Proportion FQ;J01MA;0,0942;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2022;Proportion FQ;J01MA;0,0943;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2011;Proportion Polymixins;J01XB;0,0017;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2012;Proportion Polymixins;J01XB;0,0016;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2013;Proportion Polymixins;J01XB;0,0019;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2014;Proportion Polymixins;J01XB;0,0019;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2015;Proportion Polymixins;J01XB;0,0017;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2016;Proportion Polymixins;J01XB;0,0021;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2017;Proportion Polymixins;J01XB;0,002;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2018;Proportion Polymixins;J01XB;0,0016;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2019;Proportion Polymixins;J01XB;0,0015;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2020;Proportion Polymixins;J01XB;0,0019;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2021;Proportion Polymixins;J01XB;0,0018;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2022;Proportion Polymixins;J01XB;0,0014;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2011;Proportion piperacillin + INH;J01CR05;0,0433;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2012;Proportion piperacillin + INH;J01CR05;0,0495;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2013;Proportion piperacillin + INH;J01CR05;0,0521;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2014;Proportion piperacillin + INH;J01CR05;0,0553;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2015;Proportion piperacillin + INH;J01CR05;0,0571;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2016;Proportion piperacillin + INH;J01CR05;0,0599;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2017;Proportion piperacillin + INH;J01CR05;0,0627;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2018;Proportion piperacillin + INH;J01CR05;0,0657;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2019;Proportion piperacillin + INH;J01CR05;0,0643;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2020;Proportion piperacillin + INH;J01CR05;0,0757;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2021;Proportion piperacillin + INH;J01CR05;0,0774;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2022;Proportion piperacillin + INH;J01CR05;0,0755;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2011;Proportion Linezolid ;J01XX08;0,0041;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2012;Proportion Linezolid ;J01XX08;0,0039;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2013;Proportion Linezolid ;J01XX08;0,0042;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2014;Proportion Linezolid ;J01XX08;0,0043;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2015;Proportion Linezolid ;J01XX08;0,0038;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2016;Proportion Linezolid ;J01XX08;0,0039;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2017;Proportion Linezolid ;J01XX08;0,0035;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2018;Proportion Linezolid ;J01XX08;0,0039;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2019;Proportion Linezolid ;J01XX08;0,0037;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2020;Proportion Linezolid ;J01XX08;0,0036;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2021;Proportion Linezolid ;J01XX08;0,0039;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2022;Proportion Linezolid ;J01XX08;0,0036;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2011;Proportions carbapenems (%);J01DH;0,0299;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2012;Proportions carbapenems (%);J01DH;0,0301;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2013;Proportions carbapenems (%);J01DH;0,0304;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2014;Proportions carbapenems (%);J01DH;0,0325;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2015;Proportions carbapenems (%);J01DH;0,032;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2016;Proportions carbapenems (%);J01DH;0,0308;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2017;Proportions carbapenems (%);J01DH;0,0302;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2018;Proportions carbapenems (%);J01DH;0,0304;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2019;Proportions carbapenems (%);J01DH;0,0295;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2020;Proportions carbapenems (%);J01DH;0,0319;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2021;Proportions carbapenems (%);J01DH;0,031;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net
+2022;Proportions carbapenems (%);J01DH;0,0272;DDD/1000 inhabitants/day;Hospital;Belgium;ESAC-Net

@@ -1,0 +1,361 @@
+Year;Sample_size;Percent_resistance;Number_resistants;Pathogen;Host;Indicator
+2011;;;;MRSA;Veal Calves;MRSA
+2012;104;47,1;49;MRSA;Veal Calves;MRSA
+2013;;;;MRSA;Veal Calves;MRSA
+2014;;;;MRSA;Veal Calves;MRSA
+2015;147;78,9;116;MRSA;Veal Calves;MRSA
+2016;;;;MRSA;Veal Calves;MRSA
+2017;;;;MRSA;Veal Calves;MRSA
+2018;145;54,5;79;MRSA;Veal Calves;MRSA
+2019;;;;MRSA;Veal Calves;MRSA
+2020;;;;MRSA;Veal Calves;MRSA
+2021;145;54,5;79;MRSA;Veal Calves;MRSA
+2022;;;;MRSA;Veal Calves;MRSA
+2011;;;;MRSA;Bovines for meat;MRSA
+2012;187;10,2;19;MRSA;Bovines for meat;MRSA
+2013;;;;MRSA;Bovines for meat;MRSA
+2014;;;;MRSA;Bovines for meat;MRSA
+2015;104;15,4;16;MRSA;Bovines for meat;MRSA
+2016;;;;MRSA;Bovines for meat;MRSA
+2017;;;;MRSA;Bovines for meat;MRSA
+2018;103;8,7;9;MRSA;Bovines for meat;MRSA
+2019;;;;MRSA;Bovines for meat;MRSA
+2020;;;;MRSA;Bovines for meat;MRSA
+2021;85;4,7;4;MRSA;Bovines for meat;MRSA
+2022;;;;MRSA;Bovines for meat;MRSA
+2011;;;;MRSA;Fattening pigs;MRSA
+2012;;;;MRSA;Fattening pigs;MRSA
+2013;NA;NA;NA;MRSA;Fattening pigs;MRSA
+2014;;;;MRSA;Fattening pigs;MRSA
+2015;;;;MRSA;Fattening pigs;MRSA
+2016;177;63,3;112;MRSA;"Fattening pigs (old isolation method ""2-S"")";MRSA
+2017;;;;MRSA;Fattening pigs;MRSA
+2018;;;;MRSA;Fattening pigs;MRSA
+2019;180;58,3;105;MRSA;"Fattening pigs (old isolation method ""2-S"")";MRSA
+2020;;;;MRSA;Fattening pigs;MRSA
+2021;;;;MRSA;Fattening pigs;MRSA
+2022;141;87,9;124;MRSA;"Fattening pigs (new isolation method ""1-S"")";MRSA
+2011;;;;MRSA;Dairy Cattle;MRSA
+2012;141;9,9;14;MRSA;Dairy Cattle;MRSA
+2013;;;;MRSA;Dairy Cattle;MRSA
+2014;;;;MRSA;Dairy Cattle;MRSA
+2015;96;10,4;10;MRSA;Dairy Cattle;MRSA
+2016;;;;MRSA;Dairy Cattle;MRSA
+2017;;;;MRSA;Dairy Cattle;MRSA
+2018;93;14;13;MRSA;Dairy Cattle;MRSA
+2019;;;;MRSA;Dairy Cattle;MRSA
+2020;;;;MRSA;Dairy Cattle;MRSA
+2021;128;11,7;15;MRSA;Dairy Cattle;MRSA
+2022;;;;MRSA;Dairy Cattle;MRSA
+2011;372;0,8;3;MRSA;Poultry (broilers and layers);MRSA
+2012;;;;MRSA;Poultry (broilers and layers);MRSA
+2013;;;;MRSA;Poultry (broilers and layers);MRSA
+2014;325;2,46;8;MRSA;Poultry (broilers and layers);MRSA
+2015;;;;MRSA;Poultry (broilers and layers);MRSA
+2016;;;;MRSA;Poultry (broilers and layers);MRSA
+2017;316;1,6;5;MRSA;Poultry (broilers and layers);MRSA
+2018;;;;MRSA;Poultry (broilers and layers);MRSA
+2019;;;;MRSA;Poultry (broilers and layers);MRSA
+2020;88;2,3;2;MRSA;Poultry (broilers and layers);MRSA
+2021;;;;MRSA;Poultry (broilers and layers);MRSA
+2022;;;;MRSA;Poultry (broilers and layers);MRSA
+2011;;;;MRSA;Sows;MRSA
+2012;;;;MRSA;Sows;MRSA
+2013;NA;NA;NA;MRSA;Sows;MRSA
+2014;;;;MRSA;Sows;MRSA
+2015;;;;MRSA;Sows;MRSA
+2016;153;59,5;91;MRSA;"Sows (old isolation method ""2-S"")";MRSA
+2017;;;;MRSA;Sows;MRSA
+2018;;;;MRSA;Sows;MRSA
+2019;179;46,4;83;MRSA;"Sows (old isolation method ""2-S"")";MRSA
+2020;;;;MRSA;Sows;MRSA
+2021;;;;MRSA;Sows;MRSA
+2022;133;52,6;70;MRSA;"Sows (new isolation method ""1-S"")";MRSA
+2019;173;3,47;6;E. faecalis;Broilers;MDR
+2020;170;3,53;6;E. faecalis;Broilers;MDR
+2021;169;1,78;3;E. faecalis;Broilers;MDR
+2022;170;0;0;E. faecalis;Broilers;MDR
+2019;67;10,45;7;E. faecalis;Fattening turkeys;MDR
+2020;133;11,28;15;E. faecalis;Fattening turkeys;MDR
+2021;NT;NT;NT;E. faecalis;Fattening turkeys;MDR
+2022;92;1,09;1;E. faecalis;Fattening turkeys;MDR
+2019;45;4,44;2;E. faecalis;Breeding hens;MDR
+2020;30;6,67;2;E. faecalis;Breeding hens;MDR
+2021;28;3,57;1;E. faecalis;Breeding hens;MDR
+2022;51;0;0;E. faecalis;Breeding hens;MDR
+2019;80;0;0;E. faecalis;Laying hens;MDR
+2020;83;1,2;1;E. faecalis;Laying hens;MDR
+2021;78;2,56;2;E. faecalis;Laying hens;MDR
+2022;111;0,9;1;E. faecalis;Laying hens;MDR
+2019;56;25;14;E. faecalis;Pigs;MDR
+2020;59;30,51;18;E. faecalis;Pigs;MDR
+2021;57;7,02;4;E. faecalis;Pigs;MDR
+2022;51;21,57;11;E. faecalis;Pigs;MDR
+2019;115;67,83;78;E. faecalis;Veal Calves;MDR
+2020;88;54,55;48;E. faecalis;Veal Calves;MDR
+2021;107;54,21;58;E. faecalis;Veal Calves;MDR
+2022;83;60,24;50;E. faecalis;Veal Calves;MDR
+2019;169;68,05;115;E. faecium;Broilers;MDR
+2020;170;68,82;117;E. faecium;Broilers;MDR
+2021;160;60,63;97;E. faecium;Broilers;MDR
+2022;151;60,26;91;E. faecium;Broilers;MDR
+2019;37;48,65;18;E. faecium;Fattening turkeys;MDR
+2020;54;50;27;E. faecium;Fattening turkeys;MDR
+2021;NT;NT;NT;E. faecium;Fattening turkeys;MDR
+2022;40;47,5;19;E. faecium;Fattening turkeys;MDR
+2019;119;17,65;21;E. faecium;Breeding hens;MDR
+2020;105;15,24;16;E. faecium;Breeding hens;MDR
+2021;125;17,6;22;E. faecium;Breeding hens;MDR
+2022;153;15,69;24;E. faecium;Breeding hens;MDR
+2019;137;2,92;4;E. faecium;Laying hens;MDR
+2020;157;3,82;6;E. faecium;Laying hens;MDR
+2021;171;7,02;12;E. faecium;Laying hens;MDR
+2022;156;1,28;2;E. faecium;Laying hens;MDR
+2019;178;15,17;27;E. faecium;Pigs;MDR
+2020;173;12,72;22;E. faecium;Pigs;MDR
+2021;176;13,07;23;E. faecium;Pigs;MDR
+2022;170;10;17;E. faecium;Pigs;MDR
+2019;174;25,86;45;E. faecium;Veal Calves;MDR
+2020;170;22,94;39;E. faecium;Veal Calves;MDR
+2021;170;18,82;32;E. faecium;Veal Calves;MDR
+2022;162;24,69;40;E. faecium;Veal Calves;MDR
+2011;420;6,77;28;E. coli;Poultry;pan-S
+2012;320;5,63;18;E. coli;Poultry;pan-S
+2013;234;4,7;11;E. coli;Poultry;pan-S
+2014;158;11,39;18;E. coli;Poultry;pan-S
+2015;152;11,84;18;E. coli;Poultry;pan-S
+2016;167;8,38;14;E. coli;Poultry;pan-S
+2017;160;10;16;E. coli;Poultry;pan-S
+2018;148;6,76;10;E. coli;Poultry;pan-S
+2019;170;7,65;13;E. coli;Poultry;pan-S
+2020;165;5,45;9;E. coli;Poultry;pan-S
+2021;170;13,5;23;E. coli;Poultry;pan-S
+2022;168;6,55;11;E. coli;Poultry;pan-S
+2011;420;77,86;327;E. coli;Poultry;MDR
+2012;320;81,88;262;E. coli;Poultry;MDR
+2013;234;76,92;180;E. coli;Poultry;MDR
+2014;158;62,03;98;E. coli;Poultry;MDR
+2015;152;70,39;107;E. coli;Poultry;MDR
+2016;167;68,86;115;E. coli;Poultry;MDR
+2017;160;67,5;108;E. coli;Poultry;MDR
+2018;148;76,35;113;E. coli;Poultry;MDR
+2019;170;68,24;116;E. coli;Poultry;MDR
+2020;165;70,91;117;E. coli;Poultry;MDR
+2021;170;62,4;106;E. coli;Poultry;MDR
+2022;168;69,05;116;E. coli;Poultry;MDR
+2011;420;;;E. coli;Poultry;ESBL producers
+2012;320;;;E. coli;Poultry;ESBL producers
+2013;234;;;E. coli;Poultry;ESBL producers
+2014;158;;;E. coli;Poultry;ESBL producers
+2015;152;;;E. coli;Poultry;ESBL producers
+2016;167;;;E. coli;Poultry;ESBL producers
+2017;160;6,25;10;E. coli;Poultry;ESBL producers
+2018;148;14,19;21;E. coli;Poultry;ESBL producers
+2019;170;8,24;14;E. coli;Poultry;ESBL producers
+2020;165;6,67;11;E. coli;Poultry;ESBL producers
+2021;170;5,3;9;E. coli;Poultry;ESBL producers
+2022;168;4,17;7;E. coli;Poultry;ESBL producers
+2011;420;62,86;264;E. coli;Poultry;Ciprofloxacin resistance
+2012;320;79,06;253;E. coli;Poultry;Ciprofloxacin resistance
+2013;234;74,79;175;E. coli;Poultry;Ciprofloxacin resistance
+2014;158;69,62;110;E. coli;Poultry;Ciprofloxacin resistance
+2015;152;63,82;97;E. coli;Poultry;Ciprofloxacin resistance
+2016;167;57,49;96;E. coli;Poultry;Ciprofloxacin resistance
+2017;160;58,13;93;E. coli;Poultry;Ciprofloxacin resistance
+2018;148;59,46;88;E. coli;Poultry;Ciprofloxacin resistance
+2019;170;55,29;94;E. coli;Poultry;Ciprofloxacin resistance
+2020;165;49,7;82;E. coli;Poultry;Ciprofloxacin resistance
+2021;170;41,8;71;E. coli;Poultry;Ciprofloxacin resistance
+2022;168;53,6;90;E. coli;Poultry;Ciprofloxacin resistance
+2011;420;0,48;2;E. coli;Poultry;Colistin resistance
+2012;320;4,69;15;E. coli;Poultry;Colistin resistance
+2013;234;1,71;4;E. coli;Poultry;Colistin resistance
+2014;158;0;0;E. coli;Poultry;Colistin resistance
+2015;152;0;0;E. coli;Poultry;Colistin resistance
+2016;167;0;0;E. coli;Poultry;Colistin resistance
+2017;160;0;0;E. coli;Poultry;Colistin resistance
+2018;148;0,68;1;E. coli;Poultry;Colistin resistance
+2019;170;0,59;1;E. coli;Poultry;Colistin resistance
+2020;165;0;0;E. coli;Poultry;Colistin resistance
+2021;170;0;0;E. coli;Poultry;Colistin resistance
+2022;168;0,6;1;E. coli;Poultry;Colistin resistance
+2011;154;61,74;95;E. coli;Beef Cattle;pan-S
+2012;175;48,84;85;E. coli;Beef Cattle;pan-S
+2013;204;62,75;128;E. coli;Beef Cattle;pan-S
+2014;164;71,34;117;E. coli;Beef Cattle;pan-S
+2015;180;71,67;129;E. coli;Beef Cattle;pan-S
+2016;176;64,2;113;E. coli;Beef Cattle;pan-S
+2017;120;72,5;87;E. coli;Beef Cattle;pan-S
+2018;149;53,02;79;E. coli;Beef Cattle;pan-S
+2019;164;71,34;117;E. coli;Beef Cattle;pan-S
+2020;130;77,69;101;E. coli;Beef Cattle;pan-S
+2021;119;76,5;91;E. coli;Beef Cattle;pan-S
+2022;170;52,94;90;E. coli;Beef Cattle;pan-S
+2011;154;24,68;38;E. coli;Beef Cattle;MDR
+2012;175;32,57;57;E. coli;Beef Cattle;MDR
+2013;204;23,04;47;E. coli;Beef Cattle;MDR
+2014;164;20,73;34;E. coli;Beef Cattle;MDR
+2015;180;16,67;30;E. coli;Beef Cattle;MDR
+2016;176;15,91;28;E. coli;Beef Cattle;MDR
+2017;120;21,67;26;E. coli;Beef Cattle;MDR
+2018;149;24,16;36;E. coli;Beef Cattle;MDR
+2019;164;20,73;34;E. coli;Beef Cattle;MDR
+2020;130;14,62;19;E. coli;Beef Cattle;MDR
+2021;119;14,3;17;E. coli;Beef Cattle;MDR
+2022;170;30;51;E. coli;Beef Cattle;MDR
+2011;154;;;E. coli;Beef Cattle;ESBL producers
+2012;175;;;E. coli;Beef Cattle;ESBL producers
+2013;204;;;E. coli;Beef Cattle;ESBL producers
+2014;164;;;E. coli;Beef Cattle;ESBL producers
+2015;180;;;E. coli;Beef Cattle;ESBL producers
+2016;176;;;E. coli;Beef Cattle;ESBL producers
+2017;120;2,5;3;E. coli;Beef Cattle;ESBL producers
+2018;149;5,37;8;E. coli;Beef Cattle;ESBL producers
+2019;164;4,27;7;E. coli;Beef Cattle;ESBL producers
+2020;130;2,31;3;E. coli;Beef Cattle;ESBL producers
+2021;119;0,8;1;E. coli;Beef Cattle;ESBL producers
+2022;170;2,35;4;E. coli;Beef Cattle;ESBL producers
+2011;154;11,04;17;E. coli;Beef Cattle;Ciprofloxacin resistance
+2012;175;18,29;32;E. coli;Beef Cattle;Ciprofloxacin resistance
+2013;204;8,82;18;E. coli;Beef Cattle;Ciprofloxacin resistance
+2014;164;8,54;14;E. coli;Beef Cattle;Ciprofloxacin resistance
+2015;180;4,44;8;E. coli;Beef Cattle;Ciprofloxacin resistance
+2016;176;5,68;10;E. coli;Beef Cattle;Ciprofloxacin resistance
+2017;120;12,5;15;E. coli;Beef Cattle;Ciprofloxacin resistance
+2018;149;7,38;11;E. coli;Beef Cattle;Ciprofloxacin resistance
+2019;164;6,71;11;E. coli;Beef Cattle;Ciprofloxacin resistance
+2020;130;5,38;7;E. coli;Beef Cattle;Ciprofloxacin resistance
+2021;119;5,9;7;E. coli;Beef Cattle;Ciprofloxacin resistance
+2022;170;17,1;29;E. coli;Beef Cattle;Ciprofloxacin resistance
+2011;154;0,65;1;E. coli;Beef Cattle;Colistin resistance
+2012;175;2,86;5;E. coli;Beef Cattle;Colistin resistance
+2013;204;1,47;3;E. coli;Beef Cattle;Colistin resistance
+2014;164;0,61;1;E. coli;Beef Cattle;Colistin resistance
+2015;180;0;0;E. coli;Beef Cattle;Colistin resistance
+2016;176;0,57;1;E. coli;Beef Cattle;Colistin resistance
+2017;120;0;0;E. coli;Beef Cattle;Colistin resistance
+2018;149;0;0;E. coli;Beef Cattle;Colistin resistance
+2019;164;0;0;E. coli;Beef Cattle;Colistin resistance
+2020;130;0;0;E. coli;Beef Cattle;Colistin resistance
+2021;119;0,8;1;E. coli;Beef Cattle;Colistin resistance
+2022;170;1,2;2;E. coli;Beef Cattle;Colistin resistance
+2011;157;25;39;E. coli;Pigs;pan-S
+2012;217;28,24;61;E. coli;Pigs;pan-S
+2013;206;30,1;62;E. coli;Pigs;pan-S
+2014;184;28,8;53;E. coli;Pigs;pan-S
+2015;186;40,86;76;E. coli;Pigs;pan-S
+2016;173;28,9;50;E. coli;Pigs;pan-S
+2017;176;27,27;48;E. coli;Pigs;pan-S
+2018;183;25,68;47;E. coli;Pigs;pan-S
+2019;175;41,14;72;E. coli;Pigs;pan-S
+2020;170;30;51;E. coli;Pigs;pan-S
+2021;170;41,8;71;E. coli;Pigs;pan-S
+2022;168;32,14;54;E. coli;Pigs;pan-S
+2011;157;53,5;84;E. coli;Pigs;MDR
+2012;217;53,92;117;E. coli;Pigs;MDR
+2013;206;48,54;100;E. coli;Pigs;MDR
+2014;184;47,83;88;E. coli;Pigs;MDR
+2015;186;36,56;68;E. coli;Pigs;MDR
+2016;173;45,09;78;E. coli;Pigs;MDR
+2017;176;47,73;84;E. coli;Pigs;MDR
+2018;183;50,82;93;E. coli;Pigs;MDR
+2019;175;35,43;62;E. coli;Pigs;MDR
+2020;170;49,41;84;E. coli;Pigs;MDR
+2021;170;28,8;49;E. coli;Pigs;MDR
+2022;168;41,07;69;E. coli;Pigs;MDR
+2011;157;;;E. coli;Pigs;ESBL producers
+2012;217;;;E. coli;Pigs;ESBL producers
+2013;206;;;E. coli;Pigs;ESBL producers
+2014;184;;;E. coli;Pigs;ESBL producers
+2015;186;;;E. coli;Pigs;ESBL producers
+2016;173;;;E. coli;Pigs;ESBL producers
+2017;176;5,11;9;E. coli;Pigs;ESBL producers
+2018;183;8,2;15;E. coli;Pigs;ESBL producers
+2019;175;0,57;1;E. coli;Pigs;ESBL producers
+2020;170;0;0;E. coli;Pigs;ESBL producers
+2021;170;0;0;E. coli;Pigs;ESBL producers
+2022;168;2,98;5;E. coli;Pigs;ESBL producers
+2011;157;14,1;22;E. coli;Pigs;Ciprofloxacin resistance
+2012;217;13,36;29;E. coli;Pigs;Ciprofloxacin resistance
+2013;206;5,83;12;E. coli;Pigs;Ciprofloxacin resistance
+2014;184;2,17;4;E. coli;Pigs;Ciprofloxacin resistance
+2015;186;2,15;4;E. coli;Pigs;Ciprofloxacin resistance
+2016;173;5,78;10;E. coli;Pigs;Ciprofloxacin resistance
+2017;176;9,09;16;E. coli;Pigs;Ciprofloxacin resistance
+2018;183;7,1;13;E. coli;Pigs;Ciprofloxacin resistance
+2019;175;9,71;17;E. coli;Pigs;Ciprofloxacin resistance
+2020;170;7,06;12;E. coli;Pigs;Ciprofloxacin resistance
+2021;170;4,1;7;E. coli;Pigs;Ciprofloxacin resistance
+2022;168;10,7;18;E. coli;Pigs;Ciprofloxacin resistance
+2011;157;0,64;1;E. coli;Pigs;Colistin resistance
+2012;217;0,92;2;E. coli;Pigs;Colistin resistance
+2013;206;2,43;5;E. coli;Pigs;Colistin resistance
+2014;184;0,54;1;E. coli;Pigs;Colistin resistance
+2015;186;0;0;E. coli;Pigs;Colistin resistance
+2016;173;1,16;2;E. coli;Pigs;Colistin resistance
+2017;176;1,14;2;E. coli;Pigs;Colistin resistance
+2018;183;0;0;E. coli;Pigs;Colistin resistance
+2019;175;1,71;3;E. coli;Pigs;Colistin resistance
+2020;170;0,59;1;E. coli;Pigs;Colistin resistance
+2021;170;0;0;E. coli;Pigs;Colistin resistance
+2022;168;0,6;1;E. coli;Pigs;Colistin resistance
+2011;34;15,15;5;E. coli;Veal Calves;pan-S
+2012;181;12,43;22;E. coli;Veal Calves;pan-S
+2013;202;18,32;37;E. coli;Veal Calves;pan-S
+2014;188;26,06;49;E. coli;Veal Calves;pan-S
+2015;196;23,47;46;E. coli;Veal Calves;pan-S
+2016;174;20,11;35;E. coli;Veal Calves;pan-S
+2017;185;25,41;47;E. coli;Veal Calves;pan-S
+2018;187;13,9;26;E. coli;Veal Calves;pan-S
+2019;172;19,77;34;E. coli;Veal Calves;pan-S
+2020;168;26,79;45;E. coli;Veal Calves;pan-S
+2021;173;36,4;63;E. coli;Veal Calves;pan-S
+2022;166;24,7;41;E. coli;Veal Calves;pan-S
+2011;34;70,59;24;E. coli;Veal Calves;MDR
+2012;181;72,93;132;E. coli;Veal Calves;MDR
+2013;202;66,83;135;E. coli;Veal Calves;MDR
+2014;188;56,38;106;E. coli;Veal Calves;MDR
+2015;196;51,02;100;E. coli;Veal Calves;MDR
+2016;174;58,05;101;E. coli;Veal Calves;MDR
+2017;185;56,76;105;E. coli;Veal Calves;MDR
+2018;187;68,98;129;E. coli;Veal Calves;MDR
+2019;172;62,21;107;E. coli;Veal Calves;MDR
+2020;168;54,76;92;E. coli;Veal Calves;MDR
+2021;173;49,1;85;E. coli;Veal Calves;MDR
+2022;166;54,22;90;E. coli;Veal Calves;MDR
+2011;34;;;E. coli;Veal Calves;ESBL producers
+2012;181;;;E. coli;Veal Calves;ESBL producers
+2013;202;;;E. coli;Veal Calves;ESBL producers
+2014;188;;;E. coli;Veal Calves;ESBL producers
+2015;196;;;E. coli;Veal Calves;ESBL producers
+2016;174;;;E. coli;Veal Calves;ESBL producers
+2017;185;2,7;5;E. coli;Veal Calves;ESBL producers
+2018;187;3,74;7;E. coli;Veal Calves;ESBL producers
+2019;172;2,33;4;E. coli;Veal Calves;ESBL producers
+2020;168;1,19;2;E. coli;Veal Calves;ESBL producers
+2021;173;1,7;3;E. coli;Veal Calves;ESBL producers
+2022;166;1,81;3;E. coli;Veal Calves;ESBL producers
+2011;34;41,18;14;E. coli;Veal Calves;Ciprofloxacin resistance
+2012;181;43,09;78;E. coli;Veal Calves;Ciprofloxacin resistance
+2013;202;27,36;55;E. coli;Veal Calves;Ciprofloxacin resistance
+2014;188;22,34;42;E. coli;Veal Calves;Ciprofloxacin resistance
+2015;196;23,98;47;E. coli;Veal Calves;Ciprofloxacin resistance
+2016;174;19,54;34;E. coli;Veal Calves;Ciprofloxacin resistance
+2017;185;21,62;40;E. coli;Veal Calves;Ciprofloxacin resistance
+2018;187;22,46;42;E. coli;Veal Calves;Ciprofloxacin resistance
+2019;172;24,42;42;E. coli;Veal Calves;Ciprofloxacin resistance
+2020;168;17,26;29;E. coli;Veal Calves;Ciprofloxacin resistance
+2021;173;19,1;33;E. coli;Veal Calves;Ciprofloxacin resistance
+2022;166;25,3;42;E. coli;Veal Calves;Ciprofloxacin resistance
+2011;34;14,71;5;E. coli;Veal Calves;Colistin resistance
+2012;181;6,08;11;E. coli;Veal Calves;Colistin resistance
+2013;202;5,94;12;E. coli;Veal Calves;Colistin resistance
+2014;188;2,66;5;E. coli;Veal Calves;Colistin resistance
+2015;196;2,04;4;E. coli;Veal Calves;Colistin resistance
+2016;174;1,72;3;E. coli;Veal Calves;Colistin resistance
+2017;185;1,08;2;E. coli;Veal Calves;Colistin resistance
+2018;187;2,14;4;E. coli;Veal Calves;Colistin resistance
+2019;172;2,33;4;E. coli;Veal Calves;Colistin resistance
+2020;168;1,79;3;E. coli;Veal Calves;Colistin resistance
+2021;173;1,2;2;E. coli;Veal Calves;Colistin resistance
+2022;166;1,2;2;E. coli;Veal Calves;Colistin resistance

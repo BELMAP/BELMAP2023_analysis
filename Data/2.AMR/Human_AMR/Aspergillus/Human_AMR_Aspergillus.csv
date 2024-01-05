@@ -1,0 +1,13 @@
+Year;Pathogen;Antibiotic;Sample_size;Percent_resistant;Number_resistants;Region;Surveillance;Matrix
+2011;A. fumigatus;Azole;7;28,57;2;Belgium;;
+2012;A. fumigatus;Azole;17;41,18;7;Belgium;;
+2013;A. fumigatus;Azole;33;12,12;4;Belgium;;
+2014;A. fumigatus;Azole;27;14,81;4;Belgium;;
+2015;A. fumigatus;Azole;84;13,1;11;Belgium;;
+2016;A. fumigatus;Azole;559;9,48;53;Belgium;;
+2017;A. fumigatus;Azole;589;5,77;34;Belgium;;
+2018;A. fumigatus;Azole;567;5,82;33;Belgium;;
+2019;A. fumigatus;Azole;589;6,96;41;Belgium;;
+2020;A. fumigatus;Azole;648;7,87;51;Belgium;;
+2021;A. fumigatus;Azole;684;5,41;37;Belgium;;
+2022;A. fumigatus;Azole;933;10,61;99;Belgium;;

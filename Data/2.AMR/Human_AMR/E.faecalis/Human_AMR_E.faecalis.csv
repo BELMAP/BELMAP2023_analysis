@@ -1,0 +1,12 @@
+Year;Pathogen;Antibiotic;Sample_size;Percent_resistant;Number_resistants;Region;Surveillance;Matrix
+2011;E. faecalis;vancomycin;na;na;na;Belgium;AMR;
+2012;E. faecalis;vancomycin;na;na;na;Belgium;AMR;
+2013;E. faecalis;vancomycin;na;na;na;Belgium;AMR;
+2014;E. faecalis;vancomycin;9222;0,13;12;Belgium;AMR;
+2015;E. faecalis;vancomycin;15498;0,17;26;Belgium;AMR;
+2016;E. faecalis;vancomycin;20815;0,09;19;Belgium;AMR;
+2017;E. faecalis;vancomycin;22769;0,04;9;Belgium;AMR;
+2018;E. faecalis;vancomycin;25241;0,08;20;Belgium;AMR;
+2019;E. faecalis;vancomycin;24384;0,05;12;Belgium;AMR;
+2020;E. faecalis;vancomycin;22900;0,08;18;Belgium;AMR;
+2021;E. faecalis;vancomycin;25731;0,05;13;Belgium;AMR;
