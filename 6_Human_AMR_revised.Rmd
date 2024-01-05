@@ -1,0 +1,2278 @@
+---
+title: "![](BELMAP-logo.png){width=6in}"
+subtitle: 6. AMR in Human Pathogens
+date: "Last compiled on `r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: 
+    latex_engine: lualatex
+  html_document:
+    df_print: paged
+  word_document:
+    reference_docx: "word-styles-reference-01.docx"
+css: style.css
+editor_options:
+  markdown:
+    wrap: 72
+header-includes:    
+- \usepackage{placeins}
+- \usepackage{caption}
+- \captionsetup[figure]{labelformat=empty}
+- \captionsetup[table]{labelformat=empty}
+sansfont: Gill Sans MT
+---
+
+```{r setup4, include=FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE
+)
+```
+
+```{r load_data_and_themes4, include=FALSE}
+
+library(tidyverse)
+ library(patchwork)
+ library(jpeg)
+ library(scales)
+ library(extrafont)
+ library(remotes)
+ library(extrafontdb)
+ library(magrittr)
+ library(AER)
+ library(AICcmodavg)
+ library(pscl)
+ library(MASS)
+ library(COMPoissonReg)
+ library(performance)
+ library(grid)
+ library(ggtext)
+ library(showtext)
+ library(knitr)
+ library(kableExtra)
+
+ library(flextable)
+library(ftExtra)
+ 
+ 
+ BELMAP_colourscheme <- c("#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c",
+                          "#fdbf6f","#ff7f00","#cab2d6")
+ 
+ moiras_graph_theme<- function(..., base_size = 12){theme(
+    panel.background = element_blank(), #transparent panel bg
+   plot.background = element_blank(), #transparent plot bg
+   panel.grid.major.y =  element_line(colour = "#ccc6c4"), #grey y major gridlines
+   panel.grid.major.x =  element_blank(), #remove major gridlines
+   panel.grid.minor = element_blank(), #remove minor gridlines
+   # legend.background = element_rect(fill='#001f3f'), #transparent legend bg
+   legend.title = element_text(size = 18),
+   legend.text = element_text(size = 16),
+   #  legend.box.background = element_rect(fill='#001f3f'),
+   text = element_text( family = "Gill Sans MT"),
+   axis.text = element_text(size = 16),
+   #plot.background=element_blank(),#, , size = 10, family = "calibri"
+   axis.title = element_text(size = 18),
+  axis.ticks.x = element_blank(),
+  axis.text.x = element_text(angle = 90,vjust = 0.5, hjust = 0.5),
+   strip.background = element_blank(),
+   strip.text = element_text(size = 18),
+   legend.position = "top",
+   legend.direction = "horizontal"
+ )}
+ 
+ moiras_graph_theme_small<- function(..., base_size = 12){theme(
+    panel.background = element_blank(), #transparent panel bg
+   plot.background = element_blank(), #transparent plot bg
+   panel.grid.major.y =  element_line(colour = "#ccc6c4"), #grey y major gridlines
+   panel.grid.major.x =  element_blank(), #remove major gridlines
+   panel.grid.minor = element_blank(), #remove minor gridlines
+   # legend.background = element_rect(fill='#001f3f'), #transparent legend bg
+   legend.title = element_text(size = 12),
+   legend.text = element_text(size = 10),
+   #  legend.box.background = element_rect(fill='#001f3f'),
+   text = element_text( family = "Gill Sans MT"),
+   axis.text = element_text(size = 10),
+   #plot.background=element_blank(),#, , size = 10, family = "calibri"
+   axis.title = element_text(size = 12),
+   axis.text.x = element_text(angle = 90,vjust = 1, hjust = -1),
+   strip.background = element_blank(),
+   strip.text = element_text(size = 12),
+   legend.position = "top",
+   legend.direction = "horizontal"
+ )}
+
+ font_add("Gill Sans MT", "GIL_____.TTF")
+ 
+ # adding icons to figures ------------------------------------
+ 
+ # Important step to enable showtext font rendering!
+ showtext_auto()
+ 
+ font_add('fa-solid', '../font_awesome_font_files/fontawesome-free-6.4.0-desktop/otfs/Font Awesome 6 Free-Solid-900.otf')
+ 
+ upward_arrow <- "<span style='font-family:fa-solid'>&#xf062;</span>"
+ downward_arrow <- "<span style='font-family:fa-solid'>&#xf063;</span>" 
+ equals <- "<span style='font-family:fa-solid'>&#xf52c;</span>"   #" = " 
+ oscillate <- "<span style='font-family:fa-solid'>&#xf83e;</span>"   #" ~ "
+ 
+ 
+ # BELMAP_Indicator_colourscheme <- c("MDR"="#e31a1c",
+ #                                     "pan-S" = "#33a02c",
+ #                                     "MRSA" = "#1f78b4",
+ #                                     "ESBL producers" = "#a6cee3",
+ #                                     "Ciprofloxacin resistance" = "#b2df8a",
+ #                                     "Colistin resistance" = "#1f78b4")
+
+  
+   BELMAP_location_colourscheme <- c("Belgium"="#fc8d59",
+                                   "Neighbouring countries" = "#99d594",
+                                   "Hospital Lab"="#fc8d59",
+                                   "Private lab" = "#99d594",
+                                   "Europe" = "#3288bd")
+
+ BELMAP_Human_AntiB_colourscheme <- c("Ampicillin Resistance" ="#1f78b4",
+                                      "Methicillin Resistance" ="#1f78b4",
+                                      "Penicillin Resistance"="#1f78b4",
+                                      "Carbapenem Resistance" = "#a6cee3",
+                                      "Azole Resistance" = "#1f78b4",
+                                      "Fluconazole Resistance" = "#1f78b4",
+                                      "Colistin Resistance" = "#b2df8a",
+                                      "3GC Resistance" = "#fb9a99",
+                                      "Ceftriaxone Resistance"	= "#fb9a99",
+                                      "ESBL"= "#fb9a99",
+                                      "vancomycin Resistance" = "#33a02c",
+                                      "Vancomycin Resistance" = "#33a02c",
+                                      "Anidulafungine Resistance" = "#a6cee3",
+                                      "Monoresistant isoniazid" = "#1f78b4",
+                                      "Rifampicin Resistance" = "#a6cee3",
+                                      "Fidaxomicin Resistance" ="#e31a1c",
+                                      "Ciprofloxacin Resistance" = "#fdbf6f",
+                                      "Moxifloxacin Resistance" = "#fdbf6f",
+                                      "Macrolide Resistance" = "#ff7f00",
+                                      "Clarithomycin Resistance" = "#ff7f00",
+                                      "Azithromycin Resistance" = "#ff7f00",
+                                      "Macrolide and Fluoroquinolone Resistance" = "#1a1a1a",
+                                      "AG, FQ and 3GC Resistance" = "#1a1a1a",
+                                      "MDR" = "#1a1a1a")
+                                     #"#33a02c","#e31a1c","#fdbf6f","#ff7f00","#cab2d6", "#6a3d9a","#ffff99") #
+ #-----------------------------------------------------------------------------------
+ #2. Load data-----
+ Human_AMR_Belgium_EU <- read.csv("6_Human_AMR_Belgium_EU_raw.csv") %>%
+   dplyr::select(-X)
+
+ #load graph data --------------------------------------------------
+ 
+graph_data_complete <- read_csv2("6_Human_AMR_data_and_GLM_predictions.csv") %>%
+   mutate(label_icon = case_when(
+   icon == "upward_arrow" ~ upward_arrow,
+   icon == "downward_arrow" ~ downward_arrow,
+   icon == "equals" ~ equals,
+   icon == "oscilate" ~ oscillate,
+   .default = ""
+ )) %>%
+   mutate(label = if_else((is.na(signif_level) | signif_level == ""), label_icon, paste(label_icon,signif_level,sep=" "))) %>%
+   mutate(Year=as.numeric(Year)) %>%
+   mutate(Surveillance = if_else(Surveillance == "AMR", "NSIH-AMR", Surveillance)) %>%
+   mutate(Matrix = if_else(Matrix == "Blood_CSF", "Blood or CSF", Matrix)) %>%
+   mutate(Antibiotic = if_else(grepl("Monoresistant|MDR|ESBL",Antibiotic), Antibiotic, paste(Antibiotic," Resistance", sep = "")))
+
+
+ incidence_graph_data_complete <- read_csv("6_Human_Incidence_GLM_predictions.csv") %>%
+   mutate(label_icon = case_when(
+   icon == "upward_arrow" ~ upward_arrow,
+   icon == "downward_arrow" ~ downward_arrow,
+   icon == "equals" ~ equals,
+   icon == "oscilate" ~ oscillate,
+   .default = ""
+)) %>%
+   mutate(label = if_else((is.na(signif_level) | signif_level == ""), label_icon, paste(label_icon,signif_level,sep=" "))) %>%
+   mutate(Year=as.numeric(Year)) %>%
+   mutate(Region = "Belgium") %>%
+   mutate(Surveillance = "NSIH-AMR")%>%
+   mutate(Antibiotic = if_else(grepl("Monoresistant|MDR|ESBL",Antibiotic), Antibiotic, paste(str_to_title(Antibiotic)," Resistance", sep = ""))) %>%
+   mutate(Antibiotic = if_else(grepl("3cg Resistance", Antibiotic),"3GC Resistance", Antibiotic)) %>%
+      mutate(Antibiotic = if_else(grepl("3gc Resistance", Antibiotic),"3GC Resistance", Antibiotic))
+
+
+colorize <- function(x, color) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{%s}", color, x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'>%s</span>", color,
+      x)
+  } else x
+}
+ 
+```
+
+\newpage
+
+# 6. AMR in Human pathogens
+
+**Contents**
+
+6.1 [Methodology](#paragraph51)\
+6.2 [Critical pathogens](#paragraph52)\
+6.2.1 [*Acinetobacter* spp.](#subparagraph53)\
+6.2.2 [*Pseudomonas aeruginosa*](#subparagraph54)\
+6.2.3 [*Escherichia coli*](#subparagraph51)\
+6.2.4 [*Klebsiella pneumoniae*](#subparagraph52)\
+6.3 [Pathogens with High risk](#paragraph53)\
+6.3.1 [*Enterococcus faecium*](#subparagraph56)\
+6.3.2 [*Staphylococcus aureus*](#subparagraph55)\
+6.3.3 [*Helicobacter pylori*](#subparagraph513)\
+6.3.4 [Invasive *Salmonella* spp.](#subparagraph59)\
+6.3.5 [*Neisseria gonorrhoeae*](#subparagraph511)\
+6.4 [Pathogens with medium risk](#paragraph54)\
+6.4.1 [*Streptococcus pneumoniae*](#subparagraph57)\
+6.4.2 [*Haemophilus influenzae*](#subparagraph58)\
+6.4.3 [*Shigella* spp.](#subparagraph514)\
+6.5 [Other priority pathogens](#paragraph55)\
+6.5.1 [*Mycobacterium tuberculosis*](#subparagraph510)\
+6.5.2 [*Mycoplasma genitalium*](#subparagraph512)\
+6.5.3 [*Clostridioides difficile*](#subparagraph515)\
+6.6 [Priority Fungal Pathogens](#paragraph56)\
+6.6.1 [*Candida* spp.](#subparagraph516)\
+6.6.2 [*Aspergillus fumigatus*](#paragraph517)\
+6.7 [Research](#paragraph518)
+
+In 2017, the World Health Organization (WHO) published its first ever
+list of antibiotic-resistant "priority pathogens"
+[[20]](https://www.who.int/publications-detail-redirect/WHO-EMP-IAU-2017.12).
+The highest priority "critical" group includes multidrug resistant (MDR)
+bacteria that pose a particular threat in hospitals, nursing homes, and
+among patients whose care requires devices such as ventilators and
+intravenous catheters. They include *Acinetobacter*, *Pseudomonas* and
+various Enterobacterales (including *Klebsiella* spp. and *E. coli*).
+They can cause severe and often deadly infections such as bloodstream
+infections and healthcare-associated pneumonia. The second and third
+tiers in the list -- the high and medium priority categories -- contain
+other increasingly drug-resistant bacteria that are mainly responsible
+for community-acquired infectious diseases such as gonorrhea and food
+poisoning. In 2022, the WHO published its first fungal priority list
+[[21]](https://www.who.int/publications-detail-redirect/9789240060241).
+In BELMAP 2023, we present available AMR data on pathogens highlighted
+in these documents, along with other priority, difficult-to-treat
+infections caused by pathogens such as *Clostridioides* (*Clostridium*)
+*difficile* and *Mycobacterium tuberculosis*.
+
+## 6.1 Methodology {#paragraph51}
+
+Two different systems are in place for the epidemiological monitoring of
+AMR in humans in Belgium:
+
+• the Belgian national AMR surveillances (NSIH-AMR) of methicillin
+resistant *Staphylococcus aureus* ("MRSA"), multi-resistant
+Gram-negative bacilli ("MRGN"), and vancomycin resistant enterococci
+("VRE")[[22]](https://www.sciensano.be/nl/nationale-surveillance-van-infecties-zorginstellingen-nsih).\
+• the European (EU) Antimicrobial Resistance Surveillance Network for
+Belgium ("EARS-BE")
+[[23]](https://www.sciensano.be/nl/projecten/europese-antimicrobiele-resistentie-surveillance-belgie).
+
+**NSIH-AMR**
+
+The NSIH-AMR surveillances
+[[24]](https://www.sciensano.be/nl/nationale-surveillance-van-infecties-zorginstellingen-nsih)
+are the main national surveillances for antimicrobial susceptibility and
+the incidence of multidrug resistant organisms in Belgium. By Royal
+Decree, **participation is mandatory** for acute care hospitals for the
+MRSA and MRGN surveillances. Participation in the VRE surveillance is
+currently optional (Belgian Royal Decree of 25 April 2002), but with
+consistently high (\>84%) participation rates. Exceptionally, there was
+no legal obligation for hospitals to participate in the national
+surveillances (incl. MRSA, MRGN and VRE) in 2020 (collecting 2019 data)
+and 2021 (collecting 2020 data) due to the exceptional work load for
+hospitals during the COVID-19 pandemic.
+
+In the NSIH-AMR surveillance, **data for all clinical isolates** are
+collected retrospectively (year -1) and aggregated at the hospital
+level. The AMR surveillance protocol is defined by the
+'Healthcare-associated infections and antimicrobial resistance service'
+(NSIH) of Sciensano, in collaboration with the relevant national
+reference laboratories (NRCs). Here we report the crude resistant rates
+(percentage of isolates testing resistant) and the crude incidence per
+1000 patient days (number of isolations/total number of patient days
+\*1000). For more information about this surveillance, including the
+protocols and the reports from previous years, the reader is referred to
+the NSIH webpage
+[[24]](https://www.sciensano.be/nl/nationale-surveillance-van-infecties-zorginstellingen-nsih).
+
+**EARS-Net**\
+EARS-Net
+[[25]](https://www.ecdc.europa.eu/en/about-us/networks/disease-networks-and-laboratory-networks/ears-net-data)
+is the main EU epidemiological surveillance system for AMR, and its data
+serve as important indicators on the occurrence and spread of AMR in
+European countries
+[[26]](https://www.ecdc.europa.eu/en/%20surveillance-atlas-infectious-diseases).
+On a yearly basis, this monitoring system collects and reports data from
+European countries on AMR against relevant antimicrobials within
+commonly occurring pathogens isolated from **clinical invasive samples
+(blood and cerebrospinal fluid (CSF))** in humans. EARS-Net collects
+such data on seven bacterial pathogens commonly causing infections in
+humans: *E. coli*, *K. pneumoniae*, *P. aeruginosa*, *Acinetobacter*
+species, *S. pneumoniae*, *S. aureus*, *E. faecalis* and *E. faecium*.
+EU member states are requested to participate in EARS-Net by EU
+recommendation (Council Recommendation, 2009/C 151/01), with
+**participation voluntary** for laboratories.
+
+In Belgium, national data is collected and submitted to the EU by the
+'Healthcare-associated infections and antimicrobial resistance service'
+of Sciensano (NSIH), through the "EARS-BE surveillance"
+[[27]](https://www.sciensano.be/nl/projecten/europese-antimicrobiele-resistentie-surveillance-belgie).
+EARS-BE differs from EARS-Net in three major points: (1) antimicrobial
+susceptibility tests (AST) are also performed on urinary isolates (in
+addition to blood/CSF samples); (2) the inclusion of the pathogen
+*Proteus mirabilis*, a frequent cause of urinary tract infections; (3)
+the distinction between all *Acinetobacter* species and the pathogen *A.
+baumannii*, the predominant species of the genus that is included in the
+ESKAPE pathogens commonly associated with AMR. Data are collected
+retrospectively (year - 1). Microbiology laboratories are asked to
+specify data up to the level of individual combinations of the
+antimicrobial tests performed and to transfer this file to Sciensano.
+The data call, case, data definitions and reports from previous years
+are available on the [NSIH
+website](https://www.sciensano.be/en/national-surveillance-infections-hospitals-nsih).
+
+**Invasive infections**\
+As described above, a critical difference between these two surveillance
+systems is the inclusion of all clinical isolates in the NSIH-AMR
+surveillance, while the European EARS-Net surveillance focuses on
+isolates from invasive samples (blood and CSF samples). Invasive
+infections such as bloodstream infections (BSIs) are among the most
+severe clinical syndromes, and are considered a leading cause of
+unfavorable outcomes, increasing treatment costs and length of hospital
+stay. BSIs are one of the most frequent lethal conditions that are
+managed in intensive care units (ICUs), and require immediate
+antimicrobial therapy. Hospital-associated bloodstream infections
+(HABSIs, bloodstream infections diagnosed two or more days after
+admission to hospital) represent a significant proportion of BSIs
+reported in Belgian hospitals (7,593/9,164 (82.9%) in 2021)
+[[28]](https://www.sciensano.be/sites/default/files/bsi_report_2022.pdf).
+In 2021, an invasive device (for example a central line, urinary
+catheter or endotracheal tube) was associated with 45% of all HABSIs,
+and 70% of ICU-associated BSIs. COVID-19 is considered to have had a
+huge impact on such infections, with substantial increases observed in
+the incidence of HABSIs in 2020 and 2021.
+
+Aside from these two main resistance surveillances based on aggregated
+data, clinical laboratories can voluntarily send isolates to **National
+Reference Centres**
+[(NRCs)](https://www.sciensano.be/nl/nationale-referentiecentra-voor-humane-microbiologie.)
+for phenotypic and genotypic characterization (including resistance
+profiles and confirmation of relevant resistance mechanisms) and/or
+molecular typing. These NRCs publish annual reports, from which data on
+resistance was extracted for inclusion in this report.
+
+\FloatBarrier
+
+## 6.2 Critical pathogens {#paragraph52}
+
+\FloatBarrier
+
+### 6.2.1 *Acinetobacter* spp. {#subparagraph53}
+
+*Acinetobacter* spp. are ubiquitous in nature and are able to persist on
+inanimate surfaces, facilitating their spread to- and within- healthcare
+facilities. Due to its higher virulence and intrinsic resistance to many
+antimicrobials, *A. baumannii* is one of the principal opportunistic
+pathogens that can cause severe Healthcare-associated infections. Such
+cases most often occur in patients within intensive care units, and may
+be associated with pneumonia (often ventilator-associated), central-line
+associated bloodstream infections and urinary tract infections ^[Note: *Acinetobacter* spp., other than *baumannii*, cannot be
+    considered as a UTI pathogen, and is mostly a colonizer or a
+    contaminant]
+Immune suppression, invasive procedures, burns and traumatic wounds,
+together with an extended hospital stay, are some of the risk factors
+for *Acinetobacter*
+infections[[29]](https://data.europa.eu/doi/10.2900/22212). The
+environmental persistence of *A. baumannii* makes eliminating this
+pathogen very difficult and eases transmission, which can lead to
+difficult-to-control outbreaks. Due to historical difficulties for
+clinical labs to correctly identify *Acinetobacter* isolates to species
+level, the EARS-Net surveillance monitors the antimicrobial resistance
+of *Acinetobacter* spp., with *A. baumannii* comprising 16% (32 / 196)
+of isolates in 2022. In addition to these results, since 2018, EARS-BE
+collected AST results on the subgroup of *A. baumannii* species.
+
+
+Figure 11 shows the evolution of carbapenem resistance among
+*Acinetobacter* spp. in invasive samples (EARS surveillance) and from
+*A. baumannii* isolates from all clinical samples in acute hospitals
+(NSIH-AMR surveillance). In both cases, prevalence of carbapenem
+resistance in Belgium remained low in 2021 (EARS: 1%, 196 isolates ;
+NSIH-AMR : 8.1%, 850 samples), with a minority of hospitals (\<30%)
+reporting at least one carbapenem resistant *A. baumannii*. Given the
+low number of invasive isolates, it remains difficult to precisely
+estimate the prevalence of resistance at a national level but we do
+observe a decreasing trend. No such decrease is observed in the NSIH-AMR
+surveillance which includes all clinical samples.
+
+In any case, the low prevalence in Belgium and its neighbouring
+countries (France, Germany, The Netherlands and Luxembourg) contrasts
+sharply with EU means (Figure 11A), which are strongly influenced by
+soaring numbers of carbapenemase producing *Actinobacter* spp. in Italy
+and Greece.
+
+\FloatBarrier
+
+```{r 5.2.3_Acinetobacter_spp., fig.dim=c(10,8), fig.cap="**Figure 11** — Proportion of A) *Acinetobacter* spp. or B) *A. baumannii* resistant to carbapenems from A) invasive clinical isolates isolated in Belgium, our neighbouring countries (France, Germany, The Netherlands and Luxembourg) and EU averages and B) all clinical isolates in acute care hospitals in Belgium. **Note.** Prior to 2021 non-susceptibility (susceptible at increased exposure (I) or resistant (R)) was asked in NSIH-AMR surveillance, post 2021 these cases refer to R cases only. Sources: A) EARS-BE and ECDC’s Surveillance Atlas of Infectious Diseases, B) NSIH-AMR."}
+
+
+Acinetobacter_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("Acinetobacter", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+   #    filter(!(Surveillance == "NSIH-AMR")) %>%
+   # filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Region == "Belgium" ~ 10,
+     Region == "Neighbouring countries" ~ 30,
+     Region == "Europe" ~ 50)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( Surveillance ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2011,2023), breaks = seq(2012,2021,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()
+
+
+
+Acinetobacter_graph_AMR <- graph_data_complete %>%
+  filter(grepl ("A. baumanii", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+   #    filter(!(Surveillance == "NSIH-AMR")) %>%
+   # filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Region == "Belgium" ~ 10,
+     Region == "Neighbouring countries" ~ 30,
+     Region == "Europe" ~ 50)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( Surveillance ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2011,2023), breaks = seq(2012,2021,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()+
+  theme(legend.position = "none")
+
+Acinetobacter_graph_EARS / Acinetobacter_graph_AMR + plot_annotation(tag_levels = "A")
+
+
+```
+
+Although often MDR, *Acinetobacter* spp. infections are uncommon and
+identified in \<1% HABSIs in Belgian patients. The incidence of
+carbapenem-resistant *A. baumannii* infections per 1000 patient days in
+Belgium acute care hospitals is among the lowest of all the pathogens
+monitored in NSIH-AMR, and is further reducing over time.
+
+\FloatBarrier
+
+```{r 5.2.3_Acinetobacter_spp.2, fig.dim=c(8,4), fig.cap="**Figure 12** — Crude incidence of carbapenem resistant *A. baumannii* in acute care hospitals in Belgium (per 1000 patient days) **Note.** Prior to 2021 non-susceptibility (susceptible at increased exposure (I) or resistant (R)) was asked in NSIH-AMR surveillance, post 2021 these cases refer to R cases only. Source: NSIH-AMR."}
+
+
+Acinetobacter_graph_AMR_incidence <- incidence_graph_data_complete %>%
+  filter(grepl ("A. baumanii", Pathogen)) %>%
+   mutate(y_coord = 0.001) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Incidence), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Incidence_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Incidence_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( Surveillance ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2011,2023), breaks = seq(2012,2021,1))+
+    scale_y_continuous(limits = c(0,0.02), breaks = seq(0,0.02,0.01))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "Incidence per 1000 patient days")&
+    moiras_graph_theme_small()+
+  theme(legend.position = "none")
+
+Acinetobacter_graph_AMR_incidence
+
+
+```
+
+\FloatBarrier
+
+### 6.2.2 *Pseudomonas aeruginosa* {#subparagraph54}
+
+*Pseudomonas aeruginosa* is commonly found in aquatic environments in
+nature. It is an opportunistic pathogen and a common cause of
+healthcare- associated pneumonia (including ventilator-associated
+pneumonia), bloodstream infections and urinary tract infections. *P.
+aeruginosa* displays high intrinsic resistance to a large number of
+antimicrobial agents and has a high propensity to acquire and accumulate
+resistance mechanisms (chromosomal mutations and/or mobile elements
+horizontal transfer), resulting in multidrug-resistant phenotypes
+towards different antibiotics classes.
+
+Figure 13 displays the evolution of multi-drug resistance within
+invasive clinical isolates (EARS) and all clinical isolates (NSIH-AMR)
+of *P. aeruginosa* from 2011 to 2021. Lower proportions of
+Carbapenem-resistant *Pseudomonas aeruginosa* (CRPA) are observed in
+Belgian urinary samples (EARS-BE), with resistance stable around 4%
+(4.1% in 2021, range = 3.5-4.2) The proportion of CRPA has declined
+significantly in invasive isolates in Belgium, our neighbouring
+countries and Europe, although stabilization around 6-7% is observed in
+Belgium since 2014 with 7.4% (34/462) MDR isolates in 2021. This is
+consistent with the values observed when considering all clinical cases
+in acute care hospitals (6% in 2021, 1,185/19,717). No trend analysis
+was performed for the NSIH-AMR data, due to methodological changes as
+noted in Figure 15.
+
+```{r 5.2.4_Pseudomonas_aeruginosa, fig.dim=c(10,8), fig.cap="**Figure 13** — Proportion of multidrug resistant (MDR) *P. aeruginosa* from A) invasive clinical isolates isolated in Belgium , our neighbouring countries (France, Germany, The Netherlands and Luxembourg) and EU averages and urinary samples in Belgium, and B) all clinical isolates in acute care hospitals in Belgium. **Note.** Between 2016 and 2017, the definition of MDR *P. aeruginosa* changed from reduced susceptibility (I or R ) to at least one antibiotic in four out of the five following antibiotic classes to reduced susceptibility to at least three of the following antibiotic classes: fluoroquinolones (ciprofloxacin, levofloxacin), aminoglycosides (gentamicin, tobramycin, amikacin), carbapenems (meropenem, imipenem), 3rd and / or 4th generation cephalosporins (ceftazidime, cefepime) and anti-pseudomonas penicillins (piperacillin/tazobactam). In 2018, anti-pseudomonas penicillins (piperacillin/tazobactam) were dropped from the definition. Since 2020, only resistance (R) is considered.CSF: cerebrospinal fluid. Sources: A) EARS-BE and ECDC’s Surveillance Atlas of Infectious Diseases, B) NSIH-AMR.**Note y axis scale adjusted 0 - 20% to facilitate pattern visualisation.**"}
+
+Pseudomonas_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("P. aeruginosa|P.aeruginosa", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+       filter(!(Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Region == "Belgium" ~ 5,
+     Region == "Neighbouring countries" ~ 10,
+     Region == "Europe" ~ 15)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+        facet_grid( Surveillance ~ Matrix)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2021,1))+
+    scale_y_continuous(limits = c(-1,20), breaks = seq(0,20,10))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  
+
+
+Pseudomonas_graph_AMR <- graph_data_complete %>%
+  filter(grepl ("P. aeruginosa|P.aeruginosa", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+       filter((Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Region == "Belgium" ~ 5,
+     Region == "Neighbouring countries" ~ 10,
+     Region == "Europe" ~ 15)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Region), stat="identity", position = "dodge")+
+        facet_grid(Surveillance ~ Matrix)+
+    #geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    #geom_smooth(aes(x=Year, colour = Region, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2021,1))+
+    scale_y_continuous(limits = c(-1,20), breaks = seq(0,20,10))+
+    # geom_richtext(aes(x = 2022.5, y = y_coord,
+    #                   label = label,
+    #                   fill = Region), stat = "unique",
+    #                   colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()+
+  theme(legend.position = "none")
+
+
+
+Pseudomonas_graph_EARS/Pseudomonas_graph_AMR + plot_annotation(tag_levels = "A")
+
+```
+
+In Belgium, *P. aeruginosa* was isolated in 5% of HABSIs in 2021.
+Incidence of MDR *P. aeruginosa* cases in acute care hospitals
+oscillates around 0.1 cases per 1000 patient days. Due to methodological
+changes, no trend analysis was performed on this dataset.
+
+\FloatBarrier
+
+```{r 5.2.3_Pseudomonas.2, fig.dim=c(8,4), fig.cap="**Figure 14** — Crude incidence of multidrug resistant (MDR) *P. aeruginosa* in acute care hospitals in Belgium (per 1000 patient days) Note. Between 2016 and 2017, the definition of MDR *P. aeruginosa* changed from reduced susceptibility (I or R ) to at least one antibiotic in four out of the five following antibiotic classes to reduced susceptibility to at least three of the following antibiotic classes: fluoroquinolones (ciprofloxacin, levofloxacin), aminoglycosides (gentamicin, tobramycin, amikacin), carbapenems (meropenem, imipenem), 3rd and / or 4th generation cephalosporins (ceftazidime, cefepime) and anti-pseudomonas penicillins (piperacillin/tazobactam). In 2018, anti-pseudomonas penicillins (piperacillin/tazobactam) were dropped from the definition. Since 2020, only resistance (R) is considered.  Source: NSIH-AMR."}
+
+
+Pseudomonas_graph_AMR_Incidence <- incidence_graph_data_complete %>%
+  filter(grepl ("P. aeruginosa|P.aeruginosa", Pathogen)) %>%
+    mutate(y_coord = 0.02) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Incidence), fill = Region), stat="identity", position = "dodge")+
+#    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Incidence_predict), alpha = 0.25)+
+ #   geom_smooth(aes(x=Year, colour = Region, y = Incidence_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( Surveillance ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2011,2023), breaks = seq(2012,2021,1))+
+    scale_y_continuous(limits = c(0,0.2), breaks = seq(0,0.2,0.1))+
+ #   geom_richtext(aes(x = 2022.5, y = y_coord,
+ #                     label = label,
+ #                     fill = Region), stat = "unique",
+ #                     colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "Incidence per 1000 patient days")&
+    moiras_graph_theme_small()+
+  theme(legend.position = "none")
+
+Pseudomonas_graph_AMR_Incidence
+
+
+```
+
+\FloatBarrier
+
+### 6.2.3 *Escherichia coli* {#subparagraph51}
+
+*Escherichia coli* is part of the commensal intestinal flora, but is
+also the most common pathogen in BSIs in Belgium, isolated in 19% of the
+hospital-associated BSIs (HABSIs) in 2021
+[[28]](https://www.sciensano.be/sites/default/files/bsi_report_2022.pdf).
+The source of such *E. coli* are most often urinary tract or abdominal
+infections. A major change in its global epidemiology has been the
+emergence of resistance to 3rd generation cephalosporins (3GC) primarily
+caused by extended spectrum beta-lactamases (ESBL) especially of CTX-M
+family. Another major event is the global spread of one very successful
+clone (ST131) that has emerged over the last two decades.
+
+In Belgium, we have seen an increase in resistance to 3GC among *E.
+coli* isolated from BSIs (2011--2014), but this trend stabilized in the
+last years, and decreased from 2020 (9.8%, 454/4,632) to 2021 (8.2%,
+428/5,220, Figure 15 first panel). These levels mirror those of our
+neighbouring countries (8.6%), and are lower than EU averages (11.6% in
+2021), and much lower than in other parts of the world where levels up
+to 40% are recorded [[30]](https://doi.org/10.1128/AAC.00355-1). When
+considering all clinical isolates from Belgian acute care hospitals, the
+resistance to 3GC has been more stable and slightly below that of the
+clinical invasive sample surveillance with 7.8% resistance observed in
+2021 (7,210/91,915 samples).
+
+\newpage 
+
+This contrasts a national trend of decreasing levels of ciprofloxacin
+resistance among clinical invasive isolates, which dropped from 26.7% in
+2014 to 18.1% in 2021 (Figure 15B). Of note, since 2017 the EARS-BE
+monitoring includes data on *E. coli* and *Proteus mirabilis* isolated
+from urine samples . Ciprofloxacin resistance in *E. coli* isolated from
+urine samples decreased from 16.2% in 2017 to 13.9% in 2021, which
+mirrors the trend observed in invasive isolates in the same time period.
+Thus far, resistance to carbapenems and colistin among invasive *E.
+coli* isolates (latter not shown) remains low (\<1%)^[The distribution of colistin resistance is difficult to assess
+    through EARS-Net, as colistin susceptibility testing is generally
+    not part of the initial routine antimicrobial susceptibility testing
+    (AST) panel for Enterobacterales, being performed instead at
+    national level after referral of MDR isolates to a
+    reference laboratory. In addition, colistin susceptibility testing
+    is methodologically challenging and limited to broth microdilution
+    (EUCAST). A survey among EARS-Net participating laboratories in 2017
+    showed that a majority of the local laboratories that responded did
+    not test for colistin susceptibility locally, or used methods that
+    are not recommended by EUCAST (unpublished data, ECDC/UK NEQAS).
+    This has led to the conclusion that data sources other than EARS-Net
+    are needed for colistin susceptibility surveillance until local
+    laboratory capacity has improved.]
+    
+
+```{r 5.2.1_Escherichia_coli, fig.dim=c(10,8), fig.cap="**Figure 15** — Proportion of *E. coli* resistant to 3rd generation cephalosporin (3GC) and ciprofloxacin from A) invasive clinical isolates isolated in Belgium , our neighbouring countries (France, Germany, The Netherlands and Luxembourg) and EU averages  and urinary isolates in Belgium, and B) all clinical isolates in acute care hospitals in Belgium. Note. Prior to 2021 non-susceptibility (susceptible at increased exposure (I) or resistant (R)) isolates were asked in NSIH-AMR surveillance, post 2021 these cases refer to R cases only. Furthermore, prior to 2018 non-susceptibility to 4th generation cephalosporins was included. CSF: cerebrospinal fluid. Sources: A) EARS-Be and ECDC’s Surveillance Atlas of Infectious Diseases, B) NSIH-AMR."}
+
+
+E_coli_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("E.coli|E. coli", Pathogen)) %>%
+   filter(!(Antibiotic == "Colistin")) %>%
+     filter(!(Surveillance == "NSIH-AMR")) %>%
+       filter(!grepl("Private|Hospital", Region)) %>%
+   #  group_by(Antibiotic) %>%
+   mutate(Surveillance1 = paste("EARS-BE", Matrix, sep = "\n"),
+      y_coord = case_when(
+          Region == "Belgium" ~ 10,
+          Region == "Neighbouring countries" ~ 30,
+          Region == "Europe" ~ 50)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( Surveillance1 ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2021,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()
+
+E_coli_AMR <- graph_data_complete %>%
+  filter(grepl ("E.coli|E. coli", Pathogen)) %>%
+     filter(Surveillance == "NSIH-AMR") %>%
+   mutate(y_coord = 10) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme, labels = NULL)+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( Surveillance ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2021,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()+
+  theme(legend.position = "none")
+
+E_coli_graph_EARS / E_coli_AMR + plot_annotation(tag_levels = "A") +
+  plot_layout(heights = c(2,1))
+
+
+# E_coli_graph_EARS_table <- graph_data_complete %>%
+#   filter(grepl ("E.coli|E. coli", Pathogen)) %>%
+#   filter(grepl("3GC", Antibiotic)) %>%
+#   filter(!(Surveillance == "NSIH-AMR")) %>%
+#   filter(!(Matrix == "Urine")) %>%
+#   filter(!grepl("Private|Hospital", Region)) %>%
+#   dplyr::select(Year,Region,Percent_resistant, label) %>%
+#   pivot_wider(names_from = Year, values_from = Percent_resistant) %>%
+#   kable("rst", escape = F, align = "c")
+# 
+# E_coli_graph_EARS_table <- graph_data_complete %>%
+#   filter(grepl ("E.coli|E. coli", Pathogen)) %>%
+#   filter(grepl("3GC", Antibiotic)) %>%
+#   filter(!(Surveillance == "NSIH-AMR")) %>%
+#   filter(!(Matrix == "Urine")) %>%
+#   filter(!grepl("Private|Hospital", Region)) %>%
+# #    mutate(label_icon = case_when(
+# #      icon == "upward_arrow" ~ icons::fontawesome("arrow-up", style = "solid"),
+# #      icon == "downward_arrow" ~ icons::fontawesome("arrow-down", style = "solid"),
+# #      icon == "equals" ~ equals,icons::fontawesome("equals", style = "solid"),
+# #      icon == "oscilate" ~ oscillate,icons::fontawesome("wave-square", style = "solid"),
+# #      .default = ""
+# #    )) %>%
+# #    mutate(Label = if_else((is.na(signif_level) | signif_level == ""), label_icon, paste(label_icon,signif_level,sep=" "))) %>%
+#   dplyr::select(Year,Region,Percent_resistant) %>%
+#   pivot_wider(names_from = Year, values_from = Percent_resistant) %>%
+#     mutate(Trend = "")
+# 
+#   
+#   kable(E_coli_graph_EARS_table, escape = F, align = "c")
+# 
+#   flextable(E_coli_graph_EARS_table)
+
+```
+
+\FloatBarrier
+
+The incidence of *E. coli* cases resistant to 3GC in Belgian acute care
+hospitals are among the highest of all pathogen-antimicrobial
+combinations monitored in the NSIH-AMR surveillance. The incidence of
+both 3GC and carbapenem resistant *E. coli* show no significant
+increasing or decreasing trend but do vary significantly per year, with
+on average 0.83 and 0.008 cases per 1000 patient days respectively.
+
+```{r 5.2.3_E.coli.2, fig.dim=c(10,4), fig.cap="**Figure 16** — Crude incidence of 3rd generation cephalosporins (3GC) and carbapenem resistant *E. coli* in acute care hospitals in Belgium (per 1000 patient days) **Note.** Prior to 2021 non-susceptibility (susceptible at increased exposure (I) or resistant (R)) was asked in NSIH-AMR surveillance, post 2021 these cases refer to R cases only. Furthermore, prior to 2018 non-susceptibility to 4th generation cephalosporins was included. Source: NSIH-AMR."}
+
+
+E_coli_AMR_incidence <- incidence_graph_data_complete %>%
+  filter(grepl ("E.coli|E. coli", Pathogen)) %>%
+    mutate(y_coord = 0.10) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Incidence), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Incidence_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Incidence_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme, labels = NULL)+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( Surveillance ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2023), breaks = seq(2014,2021,1))+
+    scale_y_continuous(limits = c(0,1), breaks = seq(0,1,0.5))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "Incidence per 1000 patient days")&
+    moiras_graph_theme()+
+  theme(legend.position = "none")
+
+E_coli_AMR_incidence
+
+
+```
+
+\FloatBarrier
+
+### 6.2.4 *Klebsiella pneumoniae* {#subparagraph52}
+
+*Klebsiella pneumoniae* can cause numerous healthcare-associated
+infections and community acquired acute or persistent invasive
+infections at various body sites. Globally, carbapenem-resistant *K.
+pneumoniae* (CRKP) has become one of the bacterial pathogens with the
+highest impact on public health, accounting in Europe alone for \>90,000
+infections and \>7,000 deaths annually
+[[31]](https://doi.org/10.1016/S1473-3099(18)30605-4). CRKP are
+especially of concern, both because of their epidemic potential causing
+major healthcare-associated outbreaks through dissemination of high-risk
+clones (e.g. clonal complexes ST147, ST307), but also because of the
+risk of horizontal transfer of mobile genetic elements carrying
+carbapenemase genes, including plasmids (e.g. pOXA-48a plasmid)
+[[32]](https://doi.org/10.1016/S1473-3099(13)70190-7) .
+
+In Belgium, *K. pneumoniae* was isolated in 7% of HABSIs in 2021
+[[28]](https://www.sciensano.be/sites/default/files/bsi_report_2022.pdf),
+making it the second most frequent Enterobacterales species. Figure 17
+shows the evolution of resistance in clinical isolates in 2011--2021.
+Between 2011 and 2021, both the absolute number of *K. pneumoniae*
+isolates (from n=534 to n=1,016), and the prevalence of CRKP (from 0.4%
+to 1.4%) have significantly increased. This proportion is approximately
+two-fold higher than in our direct neighbouring countries (0.73% in
+2021), yet significantly lower than the EU average (11.6%).
+
+Of note, as for many bacterial pathogens, budgetary limitations hinder
+detailed molecular surveillance on carbapenem resistant bacteria with no
+systematic microbiological and molecular surveillance of CRKP isolates
+in place. Therefore, the proportion of CPE (carbapenemase producers)
+among CRE (carbapenem resistant) is currently unknown, as is the
+distribution of the different carbapenemase family types within the CPE
+in BSI isolates. Furthermore, the prevalence of CPE cannot be addressed
+in this surveillance as some CPE types are frequently susceptible to
+carbapenems (80% of the most prevalent OXA-48-like CPE are meropenem
+susceptible).
+
+The proportion of multi-drug resistant (MDR) *K. pneumoniae* strains
+resistant to 3GCs, aminoglycosides and fluoroquinolones increased across
+the 2012--2020 period from 8.4% to 10.4% (Figure 17), which contrasts
+declining European trends.
+
+\FloatBarrier
+
+```{r 5.2.2_Klebsiella_pneumoniae, fig.dim=c(10,8), fig.cap="**Figure 17** — Proportion of resistance to a combination of aminoglycosides (AG), fluoroquinolones (FQ) and 3rd generation cephalosporins (3GC) (left panel) and carbapenem (right panel) observed in *K. pneumoniae* in A) invasive clinical isolates in Belgium , neighbouring countries and the EU average or urinary isolates in Belgium, and B) all clinical isolates in acute care hospitals in Belgium. CSF: cerebrospinal fluid. Sources: A) EARS-BE data and ECDC’s Surveillance Atlas of Infectious Diseases, B) NSIH-AMR"}
+
+Klebsiella_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("K.pneumoniae|K. pneumoniae", Pathogen)) %>%
+   # filter(!(Antibiotic == "Colistin")) %>%
+      filter(!(Surveillance == "NSIH-AMR")) %>%
+  mutate(Antibiotic = if_else(Antibiotic == "AG, FQ And 3GC", "AG, FQ and 3GC", Antibiotic)) %>%   
+  mutate(Surveillance1 = paste("EARS-BE", Matrix, sep = "\n")) %>%
+ #  filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Region == "Belgium" ~ 10,
+     Region == "Neighbouring countries" ~ 30,
+     Region == "Europe" ~ 50)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( Surveillance1 ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2021,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  +
+  theme(strip.text = element_text(size = 10))
+
+
+Klebsiella_graph_AMR <- graph_data_complete %>%
+  filter(grepl ("K.pneumoniae|K. pneumoniae", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+       filter((Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Region == "Belgium" ~ 10,
+     Region == "Neighbouring countries" ~ 30,
+     Region == "Europe" ~ 50)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Region), stat="identity", position = "dodge")+
+        facet_grid( Surveillance ~ Antibiotic)+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2021,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()+
+  theme(legend.position = "none",
+       strip.text = element_text(size = 10))
+
+
+
+Klebsiella_graph_EARS/Klebsiella_graph_AMR + plot_annotation(tag_levels = "A")+
+  plot_layout(heights = c(2,1))
+
+
+```
+
+As observed in *E. coli*, the incidence of *K. pneumoniae* cases
+resistant to 3GC is significantly higher than the incidence of *K.
+pneumoniae* cases resistant to carbapenem in Belgian acute care
+hospitals (0.4 cases per 1000 patient days vs 0.033 cases per 1000
+patient days). The incidence of 3GC resistance *K. pneumoniae* cases is
+increasing while the incidence of carbapenem resistant cases shows no
+significant increasing or decreasing trend.
+
+\FloatBarrier
+
+```{r 5.2.3_Klebsiella.2, fig.dim=c(10,4), fig.cap="**Figure 18** — Crude incidence of 3GC and resistant *K. pneumoniae* in acute care hospitals in Belgium (per 1000 patient days) **Note.** Prior to 2021 non-susceptibility (susceptible at increased exposure (I) or resistant (R)) was asked in NSIH-AMR surveillance, post 2021 these cases refer to R cases only. Source: NSIH-AMR."}
+
+
+Klebsiella_AMR_incidence <- incidence_graph_data_complete %>%
+  filter(grepl ("K.pneumoniae|K. pneumoniae", Pathogen)) %>%
+    mutate(y_coord = 0.1) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Incidence), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Incidence_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Incidence_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme, labels = NULL)+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( Surveillance ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2023), breaks = seq(2014,2021,1))+
+    scale_y_continuous(limits = c(0,1), breaks = seq(0,1,0.50))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "Incidence per 1000 patient days")&
+    moiras_graph_theme()+
+  theme(legend.position = "none")
+
+Klebsiella_AMR_incidence
+
+
+```
+
+\FloatBarrier
+
+## 6.3 Pathogens with high risk {#paragraph53}
+
+\FloatBarrier
+
+### 6.3.1 *Enterococcus faecium* {#subparagraph56}
+
+Enterococci are part of the normal intestinal flora of humans and
+animals. However, when this commensal relationship is disrupted, they
+can cause a large variety of invasive diseases such as urinary tract
+infections, bloodstream infections and endocarditis. The genus
+*Enterococcus* includes more than 80 species
+[[33]](https://lpsn.dsmz.de/search?word=Enterococcus+), but the vast
+majority of clinical enterococcal infections in humans are caused by *E.
+faecalis* and *E. faecium.* The 2017 PPS study estimated that 4.8% of HAI
+were caused by *E. faecalis* , making it the 4th most often isolated
+pathogen from HAI in Belgium. *E. faecium* was less commonly isolated and
+reported to cause 1.2% of HAI in Belgium.
+
+Enterococci are intrinsically resistant to a broad range of
+antimicrobial agents including cephalosporins, sulphonamides and low
+concentrations of aminoglycosides. Due to the expression of low affinity
+penicillin-binding proteins, they exhibit decreased susceptibility to
+many beta-lactam agents. However, there is commonly in vitro synergy
+between cell-wall active agents (penicillins or glycopeptides) and
+aminoglycosides. And yet, some enterococci have developed high
+resistance to aminoglycosides, causing loss of any synergy with this
+class of antibiotic
+[[35]](http://www.ncbi.nlm.nih.gov/books/NBK190420/). Vancomycin
+resistant *E. faecium* (VRE) is listed by the WHO as a high priority
+antibiotic resistant organism. While not shown below, NSIH-AMR also
+monitors vancomycin resistant *E. faecalis* , with lower resistance
+observed (0.05% in 2021, see appendix).
+
+As shown in Figure 19 below, in Belgium, the prevalence of vancomycin
+resistance among *E. faecium* invasive clinical isolates remained low
+during the last decade, decreasing to 2.8% in 2021 (14/502 samples).
+Even lower resistant rates are observed when considering all clinical
+cases in acute care hospitals (1.25% in 2021, 110/8,829 samples). The
+highest resistance rate, detected in 2017 (5.5%), might be indicative of
+local hospital outbreaks
+[[36]](https://www.sciensano.be/nl/biblio/european-antimicrobial-resistance-surveillance-belgium-ears-be-national-statistical-report-data-2017).
+When comparing the medians for 2017 and other years, which are less
+sensitive to extreme values than the mean, these are all equal to 0.0%.
+Notably, Belgium goes against the EU-wide trend, which demonstrates a
+clear increase in prevalence with 19.0% VRE isolates reported in 2021.
+
+\FloatBarrier
+
+```{r 5.2.6_Enterococcus_faecium,fig.dim=c(10,8), fig.cap="**Figure 19** — Proportion of invasive clinical isolates of vancomycin-resistant *E. faecium* isolated in Belgium  in comparison to neighbouring countries and the EU average. **Note.** Prior to 2016, vancomycin resistance was separated under vancomycin resistance (defined as vanco-R and susceptible to teicoplanin or susceptibility unknown) and glycopeptide resistance (defined as vanco-R and teicoplanin resistant). Since 2017, vancomycin resistance is questioned independently from the susceptibility to teicoplanin. Sources: A) EARS-BE data; 2011–2020. ECDC’s Surveillance Atlas of Infectious Diseases., B) NSIH-AMR. **Note y axis scale adjusted 0 - 20% to facilitate pattern visualisation.**"}
+
+
+E_faec_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("E. faecium|E.faecium", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+       filter(!(Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Region == "Belgium" ~ 5,
+     Region == "Neighbouring countries" ~ 10,
+     Region == "Europe" ~ 15)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid(Surveillance ~ Matrix)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2021,1))+
+    scale_y_continuous(limits = c(-1,20), breaks = seq(0,20,10))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()
+
+
+E_faec_graph_AMR <- graph_data_complete %>%
+  filter(grepl ("E. faecium|E.faecium", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+       filter((Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Region == "Belgium" ~ 5,
+     Region == "Neighbouring countries" ~ 10,
+     Region == "Europe" ~ 15)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid(Surveillance ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2021,1))+
+    scale_y_continuous(limits = c(-1,20), breaks = seq(0,20,10))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()+
+  theme(strip.text.x.top = element_blank())
+
+E_faec_graph_EARS / E_faec_graph_AMR + plot_annotation(tag_levels = "A")
+
+
+
+```
+
+Aligned with decreasing proportional resistance, the NSIH-AMR
+surveillance observes decreasing incidence of VRE, when expressed as a
+crude number of resistant cases per 1000 patient days (Figure 20). One
+should be mindful that these data are highly influenced by hospitals
+experiencing outbreaks. When considering the median incidence, these
+remain at 0 across all years as reported in the NSIH-AMR annual reports
+[[37]](https://www.sciensano.be/en/projects/national-surveillance-antimicrobial-resistance).
+
+\FloatBarrier
+
+```{r 5.2.3_E.faec.2, fig.dim=c(10,4), fig.cap="**Figure 20** — Crude incidence of vancomycin resistant *E. faecium* in acute care hospitals in Belgium (per 1000 patient days) Note. Prior to 2021 non-susceptibility (susceptible at increased exposure (I) or resistant (R)) was asked in NSIH-AMR surveillance, post 2021 these cases refer to R cases only. Source: NSIH-AMR."}
+
+
+E.faec_AMR_incidence <- incidence_graph_data_complete %>%
+  filter(grepl ("E. faecium|E.faecium", Pathogen)) %>%
+    mutate(y_coord = 0.01) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Incidence), fill = Region), stat="identity", position = "dodge")+
+#    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Incidence_predict), alpha = 0.25)+                   #remove trend analysis as KL advise 
+#    geom_smooth(aes(x=Year, colour = Region, y = Incidence_predict),stat = "identity")+    #remove trend analysis as KL advise
+    scale_fill_manual(values = BELMAP_location_colourscheme, labels = NULL)+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( Surveillance ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2023), breaks = seq(2014,2021,1))+
+    scale_y_continuous(limits = c(0,0.05), breaks = seq(0,0.05,0.025))+
+    # geom_richtext(aes(x = 2022.5, y = y_coord,                    #remove trend analysis as KL advise
+    #                   label = label,
+    #                   fill = Region), stat = "unique",
+    #                   colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "Incidence per 1000 patient days")&
+    moiras_graph_theme()+
+  theme(legend.position = "none")
+
+E.faec_AMR_incidence
+
+
+```
+
+------------------------------------------------------------------------
+
+\FloatBarrier
+
+`r colorize("Emerging linezolid resistant enterocci", "red")`
+
+Linezolid resistance in enterococci (LRE) can be caused by chromosomal point mutations in the central loop of domain V of the 23S rRNA gene (G2576T and G2505A) or through acquisition of transferable linezolid resistance determinants such as *cfr*, *cfr(B)*, *cfr(D),* *optrA* and *poxtA* genes. The first Belgian LRE's (obtained from human samples), received at the NRC, were detected in 2013, with sporadic new strains in the years thereafter. Since 2017 an increase is observed which is steep  since 2022. Apart from the increased prevalence of LRE, the increase might also, in part, be due to the increased awareness and communication to the labs (October 2022) to send this type of strains to the NRC. Of the 180 LRE received at the NRC so far, *E. faecalis* is predominant (86 %) in comparison to *E.  faecium* (14%). *OptrA* (99%) predominates as resistance mechanism in *E. faecalis*, while the resistance type is more diverse in *E. faecium* with G2576T 23S rRNA mutation (60%) most frequently detected. None of the LRE *E. faecalis* strains are resistant to glycopeptides (VRE) while the LRE *E. faecium* strains often (76%) also harbor a *van* gene. An infection with the latter type (LRE + VRE *E. faecium*), of which 19 strains are currently present in the NRC database, poses a health threat as very few therapeutic options remain
+
+```{r 5.LRE_box, fig.dim=c(6,3), fig.cap="**Figure** Number of linezolid resistant enterococci (LRE) strains received each year; **Note** 2023 data includes  samples received until September 2023. Source: NRC."}
+
+LRE_data<- tribble(
+  ~Year, ~`Number of LRE strains`,
+2013,	3,
+2014,	1,
+2015,	1,
+2016,	2,
+2017,	10,
+2018,	15,
+2019,	14,
+2020,	11,
+2021,	21,
+2022,	46,
+2023,	56,
+)
+
+
+ggplot(LRE_data)+
+  geom_line(aes(x=Year, y = `Number of LRE strains`), colour = "#a6cee3" , size = 2)+
+  scale_x_continuous(limits = c(2013,2023), breaks = seq(2013,2023,1))+
+  moiras_graph_theme_small()+
+  labs(x="") 
+```
+
+\FloatBarrier
+
+------------------------------------------------------------------------
+
+\FloatBarrier
+
+### 6.3.2 *Staphylococcus aureus* {#subparagraph55}
+
+*Staphylococcus aureus* is a bacterium that commonly colonizes the skin
+of healthy humans. However, it can also become an opportunistic
+pathogen, being a common cause of skin, soft tissue and bone infections.
+It is also one of the leading causes of bloodstream infections in Europe
+[[38]](https://www.ecdc.europa.eu/en/publications-data/antimicrobial-resistance-surveillance-europe-2023-2021-data),
+with an estimated mortality rate above 25% at 3 months (even for
+methicillin-sensitive *S. aureus*)
+[[39]](https://www.sciensano.be/sites/default/files/ears_be_2018_descriptive_report_final.pdf).
+The 2017 Belgian point prevalence survey of healthcare-associated
+infections and antimicrobial use (PPS) estimated that 8.9% of
+healthcare-associated infections (HAI) were caused by *S. aureus*. That
+makes it the 2nd most commonly isolated pathogen from HAI in Belgium,
+consistent with the findings of the earlier 2011 PPS study.
+
+In Belgium, as well as in a majority of EU countries, MRSA percentages
+have been steadily and significantly decreasing (Figure 21). This
+decrease is likely the consequence of the efficient implementation of
+national recommendations and guidance documents on preventing the spread
+of MRSA, as well as the organization of hand hygiene campaigns in acute
+care hospitals since 2005. While between 2011-2016, comparable
+resistance prevalence were observed between clinical invasive (EARS) and
+all clinical isolates (NSIH-AMR), after 2016 greater reductions are
+observed in clinical invasive isolates with 4.6% (84/1,835 isolates) in
+invasive isolates in 2021 vs 10.7% (3,028/28,415 isolates) across all
+acute care hospital cases. Similar patterns of reductions in MRSA
+prevalence interspersed with plateaus are also observed in both
+neighbouring countries (6.8% in 2021) and throughout the EU (11.7%)
+(Figure 21).
+
+Next to MRSA, vancomycin-resistant *S. aureus* (VRSA) is classified by
+the WHO as a high priority antibiotic resistant organism. In Belgium,
+resistance to vancomycin among invasive *S. aureus* clinical isolates is
+anecdotal. \FloatBarrier   
+
+```{r 5.2.6_Staphylococcus_aureus, fig.dim=c(10,8), fig.cap="**Figure 21** — Proportion of invasive clinical isolates of methicillin resistant *Staphylococcus aureus* (MRSA)  isolated in Belgium  in comparison to neighbouring countries and the EU average. Sources: A) EARS-BE data and ECDC’s Surveillance Atlas of Infectious Diseases. B) NSIH-AMR. **Note y axis scale adjusted 0 - 20% to facilitate pattern visualisation.**"}
+
+Staph_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("S. aureus|S.aureus", Pathogen)) %>%
+         filter(!(Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Region == "Belgium" ~ 5,
+     Region == "Neighbouring countries" ~ 10,
+     Region == "Europe" ~ 15)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( Matrix ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2021,1))+
+    scale_y_continuous(limits = c(-1,20), breaks = seq(0,20,10))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  
+
+Staph_graph_AMR <- graph_data_complete %>%
+  filter(grepl ("S. aureus|S.aureus", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+       filter((Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Region == "Belgium" ~ 5,
+     Region == "Neighbouring countries" ~ 10,
+     Region == "Europe" ~ 15)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( Surveillance ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2021,1))+
+    scale_y_continuous(limits = c(-1,20), breaks = seq(0,20,10))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()+
+  theme(legend.position = "none")
+
+
+
+Staph_graph_EARS/Staph_graph_AMR+plot_annotation(tag_levels = "A")
+
+```
+
+Along with decreasing proportion of methicillin resistance within *S. aureus* cases, the NSIH-AMR surveillance also observes a decreasing
+incidence of MRSA. However, the crude values remain the second highest
+among the pathogen-antimicrobial combinations monitored in this
+surveillance (0.28 cases per 1000 patient days in 2021, range 0.28-0.53,
+Figure 22). \FloatBarrier   
+
+```{r 5.2.3_MRSA.2, fig.dim=c(10,4), fig.cap="**Figure 22** — Crude incidence of MRSA in acute care hospitals in Belgium (per 1000 patient days). Source: NSIH-AMR."}
+
+
+MRSA_AMR_incidence <- incidence_graph_data_complete %>%
+  filter(grepl ("S. aureus|S.aureus", Pathogen)) %>%
+    mutate(y_coord = 0.1) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Incidence), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Incidence_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Incidence_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme, labels = NULL)+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( Surveillance ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2021,1))+
+    scale_y_continuous(limits = c(0,1), breaks = seq(0,1,0.50))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "Incidence per 1000 patient days")&
+    moiras_graph_theme_small()+
+  theme(legend.position = "none")
+
+MRSA_AMR_incidence
+
+
+```
+
+\FloatBarrier
+
+### 6.3.3 *Helicobacter pylori* {#subparagraph513}
+
+*Helicobacter pylori* is a Gram-negative bacterium that colonizes the
+antrum and corpus of the stomach. It is known to induce chronic
+inflammation of the underlying mucosa (chronic active gastritis) and can
+cause major upper gastrointestinal diseases: gastric and duodenal peptic
+ulcers, gastric cancer and gastric mucosa-associated lymphoid-tissue
+(MALT) lymphoma. The prevalence of *H. pylori* infections varies
+according to geographical regions, as well as between different ethnic,
+social or age groups, and can reach up to 50% in developing countries.
+In a study in 2011, a sample of Belgian asymptomatic children and young
+adults were tested for *H. pylori* with an overall prevalence recorded
+at 11% with a strong correlation between prevalence and country of
+birth.
+
+The Maastricht IV/Florence Consensus report for management of *H.
+pylori* infection [[40]](https://doi.org/10.1136/gutjnl-2012-302084)
+advised that recommended treatment strategies should be based on the
+regional prevalence of AMR (15% resistance rate considered as the
+threshold) that directly influenced the choice and efficacy of drug
+regimens. The NRC of *H. pylori* reported stable primary resistance (no
+exposure to previous *H. pylori* eradication treatment) rates to
+clarithromycin around 20% (Figure 23) among *H. pylori* (more than 700
+isolates per year) detected in samples collected from a limited number
+of hospital-based endoscopic units, mainly from the Brussels and
+Wallonia regions.
+
+In 2018, a prospective multicentric, multinational European study
+investigated the proportion of primary antibiotic resistance cases of
+*H. pylori* and correlated data collected in 2008--2017 with the
+antibiotic consumption in the community from 18 European countries
+[[41]](https://doi.org/10.1136/gutjnl-2021-324032.). The mean *H.
+pylori* CLA-R rate was 21.4% overall (17.4% in Belgium) and was
+significantly higher in Central/Western/Southern than in the Northern
+European countries (p\<0.03). A significant association was found
+between *H. pylori* CLA-R and consumption of macrolides in the community
+(p=0.0003). Based on currently high resistance rates to clarithromycin
+and to levofloxacin (both above 15%), *H. pylori* standard triple
+therapy regimens including one of these two antibiotics should not be
+prescribed without susceptibility testing. \FloatBarrier   
+
+```{r 5.5.1_Helicobacter_pylori, fig.dim=c(10,4), fig.cap="**Figure 23** — Evolution of clarithromycin resistance in *H. pylori* isolates send to the NRC for typing, between 2016 and 2021."}
+
+(H_pylori_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("H. pylori|H.pylori", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+    #   filter(!(Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = 10) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Human_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Human_AntiB_colourscheme)+
+   # facet_grid( Matrix ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2015,2024), breaks = seq(2016,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme_small()) 
+
+
+
+
+```
+
+\FloatBarrier
+
+### 6.3.4 Invasive *Salmonella* spp. {#subparagraph59}
+
+Although the most commonly known invasive *Salmonella* spp. are the
+typhoid serovars, they represent only a minority of invasive
+Salmonellosis in Belgium (14.3% in 2022, Table 2). The majority of
+non-typhoid cases were caused by serotypes Enteritidis (31%, 31/98),
+Dublin (10%), Typhimurium (11%) and Chester (6%). Invasive infections
+represent on average 4% of the approximately 3,000 isolates submitted
+annually to the NRC.
+
+```{r 5.2.9_Invasive_Salmonella_tab.}
+
+
+#table of invasive
+
+salmonella_table <- tribble(
+~Serotype, ~`N. Invasive`, ~`% Invasive`,
+"Enteridis",31,3.2,
+"Dublin",10,55.6,
+"Chester",6,19.4,
+"Typhimurium",11,1.5,
+"Typhi",12,52.2,
+"Others",19,NA,
+)
+
+salm_table <- flextable(salmonella_table) %>%
+    set_caption(    caption = as_paragraph(
+      as_chunk("Table 2. Total number of invasive", 
+               props = fp_text_default(font.family = "Gill Sans MT", bold = FALSE,italic = FALSE)),
+      as_chunk(" Salmonella enterica ", 
+               props = fp_text_default(font.family = "Gill Sans MT", bold = FALSE,italic = TRUE)),
+            as_chunk("serotypes received at the NRC in 2022, and their proportion.", 
+               props = fp_text_default(font.family = "Gill Sans MT", bold = FALSE,italic = FALSE))))%>%
+  font(fontname = "Gill Sans MT", part = "all") %>%
+colformat_md()
+
+set_table_properties(salm_table, width = 1, layout = "autofit")
+
+#graph
+```
+
+Data on AMR in invasive *Salmonella* infections stratified by serotype
+is only available since 2019. However, even within this short time
+frame, we observe a notable increase in resistance to ciprofloxacin
+(30.5% in 2022). Less than 2% of Belgian invasive *Salmonella* strains
+are resistant to macrolides.
+
+\FloatBarrier
+
+\newpage
+
+```{r 5.2.9_Invasive_Salmonella_spp., fig.dim=c(10,4), fig.cap="**Figure 24** — Evolution of resistance to ciprofloxacin, 3rd generation cephalosporins and azithromycin in invasive *Salmonella* spp. send to the NRC for typing, 2019–2021."}
+
+(Salmonella_graph <- graph_data_complete %>%
+  filter(grepl ("Salmonella", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+    #   filter(!(Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+    Antibiotic == "Ciprofloxacin" ~ 50,
+    Antibiotic == "3GC" ~ 30,
+    Antibiotic == "Azithromycin" ~ 10)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Human_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Human_AntiB_colourscheme)+
+   # facet_grid( Matrix ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2018,2024), breaks = seq(2019,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme_small()) 
+
+```
+
+\FloatBarrier
+
+### 6.3.5 *Neisseria gonorrhoeae* {#subparagraph511}
+
+*Neisseria gonorrhoeae* is the causative agent of Gonorrhea, the second
+most frequently found sexually transmitted infection (STI) in Belgium.
+Gonorrhea is predominantly found among men between 20--39 years of age.
+The number of cases found by molecular detection is increasing over
+time. To be able to follow up antimicrobial susceptibility to
+ciprofloxacin, ceftriaxone and azithromycin, Sciensano recommends to
+ship identified gonococcal isolates to the NRC for STIs for further
+antibiotic susceptibility testing
+[[42]](https://doi.org/10.25608/da1c-tm12). The number of *N.
+gonorrhoeae* isolates in 2022 now reaches the number of isolates
+reported pre-Covid times. In 2022, almost 700 *N. gonorrhoeae* isolates
+were tested for antimicrobial resistance
+[[43]](https://nrchm.wiv-isp.be/nl/ref_centra_labo/sti_treponema_pallidum/Rapporten/Neisseria%20gonorrhoeae%202021.pdf).
+
+Although ciprofloxacin resistance remains stable around 50%,
+azithromycin resistance is still increasing and is now over 30% (2015:
+0.8% to 33.6% in 2022). Fortunately, resistance to ceftriaxone remains
+scarce, and in 2022 no isolate resistant to ceftriaxone was detected
+(Figure 25).
+
+As a response to the rapid emergence of resistance to azithromycin in
+*N. gonorrhoeae*, as well as in other bacteria such as *Mycoplasma
+genitalium* (see section 8.5.2), Belgium, along with other countries,
+switched their treatment guidelines to monotherapy ceftriaxone 1g
+intramuscular. Quinolones/fluoroquinolones are not recommended as
+first-line treatment.
+
+\FloatBarrier
+
+```{r 5.4.1_Neisseria_gonorrhoeae, fig.dim=c(10,4), fig.cap="**Figure 25** — Evolution resistance (%) of ciprofloxacin and macrolide and ceftriaxone  in *N. gonorrhoeae* isolates sent to the NRC for typing, between 2011 and 2021."}
+
+(N_gonorr_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("N. gonorrhea|N.gonorrhea", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+    #   filter(!(Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+    Antibiotic == "Ceftriaxone" ~ 10,
+    Antibiotic == "Azithromycin" ~ 30,
+    Antibiotic == "Ciprofloxacin" ~ 50)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Human_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Human_AntiB_colourscheme)+
+   # facet_grid( Matrix ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2012,2024), breaks = seq(2013,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme_small()) 
+
+
+```
+
+\FloatBarrier
+
+## 6.4 Pathogens with medium risk {#paragraph54}
+
+### 6.4.1 *Streptococcus pneumoniae* {#subparagraph57}
+
+*Streptococcus pneumoniae* is a gram-positive bacterium that often
+resides as a commensal in the human respiratory tract, with the highest
+carriage prevalence occurring in children (\<5 years). Nevertheless,
+asymptomatic carriage can also evolve in to respiratory infections such
+as otitis media and pneumonia or even invasive pneumococcal disease
+(IPD) like bacteremia and meningitis. About 100 pneumococcal serotypes
+have been defined based on their capsular type. After the introduction
+of pneumococcal conjugate vaccines (PCVs), the global annual number of
+severe cases in children dropped from 14.5 million to 9.2 million in
+2015. Belgium initiated a universal pediatric immunization PCV program,
+utilising the 7-valent PCV, in 2007, followed by switches to 13-valent
+PCV (PCV13) in 2011 and to 10-valent PCV in 2015--2016, while
+reinstalling PCV13 in 2019. Recently, PCV15 and PCV20 have been also
+approved for their use in children and adults respectively. Annually,
+over 1,500 isolates are submitted to the NRC in the context of
+epidemiological surveillance of IPD.
+
+Specific pneumococcal serotypes are associated with AMR. The
+introduction of the PCVs reduced the circulation of some penicillin
+resistant serotypes, with an observed overall reduction in penicillin
+resistance shortly after the introduction of PCV7 (2007). During the
+period of 2011 to 2019, penicillin resistance remained stable (mean of
+10% of resistant strains). This stable trend and the level of resistance
+were consistent with European data. Since 2020, an increase in
+penicillin resistance is observed (Figure 26), due to a change in the
+antimicrobial susceptibility testing method in August 2020 at the NRC.In
+2022 penicillin resistance was 14.1% (210/1,487), which is a decrease
+compared to 2021 when a high penicillin resistance rate of 18.3%
+(157/854) was observed. The COVID-19 years 2020 and 2021 may be
+difficult to compare with the pre-COVID-19 and post-COVID-19 years due
+to the lower number of isolates tested. Due to the COVID-19 pandemic
+(2020-2021) and the related containment measures a decrease in the
+incidence of invasive pneumococcal disease by 45% was observed compared
+to pre-COVID-19 years. For macrolides, after initial declining
+resistance rates, a stable rate has been observed over the years with
+14.7% in 2022. Over the study period, rates of both penicillin and
+macrolide resistance are higher in Belgium when compared to EU levels.
+The difference in penicillin resistance between Belgium and other
+countries is probably due to methodological differences (interpretation/
+use of breakpoints), rather than representing a true difference in
+resistance rate. In Belgium, a consistent and low breakpoint of 0.06
+mg/L (epidemiological cut-off) was used for resistance testing
+throughout the considered time period, in contrast to other European
+countries that used higher clinical breakpoints for the interpretation
+of the raw susceptibility testing results.
+
+\FloatBarrier
+
+```{r 5.2.7_Streptococcus_pneumoniae, fig.dim=c(10,7), fig.cap="**Figure 26** — Evolution of penicillin and macrolide resistance in invasive *S. pneumoniae* isolates send to the NRC , between 2011 and 2022, in comparison to EARS-Net data (2011–2021) for neighbouring countries and the EU. For this report, strains from the NRC with penicillin MIC above 0.06mg (=epidemiological cut-off) were categorized as penicillin resistant. Data source: NRC Invasive *S. pneumoniae* and ECDC’s Surveillance Atlas of Infectious Diseases."}
+
+(S_pneum_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("S. pneumoniae|S.pneumoniae", Pathogen)) %>%
+   mutate(y_coord = case_when(
+     Region == "Belgium" ~ 10,
+     Region == "Neighbouring countries" ~ 30,
+     Region == "Europe" ~ 50)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Region), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Region, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Region, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_location_colourscheme )+
+    scale_colour_manual(values = BELMAP_location_colourscheme)+
+    facet_grid( ~fct_rev(Antibiotic))+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Region), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme())  
+
+
+
+```
+
+\FloatBarrier
+
+### 6.4.2 *Haemophilus influenzae* {#subparagraph58}
+
+*H. influenzae* is a Gram-negative coccobacillus, and part of the normal
+upper respiratory tract flora. The presence or absence of a
+polysaccharide capsule allows the classification of *H. influenzae*
+strains into typeable (serotypes a to f) and non typeable (NTHi)
+strains. The colonization of the upper respiratory tract begins early in
+infancy and is a dynamic process. At least 75% of healthy adults are
+colonized with *H. influenzae*, usually NTHi. As observed for *S.
+pneumoniae*, the nasopharynx acts as a potential reservoir for infection
+and asymptomatic carriage of *H. influenzae* can lead to both
+respiratory tract and systemic infections, including meningitis and
+bacteremia. In the early nineties, the introduction of a *H. influenzae*
+serotype b (Hib) conjugate vaccine in Belgium led to a sharp decrease in
+Hib invasive infections (from very common to rare) and most invasive
+infections now occur in older patients with concurrent conditions.
+Annually, about one hundred invasive isolates are referred to the NRC by
+over forty clinical laboratories. NTHi strains are responsible for more
+than 75% of cases of invasive infections and particularly affect
+children under five and adults over sixty-five.
+
+Ampicillin resistance in *H. influenzae* is mediated by two separate
+mechanisms: beta-lactamase production (most frequently) or amino-acid
+substitution of the transpeptidase enzyme (PBP3) encoded by the ftsI
+gene. Between 2011 and 2021, the rate of ampicillin resistance among
+invasive *H. influenzae* strains isolated in Belgium fluctuated around
+20%. On average, less than 20% of the resistant strains did not produce
+beta-lactamase and were classified as phenotypic "beta-lactamase
+negative-ampicillin resistant" *H. influenzae*. In 2019, an increase in
+the proportion of amoxicillin-clavulanic acid resistant strains (11%) is
+noticed that is not confirmed in 2020. However, the COVID-19 crisis
+confounds interpretation of the 2020 and 2021 data, and particular
+vigilance is required in the coming years.
+
+\FloatBarrier
+
+```{r 5.2.8_Haemophilus_influenzae, fig.dim=c(10,4), fig.cap="**Figure 27** — Evolution of resistance to ampicillin in invasive *H. influenzae* isolates send to the NRC for typing, 2011–2021."}
+
+
+(H_influ_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("H. influenzae|H.influenzae", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+       filter(!(Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Region == "Belgium" ~ 10,
+     Region == "Neighbouring countries" ~ 30,
+     Region == "Europe" ~ 50)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Human_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Human_AntiB_colourscheme)+
+   # facet_grid( Matrix ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme_small()) 
+
+```
+
+\FloatBarrier
+
+### 6.4.3 *Shigella* spp. {#subparagraph514}
+
+*Shigella* are Gram-negative pathogenic Enterobacterales which cause
+severe dysentery with diarrhea, fever, and stomach cramps. Humans are
+the main reservoir of *Shigella*, and transmission occurs mainly through
+contaminated food or water via the fecal-oral route. In Belgium, *S.
+sonnei* is the most frequently reported species representing 75% of the
+approximately 400 isolates received annually at the NRC, while *S.
+flexneri* accounts for approximately 20% of cases. Of note, the number
+of reported *S. sonnei* infections imploded during the COVID pandemic
+with a 70% reduction, most likely due to travel restrictions and social
+distancing measures. In 2022, the NRC reported 307 cases of shigellosis,
+of which 73% were identified as *S. sonnei* and 24% as *S. flexneri*.
+
+```{r 5.5.1_Shigella_spp., fig.dim=c(10,8), fig.cap="**Figure 28** — Overview of resistance to azithromycin, ciprofloxacin and 3rd generation cephalosporins  among *Shigella* spp. in Belgium, as recorded by the NRC between 2011 and 2021. The observed peak in ciprofloxacin resistance in 2018 was related to a large outbreak of MDR *S. sonnei in the MSM community*. Data source: NRC *Shigella*."}
+
+(Shigella_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("Shigella", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+    #   filter(!(Surveillance == "AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Antibiotic == "ESBL" ~ 10,
+     Antibiotic == "Azithromycin" ~ 30)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Human_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Human_AntiB_colourscheme)+
+   # facet_grid( Matrix ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()) 
+```
+
+As shown in a study of the NRC in 2021
+[[44]](https://doi.org/10.1093/jac/dkab377.) , more and more
+ciprofloxacin and macrolide-resistant *S. sonnei* lineages are
+internationally circulating among the MSM population. The extensive
+global dissemination of MDR *S. sonnei* subsequently led to sporadic
+outbreaks of extensively drug resistant (XDR) *S. sonnei*, that combine
+resistance against ciprofloxacin, azithromycin and resistance to
+extended spectrum beta lactam antibiotics (e.g., ceftriaxone)
+[[45]](https://doi.org/10.1038/s41467-023-37672-w.). In Belgium, no less
+than 47.5% of all *S. sonnei* isolates in 2022 were XDR (Figure 28). It
+is clear that this situation warrants careful monitoring, and targeted
+prevention campaigns to curb the spread of this successful clone.
+
+\FloatBarrier
+
+------------------------------------------------------------------------
+
+`r colorize("Emerging Extensively Drug Resistant \\textit{S. sonnei}","red")`
+
+In the past, infections with *Shigella* spp. were typically associated
+with travel to Asia or circulation in particular communities or
+networks, such as gay, bisexual and other men who have sex with men
+traveller's diarrhea. *S. sonnei* isolates simultaneously resistant to
+the three recommended antimicrobial drugs (CIP, 3GCs, and AZM),
+described as "extensively drug-resistant" (XDR), were reported only
+exceptionally before 2022 and were often linked to Southeast Asia.
+However, the last two years have seen a global surge in XDR *S. sonnei*
+infections, led to an ECDC alert in 2022 and cross-sectional studies
+describing these strains from Belgium and
+[[France]](https://doi.org/10.1038/s41467-023-36222-8), to the
+[[USA]](https://doi.org/10.3201/eid2908.230411), and Australia. This is
+leading to adaption in treatment guidelines, like the recommendation to
+use carbapenems for hospitalized adult males with suspected or confirmed
+shigellosis in
+[[Ireland]](https://www.hpsc.ie/a-z/gastroenteric/shigellosis/guidancepublications/).
+
+Since 2023, *Shigella* spp. are prospectively sequenced at the NRC. This
+genomic analyses at the NRC identified several clusters within the
+Ciprofloxacin -resistant sublineage 3.6.1, which was selected in South
+Asia around 15 years ago. This resistance stems from three mutations in the
+quinolone resistance-determining regions of the *gyr*A and *par*C genes,
+conferring resistance to fluoroquinolones (MIC ≥ 1 mg/L). Azithromycin
+resistance was subsequently acquired, principally through IncFII
+(pKSR100-like) plasmids. The last step in the development of the XDR
+phenotype involved various ESBL genes, with the bla~CTX-M-27~  gene
+carried by an IncB/O/K/Z plasmid as main driver in Belgium. This rapid
+emergence of XDR *S. sonnei*, including an international epidemic
+strain, is alarming, and good laboratory-based surveillance of
+shigellosis will be crucial for informed decision-making and appropriate
+public health action.
+
+![Figure. Two subclusters of XDR *S. sonnei* currently circulating in
+Belgium (2021-2023). and pink dots represent isolates from male and
+female patients, respectively. The map clearly shows concentration of
+the multi-resistant strains around Antwerp and Brussels. Source: NRC
+Shigella, Sciensano.](www/Shigella_figure.png)
+
+
+------------------------------------------------------------------------
+
+\FloatBarrier
+
+## 6.5 Other priority pathogens {#paragraph55}
+
+### 6.5.1 *Mycobacterium tuberculosis* {#subparagraph510}
+
+Tuberculosis (TB) is caused by infection with the bacterium
+*Mycobacterium tuberculosis* (Mtb) and predominantly affects the lungs,
+resulting in extensive tissue pathology. While not listed in the
+"Critical/High/Medium" groupings (due to it's prioritisation in other
+international programs), the WHO does highlight this pathogen as a
+primary priority for international research, citing TB as the number one
+global infectious disease killer, causing 1.8 million deaths per year
+[[46]](https://www.who.int/publications/i/item/WHO-EMP-IAU-2017.12).
+
+Drug-resistant TB is the most common and lethal airborne AMR disease
+worldwide today, responsible for 250,000 deaths each year. Of high
+global concern are relapse infections of multidrug resistant (MDR-TB)
+strains, for which only a limited number of second-line medicines are
+available, these are largely highly toxic and only 52% of patients are
+successfully treated globally. Of MDR-TB cases, 8.5% are extensively
+drug resistant (XDR-TB), with treatment only successful in 1 in 3
+patients. This XDR-TB is a rare type of MDR-TB that is resistant to
+isoniazid and rifampin, plus any fluoroquinolone and at least one
+linezolid or bedaquiline. In Belgium, annual registers of infections
+with *M. tuberculosis* (TB) are published by the Vlaamse Vereniging voor
+Respiratoire Gezondheidszorg en Tuberculosebestrijding (VRGT) and Fonds
+des Affections Respiratoires (FARES), based on the mandatory reporting
+of cases [[47]](https://www.fares.be/tuberculose). These publications
+show a decline of the annual cases of TB to 7.2/100,000 inhabitants,
+although underdiagnoses due to COVID-19 measurements is very likely.
+
+The majority of Belgian TB isolates remain pan-susceptible to
+antibiotics. In 2021, 5.1% (32/624) of the isolates were monoresistant
+to isoniazid and 1.4% were MDR-TB. In the considered period
+(2011--2021), the proportion of drug-resistant strains remained stable
+(Figure 29). The occurrence of XDR-TB remains extremely rare in Belgium
+(\<0.5%). An insight on the impact of migration due to the Russian
+invasion of Ukraine is only expected in 2023.
+
+```{r 5.3.1_Mycobacterium_tuberculosis, fig.dim=c(10,4), fig.cap="**Figure 29** — Overview of AMR in Belgian *M. tuberculosis* isolates, indicating the percentage of strains monoresistant against isoniazid and MDR strains (black). Data source: TB registers 2011–2021.**Note y axis scale adjusted 0 - 20% to facilitate pattern visualisation.**"}
+
+
+(TB_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("M. tuberculosis|M.tuberculosis", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+    #   filter(!(Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+    Antibiotic == "MDR" ~ 5,
+    Antibiotic == "Monoresistant isoniazid" ~ 10)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Human_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Human_AntiB_colourscheme)+
+   # facet_grid( Matrix ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2023), breaks = seq(2011,2021,1))+
+    scale_y_continuous(limits = c(-1,20), breaks = seq(0,20,10))+
+    geom_richtext(aes(x = 2022.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme_small()) 
+
+
+
+```
+
+\FloatBarrier
+
+### 6.5.2 *Mycoplasma genitalium* {#subparagraph512}
+
+*Mycoplasma genitalium* causes non-gonococcal non-chlamydial urethritis/
+cervicitis but is also frequently found in asymptomatic individuals.
+This micro-organism is of increasing concern due to the rapid speed with
+which it is acquiring resistance to the first- and second-line
+treatments (ie. azithromycin and moxifloxacin). At the NRC, which
+analyses 30--50 isolates per year, resistance to azithromycin and
+moxifloxacin is estimated by detecting resistance-associated mutations
+(RAMs) in 23S rRNA gene and *parC* gene leading to alteration in ParC
+position 83/87.
+
+As seen in Figure 30, the presence of RAMs to macrolides or
+fluoroquinolones is still rising, although there is no statistical
+significance due to low sample numbers. However, nearly four in five
+cases (76.5%) were resistant to macrolides and nearly 1 in 4 (23.5%)
+harbored RAMs to both antimicrobials in 2022. Resistance figures may be
+biased by the low frequency of samples shipped to the NRC-STI (34
+samples in 2022) due to strict testing rules (only test in the case of
+non-gonococcal, non-chlamydial urethritis or cervicitis). Moreover,
+predominantly samples from men who have sex with men were analyzed which
+do harbor more RAMs to both antimicrobials compared to heterosexuals. In
+order to assess the real magnitude of multidrug resistance in Belgium, a
+prospective collection of *M. genitalium* positive samples by several
+laboratories during a 5 month period was set up in 2022. In total, 232
+isolates were analysed (crosses on Figure 30). The results of this study
+indicated a possible overestimation of macrolide resistance, but similar
+levels of macrolide-fluoroquinolone co-resistance(crosses on Figure
+30)[[48]](https://www.medrxiv.org/content/10.1101/2023.06.06.23291033v1).
+
+Due to the increasing numbers of resistance to the first- and second-
+line treatments globally, and the largely asymptomatic presentation of
+infection, it is no longer recommended to screen for this microorganism
+or to treat asymptomatic infections.
+
+```{r 5.4.2_Mycoplasma_genitalum, fig.dim=c(10,4), fig.cap="**Figure 30** — Evolution of macrolide  and macrolide + fluoroquinolone (black) resistance in *M. genitalium* isolates sent to the NRC for typing, between 2016 and 2021. Crosses represent percentage of 232 additional samples collected as part of a prospective study resistant to macrolides  or macrolides and fluoroquinolones (grey). No statistical analysis was performed due to limited sample size."}
+
+(M_gen_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("M. genitalium|M.genitalium", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+    #   filter(!(Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+    Antibiotic == "Macrolide and Fluoroquinolone" ~ 10,
+    Antibiotic == "Macrolide" ~ 30)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+   geom_point(aes(x=2022, y = 55.2), stroke = 2, weight = 2, colour = "#f46d43", shape = 4)+
+   geom_point(aes(x=2022, y = 21.6), stroke = 2, weight = 2,colour = "#4d4d4d", shape = 4)+
+#    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+#    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Human_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Human_AntiB_colourscheme)+
+   # facet_grid( Matrix ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2015,2024), breaks = seq(2016,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+#    geom_richtext(aes(x = 2023.5, y = y_coord,
+#                      label = label,
+#                      fill = Antibiotic), stat = "unique",
+#                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme_small())
+
+
+
+```
+
+\FloatBarrier
+
+### 6.5.3 *Clostridioides difficile* {#subparagraph515}
+
+*Clostridioides difficile* is an anaerobic, spore-forming bacterium
+which can colonise the intestine of humans and animals. Pathogenic *C.
+difficile* strains can produce protein toxins (toxin A and/or B, and/or
+binary toxin) that disrupt the intestinal wall and thereby cause a range
+of symptoms from mild diarrhea to a severe life-threatening infection,
+resulting in a high clinical and economic burden.
+
+At the national level, the mean *C. difficile* infection (CDI) incidence
+in acute care hospitals remained stable since 2018 (2.4/10,000
+hospitalisation-days for total CDI and 1.3/10,000 hospitalisation-days
+for hospital-associated CDI in 2021). There was a large variability in
+the reported incidence of CDI between provinces and hospitals. Of note,
+10% of CDI episodes were recurrent and 2% of patients affected by CDI
+died possibly or definitely because of their infection
+[[49]](https://www.sciensano.be/en/biblio/epidemiology-clostridioides-difficile-infections-belgian-hospitals-national-report-data-and).
+
+The incidence of the virulent 027/NAPI/BI strains, associated with high
+relapse and mortality rates causing major outbreaks in the 2000s, has
+progressively decreased in Belgium in favour of other ribotypes that
+seem to have the same characteristics as ribotype 027 (overproduction of
+toxins A and B, production of binary toxin and multiple antimicrobial
+resistance).
+
+Since 2019, data has been collected on antimicrobial susceptibility,
+including antibiotics known to be significantly associated with CDI or
+used in CDI treatment, through testing a representative sample of
+strains sent to the NRC.
+
+All isolates were susceptible to antibiotics currently used in CDI
+treatment such as vancomycin (MIC ≤2 mg/L), metronidazole (MIC ≤2 mg/L)
+and fidaxomicin(MIC ≤0.125 mg/L) . RT078, one of the most common
+ribotypes in Belgium, RT012, RT027 and RT126 were associated with
+resistance to multiple antimicrobials. Compared to 2019, the resistance
+to erythromycin (20.5% in 2019 vs 14.0% of isolates in 2022),
+moxifloxacin (26.0 vs 10.0%), tetracycline (6.8 vs 2.0%) and rifampicin
+(4.11 vs 0.0%) decreased.
+
+Antibiotic resistance rates are lower in Belgium when compared to EU
+levels, except for clindamycin, for which the resistance rate has
+doubled since 2015 (93.9 % of the total isolates tested were resistant
+to clindamycin in 2022)
+[[50]](https://doi.org/10.1007/978-3-319-72799-8_9)
+
+```{r 5.5.1_Clostridioides_difficile, fig.dim=c(10,4), fig.cap="**Figure 31** — Overview of resistance to moxifloxacin and rifampicin  among *C. difficile* in Belgium, as recorded by the NRC from 2019 to 2022. Data source: NRC."}
+
+(C.difficile_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("C. difficile|C.difficile", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+    #   filter(!(Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Antibiotic == "Rifampicin" ~ 10,
+     Antibiotic == "Moxifloxacin" ~ 30)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Human_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Human_AntiB_colourscheme)+
+   # facet_grid( Matrix ~ Antibiotic)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2018,2023.5), breaks = seq(2019,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme_small()) 
+
+```
+
+\FloatBarrier
+
+## 6.6 Priority Fungal Pathogens {#paragraph56}
+
+### 6.6.1 *Candida* spp. {#subparagraph516}
+
+Over 200 *Candida* species have been identified, with both *C. albicans*
+and *C. glabrata* being ubiquitous commensals of the human skin, oral
+cavity and gastrointestinal tract. However, they are also the two most
+common pathogenic yeasts. Under certain predisposing factors, they can
+cause superficial and invasive infections, associated with high
+morbidity and mortality, being responsible for \>60% of all systemic
+candidiasis. Candidaemia is estimated to cause over 500 cases and 200
+deaths annually in Belgium.
+
+While *C. albicans* is considered to be susceptible to all antifungals
+and resistance is rarely reported, *C. glabrata* always displays
+decreased susceptibility to fluconazole, and, most worryingly an
+emerging resistance to echinocandins. Based on data of the NRC between
+2011 and 2022, antifungal resistance of *C. albicans* to fluconazole has
+gradually increased, but remains low, (ranging between 0.7% and 4.4%,
+Figure 32), and considerably lower than internationally reported data
+(7--12%). Antifungal resistance is more concerning for *C. glabrata*,
+for which a mean proportion of 19.9% of the strains were confirmed to be
+resistant to fluconazole in Belgium. However, this data is characterized
+by large fluctuations in prevalence over time, largely due to the low
+sample sizes (Figure 32). Internationally, levels of resistance up to
+36% have been reported, remaining fairly constant over the last years.
+By contrast, echinocandins, the preferred treatment for *C. glabrata*,
+are currently faced with emerging resistance. Data of the NRC show a
+slow reduction in prevalence of resistance to anidulafungin, with a mean
+prevalence of 1.7%, and an upper limit of 5%.
+
+```{r 5.6.1_Candida_spp., fig.dim=c(10,7), fig.cap="**Figure 32** — Overview of resistance to fluconazole and the echinocandin anidulafungin among *Candida albicans* and *Candida glabrata* in Belgium, as recorded by the NRC between 2011 and 2022."}
+
+(Candida_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("C. albicans|C. glabrata", Pathogen)) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+    #   filter(!(Surveillance == "NSIH-AMR")) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     Antibiotic == "Anidulafungine" ~ 10,
+     Antibiotic == "Fluconazole" ~ 30)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Human_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Human_AntiB_colourscheme, guide = "none")+
+    facet_grid(  ~ Pathogen)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance", fill ="Antifungal")&
+    moiras_graph_theme_small()&
+        theme(strip.text = element_text(face="italic")))
+
+
+```
+
+\FloatBarrier
+
+### 6.6.2 *Aspergillus fumigatus* {#paragraph517}
+
+*Aspergillus fumigatus* is an environmental, globally distributed mold
+that can cause a variety of diseases that vary in severity and clinical
+presentation, affecting diverse populations, from patients with asthma
+to immunocompromised patients. In the latter patient population,
+aspergillosis remains an important cause of morbidity and mortality,
+causing \>200,000 infections annually worldwide. Risk factors for
+invasive fungal infections have evolved over time, with most recently a
+significant association between *A. fumigatus* infection and the viral
+infection COVID-19, especially for patients in Intensive Care Units.
+
+Resistance to triazole antifungals (posaconazole, voriconazole,
+isavuconazole and itraconazole) in *A. fumigatus* is emerging and is
+becoming a worldwide concern. A person can develop a triazole-resistant
+infection after prolonged antifungal therapy or by inhalation of
+resistant spores. The most commonly reported mechanisms associated with
+antifungal resistance in *A. fumigatus* are mutations in the cyp51A
+gene. Since 2016, all *A. fumigatus* complex isolates are screened for
+triazole-resistance at the NRC. A fluctuating but stable trend was
+observed (Figure 33), with an overall triazole-resistance prevalence of
+6.9%. The majority of these resistant isolates displayed resistance to
+all triazole antifungals tested. The reported prevalence of
+triazole-resistance worldwide in *A. fumigatus* varies between 0.6% and
+36.3%. The last published multicenter cohort study on *Aspergillus*
+resistance among patients with *Aspergillus* disease in Belgium was
+conducted in 2011--2012, with a new national surveillance effort
+scheduled for the year 2022 and 2023. Isolates from around 300 patients
+suffering from invasive *Aspergillus* infections were collected in
+hospitals across the entire country and susceptibility testing was
+performed at the NRC. Preliminary data show that the triazole resistance
+rate rate for Aspergillus fumigatus was roughly doubled for 2022-2023
+compared to the study of 2011 (9.7% vs 4.6%, with over 85% of isolates
+resistant to all four tested azoles)
+[[51]](https://www.timm2023.org/resources/uploads/sites/92/2023/10/Abstract-book-Accepted-orals-TIMM-11.pdf).
+
+```{r 5.6.2_Aspergillus_fumigatus, fig.dim=c(10,4), fig.cap="**Figure 33** — Overview of resistance to the azole class among *A. fumigatus* species complex in Belgium, as recorded by the NRC between 2016 and 2022. Prior 2016, no systematic screening of triazole-resistance was in place, available data are shown but not included in trend analysis, red line depicts change in screening strategy."}
+
+
+(Asperg_graph_EARS <- graph_data_complete %>%
+  filter(grepl ("A. fumigatus|A.fumigatus", Pathogen)) %>%
+   mutate(y_coord = 10) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+   geom_vline(aes(xintercept=2015.5), colour = "red", size = 1)+
+    scale_fill_manual(values = BELMAP_Human_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Human_AntiB_colourscheme, guide = "none")+
+    facet_grid(  ~ Pathogen)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    labs(x="", y= "% Resistance", fill ="Antifungal")&
+    moiras_graph_theme_small()&
+   theme(strip.text = element_text(face = "italic")))
+
+
+```
+
+\FloatBarrier
+
+## 6.7 Research {#paragraph518}
+
+### 6.7.1 The impact of the COVID-19 pandemic on Gram-negative bacteria susceptibility patterns in respiratory samples of intensive care units in the Brussels Capital Region, 2010-2021
+
+-   Marco Moretti, Véronique Yvette Miendje Deyi, Deborah De Geyter,
+    Ingrid Wybo, Marc Claus, Joop Jonckheer, Philippe Clevenbergh,
+    Nicolas Dauby [[Read the full article
+    here]](https://doi.org/10.1016/j.ajic.2023.08.020)
+
+This study, led by VUB and UZ Brussels, sought to examine the trends of
+susceptibility patterns of Gram-negative Bacteria (GNB) isolated from
+respiratory specimens obtained within the intensive care units (ICU)
+situated in the Brussels Capital Region.
+
+Between the 1st of January 2010 and the 31st of December 2021, a total
+of 10577 respiratory specimens were identified, sourced from 5889
+individual ICU patients at three distinct University Hospitals in
+Brussels: UZ Brussel, CHU Saint Pierre, and CHU Brugmann. The study
+timeline was segmented into six biennial intervals, with special
+emphasis on evaluating the consequences of the COVID-19 pandemic (the
+final period: 2020-2021).
+
+Across this study, a total of 10577 specimens were identified, sourced
+from 5889 individual patients. While a significant augmentation of MDR
+isolates was observed once comparing two pre-pandemic periods (2012-2013
+and 2014-2015), all three non-susceptibility patterns significantly
+increased, comparing the years preceding and encompassing the COVID-19
+pandemic (2018-2019 and 2020-2021). *Pseudomonas aeruginosa* emerged as
+the most prevalent GNB, maintaining a consistent prevalence rate over
+the study duration (approximately 25% of specimens in each period), and
+played a pivotal role in the emergence of resistance. The trends of
+resistance patterns exhibited by *Pseudomonas aeruginosa* are
+illustrated in Figure A. In this genus, the most prominent rise in
+non-susceptibility percentage, between the pre-pandemic and pandemic
+intervals, was noted for meropenem, with a 22% rise, escalating from 25%
+to 47% of the period's specimens.
+
+The results illustrated that the COVID-19 pandemic correlated with an
+increasing trend in antimicrobial resistance within respiratory
+specimens sourced from ICU-admitted patients across three University
+Hospitals with well-implemented antibiotic stewardship programs.
+
+![Figure A: Prevalence of resistance patterns for the bacteria of the
+genus *Pseudomonas*, Belgium.The classification of drug resistance
+patterns, encompassing multi drug-resistant (MDR), extensively
+drug-resistant (XDR), and pan drug-resistant (PDR), was undertaken based
+on the non-susceptibility to different antimicrobial classes.
+Source:<https://doi.org/10.1016/j.ajic.2023.08.020>](Pseudomonas_research_proj.png)

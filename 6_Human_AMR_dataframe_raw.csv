@@ -1,0 +1,728 @@
+"","Year","Pathogen","Antibiotic","Sample_size","Percent_resistant","Number_resistants","Region","Surveillance","Matrix"
+"1","","","","","","","","",""
+"2","2011","A. baumanii","carbepenem","14","0","0","Belgium","AMR","All samples"
+"3","2012","A. baumanii","carbepenem","481","6.65","32","Belgium","AMR","All samples"
+"4","2013","A. baumanii","carbepenem","1127","12.16","137","Belgium","AMR","All samples"
+"5","2014","A. baumanii","carbepenem","1253","6.46","81","Belgium","AMR","All samples"
+"6","2015","A. baumanii","carbepenem","1209","4.8","58","Belgium","AMR","All samples"
+"7","2016","A. baumanii","carbepenem","1212","5.03","61","Belgium","AMR","All samples"
+"8","2017","A. baumanii","carbepenem","1221","6.06","74","Belgium","AMR","All samples"
+"9","2018","A. baumanii","carbepenem","1256","7.56","95","Belgium","AMR","All samples"
+"10","2019","A. baumanii","carbepenem","830","6.75","56","Belgium","AMR","All samples"
+"11","2020","A. baumanii","carbepenem","810","7.28","59","Belgium","AMR","All samples"
+"12","2021","A. baumanii","carbepenem","850","8.12","69","Belgium","AMR","All samples"
+"13","2015","Acinetobacter","carbepenem","24","0","0","Belgium","EARS","Blood_CSF"
+"14","2016","Acinetobacter","carbepenem","78","2.6","2","Belgium","EARS","Blood_CSF"
+"15","2017","Acinetobacter","carbepenem","131","6.9","9","Belgium","EARS","Blood_CSF"
+"16","2018","Acinetobacter","carbepenem","132","3.8","5","Belgium","EARS","Blood_CSF"
+"17","2019","Acinetobacter","carbepenem","92","0","0","Belgium","EARS","Blood_CSF"
+"18","2020","Acinetobacter","carbepenem","163","1.2","2","Belgium","EARS","Blood_CSF"
+"19","2021","Acinetobacter","carbepenem","196","1","2","Belgium","EARS","Blood_CSF"
+"20","2015","Acinetobacter","carbepenem",NA,NA,NA,"Neighbours","EARS",NA
+"21","2016","Acinetobacter","carbepenem",NA,NA,NA,"Neighbours","EARS",NA
+"22","2017","Acinetobacter","carbepenem",NA,NA,NA,"Neighbours","EARS",NA
+"23","2018","Acinetobacter","carbepenem",NA,NA,NA,"Neighbours","EARS",NA
+"24","2019","Acinetobacter","carbepenem",NA,NA,NA,"Neighbours","EARS",NA
+"25","2020","Acinetobacter","carbepenem",NA,NA,NA,"Neighbours","EARS",NA
+"26","2021","Acinetobacter","carbepenem",NA,NA,NA,"Neighbours","EARS",NA
+"27","2015","Acinetobacter","carbepenem",NA,NA,NA,"Europe","EARS",NA
+"28","2016","Acinetobacter","carbepenem",NA,NA,NA,"Europe","EARS",NA
+"29","2017","Acinetobacter","carbepenem",NA,NA,NA,"Europe","EARS",NA
+"30","2018","Acinetobacter","carbepenem",NA,NA,NA,"Europe","EARS",NA
+"31","2019","Acinetobacter","carbepenem",NA,NA,NA,"Europe","EARS",NA
+"32","2020","Acinetobacter","carbepenem",NA,NA,NA,"Europe","EARS",NA
+"33","2021","Acinetobacter","carbepenem",NA,NA,NA,"Europe","EARS",NA
+"34","2011","Acinetobacter","carbepenem",NA,NA,NA,"Belgium","AMR",NA
+"35","2012","Acinetobacter","carbepenem",NA,NA,NA,"Belgium","AMR",NA
+"36","2013","Acinetobacter","carbepenem",NA,NA,NA,"Belgium","AMR",NA
+"37","2014","Acinetobacter","carbepenem",NA,NA,NA,"Belgium","AMR",NA
+"38","2015","Acinetobacter","carbepenem",NA,NA,NA,"Belgium","AMR",NA
+"39","2016","Acinetobacter","carbepenem",NA,NA,NA,"Belgium","AMR",NA
+"40","2017","Acinetobacter","carbepenem",NA,NA,NA,"Belgium","AMR",NA
+"41","2018","Acinetobacter","carbepenem",NA,NA,NA,"Belgium","AMR",NA
+"42","2019","Acinetobacter","carbepenem",NA,NA,NA,"Belgium","AMR",NA
+"43","2020","Acinetobacter","carbepenem",NA,NA,NA,"Belgium","AMR",NA
+"44","2021","Acinetobacter","carbepenem",NA,NA,NA,"Belgium","AMR",NA
+"45","2011","A. fumigatus","Azole","7","28.57","2","Belgium",NA,NA
+"46","2012","A. fumigatus","Azole","17","41.18","7","Belgium",NA,NA
+"47","2013","A. fumigatus","Azole","33","12.12","4","Belgium",NA,NA
+"48","2014","A. fumigatus","Azole","27","14.81","4","Belgium",NA,NA
+"49","2015","A. fumigatus","Azole","84","13.1","11","Belgium",NA,NA
+"50","2016","A. fumigatus","Azole","559","9.48","53","Belgium",NA,NA
+"51","2017","A. fumigatus","Azole","589","5.77","34","Belgium",NA,NA
+"52","2018","A. fumigatus","Azole","567","5.82","33","Belgium",NA,NA
+"53","2019","A. fumigatus","Azole","589","6.96","41","Belgium",NA,NA
+"54","2020","A. fumigatus","Azole","648","7.87","51","Belgium",NA,NA
+"55","2021","A. fumigatus","Azole","684","5.41","37","Belgium",NA,NA
+"56","2022","A. fumigatus","Azole","933","10.61","99","Belgium",NA,NA
+"57","2019","C. difficile","Moxifloxacin","73","26.3","19","Belgium",NA,NA
+"58","2020","C. difficile","Moxifloxacin","74","12.2","9","Belgium",NA,NA
+"59","2021","C. difficile","Moxifloxacin","70","11.4","8","Belgium",NA,NA
+"60","2022","C. difficile","Moxifloxacin","100","10","10","Belgium",NA,NA
+"61","2019","C. difficile","Rifampicin","73","4.1","3","Belgium",NA,NA
+"62","2020","C. difficile","Rifampicin","74","1.4","1","Belgium",NA,NA
+"63","2021","C. difficile","Rifampicin","70","1.4","1","Belgium",NA,NA
+"64","2022","C. difficile","Rifampicin","100","0","0","Belgium",NA,NA
+"65","2019","C. difficile","Vancomycin","74","0","0","Belgium",NA,NA
+"66","2020","C. difficile","Vancomycin","73","0","0","Belgium",NA,NA
+"67","2021","C. difficile","Vancomycin","70","0","0","Belgium",NA,NA
+"68","2022","C. difficile","Vancomycin","100","0","0","Belgium",NA,NA
+"69","2021","C. difficile","Fidaxomicin","70","0","0","Belgium",NA,NA
+"70","2022","C. difficile","Fidaxomicin","100","0","0","Belgium",NA,NA
+"71","2011","C. albicans","Fluconazole","58","3.45","2","Belgium",NA,NA
+"72","2012","C. albicans","Fluconazole","104","1.92","2","Belgium",NA,NA
+"73","2013","C. albicans","Fluconazole","146","0.68","1","Belgium",NA,NA
+"74","2014","C. albicans","Fluconazole","202","0.99","2","Belgium",NA,NA
+"75","2015","C. albicans","Fluconazole","209","1.91","4","Belgium",NA,NA
+"76","2016","C. albicans","Fluconazole","264","1.89","5","Belgium",NA,NA
+"77","2017","C. albicans","Fluconazole","383","1.31","5","Belgium",NA,NA
+"78","2018","C. albicans","Fluconazole","310","0.65","2","Belgium",NA,NA
+"79","2019","C. albicans","Fluconazole","298","2.01","6","Belgium",NA,NA
+"80","2020","C. albicans","Fluconazole","361","4.43","16","Belgium",NA,NA
+"81","2021","C. albicans","Fluconazole","434","3.92","17","Belgium",NA,NA
+"82","2022","C. albicans","Fluconazole","379","3.17","12","Belgium",NA,NA
+"83","2011","C. glabrata","Fluconazole","71","15.49","11","Belgium",NA,NA
+"84","2012","C. glabrata","Fluconazole","68","14.71","10","Belgium",NA,NA
+"85","2013","C. glabrata","Fluconazole","104","12.5","13","Belgium",NA,NA
+"86","2014","C. glabrata","Fluconazole","110","18.18","20","Belgium",NA,NA
+"87","2015","C. glabrata","Fluconazole","123","26.83","33","Belgium",NA,NA
+"88","2016","C. glabrata","Fluconazole","144","19.44","28","Belgium",NA,NA
+"89","2017","C. glabrata","Fluconazole","177","11.86","21","Belgium",NA,NA
+"90","2018","C. glabrata","Fluconazole","159","23.27","37","Belgium",NA,NA
+"91","2019","C. glabrata","Fluconazole","156","12.18","19","Belgium",NA,NA
+"92","2020","C. glabrata","Fluconazole","197","12.69","25","Belgium",NA,NA
+"93","2021","C. glabrata","Fluconazole","198","20.2","40","Belgium",NA,NA
+"94","2022","C. glabrata","Fluconazole","216","19.91","43","Belgium",NA,NA
+"95","2011","C. glabrata","Anidulafungine","54","3.7","2","Belgium",NA,NA
+"96","2012","C. glabrata","Anidulafungine","62","0","0","Belgium",NA,NA
+"97","2013","C. glabrata","Anidulafungine","101","3.96","4","Belgium",NA,NA
+"98","2014","C. glabrata","Anidulafungine","109","0.92","1","Belgium",NA,NA
+"99","2015","C. glabrata","Anidulafungine","123","0.81","1","Belgium",NA,NA
+"100","2016","C. glabrata","Anidulafungine","144","1.39","2","Belgium",NA,NA
+"101","2017","C. glabrata","Anidulafungine","160","5","8","Belgium",NA,NA
+"102","2018","C. glabrata","Anidulafungine","159","1.26","2","Belgium",NA,NA
+"103","2019","C. glabrata","Anidulafungine","152","1.32","2","Belgium",NA,NA
+"104","2020","C. glabrata","Anidulafungine","196","0.51","1","Belgium",NA,NA
+"105","2021","C. glabrata","Anidulafungine","198","0","0","Belgium",NA,NA
+"106","2022","C. glabrata","Anidulafungine","215","0.93","2","Belgium",NA,NA
+"107","2012","E.coli","Colistin","257","0","0","Belgium","EARS","Blood_CSF"
+"108","2013","E.coli","Colistin","1082","0.6","6","Belgium","EARS","Blood_CSF"
+"109","2014","E.coli","Colistin","506","0.2","1","Belgium","EARS","Blood_CSF"
+"110","2015","E.coli","Colistin","927","1.3","12","Belgium","EARS","Blood_CSF"
+"111","2016","E.coli","Colistin","1784","0.4","7","Belgium","EARS","Blood_CSF"
+"112","2017","E.coli","Colistin","1393","0.3","4","Belgium","EARS","Blood_CSF"
+"113","2018","E.coli","Colistin","2233","0.9","20","Belgium","EARS","Blood_CSF"
+"114","2019","E.coli","Colistin","1981","0.8","16","Belgium","EARS","Blood_CSF"
+"115","2020","E.coli","Colistin","1812","0.9","16","Belgium","EARS","Blood_CSF"
+"116","2021","E.coli","Colistin","1594","1.3","21","Belgium","EARS","Blood_CSF"
+"117","2012","E.coli","Colistin",NA,NA,NA,"Belgium","EARS","Urine"
+"118","2013","E.coli","Colistin",NA,NA,NA,"Belgium","EARS","Urine"
+"119","2014","E.coli","Colistin",NA,NA,NA,"Belgium","EARS","Urine"
+"120","2015","E.coli","Colistin",NA,NA,NA,"Belgium","EARS","Urine"
+"121","2016","E.coli","Colistin",NA,NA,NA,"Belgium","EARS","Urine"
+"122","2017","E.coli","Colistin","17228","0.4","69","Belgium","EARS","Urine"
+"123","2018","E.coli","Colistin","30118","0.6","181","Belgium","EARS","Urine"
+"124","2019","E.coli","Colistin","27887","0.9","251","Belgium","EARS","Urine"
+"125","2020","E.coli","Colistin","25822","1.1","284","Belgium","EARS","Urine"
+"126","2021","E.coli","Colistin","32695","0.8","262","Belgium","EARS","Urine"
+"127","2011","E.coli","3GC","3405","5.7","194","Belgium","EARS","Blood_CSF"
+"128","2012","E.coli","3GC","4097","6.9","283","Belgium","EARS","Blood_CSF"
+"129","2013","E.coli","3GC","4051","8","324","Belgium","EARS","Blood_CSF"
+"130","2014","E.coli","3GC","2800","9.7","272","Belgium","EARS","Blood_CSF"
+"131","2015","E.coli","3GC","2908","10","291","Belgium","EARS","Blood_CSF"
+"132","2016","E.coli","3GC","3737","10.5","392","Belgium","EARS","Blood_CSF"
+"133","2017","E.coli","3GC","4670","9.7","453","Belgium","EARS","Blood_CSF"
+"134","2018","E.coli","3GC","4644","9","418","Belgium","EARS","Blood_CSF"
+"135","2019","E.coli","3GC","4230","10.1","427","Belgium","EARS","Blood_CSF"
+"136","2020","E.coli","3GC","4632","9.8","454","Belgium","EARS","Blood_CSF"
+"137","2021","E.coli","3GC","5220","8.2","428","Belgium","EARS","Blood_CSF"
+"138","2011","E.coli","3GC",NA,NA,NA,"Belgium","EARS","Urine"
+"139","2012","E.coli","3GC",NA,NA,NA,"Belgium","EARS","Urine"
+"140","2013","E.coli","3GC",NA,NA,NA,"Belgium","EARS","Urine"
+"141","2014","E.coli","3GC",NA,NA,NA,"Belgium","EARS","Urine"
+"142","2015","E.coli","3GC",NA,NA,NA,"Belgium","EARS","Urine"
+"143","2016","E.coli","3GC",NA,NA,NA,"Belgium","EARS","Urine"
+"144","2017","E.coli","3GC","82636","5.8","4793","Belgium","EARS","Urine"
+"145","2018","E.coli","3GC","104256","6.4","6672","Belgium","EARS","Urine"
+"146","2019","E.coli","3GC","102540","6.2","6357","Belgium","EARS","Urine"
+"147","2020","E.coli","3GC","107666","5.9","6352","Belgium","EARS","Urine"
+"148","2021","E.coli","3GC","122260","5.6","6847","Belgium","EARS","Urine"
+"149","2011","E.coli","3GC","65319","9.01","5883","Neighbours","EARS",NA
+"150","2012","E.coli","3GC","72086","10.43","7520","Neighbours","EARS",NA
+"151","2013","E.coli","3GC","81001","11.06","8956","Neighbours","EARS",NA
+"152","2014","E.coli","3GC","85719","11.03","9453","Neighbours","EARS",NA
+"153","2015","E.coli","3GC","91822","11.88","10908","Neighbours","EARS",NA
+"154","2016","E.coli","3GC","123944","11.8","14626","Neighbours","EARS",NA
+"155","2017","E.coli","3GC","140404","12.02","16874","Neighbours","EARS",NA
+"156","2018","E.coli","3GC","152720","13.36","20406","Neighbours","EARS",NA
+"157","2019","E.coli","3GC","157918","13.54","21377","Neighbours","EARS",NA
+"158","2020","E.coli","3GC","137465","12.69","17444","Neighbours","EARS",NA
+"159","2021","E.coli","3GC",NA,NA,NA,"Neighbours","EARS",NA
+"160","2011","E.coli","3GC","17904","7.42","1329","Europe","EARS",NA
+"161","2012","E.coli","3GC","19990","8.6","1719","Europe","EARS",NA
+"162","2013","E.coli","3GC","22455","8.8","1977","Europe","EARS",NA
+"163","2014","E.coli","3GC","24087","9","2167","Europe","EARS",NA
+"164","2015","E.coli","3GC","27503","9.52","2617","Europe","EARS",NA
+"165","2016","E.coli","3GC","36171","10.27","3713","Europe","EARS",NA
+"166","2017","E.coli","3GC","44223","10.63","4701","Europe","EARS",NA
+"167","2018","E.coli","3GC","43287","10.51","4550","Europe","EARS",NA
+"168","2019","E.coli","3GC","44224","10.3","4557","Europe","EARS",NA
+"169","2020","E.coli","3GC","54299","9.57","5197","Europe","EARS",NA
+"170","2021","E.coli","3GC",NA,NA,NA,"Europe","EARS",NA
+"171","2011","E.coli","ciprofloxacin","3549","21.5","764","Belgium","EARS","Blood_CSF"
+"172","2012","E.coli","ciprofloxacin","3428","21.9","751","Belgium","EARS","Blood_CSF"
+"173","2013","E.coli","ciprofloxacin","3679","23.2","854","Belgium","EARS","Blood_CSF"
+"174","2014","E.coli","ciprofloxacin","2337","26.1","610","Belgium","EARS","Blood_CSF"
+"175","2015","E.coli","ciprofloxacin","2402","26.8","644","Belgium","EARS","Blood_CSF"
+"176","2016","E.coli","ciprofloxacin","3409","24.5","835","Belgium","EARS","Blood_CSF"
+"177","2017","E.coli","ciprofloxacin","3890","23.3","906","Belgium","EARS","Blood_CSF"
+"178","2018","E.coli","ciprofloxacin","3766","21.7","817","Belgium","EARS","Blood_CSF"
+"179","2019","E.coli","ciprofloxacin","3802","19","722","Belgium","EARS","Blood_CSF"
+"180","2020","E.coli","ciprofloxacin","4201","18.4","773","Belgium","EARS","Blood_CSF"
+"181","2021","E.coli","ciprofloxacin","5046","18.1","913","Belgium","EARS","Blood_CSF"
+"182","2011","E.coli","ciprofloxacin",NA,NA,NA,"Belgium","EARS","Urine"
+"183","2012","E.coli","ciprofloxacin",NA,NA,NA,"Belgium","EARS","Urine"
+"184","2013","E.coli","ciprofloxacin",NA,NA,NA,"Belgium","EARS","Urine"
+"185","2014","E.coli","ciprofloxacin",NA,NA,NA,"Belgium","EARS","Urine"
+"186","2015","E.coli","ciprofloxacin",NA,NA,NA,"Belgium","EARS","Urine"
+"187","2016","E.coli","ciprofloxacin",NA,NA,NA,"Belgium","EARS","Urine"
+"188","2017","E.coli","ciprofloxacin","75845","16.2","12287","Belgium","EARS","Urine"
+"189","2018","E.coli","ciprofloxacin","93123","16.7","15552","Belgium","EARS","Urine"
+"190","2019","E.coli","ciprofloxacin","97239","15.4","14975","Belgium","EARS","Urine"
+"191","2020","E.coli","ciprofloxacin","103576","14.9","15433","Belgium","EARS","Urine"
+"192","2021","E.coli","ciprofloxacin","119251","13.9","16576","Belgium","EARS","Urine"
+"193","2011","E.coli","ciprofloxacin","66853","20.57","13755","Europe","EARS",NA
+"194","2012","E.coli","ciprofloxacin","73053","20.76","15163","Europe","EARS",NA
+"195","2013","E.coli","ciprofloxacin","82276","20.94","17226","Europe","EARS",NA
+"196","2014","E.coli","ciprofloxacin","84545","21.19","17919","Europe","EARS",NA
+"197","2015","E.coli","ciprofloxacin","91832","21.45","19694","Europe","EARS",NA
+"198","2016","E.coli","ciprofloxacin","125161","20.79","26024","Europe","EARS",NA
+"199","2017","E.coli","ciprofloxacin","141386","21.21","29981","Europe","EARS",NA
+"200","2018","E.coli","ciprofloxacin","154698","22.47","34763","Europe","EARS",NA
+"201","2019","E.coli","ciprofloxacin","161718","21.3","34442","Europe","EARS",NA
+"202","2020","E.coli","ciprofloxacin","137785","20.45","28180","Europe","EARS",NA
+"203","2021","E.coli","ciprofloxacin",NA,NA,NA,"Europe","EARS",NA
+"204","2017","E.coli","3GC","44766","5.1","2283","Private lab","EARS","Urine"
+"205","2018","E.coli","3GC","56820","6","3409","Private lab","EARS","Urine"
+"206","2019","E.coli","3GC","57176","5.6","3202","Private lab","EARS","Urine"
+"207","2020","E.coli","3GC","56877","5.4","3071","Private lab","EARS","Urine"
+"208","2021","E.coli","3GC","62306","4.9","3053","Private lab","EARS","Urine"
+"209","2017","E.coli","3GC","37870","6.7","2537","Hospital Lab","EARS","Urine"
+"210","2018","E.coli","3GC","47436","6.8","3226","Hospital Lab","EARS","Urine"
+"211","2019","E.coli","3GC","45364","7","3175","Hospital Lab","EARS","Urine"
+"212","2020","E.coli","3GC","50789","6.4","3250","Hospital Lab","EARS","Urine"
+"213","2021","E.coli","3GC","59954","6.3","3777","Hospital Lab","EARS","Urine"
+"214","2017","E.coli","ciprofloxacin","30855","18.1","5585","Hospital Lab","EARS","Urine"
+"215","2018","E.coli","ciprofloxacin","36132","16.7","6034","Hospital Lab","EARS","Urine"
+"216","2019","E.coli","ciprofloxacin","39945","15.9","6351","Hospital Lab","EARS","Urine"
+"217","2020","E.coli","ciprofloxacin","46525","14.8","6886","Hospital Lab","EARS","Urine"
+"218","2021","E.coli","ciprofloxacin","56806","14.9","8464","Hospital Lab","EARS","Urine"
+"219","2017","E.coli","ciprofloxacin","44990","14.9","6704","Private lab","EARS","Urine"
+"220","2018","E.coli","ciprofloxacin","56991","16.7","9517","Private lab","EARS","Urine"
+"221","2019","E.coli","ciprofloxacin","57294","15","8594","Private lab","EARS","Urine"
+"222","2020","E.coli","ciprofloxacin","57051","15","8558","Private lab","EARS","Urine"
+"223","2021","E.coli","ciprofloxacin","62445","13.1","8180","Private lab","EARS","Urine"
+"224","2017","E.coli","colistin","9608","0.3","29","Hospital Lab","EARS","Urine"
+"225","2018","E.coli","colistin","20880","0.6","125","Hospital Lab","EARS","Urine"
+"226","2019","E.coli","colistin","22559","0.8","180","Hospital Lab","EARS","Urine"
+"227","2020","E.coli","colistin","20417","1","204","Hospital Lab","EARS","Urine"
+"228","2021","E.coli","colistin","18003","1","180","Hospital Lab","EARS","Urine"
+"229","2017","E.coli","colistin","7620","0.6","46","Private lab","EARS","Urine"
+"230","2018","E.coli","colistin","9238","0.9","83","Private lab","EARS","Urine"
+"231","2019","E.coli","colistin","5328","1","53","Private lab","EARS","Urine"
+"232","2020","E.coli","colistin","5405","1.4","76","Private lab","EARS","Urine"
+"233","2021","E.coli","colistin","14692","0.6","88","Private lab","EARS","Urine"
+"234","2011","E.coli","3GC",NA,NA,NA,"Belgium","AMR","All samples"
+"235","2012","E.coli","3GC",NA,NA,NA,"Belgium","AMR","All samples"
+"236","2013","E.coli","3GC",NA,NA,NA,"Belgium","AMR","All samples"
+"237","2014","E.coli","3GC","37196","7.6","2830","Belgium","AMR","All samples"
+"238","2015","E.coli","3GC","62082","8.6","5353","Belgium","AMR","All samples"
+"239","2016","E.coli","3GC","138083","4","5457","Belgium","AMR","All samples"
+"240","2017","E.coli","3GC","62900","8","5053","Belgium","AMR","All samples"
+"241","2018","E.coli","3GC","96189","10.1","9719","Belgium","AMR","All samples"
+"242","2019","E.coli","3GC","86832","9.9","8566","Belgium","AMR","All samples"
+"243","2020","E.coli","3GC","87152","9.2","8025","Belgium","AMR","All samples"
+"244","2021","E.coli","3GC","91915","7.8","7210","Belgium","AMR","All samples"
+"245","2011","E.coli","carbapenem(méropenem)",NA,NA,NA,"Belgium","AMR","All samples"
+"246","2012","E.coli","carbapenem(méropenem)",NA,NA,NA,"Belgium","AMR","All samples"
+"247","2013","E.coli","carbapenem(méropenem)",NA,NA,NA,"Belgium","AMR","All samples"
+"248","2014","E.coli","carbapenem(méropenem)",NA,NA,NA,"Belgium","AMR","All samples"
+"249","2015","E.coli","carbapenem(méropenem)","86268","0.05","44","Belgium","AMR","All samples"
+"250","2016","E.coli","carbapenem(méropenem)","177510","0.05","82","Belgium","AMR","All samples"
+"251","2017","E.coli","carbapenem(méropenem)","89036","0.13","113","Belgium","AMR","All samples"
+"252","2018","E.coli","carbapenem(méropenem)","97429","0.12","115","Belgium","AMR","All samples"
+"253","2019","E.coli","carbapenem(méropenem)","86832","0.13","114","Belgium","AMR","All samples"
+"254","2020","E.coli","carbapenem(méropenem)","86816","0.1","87","Belgium","AMR","All samples"
+"255","2021","E.coli","carbapenem(méropenem)","91915","0.06","51","Belgium","AMR","All samples"
+"256","2011","E. faecalis","vancomycin",NA,NA,NA,"Belgium","AMR",NA
+"257","2012","E. faecalis","vancomycin",NA,NA,NA,"Belgium","AMR",NA
+"258","2013","E. faecalis","vancomycin",NA,NA,NA,"Belgium","AMR",NA
+"259","2014","E. faecalis","vancomycin","9222","0.13","12","Belgium","AMR",NA
+"260","2015","E. faecalis","vancomycin","15498","0.17","26","Belgium","AMR",NA
+"261","2016","E. faecalis","vancomycin","20815","0.09","19","Belgium","AMR",NA
+"262","2017","E. faecalis","vancomycin","22769","0.04","9","Belgium","AMR",NA
+"263","2018","E. faecalis","vancomycin","25241","0.08","20","Belgium","AMR",NA
+"264","2019","E. faecalis","vancomycin","24384","0.05","12","Belgium","AMR",NA
+"265","2020","E. faecalis","vancomycin","22900","0.08","18","Belgium","AMR",NA
+"266","2021","E. faecalis","vancomycin","25731","0.05","13","Belgium","AMR",NA
+"267","2011","E. faecium","vancomycin","186","7","13","Belgium","EARS","Blood_CSF"
+"268","2012","E. faecium","vancomycin","215","1.4","3","Belgium","EARS","Blood_CSF"
+"269","2013","E. faecium","vancomycin","235","1.7","4","Belgium","EARS","Blood_CSF"
+"270","2014","E. faecium","vancomycin","195","3.1","6","Belgium","EARS","Blood_CSF"
+"271","2015","E. faecium","vancomycin","189","1.1","2","Belgium","EARS","Blood_CSF"
+"272","2016","E. faecium","vancomycin","289","1.7","5","Belgium","EARS","Blood_CSF"
+"273","2017","E. faecium","vancomycin","417","5.5","23","Belgium","EARS","Blood_CSF"
+"274","2018","E. faecium","vancomycin","436","1.8","8","Belgium","EARS","Blood_CSF"
+"275","2019","E. faecium","vancomycin","358","0.8","3","Belgium","EARS","Blood_CSF"
+"276","2020","E. faecium","vancomycin","533","3.6","19","Belgium","EARS","Blood_CSF"
+"277","2021","E. faecium","vancomycin","502","2.8","14","Belgium","EARS","Blood_CSF"
+"278","2011","E. faecium","vancomycin",NA,NA,NA,"Belgium","EARS","Urine"
+"279","2012","E. faecium","vancomycin",NA,NA,NA,"Belgium","EARS","Urine"
+"280","2013","E. faecium","vancomycin",NA,NA,NA,"Belgium","EARS","Urine"
+"281","2014","E. faecium","vancomycin",NA,NA,NA,"Belgium","EARS","Urine"
+"282","2015","E. faecium","vancomycin",NA,NA,NA,"Belgium","EARS","Urine"
+"283","2016","E. faecium","vancomycin","1073","1.5","16","Belgium","EARS","Urine"
+"284","2017","E. faecium","vancomycin","1492","1.6","24","Belgium","EARS","Urine"
+"285","2018","E. faecium","vancomycin","1591","2.5","40","Belgium","EARS","Urine"
+"286","2019","E. faecium","vancomycin","2095","1.7","36","Belgium","EARS","Urine"
+"287","2020","E. faecium","vancomycin","2614","1","26","Belgium","EARS","Urine"
+"288","2021","E. faecium","vancomycin","571","2.6","15","Belgium","EARS","Urine"
+"289","2011","E. faecium","vancomycin","1703","4.52","77","Neighbours","EARS",NA
+"290","2012","E. faecium","vancomycin","1980","5.81","115","Neighbours","EARS",NA
+"291","2013","E. faecium","vancomycin","2370","5.91","140","Neighbours","EARS",NA
+"292","2014","E. faecium","vancomycin","2416","3.97","96","Neighbours","EARS",NA
+"293","2015","E. faecium","vancomycin","2975","5.48","163","Neighbours","EARS",NA
+"294","2016","E. faecium","vancomycin","3748","6.86","257","Neighbours","EARS",NA
+"295","2017","E. faecium","vancomycin","4543","10.02","455","Neighbours","EARS",NA
+"296","2018","E. faecium","vancomycin","4479","13.44","602","Neighbours","EARS",NA
+"297","2019","E. faecium","vancomycin","4682","16.02","750","Neighbours","EARS",NA
+"298","2020","E. faecium","vancomycin","6507","13.22","860","Neighbours","EARS",NA
+"299","2021","E. faecium","vancomycin",NA,NA,NA,"Neighbours","EARS",NA
+"300","2011","E. faecium","vancomycin","6654","7.06","470","Europe","EARS",NA
+"301","2012","E. faecium","vancomycin","7418","7.93","588","Europe","EARS",NA
+"302","2013","E. faecium","vancomycin","8631","8.64","746","Europe","EARS",NA
+"303","2014","E. faecium","vancomycin","8558","8.82","755","Europe","EARS",NA
+"304","2015","E. faecium","vancomycin","9342","9.47","885","Europe","EARS",NA
+"305","2016","E. faecium","vancomycin","12511","11.47","1435","Europe","EARS",NA
+"306","2017","E. faecium","vancomycin","14178","14.23","2017","Europe","EARS",NA
+"307","2018","E. faecium","vancomycin","15992","16.76","2680","Europe","EARS",NA
+"308","2019","E. faecium","vancomycin","16549","17.23","2852","Europe","EARS",NA
+"309","2020","E. faecium","vancomycin","18151","16.63","3019","Europe","EARS",NA
+"310","2021","E. faecium","vancomycin",NA,NA,NA,"Europe","EARS",NA
+"311","2011","E. faecium","vancomycin",NA,NA,NA,"Belgium","AMR","All sample types"
+"312","2012","E. faecium","vancomycin",NA,NA,NA,"Belgium","AMR","All sample types"
+"313","2013","E. faecium","vancomycin",NA,NA,NA,"Belgium","AMR","All sample types"
+"314","2014","E. faecium","vancomycin","2226","4.22","94","Belgium","AMR","All sample types"
+"315","2015","E. faecium","vancomycin","3779","3.49","132","Belgium","AMR","All sample types"
+"316","2016","E. faecium","vancomycin","6194","3.57","221","Belgium","AMR","All sample types"
+"317","2017","E. faecium","vancomycin","6915","1.72","119","Belgium","AMR","All sample types"
+"318","2018","E. faecium","vancomycin","8102","2.32","188","Belgium","AMR","All sample types"
+"319","2019","E. faecium","vancomycin","8335","2","167","Belgium","AMR","All sample types"
+"320","2020","E. faecium","vancomycin","8167","1.7","139","Belgium","AMR","All sample types"
+"321","2021","E. faecium","vancomycin","8829","1.25","110","Belgium","AMR","All sample types"
+"322","2011","H. influenzae","Ampicillin","82","20.73170732","17","Belgium",NA,NA
+"323","2012","H. influenzae","Ampicillin","87","18.3908046","16","Belgium",NA,NA
+"324","2013","H. influenzae","Ampicillin","86","20.93023256","18","Belgium",NA,NA
+"325","2014","H. influenzae","Ampicillin","94","27.65957447","26","Belgium",NA,NA
+"326","2015","H. influenzae","Ampicillin","98","16.32653061","16","Belgium",NA,NA
+"327","2016","H. influenzae","Ampicillin","92","27.17391304","25","Belgium",NA,NA
+"328","2017","H. influenzae","Ampicillin","98","13.26530612","13","Belgium",NA,NA
+"329","2018","H. influenzae","Ampicillin","129","18.60465116","24","Belgium",NA,NA
+"330","2019","H. influenzae","Ampicillin","155","22.58064516","35","Belgium",NA,NA
+"331","2020","H. influenzae","Ampicillin","81","24.69135802","20","Belgium",NA,NA
+"332","2021","H. influenzae","Ampicillin","84","20.23809524","17","Belgium",NA,NA
+"333","2022","H. influenzae","Ampicillin","146","13.7","20","Belgium",NA,NA
+"334","2016","H. pylori","Clarithomycin","723","20.7","150","Belgium",NA,NA
+"335","2017","H. pylori","Clarithomycin","674","20.5","138","Belgium",NA,NA
+"336","2018","H. pylori","Clarithomycin","670","23.1","155","Belgium",NA,NA
+"337","2019","H. pylori","Clarithomycin","855","19.9","170","Belgium",NA,NA
+"338","2020","H. pylori","Clarithomycin","919","19.8","182","Belgium",NA,NA
+"339","2021","H. pylori","Clarithomycin","1301","21.5","280","Belgium",NA,NA
+"340","2022","H. pylori","Clarithomycin","1541","20.8","321","Belgium",NA,NA
+"341","2011","K.pneumoniae","carbapenem","534","0.4","2","Belgium","EARS","Blood_CSF"
+"342","2012","K.pneumoniae","carbapenem","545","0.7","4","Belgium","EARS","Blood_CSF"
+"343","2013","K.pneumoniae","carbapenem","618","0.3","2","Belgium","EARS","Blood_CSF"
+"344","2014","K.pneumoniae","carbapenem","429","0.5","2","Belgium","EARS","Blood_CSF"
+"345","2015","K.pneumoniae","carbapenem","432","0.5","2","Belgium","EARS","Blood_CSF"
+"346","2016","K.pneumoniae","carbapenem","669","2.4","16","Belgium","EARS","Blood_CSF"
+"347","2017","K.pneumoniae","carbapenem","790","1.1","9","Belgium","EARS","Blood_CSF"
+"348","2018","K.pneumoniae","carbapenem","935","1.4","13","Belgium","EARS","Blood_CSF"
+"349","2019","K.pneumoniae","carbapenem","822","1.2","10","Belgium","EARS","Blood_CSF"
+"350","2020","K.pneumoniae","carbapenem","957","1.4","13","Belgium","EARS","Blood_CSF"
+"351","2021","K.pneumoniae","carbapenem","1016","1.4","14","Belgium","EARS","Blood_CSF"
+"352","2011","K.pneumoniae","carbapenem",NA,NA,NA,"Belgium","EARS","Urine"
+"353","2012","K.pneumoniae","carbapenem",NA,NA,NA,"Belgium","EARS","Urine"
+"354","2013","K.pneumoniae","carbapenem",NA,NA,NA,"Belgium","EARS","Urine"
+"355","2014","K.pneumoniae","carbapenem",NA,NA,NA,"Belgium","EARS","Urine"
+"356","2015","K.pneumoniae","carbapenem",NA,NA,NA,"Belgium","EARS","Urine"
+"357","2016","K.pneumoniae","carbapenem","9531","0.4","38","Belgium","EARS","Urine"
+"358","2017","K.pneumoniae","carbapenem","13631","0.3","41","Belgium","EARS","Urine"
+"359","2018","K.pneumoniae","carbapenem","14089","0.3","42","Belgium","EARS","Urine"
+"360","2019","K.pneumoniae","carbapenem","14345","0.2","29","Belgium","EARS","Urine"
+"361","2020","K.pneumoniae","carbapenem","17521","0.3","53","Belgium","EARS","Urine"
+"362","2021","K.pneumoniae","carbapenem","1016","1.4","14","Belgium","EARS","Urine"
+"363","2011","K.pneumoniae","carbapenem","3069","0.13","4","Neighbours","EARS",NA
+"364","2012","K.pneumoniae","carbapenem","3282","0.27","9","Neighbours","EARS",NA
+"365","2013","K.pneumoniae","carbapenem","3713","0.54","20","Neighbours","EARS",NA
+"366","2014","K.pneumoniae","carbapenem","4298","0.49","21","Neighbours","EARS",NA
+"367","2015","K.pneumoniae","carbapenem","5084","0.3","15","Neighbours","EARS",NA
+"368","2016","K.pneumoniae","carbapenem","6991","0.37","26","Neighbours","EARS",NA
+"369","2017","K.pneumoniae","carbapenem","8093","0.53","43","Neighbours","EARS",NA
+"370","2018","K.pneumoniae","carbapenem","8571","0.46","39","Neighbours","EARS",NA
+"371","2019","K.pneumoniae","carbapenem","9257","0.84","78","Neighbours","EARS",NA
+"372","2020","K.pneumoniae","carbapenem","12041","0.45","54","Neighbours","EARS",NA
+"373","2021","K.pneumoniae","carbapenem",NA,NA,NA,"Neighbours","EARS",NA
+"374","2011","K.pneumoniae","carbapenem","15169","8.72","1323","Europe","EARS",NA
+"375","2012","K.pneumoniae","carbapenem","16548","7.49","1240","Europe","EARS",NA
+"376","2013","K.pneumoniae","carbapenem","18311","7.49","1371","Europe","EARS",NA
+"377","2014","K.pneumoniae","carbapenem","19809","6.82","1351","Europe","EARS",NA
+"378","2015","K.pneumoniae","carbapenem","22065","7.45","1643","Europe","EARS",NA
+"379","2016","K.pneumoniae","carbapenem","30314","6.48","1965","Europe","EARS",NA
+"380","2017","K.pneumoniae","carbapenem","32861","6.89","2263","Europe","EARS",NA
+"381","2018","K.pneumoniae","carbapenem","38141","8.68","3310","Europe","EARS",NA
+"382","2019","K.pneumoniae","carbapenem","40714","7.97","3246","Europe","EARS",NA
+"383","2020","K.pneumoniae","carbapenem","39068","10.2","3986","Europe","EARS",NA
+"384","2021","K.pneumoniae","carbapenem",NA,NA,NA,"Europe","EARS",NA
+"385","2011","K.pneumoniae","AG, FQ and 3GC","435","5.5","24","Belgium","EARS","Blood_CSF"
+"386","2012","K.pneumoniae","AG, FQ and 3GC","411","8.5","35","Belgium","EARS","Blood_CSF"
+"387","2013","K.pneumoniae","AG, FQ and 3GC","464","8.2","38","Belgium","EARS","Blood_CSF"
+"388","2014","K.pneumoniae","AG, FQ and 3GC","341","7.9","27","Belgium","EARS","Blood_CSF"
+"389","2015","K.pneumoniae","AG, FQ and 3GC","396","8.6","34","Belgium","EARS","Blood_CSF"
+"390","2016","K.pneumoniae","AG, FQ and 3GC","637","9.3","59","Belgium","EARS","Blood_CSF"
+"391","2017","K.pneumoniae","AG, FQ and 3GC","632","8.5","54","Belgium","EARS","Blood_CSF"
+"392","2018","K.pneumoniae","AG, FQ and 3GC","742","9.8","73","Belgium","EARS","Blood_CSF"
+"393","2019","K.pneumoniae","AG, FQ and 3GC","806","9.2","74","Belgium","EARS","Blood_CSF"
+"394","2020","K.pneumoniae","AG, FQ and 3GC","973","10.4","101","Belgium","EARS","Blood_CSF"
+"395","2021","K.pneumoniae","AG, FQ and 3GC","931","7.6","71","Belgium","EARS","Blood_CSF"
+"396","2011","K.pneumoniae","AG, FQ and 3GC",NA,NA,NA,"Belgium","EARS","Urine"
+"397","2012","K.pneumoniae","AG, FQ and 3GC",NA,NA,NA,"Belgium","EARS","Urine"
+"398","2013","K.pneumoniae","AG, FQ and 3GC",NA,NA,NA,"Belgium","EARS","Urine"
+"399","2014","K.pneumoniae","AG, FQ and 3GC",NA,NA,NA,"Belgium","EARS","Urine"
+"400","2015","K.pneumoniae","AG, FQ and 3GC",NA,NA,NA,"Belgium","EARS","Urine"
+"401","2016","K.pneumoniae","AG, FQ and 3GC","8332","5.2","433","Belgium","EARS","Urine"
+"402","2017","K.pneumoniae","AG, FQ and 3GC","12091","5.2","629","Belgium","EARS","Urine"
+"403","2018","K.pneumoniae","AG, FQ and 3GC","13948","5.1","711","Belgium","EARS","Urine"
+"404","2019","K.pneumoniae","AG, FQ and 3GC","13824","4.2","581","Belgium","EARS","Urine"
+"405","2020","K.pneumoniae","AG, FQ and 3GC","16402","4.1","672","Belgium","EARS","Urine"
+"406","2021","K.pneumoniae","AG, FQ and 3GC","931","7.6","71","Belgium","EARS","Urine"
+"407","2011","K.pneumoniae","AG, FQ and 3GC","3080","12.4","382","Neighbours","EARS",NA
+"408","2012","K.pneumoniae","AG, FQ and 3GC","2756","10.45","288","Neighbours","EARS",NA
+"409","2013","K.pneumoniae","AG, FQ and 3GC","3779","14.02","530","Neighbours","EARS",NA
+"410","2014","K.pneumoniae","AG, FQ and 3GC","4340","13.89","603","Neighbours","EARS",NA
+"411","2015","K.pneumoniae","AG, FQ and 3GC","5160","12.07","623","Neighbours","EARS",NA
+"412","2016","K.pneumoniae","AG, FQ and 3GC","6992","11.13","778","Neighbours","EARS",NA
+"413","2017","K.pneumoniae","AG, FQ and 3GC","8046","10.81","870","Neighbours","EARS",NA
+"414","2018","K.pneumoniae","AG, FQ and 3GC","8471","10.61","899","Neighbours","EARS",NA
+"415","2019","K.pneumoniae","AG, FQ and 3GC","9188","9.61","883","Neighbours","EARS",NA
+"416","2020","K.pneumoniae","AG, FQ and 3GC","11718","8.99","1054","Neighbours","EARS",NA
+"417","2021","K.pneumoniae","AG, FQ and 3GC",NA,NA,NA,"Neighbours","EARS",NA
+"418","2011","K.pneumoniae","AG, FQ and 3GC","15241","21.47","3273","Europe","EARS",NA
+"419","2012","K.pneumoniae","AG, FQ and 3GC","15895","20.98","3334","Europe","EARS",NA
+"420","2013","K.pneumoniae","AG, FQ and 3GC","18136","19.86","3601","Europe","EARS",NA
+"421","2014","K.pneumoniae","AG, FQ and 3GC","19451","20.71","4029","Europe","EARS",NA
+"422","2015","K.pneumoniae","AG, FQ and 3GC","22220","20.26","4502","Europe","EARS",NA
+"423","2016","K.pneumoniae","AG, FQ and 3GC","29589","18.34","5426","Europe","EARS",NA
+"424","2017","K.pneumoniae","AG, FQ and 3GC","31514","17.97","5664","Europe","EARS",NA
+"425","2018","K.pneumoniae","AG, FQ and 3GC","37402","18.53","6930","Europe","EARS",NA
+"426","2019","K.pneumoniae","AG, FQ and 3GC","40270","17.83","7179","Europe","EARS",NA
+"427","2020","K.pneumoniae","AG, FQ and 3GC","38094","18.71","7127","Europe","EARS",NA
+"428","2021","K.pneumoniae","AG, FQ and 3GC",NA,NA,NA,"Europe","EARS",NA
+"429","2011","K.pneumoniae","carbapenem (mÃ©ropenem)",NA,NA,NA,"Belgium","AMR","All samples"
+"430","2012","K.pneumoniae","carbapenem (mÃ©ropenem)",NA,NA,NA,"Belgium","AMR","All samples"
+"431","2013","K.pneumoniae","carbapenem (mÃ©ropenem)",NA,NA,NA,"Belgium","AMR","All samples"
+"432","2014","K.pneumoniae","carbapenem (mÃ©ropenem)",NA,NA,NA,"Belgium","AMR","All samples"
+"433","2015","K.pneumoniae","carbapenem (mÃ©ropenem)","15565","1.89","294","Belgium","AMR","All samples"
+"434","2016","K.pneumoniae","carbapenem (mÃ©ropenem)","18838","1.67","314","Belgium","AMR","All samples"
+"435","2017","K.pneumoniae","carbapenem (mÃ©ropenem)","19330","2.04","395","Belgium","AMR","All samples"
+"436","2018","K.pneumoniae","carbapenem (mÃ©ropenem)","21772","2.18","474","Belgium","AMR","All samples"
+"437","2019","K.pneumoniae","carbapenem (mÃ©ropenem)","20037","2.12","424","Belgium","AMR","All samples"
+"438","2020","K.pneumoniae","carbapenem (mÃ©ropenem)","19338","1.77","342","Belgium","AMR","All samples"
+"439","2021","K.pneumoniae","carbapenem (mÃ©ropenem)","21219","1.13","240","Belgium","AMR","All samples"
+"440","2011","K.pneumoniae","3CG",NA,NA,NA,"Belgium","AMR","All samples"
+"441","2012","K.pneumoniae","3CG",NA,NA,NA,"Belgium","AMR","All samples"
+"442","2013","K.pneumoniae","3CG",NA,NA,NA,"Belgium","AMR","All samples"
+"443","2014","K.pneumoniae","3CG","6031","16.9","1022","Belgium","AMR","All samples"
+"444","2015","K.pneumoniae","3CG","11119","20.8","2316","Belgium","AMR","All samples"
+"445","2016","K.pneumoniae","3CG","11347","20.2","2289","Belgium","AMR","All samples"
+"446","2017","K.pneumoniae","3CG","12470","18.1","2253","Belgium","AMR","All samples"
+"447","2018","K.pneumoniae","3CG","21559","24.1","5192","Belgium","AMR","All samples"
+"448","2019","K.pneumoniae","3CG","20037","22.7","4557","Belgium","AMR","All samples"
+"449","2020","K.pneumoniae","3CG","19245","21.2","4089","Belgium","AMR","All samples"
+"450","2021","K.pneumoniae","3CG","21219","18.3","3880","Belgium","AMR","All samples"
+"451","2016","M. genitalium","Macrolide","12","83.33","10","Belgium","NRC",NA
+"452","2017","M. genitalium","Macrolide","37","56.76","21","Belgium","NRC",NA
+"453","2018","M. genitalium","Macrolide","56","53.57","30","Belgium","NRC",NA
+"454","2019","M. genitalium","Macrolide",NA,NA,NA,"Belgium","NRC",NA
+"455","2020","M. genitalium","Macrolide","46","78.6","36","Belgium","NRC",NA
+"456","2021","M. genitalium","Macrolide","43","83.7","36","Belgium","NRC",NA
+"457","2022","M. genitalium","Macrolide","34","76.5","26","Belgium","NRC",NA
+"458","2022","M. genitalium","Macrolide","232","55.2","128","Belgium","Study",NA
+"459","2016","M. genitalium","Macrolide and Fluoroquinolone","12","8.33","1","Belgium","NRC",NA
+"460","2017","M. genitalium","Macrolide and Fluoroquinolone","37","16.22","6","Belgium","NRC",NA
+"461","2018","M. genitalium","Macrolide and Fluoroquinolone","56","10.71","6","Belgium","NRC",NA
+"462","2019","M. genitalium","Macrolide and Fluoroquinolone",NA,NA,NA,"Belgium","NRC",NA
+"463","2020","M. genitalium","Macrolide and Fluoroquinolone","46","31","14","Belgium","NRC",NA
+"464","2021","M. genitalium","Macrolide and Fluoroquinolone","43","39.5","17","Belgium","NRC",NA
+"465","2022","M. genitalium","Macrolide and Fluoroquinolone","34","23.5","8","Belgium","NRC",NA
+"466","2022","M. genitalium","Macrolide and Fluoroquinolone","232","21.6","50","Belgium","Study",NA
+"467","2011","M. tuberculosis","Monoresistant isoniazid","754","4.5","34","Belgium",NA,NA
+"468","2012","M. tuberculosis","Monoresistant isoniazid","735","5","37","Belgium",NA,NA
+"469","2013","M. tuberculosis","Monoresistant isoniazid","728","4.9","36","Belgium",NA,NA
+"470","2014","M. tuberculosis","Monoresistant isoniazid","701","4.3","30","Belgium",NA,NA
+"471","2015","M. tuberculosis","Monoresistant isoniazid","745","5.8","43","Belgium",NA,NA
+"472","2016","M. tuberculosis","Monoresistant isoniazid","769","4.6","35","Belgium",NA,NA
+"473","2017","M. tuberculosis","Monoresistant isoniazid","729","5.9","43","Belgium",NA,NA
+"474","2018","M. tuberculosis","Monoresistant isoniazid","695","5","35","Belgium",NA,NA
+"475","2019","M. tuberculosis","Monoresistant isoniazid","707","3.4","24","Belgium",NA,NA
+"476","2020","M. tuberculosis","Monoresistant isoniazid","613","6.2","38","Belgium",NA,NA
+"477","2021","M. tuberculosis","Monoresistant isoniazid","624","5.1","32","Belgium",NA,NA
+"478","2011","M. tuberculosis","MDR","754","2","15","Belgium",NA,NA
+"479","2012","M. tuberculosis","MDR","735","2.7","20","Belgium",NA,NA
+"480","2013","M. tuberculosis","MDR","728","1.8","13","Belgium",NA,NA
+"481","2014","M. tuberculosis","MDR","701","1.5","11","Belgium",NA,NA
+"482","2015","M. tuberculosis","MDR","745","2","15","Belgium",NA,NA
+"483","2016","M. tuberculosis","MDR","769","1.3","10","Belgium",NA,NA
+"484","2017","M. tuberculosis","MDR","729","0.7","5","Belgium",NA,NA
+"485","2018","M. tuberculosis","MDR","695","1","7","Belgium",NA,NA
+"486","2019","M. tuberculosis","MDR","707","2.1","15","Belgium",NA,NA
+"487","2020","M. tuberculosis","MDR","613","2.3","14","Belgium",NA,NA
+"488","2021","M. tuberculosis","MDR","624","1.4","9","Belgium",NA,NA
+"489","2011","S. aureus","Methicillin","1346","18.3","246","Belgium","EARS","Blood_CSF"
+"490","2012","S. aureus","Methicillin","1575","16.5","260","Belgium","EARS","Blood_CSF"
+"491","2013","S. aureus","Methicillin","1612","16.9","272","Belgium","EARS","Blood_CSF"
+"492","2014","S. aureus","Methicillin","987","13.5","133","Belgium","EARS","Blood_CSF"
+"493","2015","S. aureus","Methicillin","1031","11.9","123","Belgium","EARS","Blood_CSF"
+"494","2016","S. aureus","Methicillin","1364","12.2","166","Belgium","EARS","Blood_CSF"
+"495","2017","S. aureus","Methicillin","1510","8.5","128","Belgium","EARS","Blood_CSF"
+"496","2018","S. aureus","Methicillin","1733","8.9","154","Belgium","EARS","Blood_CSF"
+"497","2019","S. aureus","Methicillin","1276","6.3","80","Belgium","EARS","Blood_CSF"
+"498","2020","S. aureus","Methicillin","1580","6.8","107","Belgium","EARS","Blood_CSF"
+"499","2021","S. aureus","Methicillin","1835","4.6","84","Belgium","EARS","Blood_CSF"
+"500","2011","S. aureus","Methicillin","9323","14.94","1393","Neighbours","EARS",NA
+"501","2012","S. aureus","Methicillin","10199","14.21","1449","Neighbours","EARS",NA
+"502","2013","S. aureus","Methicillin","11621","11.92","1385","Neighbours","EARS",NA
+"503","2014","S. aureus","Methicillin","11648","12.06","1405","Neighbours","EARS",NA
+"504","2015","S. aureus","Methicillin","13480","11.19","1508","Neighbours","EARS",NA
+"505","2016","S. aureus","Methicillin","18672","9.8","1829","Neighbours","EARS",NA
+"506","2017","S. aureus","Methicillin","22845","9.17","2095","Neighbours","EARS",NA
+"507","2018","S. aureus","Methicillin","22586","8.02","1811","Neighbours","EARS",NA
+"508","2019","S. aureus","Methicillin","21847","7.4","1617","Neighbours","EARS",NA
+"509","2020","S. aureus","Methicillin","28187","7.52","2119","Neighbours","EARS",NA
+"510","2021","S. aureus","Methicillin",NA,NA,NA,"Neighbours","EARS",NA
+"511","2011","S. aureus","Methicillin","36003","16.31","5871","Europe","EARS",NA
+"512","2012","S. aureus","Methicillin","37321","16.15","6029","Europe","EARS",NA
+"513","2013","S. aureus","Methicillin","41833","16.01","6699","Europe","EARS",NA
+"514","2014","S. aureus","Methicillin","41275","15.88","6554","Europe","EARS",NA
+"515","2015","S. aureus","Methicillin","46173","15.91","7347","Europe","EARS",NA
+"516","2016","S. aureus","Methicillin","57730","13.88","8013","Europe","EARS",NA
+"517","2017","S. aureus","Methicillin","66120","12.86","8500","Europe","EARS",NA
+"518","2018","S. aureus","Methicillin","72882","13.96","10173","Europe","EARS",NA
+"519","2019","S. aureus","Methicillin","74718","12.86","9610","Europe","EARS",NA
+"520","2020","S. aureus","Methicillin","72314","13.23","9564","Europe","EARS",NA
+"521","2021","S. aureus","Methicillin",NA,NA,NA,"Europe","EARS",NA
+"522","2011","S. aureus","Methicillin","33137","18.4","6108","Belgium","AMR","All samples"
+"523","2012","S. aureus","Methicillin","35344","16.6","5868","Belgium","AMR","All samples"
+"524","2013","S. aureus","Methicillin","33452","17.5","5839","Belgium","AMR","All samples"
+"525","2014","S. aureus","Methicillin","33541","15.2","5115","Belgium","AMR","All samples"
+"526","2015","S. aureus","Methicillin","34558","15.4","5324","Belgium","AMR","All samples"
+"527","2016","S. aureus","Methicillin","1135516","0.5","5745","Belgium","AMR","All samples"
+"528","2017","S. aureus","Methicillin","33477","14.4","4831","Belgium","AMR","All samples"
+"529","2018","S. aureus","Methicillin","33627","14.2","4785","Belgium","AMR","All samples"
+"530","2019","S. aureus","Methicillin","32273","12.4","3996","Belgium","AMR","All samples"
+"531","2020","S. aureus","Methicillin","27628","10.6","2922","Belgium","AMR","All samples"
+"532","2021","S. aureus","Methicillin","28415","10.7","3028","Belgium","AMR","All samples"
+"533","2013","N. gonorrhea","Ciprofloxacin","592","51.4","304","Belgium",NA,NA
+"534","2014","N. gonorrhea","Ciprofloxacin","558","53.9","301","Belgium",NA,NA
+"535","2015","N. gonorrhea","Ciprofloxacin","627","46.3","290","Belgium",NA,NA
+"536","2016","N. gonorrhea","Ciprofloxacin","593","45.9","272","Belgium",NA,NA
+"537","2017","N. gonorrhea","Ciprofloxacin","601","43.4","261","Belgium",NA,NA
+"538","2018","N. gonorrhea","Ciprofloxacin","682","42.4","289","Belgium",NA,NA
+"539","2019","N. gonorrhea","Ciprofloxacin","650","54.1","352","Belgium",NA,NA
+"540","2020","N. gonorrhea","Ciprofloxacin","495","52.1","258","Belgium",NA,NA
+"541","2021","N. gonorrhea","Ciprofloxacin","558","55.9","312","Belgium",NA,NA
+"542","2022","N. gonorrhea","Ciprofloxacin","675","56.3","380","Belgium",NA,NA
+"543","2013","N. gonorrhea","Azithromycin","592","0.2","1","Belgium",NA,NA
+"544","2014","N. gonorrhea","Azithromycin","558","1.3","7","Belgium",NA,NA
+"545","2015","N. gonorrhea","Azithromycin","627","0.8","5","Belgium",NA,NA
+"546","2016","N. gonorrhea","Azithromycin","593","5.2","31","Belgium",NA,NA
+"547","2017","N. gonorrhea","Azithromycin","601","3.7","22","Belgium",NA,NA
+"548","2018","N. gonorrhea","Azithromycin","682","7.2","49","Belgium",NA,NA
+"549","2019","N. gonorrhea","Azithromycin","650","9.4","61","Belgium",NA,NA
+"550","2020","N. gonorrhea","Azithromycin","495","16","79","Belgium",NA,NA
+"551","2021","N. gonorrhea","Azithromycin","558","18.6","104","Belgium",NA,NA
+"552","2022","N. gonorrhea","Azithromycin","675","33.6","227","Belgium",NA,NA
+"553","2013","N. gonorrhea","Ceftriaxone","592","0","0","Belgium",NA,NA
+"554","2014","N. gonorrhea","Ceftriaxone","558","0","0","Belgium",NA,NA
+"555","2015","N. gonorrhea","Ceftriaxone","627","0.2","1","Belgium",NA,NA
+"556","2016","N. gonorrhea","Ceftriaxone","593","0","0","Belgium",NA,NA
+"557","2017","N. gonorrhea","Ceftriaxone","601","0.3","2","Belgium",NA,NA
+"558","2018","N. gonorrhea","Ceftriaxone","682","0.7","5","Belgium",NA,NA
+"559","2019","N. gonorrhea","Ceftriaxone","650","0.2","1","Belgium",NA,NA
+"560","2020","N. gonorrhea","Ceftriaxone","495","0.4","2","Belgium",NA,NA
+"561","2021","N. gonorrhea","Ceftriaxone","558","0.4","2","Belgium",NA,NA
+"562","2022","N. gonorrhea","Ceftriaxone","675","0","0","Belgium",NA,NA
+"563","2011","P. aeruginosa","MDR","196","12.2","24","Belgium","EARS","Blood_CSF"
+"564","2012","P. aeruginosa","MDR","246","8.9","22","Belgium","EARS","Blood_CSF"
+"565","2013","P. aeruginosa","MDR","359","10.9","39","Belgium","EARS","Blood_CSF"
+"566","2014","P. aeruginosa","MDR","253","6.7","17","Belgium","EARS","Blood_CSF"
+"567","2015","P. aeruginosa","MDR","203","3.9","8","Belgium","EARS","Blood_CSF"
+"568","2016","P. aeruginosa","MDR","278","6.5","18","Belgium","EARS","Blood_CSF"
+"569","2017","P. aeruginosa","MDR","360","6.7","24","Belgium","EARS","Blood_CSF"
+"570","2018","P. aeruginosa","MDR","366","5.5","20","Belgium","EARS","Blood_CSF"
+"571","2019","P. aeruginosa","MDR","442","6.1","27","Belgium","EARS","Blood_CSF"
+"572","2020","P. aeruginosa","MDR","493","6.7","33","Belgium","EARS","Blood_CSF"
+"573","2021","P. aeruginosa","MDR","462","7.4","34","Belgium","EARS","Blood_CSF"
+"574","2017","P. aeruginosa","MDR","3161","3.9","123","Belgium","EARS","Urine"
+"575","2018","P. aeruginosa","MDR","4601","4.2","193","Belgium","EARS","Urine"
+"576","2019","P. aeruginosa","MDR","4696","3.7","174","Belgium","EARS","Urine"
+"577","2020","P. aeruginosa","MDR","4812","3.5","168","Belgium","EARS","Urine"
+"578","2021","P. aeruginosa","MDR","6360","4.1","261","Belgium","EARS","Urine"
+"579","2011","P. aeruginosa","MDR","10176","14.79","1505","Neighbours","EARS",NA
+"580","2012","P. aeruginosa","MDR","10891","14.36","1564","Neighbours","EARS",NA
+"581","2013","P. aeruginosa","MDR","12153","13.63","1656","Neighbours","EARS",NA
+"582","2014","P. aeruginosa","MDR","11939","14.48","1729","Neighbours","EARS",NA
+"583","2015","P. aeruginosa","MDR","12863","13.63","1753","Neighbours","EARS",NA
+"584","2016","P. aeruginosa","MDR","15628","11.72","1832","Neighbours","EARS",NA
+"585","2017","P. aeruginosa","MDR","17117","10.92","1870","Neighbours","EARS",NA
+"586","2018","P. aeruginosa","MDR","19306","11.22","2167","Neighbours","EARS",NA
+"587","2019","P. aeruginosa","MDR","20406","9.91","2023","Neighbours","EARS",NA
+"588","2020","P. aeruginosa","MDR","20421","9.72","1984","Neighbours","EARS",NA
+"589","2021","P. aeruginosa","MDR",NA,NA,NA,"Neighbours","EARS",NA
+"590","2011","P. aeruginosa","MDR","2575","12.93","333","Europe","EARS",NA
+"591","2012","P. aeruginosa","MDR","2743","10.68","293","Europe","EARS",NA
+"592","2013","P. aeruginosa","MDR","3121","9.71","303","Europe","EARS",NA
+"593","2014","P. aeruginosa","MDR","3148","9.63","303","Europe","EARS",NA
+"594","2015","P. aeruginosa","MDR","3563","8.73","311","Europe","EARS",NA
+"595","2016","P. aeruginosa","MDR","4095","7.91","324","Europe","EARS",NA
+"596","2017","P. aeruginosa","MDR","4397","7.19","316","Europe","EARS",NA
+"597","2018","P. aeruginosa","MDR","4551","7.03","320","Europe","EARS",NA
+"598","2019","P. aeruginosa","MDR","4920","6.32","311","Europe","EARS",NA
+"599","2020","P. aeruginosa","MDR","6972","6.99","487","Europe","EARS",NA
+"600","2021","P. aeruginosa","MDR",NA,NA,NA,"Europe","EARS",NA
+"601","2011","P. aeruginosa","MDR","137","0","0","Belgium","AMR","All sample types"
+"602","2012","P. aeruginosa","MDR","6838","6.6","450","Belgium","AMR","All sample types"
+"603","2013","P. aeruginosa","MDR","14595","5","730","Belgium","AMR","All sample types"
+"604","2014","P. aeruginosa","MDR","18954","5.5","1035","Belgium","AMR","All sample types"
+"605","2015","P. aeruginosa","MDR","19307","5.8","1122","Belgium","AMR","All sample types"
+"606","2016","P. aeruginosa","MDR","22065","6","1313","Belgium","AMR","All sample types"
+"607","2017","P. aeruginosa","MDR","19584","7.7","1515","Belgium","AMR","All sample types"
+"608","2018","P. aeruginosa","MDR","20743","7.2","1488","Belgium","AMR","All sample types"
+"609","2019","P. aeruginosa","MDR","18990","6.7","1270","Belgium","AMR","All sample types"
+"610","2020","P. aeruginosa","MDR","18109","6.7","1212","Belgium","AMR","All sample types"
+"611","2021","P. aeruginosa","MDR","19717","6","1185","Belgium","AMR","All sample types"
+"612","2011","S. pneumoniae","Penicillin","1868","10.76","201","Belgium",NA,NA
+"613","2012","S. pneumoniae","Penicillin","1761","9.88","174","Belgium",NA,NA
+"614","2013","S. pneumoniae","Penicillin","1653","10.04","166","Belgium",NA,NA
+"615","2014","S. pneumoniae","Penicillin","1215","9.22","112","Belgium",NA,NA
+"616","2015","S. pneumoniae","Penicillin","1369","10.37","142","Belgium",NA,NA
+"617","2016","S. pneumoniae","Penicillin","1339","9.34","125","Belgium",NA,NA
+"618","2017","S. pneumoniae","Penicillin","1497","10.02","150","Belgium",NA,NA
+"619","2018","S. pneumoniae","Penicillin","1558","10.27","160","Belgium",NA,NA
+"620","2019","S. pneumoniae","Penicillin","1589","9.88","157","Belgium",NA,NA
+"621","2020","S. pneumoniae","Penicillin","882","14.85","131","Belgium",NA,NA
+"622","2021","S. pneumoniae","Penicillin","854","18.38","157","Belgium",NA,NA
+"623","2022","S. pneumoniae","Penicillin","1487","14.12","210","Belgium",NA,NA
+"624","2011","S. pneumoniae","Penicillin","3053","1.15","35","Neighbours",NA,NA
+"625","2012","S. pneumoniae","Penicillin","2462","0.28","7","Neighbours",NA,NA
+"626","2013","S. pneumoniae","Penicillin","2818","0.21","6","Neighbours",NA,NA
+"627","2014","S. pneumoniae","Penicillin","2519","0.44","11","Neighbours",NA,NA
+"628","2015","S. pneumoniae","Penicillin","3354","0.83","28","Neighbours",NA,NA
+"629","2016","S. pneumoniae","Penicillin","4000","1.03","41","Neighbours",NA,NA
+"630","2017","S. pneumoniae","Penicillin","4180","2.3","96","Neighbours",NA,NA
+"631","2018","S. pneumoniae","Penicillin","4760","3.89","185","Neighbours",NA,NA
+"632","2019","S. pneumoniae","Penicillin","4624","3.91","181","Neighbours",NA,NA
+"633","2020","S. pneumoniae","Penicillin","2766","4.52","125","Neighbours",NA,NA
+"634","2021","S. pneumoniae","Penicillin",NA,NA,NA,"Neighbours",NA,NA
+"635","2011","S. pneumoniae","Penicillin","12735","1.96","249","Europe",NA,NA
+"636","2012","S. pneumoniae","Penicillin","11114","1.93","214","Europe",NA,NA
+"637","2013","S. pneumoniae","Penicillin","11612","2.19","254","Europe",NA,NA
+"638","2014","S. pneumoniae","Penicillin","10781","2.17","234","Europe",NA,NA
+"639","2015","S. pneumoniae","Penicillin","12185","2.35","286","Europe",NA,NA
+"640","2016","S. pneumoniae","Penicillin","15666","2.99","469","Europe",NA,NA
+"641","2017","S. pneumoniae","Penicillin","17163","1.53","263","Europe",NA,NA
+"642","2018","S. pneumoniae","Penicillin","18676","1.96","366","Europe",NA,NA
+"643","2019","S. pneumoniae","Penicillin","18237","2.06","376","Europe",NA,NA
+"644","2020","S. pneumoniae","Penicillin","8032","3.86","310","Europe",NA,NA
+"645","2021","S. pneumoniae","Penicillin",NA,NA,NA,"Europe",NA,NA
+"646","2011","S. pneumoniae","Macrolide","1868","26.12","488","Belgium",NA,NA
+"647","2012","S. pneumoniae","Macrolide","1761","25.1","442","Belgium",NA,NA
+"648","2013","S. pneumoniae","Macrolide","1653","23.65","391","Belgium",NA,NA
+"649","2014","S. pneumoniae","Macrolide","1215","17.53","213","Belgium",NA,NA
+"650","2015","S. pneumoniae","Macrolide","1369","18.41","252","Belgium",NA,NA
+"651","2016","S. pneumoniae","Macrolide","1339","15.91","213","Belgium",NA,NA
+"652","2017","S. pneumoniae","Macrolide","1497","14.96","224","Belgium",NA,NA
+"653","2018","S. pneumoniae","Macrolide","1558","15.34","239","Belgium",NA,NA
+"654","2019","S. pneumoniae","Macrolide","1589","15.73","250","Belgium",NA,NA
+"655","2020","S. pneumoniae","Macrolide","882","19.5","172","Belgium",NA,NA
+"656","2021","S. pneumoniae","Macrolide","854","16.51","141","Belgium",NA,NA
+"657","2022","S. pneumoniae","Macrolide","1487","14.66","218",NA,NA,NA
+"658","2011","S. pneumoniae","Macrolide","3184","14.23","453","Neighbours",NA,NA
+"659","2012","S. pneumoniae","Macrolide","2573","12.16","313","Neighbours",NA,NA
+"660","2013","S. pneumoniae","Macrolide","3088","12.4","383","Neighbours",NA,NA
+"661","2014","S. pneumoniae","Macrolide","2621","9.54","250","Neighbours",NA,NA
+"662","2015","S. pneumoniae","Macrolide","3415","11.01","376","Neighbours",NA,NA
+"663","2016","S. pneumoniae","Macrolide","4085","10.01","409","Neighbours",NA,NA
+"664","2017","S. pneumoniae","Macrolide","4289","8.56","367","Neighbours",NA,NA
+"665","2018","S. pneumoniae","Macrolide","4779","9.58","458","Neighbours",NA,NA
+"666","2019","S. pneumoniae","Macrolide","4678","9.96","466","Neighbours",NA,NA
+"667","2020","S. pneumoniae","Macrolide","2892","9.37","271","Neighbours",NA,NA
+"668","2021","S. pneumoniae","Macrolide",NA,NA,NA,"Neighbours",NA,NA
+"669","2011","S. pneumoniae","Macrolide","12670","14.65","1856","Europe",NA,NA
+"670","2012","S. pneumoniae","Macrolide","11286","14.73","1662","Europe",NA,NA
+"671","2013","S. pneumoniae","Macrolide","12212","13.81","1686","Europe",NA,NA
+"672","2014","S. pneumoniae","Macrolide","11036","12.01","1325","Europe",NA,NA
+"673","2015","S. pneumoniae","Macrolide","16036","11.06","1774","Europe",NA,NA
+"674","2016","S. pneumoniae","Macrolide","12682","12.66","1605","Europe",NA,NA
+"675","2017","S. pneumoniae","Macrolide","17587","10.58","1860","Europe",NA,NA
+"676","2018","S. pneumoniae","Macrolide","19217","10.89","2092","Europe",NA,NA
+"677","2019","S. pneumoniae","Macrolide","18948","11.25","2131","Europe",NA,NA
+"678","2020","S. pneumoniae","Macrolide","8362","13.38","1119","Europe",NA,NA
+"679","2021","S. pneumoniae","Macrolide",NA,NA,NA,"Europe",NA,NA
+"680","2019","Salmonella","Ciprofloxacin","96","13.4","13","Belgium",NA,NA
+"681","2020","Salmonella","Ciprofloxacin","73","17.8","13","Belgium",NA,NA
+"682","2021","Salmonella","Ciprofloxacin","68","22.1","15","Belgium",NA,NA
+"683","2022","Salmonella","Ciprofloxacin","95","30.5","29","Belgium",NA,NA
+"684","2019","Salmonella","3GC","96","0.8","1","Belgium",NA,NA
+"685","2020","Salmonella","3GC","73","2.7","2","Belgium",NA,NA
+"686","2021","Salmonella","3GC","68","2.9","2","Belgium",NA,NA
+"687","2022","Salmonella","3GC","95","3.2","3","Belgium",NA,NA
+"688","2019","Salmonella","Azithromycin","96","1.4","1","Belgium",NA,NA
+"689","2020","Salmonella","Azithromycin","73","1.4","1","Belgium",NA,NA
+"690","2021","Salmonella","Azithromycin","68","1.5","1","Belgium",NA,NA
+"691","2022","Salmonella","Azithromycin","95","0","0","Belgium",NA,NA
+"692","2011","Shigella spp.","Ciprofloxacin","127","18.1","23","Belgium",NA,NA
+"693","2012","Shigella spp.","Ciprofloxacin","324","11.4","37","Belgium",NA,NA
+"694","2013","Shigella spp.","Ciprofloxacin","321","9.9","32","Belgium",NA,NA
+"695","2014","Shigella spp.","Ciprofloxacin","399","10.7","43","Belgium",NA,NA
+"696","2015","Shigella spp.","Ciprofloxacin","392","18.1","71","Belgium",NA,NA
+"697","2016","Shigella spp.","Ciprofloxacin","367","14.4","53","Belgium",NA,NA
+"698","2017","Shigella spp.","Ciprofloxacin","353","28.6","101","Belgium",NA,NA
+"699","2018","Shigella spp.","Ciprofloxacin","427","41.5","177","Belgium",NA,NA
+"700","2019","Shigella spp.","Ciprofloxacin","421","23.9","101","Belgium",NA,NA
+"701","2020","Shigella spp.","Ciprofloxacin","114","29.8","34","Belgium",NA,NA
+"702","2021","Shigella spp.","Ciprofloxacin","197","23.3","46","Belgium",NA,NA
+"703","2022","Shigella spp.","Ciprofloxacin","297","38","113","Belgium",NA,NA
+"704","2011","Shigella spp.","ESBL","127","0","0","Belgium",NA,NA
+"705","2012","Shigella spp.","ESBL","324","1.6","5","Belgium",NA,NA
+"706","2013","Shigella spp.","ESBL","321","3.4","11","Belgium",NA,NA
+"707","2014","Shigella spp.","ESBL","399","2.5","10","Belgium",NA,NA
+"708","2015","Shigella spp.","ESBL","392","4.8","19","Belgium",NA,NA
+"709","2016","Shigella spp.","ESBL","367","3.1","11","Belgium",NA,NA
+"710","2017","Shigella spp.","ESBL","353","10.9","38","Belgium",NA,NA
+"711","2018","Shigella spp.","ESBL","427","12.1","52","Belgium",NA,NA
+"712","2019","Shigella spp.","ESBL","421","13.8","58","Belgium",NA,NA
+"713","2020","Shigella spp.","ESBL","114","10.5","12","Belgium",NA,NA
+"714","2021","Shigella spp.","ESBL","197","19.3","38","Belgium",NA,NA
+"715","2022","Shigella spp.","ESBL","297","37","110","Belgium",NA,NA
+"716","2011","Shigella spp.","Azithromycin","127","11","14","Belgium",NA,NA
+"717","2012","Shigella spp.","Azithromycin","324","2.2","7","Belgium",NA,NA
+"718","2013","Shigella spp.","Azithromycin","321","13.4","43","Belgium",NA,NA
+"719","2014","Shigella spp.","Azithromycin","399","0.5","2","Belgium",NA,NA
+"720","2015","Shigella spp.","Azithromycin","392","9.2","36","Belgium",NA,NA
+"721","2016","Shigella spp.","Azithromycin","367","5.4","20","Belgium",NA,NA
+"722","2017","Shigella spp.","Azithromycin","353","22","78","Belgium",NA,NA
+"723","2018","Shigella spp.","Azithromycin","427","37.2","159","Belgium",NA,NA
+"724","2019","Shigella spp.","Azithromycin","421","23.6","99","Belgium",NA,NA
+"725","2020","Shigella spp.","Azithromycin","114","34.2","39","Belgium",NA,NA
+"726","2021","Shigella spp.","Azithromycin","197","37.5","74","Belgium",NA,NA
+"727","2022","Shigella spp.","Azithromycin","297","39.1","116","Belgium",NA,NA
