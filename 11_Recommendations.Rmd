@@ -1,0 +1,99 @@
+---
+title: "![](BELMAP-logo.png){width=6in}"
+subtitle: 11. Recommendations
+date: "Last compiled on `r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  word_document:
+    reference_docx: "word-styles-reference-01.docx"
+css: style.css
+editor_options:
+  markdown:
+    wrap: 72
+header-includes:
+- \usepackage{placeins}
+- \usepackage{caption}
+- \captionsetup[figure]{labelformat=empty}
+- \captionsetup[table]{labelformat=empty}
+---
+
+```{r setup9, include=FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE
+)
+```
+
+```{r load_libraries9, include=FALSE}
+
+library(tidyverse)
+library(patchwork)
+library(jpeg)
+library(scales)
+library(extrafont)
+library(remotes)
+library(extrafontdb)
+library(magrittr)
+library(AER)
+library(AICcmodavg)
+library(pscl)
+library(MASS)
+library(COMPoissonReg)
+library(performance)
+library(grid)
+library(ggtext)
+library(showtext)
+library(cowplot)
+```
+\newpage
+
+# 11. Recommendations
+
+The BELMAP editorial board endorses the measures outlined in the NAP-AMR 2020-2024 [[78]](https://www.health.belgium.be/sites/default/files/uploads/fields/fpshealth_theme_file/en-amr_one_health_national_plan_final_1.pdf) and the recently adopted EU Council recommendations aimed at addressing antimicrobial resistance (AMR) [[79]](https://www.consilium.europa.eu/en/press/press-releases/2023/06/13/tackling-antimicrobial-resistance-council-adopts-recommendation/). To achieve these ambitious goals, we wish to emphasize the following actions to enhance the  monitoring of AMR and antimicrobial consumption (AMC) in Belgium.
+
+## Antimicrobial consumption and exposure    
+
+The importance of timely, personalised feedback is consistently recognized in efforts to improve antimicrobial stewardship. This reinforces the potential value within the human medical sector of projects such as the new antibiotic barometer [[80]](https://blog.corilus.be/gp/webinar-antibiotica-barometer), which informs and rewards general practitioners who engage with better prescribing practices. A key component of such schemes going forward is the inclusion of information on the indication for prescription, as effective assessment of appropriate (or inappropriate) prescription behaviour requires knowledge of the prescription’s context. 
+
+Accurate monitoring of AMC is vital for measuring progress towards stewardship targets and assessing the impact of interventions. The reliance of current human AMC surveillance systems on reimbursement data, and the possibility of reimbursement up to 2 years after treatment, introduces a 2 year delay in the collection and detailed analysis of AMC data. Developing a system for more regular submissions of prescription data could support more timely monitoring of progress. Again, a further significant improvement would be the integration of information on prescription indication, which could support the development and monitoring of more specific antimicrobial targets, generated in line with gold standard treatment guidelines and local data.
+
+External impacts on prescribing behaviour, such as antimicrobial shortages, should also be minimised. The unavailability of narrow-spectrum antibiotics (e.g. amoxicillin or ceftriaxone), sometimes for weeks or months due to production or supply chain issues, and the inflexibility within the Belgian Market to change suppliers, can lead to long periods without an equivalent product available. This can force medical practitioners to prescribe broader spectrum antimicrobials simply from a lack of appropriate alternatives. Reinforcing robust antimicrobial production and supply chains is also key to supporting optimal antimicrobial stewardship. 
+
+Within the veterinary sector, a digital antimicrobial use (AMU) data-collection system exists for key food-producing species(pigs, veal calves, laying hens and broilers), with important expansions and additions already planned. Since August 2023, the data collection is expanded to include more food-producing species (turkeys plus full coverage of chicken and bovine production). Horses and companion animals remain a significant gap in current monitoring, particularly as such species are typically in close contact with humans and may thus pose greater risk for zoonotic spill over [[81]](https://DOI.org/10.1093/jac/dkw481). Plans to include these horses by 2026 and companion animals by 2029 at the latest  represent an important step. However, given potential challenges surrounding data harmonisation and the additional workload, ongoing engagement with stakeholders and particularly veterinarians will be essential for a smooth introduction. The collection of AMU data supports personalised feedback, including for example regular benchmarking reports for veterinarians and farmers which can support stewardship efforts, such as the requirement to prepare an action plan for improvement in the case of excessive use. Conversely, those appropriately prescribing and utilising antimicrobials should be rewarded and further supported. 
+
+Outside of AMU, the development of direct and cross resistance due to exposure to biocidal products is still understudied. The risk of such resistance is not currently considered when evaluating efficacy during the development or licensing of disinfectants. The results of ongoing pilot studies that survey resistance to biocidal products should be combined with literature and expert opinion to develop best practices in the use of substances and raise awareness among the general public and healthcare workers. Other important steps will include targeting products identified as likely or highly likely to promote the development of resistance (e.g. chlorhexidine, quaternary ammonium compounds and triclosan) and ultimately monitoring the emergence of resistance and cross-resistance in the human healthcare system and studying this emergence in other areas of biocide use (food production, agriculture, veterinary medicine and manufacturing sectors).
+
+## AMR monitoring   
+
+In human medicine, Belgium is still underperforming in the capacity to analyse and report relevant resistance mechanisms, not only at the NRC but also at the local level. The BELMAP board proposes financial incentives to perform specific rapid diagnostic tests  through reimbursement by National Insurance (appropriate contexts in which to use these test could be defined and standardised based on (inter)national guidances or recommendations, e.g. ongoing SHC MDRO laboratory guidelines).  The implementation of these testing methods in routine labs is of particular importance for the specific surveillance of carbapenemase producers (CP) among Gram-negative rods (*Enterobacterales, P. aeruginosa, A. baumannii*) that need to be distinguished from non-CP carbapenem-resistant (CR) strains, which cannot be easily distinguished by raw determination of drug susceptibility testing. The appropriate detection/distinction of CP and the study of the distribution of the different carbapenemase families has major clinical impact both for the individual therapeutic management (especially in invasive infections) and for the prevention and control of resistance transmission in a healthcare setting. Additionally, for clinical laboratories confronted with clinically-relevant Multidrug resistant organisms (MDRO), testing sensitivity to reserve antibiotics (e.g. colistin and cefiderocol) is essential not only for individual case management but for national monitoring of the effectiveness of these vital, last line treatments. As essential monitoring and case-management activities the BELMAP board advises the reimbursement of such tests for clinically-relevant MDROs. Finally, financial support for ICT improvements to facilitate harmonised reporting of results could dramatically improve data collection and AMR monitoring. This could consider the inclusion of a regular zero-reporting (absence of notification) of outbreaks by MDRO’s and other difficult to treat bacteria, yeasts or fungi.
+
+The advances in diagnostics should be complemented with the continued roll-out of whole-genome sequencing. Since Covid-19, surveillance of infectious diseases has made a quantum leap towards genomics-based surveillance. Initially conceptualized and rolled out for the detection of virus variants, many large health centers in Belgium (both public health institutes and hospitals) now possess the equipment required for sequencing pathogens. In this post-pandemic phase, much of this capacity is now underused. Therefore, the BELMAP board proposes that this equipment should be converted from ‘Covid sequencing’ to a more integrated, GDPR compliant national platform for genomics-based infectious disease surveillance. These technical platforms may be used to set up a surveillance network of sentinels labs by performing sequencing in the context of specific funded AMR surveillance projects. A collaboration between Sciensano, National Reference Centers, Regional Health Authorities, Hospitals and FAVV/ASFCA (who also is generating sequencing data from animals and food products) has the potential to create a centralized tool to exchange genomic and patient data for infectious diseases surveillance with a One Health vision.  Going forward, sequencing from the NRL-AMR (food producing animals and food samples) and the regional veterinary laboratories of DGZ and ARSIA (veterinary samples), together with data from environmental sampling, could also be incorporated into a truly comprehensive, integrated surveillance. This platform should enable timely  analysis of local and spread pathogen dispersion, supporting outbreak investigation   and the detection of emerging threats and AMR. This is especially important for MDRO isolates with high dissemination potential (e.g. CP-producing organisms), zoonotic pathogens and emerging pathogens in both human and animal sectors. Again, the BELMAP board would like to emphasis the need for WGS alongside, rather than instead of phenotyping testing, and novel phenotypic techniques [[82]](https://doi.org/10.1128/JCM.00098-20) should also be explored to develop optimised outbreak support.  
+
+A pilot project for the construction of a national, integrated disease surveillance system is already underway.   Funded by European HERA (2022-2024), and coordinated by Sciensano [[83]](https://www.sciensano.be/nl/projecten/consolidatie-van-de-nationale-e-gezondheidsinfrastructuur-voor-gecombineerde-microbiologische) this project aims to create a digital architecture to integrate genomic and nominative data in a secure environment (Figure 54). The national roll-out of this platform (high-level design below) will depend on integration of all stakeholders and continued funding from 2025 onwards, which can be partially supported by the NAP-AMR. In the long term, such systems would ideally be integrated into data collection systems for national surveillances and mandatory declarations of infectious diseases to minimize the administrative burden and optimize dataflows. Indeed, a national platform for the rapid reporting of alert cases related to HA-AMR/MDRO is currently lacking, but would support their follow-up and management by designated actors.
+
+
+```{r 11.1_recommendfig, fig.dim=c(10,7), fig.cap="**Figure 54** — An overview of the Be-HERA architecture with its different components. Clinical and Epidemiological data is collected at the level of the National Reference Centers (NRCs) and sent to Healthdata.be. Genomic data will be transferred to the BioIT."}
+
+#load project visualisation
+
+recommend_visual  <- readJPEG("www/hera.jpg", native = TRUE)
+
+ggdraw(recommend_visual) +
+        draw_image(recommend_visual)
+
+
+```
+
+\FloatBarrier
+However, such systems may present considerable data privacy, as well as technological, challenges. In the more immediate term, measures should be taken to improve and harmonize current national and EU (EARS) AMR surveillances - combining the best of the mandatory National surveillance of antimicrobial resistance (NSIH-AMR) ) (comprehensive data of all clinical isolates from acute hospitals, but aggregated at a national level) with the best of the EARS surveillance (detailed epidemiological surveillance but voluntary and thus non-representative). As well as reducing the burden for hospitals participating in two surveillance schemes, the integration of a harmonised protocol into the HealthData platform could aid automation of data collection, hopefully reducing the delay in data collection and analysis (currently 12-18 months), and thus supporting more timely feedback and responses to changes in the AMR situation. Enrolling private laboratories into such a surveillance scheme may also represent the most efficient way to establish AMR surveillance in community and long term care facility settings. A significant challenge is likely establishing a data collection pathway that works with the plethora of operating systems utilised by laboratories. However, such laboratories represent the point of aggregation for samples from wide ranging care settings which, particularly in the case of long term care facilities, likely lack the resources or expertise to directly participate in surveillances. Such lab-based surveillance is being utilised in a 2023 pilot study of AMR in bacterial isolates from uncomplicated UTIs in primary care, the results of which may inform the establishment of a broader laboratory-based AMR surveillance.
+
+Another improvement to AMR reporting outlined in the adopted EU council recommendations [[79]](https://data.consilium.europa.eu/doc/document/ST-9581-2023-INIT/en/pdf) is the designation of critical multidrug-resistant organisms resistant to last line treatments (e.g. carbapenem-resistant *Enterobacterales*, carbapenemase-producing *P. aeruginosa*, carbapenem-resistant *A. baumannii*, and *Candida auris*) as notifiable diseases^[Notifiable diseases fall under regional jurisdiction. These are serious infections, with labs/clinicians obliged to report diagnosed cases to the relevant regional authority, who then aims to reduce spread, for example through contact tracing. Outbreaks of care-associated MDRO are already notifiable, but many cases are currently reported late or not at all.]. under national legislation. In addition, Member States should decide if other resistant organisms are notifiable, according to the national situation. To ensure the feasibility of mandatory reporting (which falls under regional jurisdiction), such a list should be well defined and regularly updated in collaboration with and under advisory of the TC-MDRO. 
+
+In the veterinary sector, despite prodigious reductions in AMU, no commensurate reductions in AMR are observed, especially when AMR in indicator bacteria are considered. This may be because a) even restricted AMU will drive or sustain AMR, b) persistence of AMR on farms or in the production chain (slaughterhouses, transportation) is supported by mechanisms other than AMU, for example cross-over of resistant bacteria between productions sites and along the production chain, c) the persistence of AMR may delay a marked decline in resistance despite a significant drop in use, d) not all AMU is registered, or e) the monitoring of AMR in the veterinary sector in Belgium (currently based on EU-level methodology) may not accurately cover  the AMR situation in Belgian animal populations. An assessment of how well the current monitoring methodology represents Belgian populations is a first key step to understanding this disconnect between what is considered the key lever in reducing AMR, and observed AMR results. Secondly the BELMAP editorial board advises to investigate the impact of drivers (others than antimicrobial use) on AMR. Future research projects focusing on the transfer of resistance along the production chain, the potential  impact of heavy metals and biocides,  and the impact of different production systems would be of great value. 
+
+Another  important gap in the veterinary sector is the absence of AMR surveillance in pets and aquatic food-producing animals. The BELMAP editorial board points out the need of a harmonized and representative surveillance of AMR in animal (food-producing and pets) pathogens. This monitoring should inform veterinarians and authorities of the exact impact of AMR in clinically relevant pathogens. The inclusion of selective monitoring of resistance to antibiotics considered of critical importance in human medicine (e.g. linezolid), like that already conducted for carbapenemases and ESBL producers, is further essential to carefully monitor the emergence of such resistance. Furthermore, as recommended for human health, the whole-genome sequencing of MDR bacteria from animal origin should continue to expand as part of the Belgian One-Health monitoring of bacterial clones resistant to CIAs.
+
+An attractive option for environmental monitoring of AMR is through surveillance in sewage/waste waters, because it provides an integrated view of AMR in bacteria and fungi carried across the human and animal populations, and the environment. This is much more comprehensive than the current (human/animal) patient-by-patient sampling, and also avoids privacy concerns in the collection of data. Centralized sewage monitoring contains signals that reflect community-level dissemination of AMR. Indeed, similar to SARS-CoV-2, AMR may be silently transmitted within communities and missed by standard monitoring in human clinics. Therefore, pilot projects to quantify AMR genes in effluents of nursing homes, hospitals and agricultural hotspots should be supported to promote the development of these techniques and complete the overview of the AMR situation. 

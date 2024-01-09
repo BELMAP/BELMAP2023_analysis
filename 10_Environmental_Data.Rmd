@@ -1,0 +1,585 @@
+---
+title: "![](BELMAP-logo.png){width=6in}"
+subtitle: "10. Environment"
+date: "Last compiled on `r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: 
+        latex_engine: lualatex
+  word_document:
+    reference_docx: "word-styles-reference-01.docx"
+  html_document:
+    df_print: paged
+css: style.css
+editor_options:
+  markdown:
+    wrap: 72
+header-includes: 
+- \usepackage{placeins}   
+- \usepackage{caption}
+- \captionsetup[figure]{labelformat=empty}
+---
+
+```{r setup8, include=FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE
+)
+```
+
+```{r load_data_and_themes8, include=FALSE}
+
+library(tidyverse)
+library(patchwork)
+library(jpeg)
+library(scales)
+library(extrafont)
+library(remotes)
+library(extrafontdb)
+library(magrittr)
+library(AER)
+library(AICcmodavg)
+library(pscl)
+library(MASS)
+library(COMPoissonReg)
+library(performance)
+library(grid)
+library(ggtext)
+library(showtext)
+library(cowplot)
+
+
+font_add("Gill Sans MT", "GIL_____.TTF")
+
+# adding icons to figures ------------------------------------
+
+# Important step to enable showtext font rendering!
+showtext_auto()
+
+font_add('fa-solid', '../font_awesome_font_files/fontawesome-free-6.4.0-desktop/otfs/Font Awesome 6 Free-Solid-900.otf')
+
+upward_arrow <- "<span style='font-family:fa-solid'>&#xf062;</span>"
+downward_arrow <- "<span style='font-family:fa-solid'>&#xf063;</span>" 
+equals <- "<span style='font-family:fa-solid'>&#xf52c;</span>"   #" = " 
+oscillate <- "<span style='font-family:fa-solid'>&#xf83e;</span>"   #" ~ "
+
+
+BELMAP_colourscheme <- c("#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c",
+"#fdbf6f","#ff7f00","#cab2d6")
+
+moiras_graph_theme<- function(..., base_size = 12){theme(
+  panel.background = element_rect(fill="#f7f7f7", colour = "#001f3f"), #transparent panel bg
+  plot.background = element_rect(fill='#f7f7f7', color=NA), #transparent plot bg
+  panel.grid.major.y =  element_line(colour = "#ccc6c4"), #grey y major gridlines
+  panel.grid.major.x =  element_blank(), #remove major gridlines
+  panel.grid.minor = element_blank(), #remove minor gridlines
+  # legend.background = element_rect(fill='#001f3f'), #transparent legend bg
+  legend.title = element_text(size = 14),
+  legend.text = element_text(size = 12),
+  #  legend.box.background = element_rect(fill='#001f3f'),
+  text = element_text( family = "Gill Sans MT"),
+  axis.text = element_text(size = 14),
+  #plot.background=element_blank(),#, , size = 10, family = "calibri"
+  axis.title = element_text(size = 16),
+  axis.ticks.x = element_blank(),
+  axis.text.x = element_text(angle = 90,vjust = 0.5, hjust = 0.5)
+)}
+
+
+
+
+#2. Load data--------------
+FAO_fungicide<- read.csv("\\\\sciensano.be/FS/1220_BactDis_Scientist/Scientists/Moira/BELMAP 2023/Data/3.Environment/FAOSTAT_data_en_7-6-2023.csv",
+                         sep = ",", header = TRUE) %>%
+  dplyr::select(Item, Year, Value)
+
+#load data
+
+water_raw_data<- read_csv2("\\\\sciensano.be/FS/1220_BactDis_Scientist/Scientists/Moira/BELMAP 2023/Data/3.Environment/water_antimicrobial_residues.csv")
+
+
+flanders_raw_data1<- read_csv2("\\\\sciensano.be/FS/1220_BactDis_Scientist/Scientists/Moira/BELMAP 2023/Data/3.Environment/VMM_water_data_raw.csv")
+
+
+flanders_measurement_points<- read_csv2("\\\\sciensano.be/FS/1220_BactDis_Scientist/Scientists/Moira/BELMAP 2023/Data/3.Environment/VMM_meetpunt_locations.csv")%>%
+  filter(regio == "Vlaanderen") %>%
+  dplyr::select(meetplaats,provincie) %>%
+  mutate(meetplaats = as.character(meetplaats))
+
+
+flanders_raw_data<- left_join(flanders_raw_data1,flanders_measurement_points, by = "meetplaats")
+
+# monitoring--------------
+
+#tidy data
+
+# names(flanders_raw_data)
+# 
+# names(flanders_measurement_points)
+# 
+# unique(flanders_measurement_points$regio)
+
+BE_list <- c("Canal In","Canal Out","Woluwe Out","Senne In" ,"Senne Out")
+
+water_data<-  water_raw_data %>%
+  pivot_longer(cols = -c(Date, Antibiotic), names_to = "Location", values_to = "concentration") %>%
+  mutate(concentration = str_replace(concentration,",","."))%>%
+    mutate(exact_value = if_else(grepl("<", concentration), "< Value Recorded", "Value Recorded"),
+           Date = dmy(Date),
+           Organisation = if_else(Location %in% BE_list, "Brussels Environment", "SPW")) %>%
+  mutate(`Concentration (ug)` = as.numeric(str_replace(concentration,"<","")),
+         Antibiotic = case_when(
+           grepl("Amoxicilline", Antibiotic) ~ "Amoxicillin",
+           grepl("Azitromycine ", Antibiotic) ~  "Azithromycin",
+           grepl("Ciprofloxacine ", Antibiotic) ~  "Ciprofloxacin",
+           grepl("Claritromycine", Antibiotic) ~  "Clarithromycin",
+           grepl("Erytromycine ", Antibiotic) ~  "Erythromycin",
+           .default = Antibiotic))  %>%
+  dplyr::select(-concentration)
+
+
+flanders_water_data <- flanders_raw_data %>%
+  filter(!is.na(waterlichaam))%>%
+  unite("Amoxicillin", Amoxicillin.ng.L.sign:Amoxicillin.ng.L., remove = TRUE,sep = " ") %>%
+  unite("Azithromycin", Azithromyc.ng.L.sign:Azithromyc.ng.L., remove = TRUE,sep = " ") %>%
+  unite("Ciprofloxacin", Ciprofloxacin.ng.L.sign:Ciprofloxacin.ng.L., remove = TRUE,sep = " ") %>%
+  unite("Clarithromycin", Clarithromyc.ng.L.sign:Clarithromyc.ng.L., remove = TRUE,sep = " ") %>%
+  unite("Erythromycin", Erythromyc.ng.L.sign:Erythromyc.ng.L, remove = TRUE,sep = " ") %>%
+  pivot_longer(cols = -c(meetplaats , waterlichaam,X,Y,Deelmonster,Datum,provincie), names_to = "Antibiotic", values_to = "concentration") %>%
+  filter(!is.na(provincie)) %>%
+  mutate(exact_value = if_else(grepl("< ", concentration), "< Value Recorded", "Value Recorded"),
+         Date = dmy(Datum),
+         Location =  case_when(
+           provincie == "Antwerpen" ~ "Antwerp",
+           provincie == "Limburg" ~ "Limburg",
+           provincie == "Oost-Vlaanderen" ~ "East Flanders",
+           provincie == "West-Vlaanderen" ~ "West Flanders",
+           provincie == "Vlaams-Brabant" ~ "Flemish Brabant"),
+         Organisation = "VMM",
+        `Concentration (ug)` = as.numeric(str_replace(concentration,"< ",""))/1000) %>%
+  dplyr::select(-c(meetplaats, waterlichaam, X, Y, Deelmonster,Datum,concentration, provincie))
+  
+long_env_data <- rbind(water_data,flanders_water_data) %>%
+  filter(!is.na(Date))
+
+
+
+#add PNEC
+
+PNECS <- tibble(
+  Antibiotic = c("Clarithromycin", "Azithromycin", "Amoxicillin", "Ciprofloxacin", "Erythromycin"),
+  PNEC = c(0.12, 0.019, 0.078, 0.089, 0.2)
+)
+
+
+#add in EU averages
+Europe_data<- read.csv("\\\\sciensano.be/FS/1220_BactDis_Scientist/Scientists/Moira/BELMAP 2023/Data/3.Environment/Europe_data.csv", sep = ";") %>%
+  dplyr::select(Antibiotic, MEC)
+
+
+#make range and mean:
+
+Europe_data_clean <- Europe_data %>%
+  group_by(Antibiotic) %>%
+  summarise(mean_MEC = mean(MEC), min_MEC = min(MEC), max_MEC = max(MEC)) %>%
+  ungroup() %>%
+  mutate(Date = "01-01-2015")%>%
+  mutate(Date_read = dmy(Date)) %>%
+  filter(!is.na(mean_MEC))
+
+
+
+```
+
+\newpage
+
+# 10. Antibiotic residues and resistance in the environment
+
+**Contents**
+
+10.1 [Residue monitoring in the environment](#paragraph91)\
+10.2 [Antifungal use in the environment](#paragraph92)\
+10.3 [Research](#paragraph93)\
+10.3.1 [Monitoring of azole-resistance in *A. fumigatus* in wastewater samples](#subparagraph91)\
+10.3.2 [The PARRTAE project](#subparagraph92)
+
+
+## 10.1 Residue monitoring in the environment {#paragraph91}
+
+The environment is increasingly acknowledged as a contributor to the
+development and spread of AMR [[70]](https://efsa.onlinelibrary.wiley.com/doi/full/10.2903/j.efsa.2021.6651), in particular in high risk areas due to
+human, animal , agriculture and manufacturing waste streams. All Belgian
+regions adhere to the European Directive 2008/105/CE on environmental
+quality standards in the field of water policy. The Vlaamse
+Milieumaatschappij (VMM), Brussels Environment and the Service Public de
+Wallonie (SPW) track the concentration of potential water pollutants of
+surface water listed in the European Watch List (Figure 50). The most
+recent version of this list
+[[71]](https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022D1307)
+contains four antibiotics: sulfamethoxazol, trimethoprim, clindamycine
+and ofloxacine. Previous watch lists included amoxicilline and
+ciprofloxacine (2019-2022), and three macrolides (erythromycin,
+clarithromycin and azithromycin (2016-2020)). The report also defines
+Predicted No Effect Concentrations (PNECs)^[PNEC are based on their estimated minimal selective concentrations
+    for selected bacterial species. The PNEC values can serve as a guide
+    on the maximum levels of antibiotic residues in an environmental
+    matrix, below which resistance is unlikely to develop.] and identifies possible
+methods of analysis for the proposed substances.
+
+Monitoring data for the five molecules of the 2016-2020 watch lists are
+shown in Figure 51. All five molecules showed higher levels detected in
+Brussels waterways in 2022. Of note, the PNEC of azithromycin (0.019
+ug/L) is very close to the detection limit of current technology (0.02
+ug/L). Regarding the new watch list, two molecules, trimethoprim and
+sulfamethoxazole, were included in the monitoring program of 2022, with
+monitoring of clindamycine and ofloxacine residues commencing in 2023.
+Data from four sites in Flanders in 2022 showed higher levels of
+sulfamethoxazol (mean value = 0.107 ug/L, max = 1.54 ug/L) compared to
+trimethoprim (mean value = 0.018 ug/L, max = 0.073 ug/L), with only 3/36
+measurements for sulfamethoxazol registering below the limit of
+quantification (0.01 ug/L), compared to 13/36 for trimethoprim.
+
+Apart from these mandatory monitoring, an encouraging number of point
+prevalence studies and pilot projects have been initiated by the
+regional authorities.
+
+-   The IMHOTEP project (2018), performed in collaboration between the
+    SPW and Brussels Environment (among other partners), investigated
+    drug residues in water samples from effluents from purification
+    stations, surface and drinking water; analyzing 208 samples in
+    Wallonia and 50 samples in the Brussels Region
+    [[72]](https://doi.org/10.2760/771124).\
+-   The Interreg project DIADEM (2017--2020) mapped yearly fluctuations
+    in residue concentration of 7 antibiotics in 24 sites spread
+    alongside Meuse, Sambre and the Semois.\
+-   The VMM published various reports on residues in surface and ground
+    water[[73]](https://www.vmm.be/publicaties/veterinaire-antibiotica-in-water-2017-2018)\
+-   The Flanders Research Institute for Agriculture, Fisheries and Food
+    (ILVO, Instituut voor Landbouw-, Visserij- en Voedingsonderzoek) is
+    participating in the PARRTAE project, which is a collaboration
+    between several EU countries, involving the collection of water
+    samples from sites with suspected high and low loads of antibiotic
+    residues (see section 11.3.2 for further details)
+
+\newpage
+
+```{r 10.1_residue_monitoring, fig.dim=c(10,16), fig.cap=""}
+
+
+plot_list= list()
+
+plot_colours <-  c("#a6cee3","#1f78b4","#fb9a99","#b2df8a","#33a02c")
+
+for (i in unique(long_env_data$Organisation)) {
+  data_plot<- long_env_data %>%
+    filter(Organisation == i)
+
+#   if(grepl("VMM", unique(data_plot$Organisation))){
+#     plot_colours <- viridis(43)
+#   }else{
+#     plot_colours <-  c("#a6cee3","#1f78b4","#fb9a99","#b2df8a","#33a02c")    
+#   }
+ 
+  
+  
+  first_plot_trial <- data_plot %>%
+    ggplot()+
+    geom_jitter(aes(x=Date, y=`Concentration (ug)`, colour =  Location, fill =Location, shape = exact_value),size = 2, width = 20, height = 0.002)+
+    geom_errorbar(data = Europe_data_clean, aes(x = Date_read, ymin=min_MEC, ymax=max_MEC), size =1, width=0, colour = "blue")+
+    geom_point(data = Europe_data_clean, aes(x = Date_read, y=mean_MEC), size =2, colour = "red")+
+    scale_colour_manual(values = plot_colours)+
+    scale_fill_manual(values = plot_colours)+
+    scale_shape_manual(values=c(1, 19))+
+    scale_y_continuous( trans='log10', limits = c(0.0001,100))+
+    facet_wrap(~Antibiotic)+
+    labs(x= "Time", y="Concentration (ug/l)", shape = "",title = i)+
+    geom_hline(data = PNECS, aes(yintercept=PNEC),linetype='dotted')+
+    theme_classic()+
+    theme(strip.text = element_text(size = 12)
+          #strip.background = element_blank()
+    )
+  plot_list[[i]] <- first_plot_trial
+  
+}
+
+
+plot_list[[1]] / plot_list[[2]] / plot_list[[3]] +plot_layout(heights = c(1,1,1))
+
+```
+
+^ **Figure 51** — Detection of antibiotic residues at various locations, separated by organization A) Brussels Environment, B) Service Public de Wallonie (SPW), C) Vlaamse Milieumaatschappij (VMM). The colour depicts the location of the sample, the shape represents the type of recording (full circle = exact value record, empty circle = < value record), dotted line =  the Predicted No Effect Concentration (PNEC) for that antibiotic, red point = average (mean) from EU data available in literature, blue line = range from EU data available in literature, collated by Sanseverino et al. (2018). Sources: Brussels Environment, SPW, VMM.
+
+
+\FloatBarrier
+
+## 10.2 Antifungal pesticide use in the environment {#paragraph92}
+
+Pesticides encompass a wide range of products designed to prevent,
+repel, destroy or mitigate unwanted organisms, including bacteria, fungi and viruses. As such, antimicrobial (especially fungicidal and bactericidal) products aren't
+just used to treat infections of humans and animals, but also to treat
+or prevent infections in agricultural produce such as grains, fruit and
+vegetables. Pesticide use is important for protecting agricultural
+productivity, with fungal pathogens alone destroying an estimated 1/3 of
+global crop production annually
+[[74]](https://doi.org/10.1038/nature10947). However, there are concerns
+that the use of such products in the environment may drive resistance as
+the broad application of pesticides to, for example, an entire field
+exposes a very wide diversity of microorganisms to the pesticide at
+potentially very variable concentrations. The potential impact of the
+use of pesticides on AMR development and the risk this poses to the
+effectiveness of human and veterinary treatments remains unclear, but is
+particularly concerning when the drugs used in the environment are very
+similar, or even the same, as those used in medical practice.
+
+FAOSTAT provides data relating to food and agriculture for over 245
+countries and territories, including Belgium
+[[75]](https://www.fao.org/faostat/en/#data/RP). This data source
+provides consumption data, expressed in tonnes of active product, for a
+number of pesticides used in the agricultural sector for crops, seeds and forestry. Below we
+illustrate the volume (in tonnes) of diazole and triazole antifungal
+chemicals utilised in the Belgian agricultural sector (crops, seeds and forestry, light blue),
+compared to the volume consumed in the human medical sector (dark blue).
+Azoles (including diazoles and triazoles) are the most widely used class
+of molecules in human antifungal therapy
+[[76]](https://doi.org/10.1016/j.bcp.2016.11.019). Only five classes of
+antifungal medications have been developed, with multiple displaying
+high toxicity or limited oral availability (thus requiring
+hospitalisation and intravenous treatment), leaving few alternatives for
+treating resistant fungal pathogens
+[[77]](https://doi.org/10.1038/s41579-022-00720-1).
+
+```{r 10.2_environ_antifun_use, fig.dim=c(10,5), fig.cap="**Figure 52** — Consumption (in tonnes) of diazole and triazole azole antifungals in the agricultural sector for crops, seeds and forestry and human medical sector in Belgium. Sources: ESAC-Net and FAOSTAT"}
+
+FAO_fungicide<- read.csv("\\\\sciensano.be/FS/1220_BactDis_Scientist/Scientists/Moira/BELMAP 2023/Data/3.Environment/FAOSTAT_data_en_7-6-2023.csv",
+                         sep = ",", header = TRUE) %>%
+  dplyr::select(Item, Year, Value)
+
+FAO_fungicide_barchart <- FAO_fungicide %>%
+  filter(!grepl("ungicide",Item)) %>%
+  ggplot(aes(x=Year,y=Value))+
+  geom_bar(aes(fill=Item), stat="identity", position = "stack")+
+  scale_fill_manual(values = BELMAP_colourscheme)+
+  scale_x_continuous(breaks = seq(2011,2020,by=1))+
+   labs(y="Agricultural use (tonnes)")
+
+
+# human Fungicide for comparison
+
+human_AMC_raw <- read.csv("\\\\sciensano.be/FS/1220_BactDis_Scientist/Scientists/Moira/BELMAP 2023/Data/1.AMC/Combined_AMC/ESAC_OUTPUT_VOLUME.csv") %>%
+  dplyr::select(-X)
+
+
+#azole atc codes:
+Azole_codes <- c("D01AC", "J02AB", "J02AC")
+
+human_AMC_azole_raw <-human_AMC_raw %>%
+  filter(grepl(paste(Azole_codes,collapse = "|"),ATCCode)) %>%
+  mutate(Year = DateUsedForStatisticsYear ) %>%
+  group_by(Year) %>%
+  summarise(Volume.mg = sum(TOTAL_VOLUME)) %>%
+  ungroup %>%
+  mutate(Volume.tonnes = round(Volume.mg/1000000000)) %>%
+  dplyr::select(Year, Volume.tonnes) %>%
+  mutate(Sector = "Human medicine")
+
+# Azole compared to human :
+
+
+FAO_fungicide_azole <- FAO_fungicide %>%
+  filter(Item == "Fung & Bact – Triazoles, diazoles") %>%
+  mutate(Volume.tonnes = round(Value)) %>%
+  dplyr::select(Year, Volume.tonnes) %>%
+  mutate(Sector = "Agricultural")
+
+Azoles_uncount <- rbind(human_AMC_azole_raw,FAO_fungicide_azole) %>%
+  uncount(data = ., weights = Volume.tonnes) %>%
+  filter(as.numeric(Year) > 2011) %>%
+  filter(as.numeric(Year) < 2021)
+
+
+Azoles <- rbind(human_AMC_azole_raw,FAO_fungicide_azole) %>%
+  filter(as.numeric(Year) > 2011) %>%
+  filter(as.numeric(Year) < 2021)
+# 
+# (Azole_figure1 <- Azoles_uncount  %>%
+#   ggplot() +
+#     geom_point(data = Azoles_uncount[Azoles_uncount$Sector == "Human medicine",],aes(x = Sector, y = Year, colour = Sector), size = 1)+
+#   geom_jitter(data = Azoles_uncount[Azoles_uncount$Sector == "Agricultural",],
+#               aes(x = Sector, y = Year, colour = Sector), 
+#               size = 1,height = 0.3)+
+#     scale_y_continuous(limits = c(2011.5,2020.5), breaks =seq(2012,2020,by = 1))+
+#     coord_flip())
+
+
+FAO_fungicide_barchart <- FAO_fungicide %>%
+  filter(!grepl("ungicide",Item)) %>%
+  ggplot(aes(x=Year,y=Value))+
+  geom_bar(aes(fill=Item), stat="identity", position = "stack")+
+  scale_fill_manual(values = BELMAP_colourscheme)+
+  scale_x_continuous(breaks = seq(2011,2020,by=1))+
+   labs(y="Agricultural use (tonnes)")
+
+
+# human Fungicide for comparison
+
+human_AMC_raw <- read.csv("\\\\sciensano.be/FS/1220_BactDis_Scientist/Scientists/Moira/BELMAP 2023/Data/1.AMC/Combined_AMC/ESAC_OUTPUT_VOLUME.csv") %>%
+  dplyr::select(-X)
+
+
+#azole atc codes:
+Azole_codes <- c("D01AC", "J02AB", "J02AC")
+
+human_AMC_azole_raw <-human_AMC_raw %>%
+  filter(grepl(paste(Azole_codes,collapse = "|"),ATCCode)) %>%
+  mutate(Year = DateUsedForStatisticsYear ) %>%
+  group_by(Year) %>%
+  summarise(Volume.mg = sum(TOTAL_VOLUME)) %>%
+  ungroup %>%
+  mutate(Volume.tonnes = round(Volume.mg/1000000000)) %>%
+  dplyr::select(Year, Volume.tonnes) %>%
+  mutate(Sector = "Human medicine")
+
+# Azole compared to human :
+
+
+FAO_fungicide_azole <- FAO_fungicide %>%
+  filter(Item == "Fung & Bact – Triazoles, diazoles") %>%
+  mutate(Volume.tonnes = round(Value)) %>%
+  dplyr::select(Year, Volume.tonnes) %>%
+  mutate(Sector = "Agricultural")
+
+Azoles_uncount <- rbind(human_AMC_azole_raw,FAO_fungicide_azole) %>%
+  uncount(data = ., weights = Volume.tonnes) %>%
+  filter(as.numeric(Year) > 2011) %>%
+  filter(as.numeric(Year) < 2021)
+
+
+Azoles <- rbind(human_AMC_azole_raw,FAO_fungicide_azole) %>%
+  filter(as.numeric(Year) > 2011) %>%
+  filter(as.numeric(Year) < 2021)
+# 
+# (Azole_figure1 <- Azoles_uncount  %>%
+#   ggplot() +
+#     geom_point(data = Azoles_uncount[Azoles_uncount$Sector == "Human medicine",],aes(x = Sector, y = Year, colour = Sector), size = 1)+
+#   geom_jitter(data = Azoles_uncount[Azoles_uncount$Sector == "Agricultural",],
+#               aes(x = Sector, y = Year, colour = Sector), 
+#               size = 1,height = 0.3)+
+#     scale_y_continuous(limits = c(2011.5,2020.5), breaks =seq(2012,2020,by = 1))+
+#     coord_flip())
+
+
+(Azole_figure2 <- Azoles  %>%
+    ggplot() +
+     geom_bar(aes(x = Year, y = Volume.tonnes, fill = Sector), position = "stack", stat = "identity")+
+      scale_fill_manual(values = BELMAP_colourscheme)+
+    scale_x_continuous(limits = c(2011.5,2020.5), breaks =seq(2012,2020,by = 1))+
+    ylab("Consumption (tonnes)"))
+
+
+# (Azole_figure3 <- Azoles  %>%
+#     ggplot() +
+#     geom_point(aes(x = Year, Sector, size = Volume.tonnes, colour = Sector))+
+#     scale_x_continuous(limits = c(2011.5,2020.5), breaks =seq(2012,2020,by = 1))+
+#     coord_flip())
+# 
+# 
+# Azole_figure1+Azole_figure2
+
+
+```
+
+\FloatBarrier
+
+## 10.3. Research {#paragraph93}
+
+### 10.3.1 Monitoring of azole-resistance in *A. fumigatus* in wastewater samples {#subparagraph91}
+
+-Hanne Debergh and Ann Packeu, Sciensano
+
+Environmental azole resistance monitoring of *A. fumigatus* is not yet
+embedded in an annual monitoring program as only now the interest in
+this topic is rising. Environmental *A. fumigatus* monitoring is usually
+performed through air and soil testing, however, in the research project
+MissingLink, wastewater monitoring has been initiated. This research,
+funded by Sciensano, investigates whether this medium could provide an
+easier and more complete monitoring tool, that could be in relation with
+monitoring in clinical isolates.
+
+In 2021 and 2022, the first wastewater analysis have been performed
+monitoring the presence of (azole resistant) *A. fumigatus*. In total,
+10 wastewater treatment plants (WWTPs) from Flanders and Brussels have
+been selected, based on the highest population coverage (Figure 1).
+Water filtrations have been performed using two media: malt +
+chloramphenicol (MC) and MC supplemented with tebuconazole (4 mg/L) as a
+first screening method for azole-resistance. This widely used
+agricultural azole could potentially cause cross-resistance against
+medical azoles. *A. fumigatus* has been detected at each sampling point,
+with a total of 346 colonies isolated from the MC+T medium. A total of
+14 isolates showed phenotypical resistance against at least one medical
+azole (itraconazole, voriconazole, posaconazole and isavuconazole)
+resulting in a 4% prevalence rate, which is similar to what is seen in
+clinical isolates in Belgium
+[[78]](https://doi.org/10.1016/j.jiac.2021.08.024). Molecular testing
+showed presence of the widely distributed TR34/L98H mutation and one
+isolate carried the TR46/Y121F/T289A mutation.
+
+The National Reference Centre (NRC) for mycoses receives around 600-700
+human *A. fumigatus* isolates on a yearly basis. To be able to compare
+the clinical resistance rates with environmental resistance rates in
+Belgium, a new monitoring round was started in 2023 to increase the
+number of isolates. We aim to test whether wastewater surveillance could
+prove to be an interesting medium to monitor the prevalence of azole
+resistance in Belgium.
+
+```{r 10.3.1_, fig.dim=c(10,7), fig.cap="**Figure 53** — Map showing the 10 selected wastewater treatment plants (WWTPs) in Flanders and Brussels for the monitoring of (azole resistant) Aspergillus fumigatus."}
+
+#load project visualisation
+
+project_visual  <- readJPEG("www/Env_asperg_waste_water.jpg", native = TRUE)
+
+ggdraw(project_visual) +
+        draw_image(project_visual)
+
+
+```
+
+\FloatBarrier
+
+### 10.3.2 The PARRTAE project {#subparagraph92}
+
+-Laurens Tuts, Geertrui Rasschaert, ILVO
+
+The Flanders Research Institute for Agriculture, Fisheries and Food
+(ILVO) participates in the European PARRTAE project (2021-2024). This
+consortium aims to study antibiotic resistance in the aquatic
+environment, covering a wide variety of water samples, including
+groundwater, surface water, wastewater plants and marine environments.
+Water samples in regions with both low and high loads of antibiotic
+usage will be collected. In addition, antibiotic residues will be
+quantified, both in water and sediment. Another objective is the
+determination of common ARG plasmids circulating in European waters in
+order to understand and prevent their dissemination. In a first part of
+this research, surface water and groundwater locations were chosen as
+representatives for high-risk regions related to the use of antibiotics
+in veterinary medicine. The spread of manure on arable lands can lead to
+the dissemination of the antibiotic (resistance) load into the
+environment. Suspecting a high load of antibiotic residues and
+antibiotic-resistant bacteria, samples were taken at 35 locations in
+West-Flanders (Yser Basin) and 15 sites were sampled in Antwerp (Meuse
+Basin), both for surface water (March 2022) and groundwater (Augustus to
+December 2022). Additionally, a follow-up sampling of surface water was
+conducted at the end of the fertilization period spanning from September
+to November 2022. *E. coli* were isolated and tested for antibiotic
+susceptibility. An increase in AMR (from 42% to 73%)
+in *E. coli*, isolated from surface waters, was seen after the
+fertilization period. In groundwater, there was a resistance in 67% of
+samples. Resistance against sulfamethoxazole (50%) was most often
+detected, followed by: ampicillin (22%), tetracycline (14%),
+trimethoprim (14%) and ciprofloxacin (6%). ESBL-producing *E. coli* were isolated in 29 samples (29%).
+Remarkable for these ESBL *E. coli* was the occurrence of resistance
+against ertapenem (15%), colistin (4%) and 3rd & 4th generation
+cephalosporins. Antibiotic residues will be quantified to possibly
+associate the occurrence of antibiotic resistance with the presence of
+antibiotics in water. In marine samples, antibiotic susceptibility will
+later be assessed in the indicator organisms *Vibrio* spp. and *Shewanella*
+spp.
