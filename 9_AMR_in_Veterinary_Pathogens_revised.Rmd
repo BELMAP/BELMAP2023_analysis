@@ -1,0 +1,1082 @@
+---
+title: "![](BELMAP-logo.png){width=6in}"
+subtitle: 9. AMR in Veterinary Pathogens
+date: "Last compiled on `r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  word_document:
+    reference_docx: "word-styles-reference-01.docx"
+css: style.css
+editor_options:
+  markdown:
+    wrap: 72
+header-includes:
+- \usepackage{placeins}
+- \usepackage{caption}
+- \captionsetup[figure]{labelformat=empty}
+- \captionsetup[table]{labelformat=empty}
+---
+
+```{r setup7, include=FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE
+)
+```
+
+```{r load_data_and_themes7, include=FALSE}
+
+library(tidyverse)
+library(patchwork)
+library(jpeg)
+library(scales)
+library(extrafont)
+library(remotes)
+library(extrafontdb)
+library(magrittr)
+library(AER)
+library(AICcmodavg)
+library(pscl)
+library(MASS)
+library(COMPoissonReg)
+library(performance)
+library(grid)
+library(ggtext)
+library(showtext)
+
+
+BELMAP_colourscheme <- c("#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c",
+                         "#fdbf6f","#ff7f00","#cab2d6")
+
+moiras_graph_theme<- function(..., base_size = 12){theme(
+   panel.background = element_blank(), #transparent panel bg
+  plot.background = element_blank(), #transparent plot bg
+  panel.grid.major.y =  element_line(colour = "#ccc6c4"), #grey y major gridlines
+  panel.grid.major.x =  element_blank(), #remove major gridlines
+  panel.grid.minor = element_blank(), #remove minor gridlines
+  # legend.background = element_rect(fill='#001f3f'), #transparent legend bg
+  legend.title = element_text(size = 18),
+  legend.text = element_text(size = 16),
+  #  legend.box.background = element_rect(fill='#001f3f'),
+  text = element_text( family = "Gill Sans MT"),
+  axis.text = element_text(size = 16),
+  #plot.background=element_blank(),#, , size = 10, family = "calibri"
+  axis.title = element_text(size = 18),
+  axis.ticks.x = element_blank(),
+  axis.text.x = element_text(angle = 90,vjust = 0.5, hjust = 0.5),
+  strip.background = element_blank(),
+  strip.text = element_text(size = 18),
+  legend.position = "top",
+  legend.direction = "horizontal"
+)}
+
+font_add("Gill Sans MT", "GIL_____.TTF")
+
+# adding icons to figures ------------------------------------
+
+# Important step to enable showtext font rendering!
+showtext_auto()
+
+font_add('fa-solid', '../font_awesome_font_files/fontawesome-free-6.4.0-desktop/otfs/Font Awesome 6 Free-Solid-900.otf')
+
+upward_arrow <- "<span style='font-family:fa-solid'>&#xf062;</span>"
+downward_arrow <- "<span style='font-family:fa-solid'>&#xf063;</span>" 
+equals <- "<span style='font-family:fa-solid'>&#xf52c;</span>"   #" = " 
+oscillate <- "<span style='font-family:fa-solid'>&#xf83e;</span>"   #" ~ "
+
+
+# BELMAP_Indicator_colourscheme <- c("MDR"="#e31a1c",
+#                                     "pan-S" = "#33a02c",
+#                                     "MRSA" = "#1f78b4",
+#                                     "ESBL producers" = "#a6cee3",
+#                                     "Ciprofloxacin resistance" = "#b2df8a",
+#                                     "Colistin resistance" = "#1f78b4")
+
+
+BELMAP_Vet_AntiB_colourscheme <- c("Amoxicillin" ="#253494",
+                                   "Amoxyclav" ="#253494",
+                                   "Benzylpenicillin"="#1f78b4",
+                                   "Ampicillin" ="#1f78b4",
+                                   "Penicillin G"="#1f78b4",
+                                     "Apramycin" = "#a6cee3",
+                                     "Colistin" = "#b2df8a",
+                                     "Doxycycline" = "#fb9a99",
+                                     "Tetracycline"= "#fb9a99",
+                                     "Florfenicol" = "#33a02c",
+                                     "Tylvalosine" = "#33a02c",
+                                     "Tiamuline" = "#1f78b4",
+                                     "Cefazolin" = "#fc4e2a",
+                                   "Cefalexin" = "#fed976",
+                                     "TMP-SMX" = "#1a1a1a")
+
+
+
+#-----------------------------------------------------------------------------------
+#2. Load data-----
+
+#load graph data --------------------------------------------------
+
+graph_data_complete <- read_csv2("9_Vet_AMR_data_and_GLM_predictions.csv") %>%
+  mutate(label_icon = case_when(
+  icon == "upward_arrow" ~ upward_arrow,
+  icon == "downward_arrow" ~ downward_arrow,
+  icon == "equals" ~ equals,
+  icon == "oscilate" ~ oscillate,
+  .default = ""
+)) %>%
+  mutate(label = if_else((is.na(signif_level) | signif_level == ""), label_icon, paste(label_icon,signif_level,sep=" "))) %>%
+  mutate(Year=as.numeric(Year))  %>%
+  mutate(Antibiotic1= str_to_title(Antibiotic)) %>%
+  mutate(Antibiotic = case_when(
+    grepl("Tmpsmx",Antibiotic1) ~ "TMP-SMX",
+    grepl("Ampramycin",Antibiotic1) ~ "Apramycin",
+    grepl("Tmp-Smx",Antibiotic1) ~ "TMP-SMX",
+    grepl("Amx_clav",Antibiotic1) ~ "Amoxyclav",
+    grepl("Florphenicol",Antibiotic1) ~ "Florfenicol",
+    .default = Antibiotic1)) 
+
+
+graph_data_complete_mast <- read_csv("9_Vet_AMR_data_and_GLM_predictions_mast.csv") %>%
+  mutate(label_icon = case_when(
+  icon == "upward_arrow" ~ upward_arrow,
+  icon == "downward_arrow" ~ downward_arrow,
+  icon == "equals" ~ equals,
+  icon == "oscilate" ~ oscillate,
+  .default = ""
+)) %>%
+  mutate(label = if_else((is.na(signif_level) | signif_level == ""), label_icon, paste(label_icon,signif_level,sep=" "))) %>%
+  mutate(Year=as.numeric(Year))  %>%
+  mutate(Antibiotic1= str_to_title(Antibiotic)) %>%
+  mutate(Antibiotic = case_when(
+    grepl("Tmpsmx",Antibiotic1) ~ "TMP-SMX",
+    grepl("Penicillin_g",Antibiotic1) ~ "Penicillin G",
+    grepl("Tmp-Smx",Antibiotic1) ~ "TMP-SMX",
+    grepl("Amx_clav",Antibiotic1) ~ "Amoxyclav",
+    .default = Antibiotic1)) 
+
+```
+          
+\FloatBarrier                       
+                            
+\newpage
+
+\FloatBarrier 
+ 
+# 9. AMR in Veterinary Pathogens
+
+**Contents**
+
+9.1 [**Pathogens in beef cattle**](#paragraph81)\
+9.1.1 [*Escherichia coli*](#subparagraph81)\
+9.1.2 [*Mannheimia haemolytica & Pasteurella
+multocida*](#subparagraph82)\
+9.2 [**Pathogens in chickens**](#paragraph82)\
+9.2.1 [*Escherichia coli*](#subparagraph83)\
+9.2.2 [*Enterococcus cecorum*](#subparagraph84)\
+9.3 [**Pathogens in swine**](#paragraph883)\
+9.3.1 [*Escherichia coli*](#subparagraph85)\
+9.3.2 [*Staphylococcus hyicus*](#subparagraph86)\
+9.3.3 [*Streptococcus suis*](#subparagraph87)\
+9.3.4 [*Pasteurella multocida*](#subparagraph88)\
+9.3.5 [*Actinobacillus pleuropneumonia*](#subparagraph89)\
+9.3.6 [*Brachyspira hyodysenteriae*](#subparagraph810)\
+9.4 [**Pathogens of bovine mastitis**](#paragraph84)\
+9.2.1 [*Escherichia coli*](#subparagraph811)\
+9.2.2 [*Staphylococcus aureus*](#subparagraph812)     
+9.5 [Research projects](#paragraph85)\
+9.5.1 [Investigating the causes of the high prevalence of fluoroquinolone resistance in broilers (FLUPOUL project)](#subparagraph851)\    
+9.5.2 [ABchangeR1 project](#subparagraph852)    
+
+\newpage
+
+At both national and European level, a gap in AMR surveillance in
+veterinary medicine is evident. Current AMR surveillance efforts are of
+limited help to veterinary practitioners and policymakers seeking to
+improve antimicrobial stewardship in animal health.
+
+We therefore include in the BELMAP report data on resistance among
+pathogens isolated from diseased farm animals. One limitation of this
+data is the absence of information on the clinical case, such as the
+symptoms expressed, how long the animal had been sick, whether multiple
+samples were collected from the same individual (e.g. across a disease
+course), and whether the animal had already received any treatment. The
+selection of bug-drug combination is inspired by ongoing work to create
+the European Antimicrobial Resistance Surveillance network in Veterinary
+medicine (EARS-Vet), whose scope was recently defined by expert
+opinion[[62]](https://doi.org/10.1093/jac/dkab462) . In Belgium,
+aggregated data was provided by ARSIA, DGZ and MCC. While
+awaiting official European breakpoints through EARS-VET, antimicrobial
+susceptibility testing results were interpreted based on clinical
+breakpoints from the Comité de l'Antibiogramme de la Société Française
+de Microbiologie, with no standardized antimicrobial sensitivity panel
+used across laboratories. Throughout the text, antimicrobials listed as
+recommended as first, second and third line treatments are based on the
+AMCRA formulary guidelines[[63]](https://formularium.amcra.be/).
+
+\FloatBarrier
+
+## 9.1 Pathogens in beef cattle {#paragraph81}
+
+\FloatBarrier
+
+### 9.1.1 *Escherichia coli* {#subparagraph81}
+
+In cattle, *E. coli* is most often associated with disease in calves,
+with observed pathology varying according to the bacterial strain.
+Intestinal overgrowth of *E. coli* can be associated with diarrhea and
+poor digestion in cattle. This is most frequently caused by insufficient
+colostrum intake and subsequent poor immunity and nutritional errors and
+is most often seen in intensively fed cattle. One of the more severe
+manifestations of *E. coli* infections is colisepticemia, this is most
+often observed in immunocompromised individuals -- either in young
+calves due to insufficient colostrum intake and failure of passive
+immune transfer, or in older immunocompromised individuals, most often
+suffering from severe comorbidities.
+
+Between 2014 and 2022, 15,342 *E. coli* isolates were isolated from the
+faeces of diseased cattle and tested for antibiotic sensitivity. As
+shown in Figure 40, the majority of isolates were found to be resistant
+to this trimethoprim-sulfamethoxazole (TMP-SMX) (8,917/15,342 samples from 2014-2022, 58.1%). By
+contrast, isolates showed low resistance to aminoglycosides or colistin
+during the study period, with an average of 6.5% and 4.5% of the
+isolates resistant to apramycin and colistin, respectively in the total
+period studied from 2015--2021.
+
+```{r 10.1_Ecoli_cattle, fig.dim=c(10,5), fig.cap="**Figure 40** —  Evolution of resistance (%) to trimethoprim-sulfamethoxazole (TMP-SMX), colistin  and apramycin in *E. coli* isolated from the faeces of diseased cattle. Data source: ARSIA & DGZ "}
+
+cattle_ecoli_graph <- graph_data_complete %>%
+  filter(grepl ("E. coli", Bacteria )) %>%
+   # # filter(!(Antibiotic == "Colistin")) %>%
+       filter(grepl("cattle_feaces", Source)) %>%
+    #filter(!(Matrix == "Urine")) %>%
+ #  group_by(Antibiotic) %>%
+   mutate(y_coord = case_when(
+     grepl("Apramycin",Antibiotic) ~ 15,
+     grepl("Colistin",Antibiotic) ~ 5,
+     grepl("TMP-SMX",Antibiotic) ~ 60)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Vet_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Vet_AntiB_colourscheme)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2023.5), breaks = seq(2014,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  
+
+cattle_ecoli_graph
+
+```
+
+A significant limitation of this dataset is the grouping of all cattle
+data together, independent of host age or production system, with for
+example calves from veal or dairy farms experiencing varying challenges
+and thus potentially different disease and resistance profiles. We do,
+for instance, observe that resistance profiles of bovine commensal *E.
+coli* (see section 8.2) vary between adult cattle and young veal
+calves[[58]](https://www.favv-afsca.be/productionanimale/antibioresistance/resultats/#sciensano).
+Indeed, the recommended treatment for pathogenic *E. coli* causing
+digestive disorders varies by host age, with the combination therapy of
+trimethoprim and sulfonamide noted the first line treatment for
+diarrhoea in older cattle (where low trimethoprim-sulphonamide
+resistance is expected), while prevention is the preferred first line
+for diarrhoea in younger cattle, with trimethoprim and sulfonamide
+combinations listed as a potential second line treatment with many other
+antimicrobials, as high resistance may be expected in this setting.
+
+\FloatBarrier
+
+### 9.1.2 *Mannheimia haemolytica & Pasteurella multocida* {#subparagraph82}
+
+*Mannheimia haemolytica* and *Pasteurella multocida* are both
+Gram-negative bacteria that are commensals of the bovine nasopharyngeal
+tract, and also associated with bovine respiratory disease (BRD)
+complex. BRD is a multifactorial syndrome for which no single pathogen
+is responsible, but rather it results from the interaction of the host's
+immune system with respiratory pathogens (bacterial, viral, parasitic or
+fungal) and environmental influences (e.g. ammonia, dust, temperature)
+[[64]](https://www.msdvetmanual.com/respiratory-system/bovine-respiratory-disease-complex).
+While it may be observed at any age, it is more common in calves, and is
+observed as a herd or group problem. As a multifactorial disease, the
+implementation of actions to reduce predisposing conditions, including
+potential vaccination against contributing viral pathogens, is important
+for reducing disease prevalence and supporting animal welfare.
+
+Since 2014, *M. haemolytica* isolates tested for antibacterial
+resistance have demonstrated low (\<10%) rates of resistance to
+florfenicol (Figure 41), the first choice treatment according to the
+AMCRA guidelines[[65]](https://formularium.amcra.be/58). Resistance to
+doxycycline, a second choice treatment option, was low from 2014 to 2017
+but has since increased (highest observed value of 28.6% recorded in
+2022). The rate of resistance to TMP-SMX has oscillated within the study
+period, but remained below 10% since 2019.
+
+```{r 10.1_M_haem_cattle, fig.dim=c(10,5), fig.cap="**Figure 41** — Evolution of resistance (%) to florfenicol, trimethoprim-sulfamethoxazole (TMP-SMX)  and doxycycline in *M. haemolytica* isolated from diseased cattle. Data source: ARSIA & DGZ"}
+
+cattle_mhaem_graph <- graph_data_complete %>%
+  filter(grepl ("M. haemolytica", Bacteria )) %>%
+       filter(grepl("pulmonary", Source)) %>%
+   mutate(y_coord = case_when(
+     grepl("Florfenicol",Antibiotic) ~ 5,
+     grepl("TMP-SMX",Antibiotic) ~ 15,
+     grepl("Doxycycline",Antibiotic) ~ 40)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Vet_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Vet_AntiB_colourscheme)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2023.5), breaks = seq(2014,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  
+
+cattle_mhaem_graph
+
+```
+
+For *P. multocida*, resistance to florfenicol and to TMP-SMX are low
+(Figure 42), with resistance to TMP-SMX decreasing across the study
+period. By contrast, resistance to doxycycline has increased across the
+study period. Once again, the grouping of data across cattle ages and
+production types may be masking stratified resistance profile patterns.
+
+```{r 10.1_pmult_cattle, fig.dim=c(10,5), fig.cap="**Figure 42** — Evolution of resistance (%) to florfenicol, trimethoprim-sulfamethoxazole (TMP-SMX)  and doxycycline in *P. multocida* isolated from diseased cattle. **Note y axis scale adjusted 0 - 20% to facilitate pattern visualisation.** Data source: ARSIA & DGZ"}
+
+cattle_pmult_graph <- graph_data_complete %>%
+  filter(grepl ("P. multocida", Bacteria )) %>%
+        filter(grepl("pulmonary", Source)) %>%
+   mutate(y_coord = case_when(
+     grepl("Florfenicol",Antibiotic) ~ 1,
+     grepl("TMP-SMX",Antibiotic) ~ 7,
+     grepl("Doxycycline",Antibiotic) ~ 15)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Vet_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Vet_AntiB_colourscheme)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2023.5), breaks = seq(2014,2022,1))+
+    scale_y_continuous(limits = c(-2,25), breaks = seq(0,20,10))+
+    geom_richtext(aes(x = 2023, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  
+
+cattle_pmult_graph
+
+```
+
+\FloatBarrier
+
+## 9.2 Pathogens in chickens {#paragraph82}
+
+### 9.2.1 *Escherichia coli* {#subparagraph83}
+
+Although many *E. coli* are non-pathogenic, avian pathogenic strains of
+*E. coli* can cause a variety of symptoms in chickens, varying from
+localized to systemic infections. Together these conditions are known as
+colibacillosis, and represent one of the most common causes of mortality
+and most economically devastating bacterial diseases for poultry farming
+globally[[66]](https://www.msdvetmanual.com/poultry/colibacillosis/colibacillosis-in-poultry). Worryingly, *E. coli* isolated from the internal organs of diseased chickens displayed high prevalence of AMR against
+all tested antibiotics. Figure 43 depicts the rate of resistance to the
+recommended antibiotic treatments, with combined TMP-SMX representing the recommended first choice and tetracyclines
+as the recommended second line treatment. As drinking-water based
+treatments are often the only practical option within poultry farms, and
+given the increased oral availability of doxycycline, this is often
+preferred over others within the tetracycline group. Overall, the
+highest levels of resistance is observed against amoxicillin, followed
+by tetracyclines and TMP-SMX with a statistically
+significant increase in the prevalence of resistance over time for all
+antibiotics.
+
+```{r 10.2_Ecoli_poult, fig.dim=c(10,5), fig.cap="**Figure 43** — Evolution of resistance (%) to trimethoprim-sulfamethoxazole (TMP-SMX), tetracycline  and amoxicillin in *E. coli* isolated from inner organs of diseased chickens. Of note, pre-2017 the resistance to amoxicillin was based on resistance measured for ampicillin. Data source: DGZ"}
+
+poult_ecoli_graph <- graph_data_complete %>%
+  filter(grepl ("E. coli", Bacteria )) %>%
+       filter(grepl("poultry_inner_organs", Source)) %>%
+   mutate(y_coord = case_when(
+     grepl("Amoxicillin",Antibiotic) ~ 70,
+     grepl("Tetracycline",Antibiotic) ~ 60,
+     grepl("TMP-SMX",Antibiotic) ~ 50)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Vet_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Vet_AntiB_colourscheme)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2023.5), breaks = seq(2014,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  
+
+poult_ecoli_graph
+
+```
+
+Very high levels of resistance are consistently observed in all three
+depicted antibiotics since 2020, with peak resistance to first and
+second line treatments observed in 2021 (60.2% and 64.7% resistant to
+TMP-SMX and tetracyclines respectively). Such levels of resistance might
+endanger the therapeutic success when treating colibacillosis with a
+first, second, or third line antibiotic. In terms of co-resistance,
+tetracyclines, amoxicillin and trimethoprim-sulphonamides are known to
+share the same plasmids. Co-selection by the use of one of these
+antimicrobial classes may therefore induce resistance to all of them.
+
+\FloatBarrier
+
+### 9.2.2 *Enterococcus cecorum* {#subparagraph84}
+
+*Enterococcus cecorum* was initially considered a commensal of the
+gastrointestinal tract of chickens, but in recent decades has emerged as
+a cause of poultry morbidity and mortality, particularly in
+broilers[[67]](https://doi.org/10.2903/j.efsa.2022.7126). *E. cecorum*
+has been associated with both acute and chronic osteomyelitis, arthritis
+and septicemia in adult chickens. As very few isolates have been
+analysed each year so far, no trend analysis or graphical representation
+are presented here, but the full dataset can be found in the appendix.
+AMR testing of *E. cecorum* isolates from the internal organs of
+diseased chickens indicates a consistently extremely high prevalence of
+resistance to TMP-SMX since 2014 (minimum 83.9% (26/31 isolates) in
+2016, maximum 100% (27/27 isolates) in 2015). This may result in
+potential therapeutic failure when using this first line antibiotic to
+treat *E. cecorum* infections. Resistance to the other listed
+recommended first line therapy, doxycycline, was stable between
+2014--2016, but has increased sharply since then, while resistance to
+ampicillin is consistently low. This increase in resistance appears at
+odds with antimicrobial consumption data, which indicate decreasing use
+of tetracyclines (doxycycline and tetracycline, expressed in BD100)
+since 2018 when species- specific antibiotic use was first reported.
+Co-selection of resistance due to the use of other antimicrobial classes
+may be contributing to observed resistance patterns.
+
+\FloatBarrier
+
+## 9.3 Pathogens in swine {#paragraph883}
+
+### 9.3.1 *Escherichia coli* {#subparagraph85}
+
+As in other species, *E. coli* may be present in the gastrointestinal
+tract of healthy pigs, but can also be associated with outbreaks of
+diarrheal and other digestive conditions in farmed pigs. Husbandry and
+environmental conditions are thought to contribute to disease
+development, such that a series of preventative methods, over a first
+line antimicrobial therapy, is the preferred and recommended action to
+avoid disease development [[68]](https://formularium.amcra.be/i/42).
+However, should preventative methods fail and symptoms arise, AMCRA
+recommends second and third choice antimicrobials -- including, among
+others, apramycin and colistin. AMCRA does not recommend colistine as a
+first line antimicrobial because it is listed as a WHO Critically
+Important Antimicrobial (CIA). . Figure 44 shows the recorded prevalence
+of resistance to amoxicillin, apramycin and colistin. We see low and
+stable prevalence of resistance to apramycin (\<5% throughout study
+period) and colistin (\<10% throughout study period). Amoxicillin is not
+proposed as therapy due to the high resistance of *E. coli* to
+aminopenicillins and the selective pressure exerted by the use of those
+molecules towards the selection of ESBL-producing *E. coli*, with indeed
+very or extremely high observed rates of resistance across the study
+period (minimum 65.9% (162/242 isolates) in 2021, maximum 81.3% (334/411
+isolates) in 2017).
+
+```{r 10.3_Ecoli_swine, fig.dim=c(10,5), fig.cap="**Figure 44** — Evolution of resistance (%) to amoxicillin , colistin and apramycin in *E. coli*  isolated from faeces of diseased swine. Of note, pre-2017 the resistance to amoxicillin was based on resistance to ampicillin. Data source: DGZ"}
+
+swine_ecoli_graph <- graph_data_complete %>%
+  filter(grepl ("E. coli", Bacteria )) %>%
+    filter(!grepl ("hemo", Bacteria )) %>%
+       filter(grepl("Swine_feaces", Source)) %>%
+   mutate(y_coord = case_when(
+     grepl("Apramycin",Antibiotic) ~ 5,
+     grepl("Colistin",Antibiotic) ~ 15,
+     grepl("Amoxicillin",Antibiotic) ~ 70)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Vet_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Vet_AntiB_colourscheme)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2024), breaks = seq(2014,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  
+
+swine_ecoli_graph
+
+```
+
+Hemolytic *E. coli* causes diarrhea in neonatal pigs and diarrhea and
+edema disease in weaned pigs. Effective prevention and rapid treatment
+is essential as gastrointestinal disruption as a neonate can have
+dramatic impacts on overall production. Again, preventative methods to
+optimize hygiene and husbandry, as well as a maternal vaccination, are
+preferred to responsive antimicrobial therapy -- thus AMCRA does not
+describe a first choice antibiotic. However, if such mechanisms fail and
+the conditions arise, then antimicrobials such as apramycin and colistin
+can serve as second line therapeutic options. While a statistically
+significant decrease in resistance is observed for colistin (decreasing
+from 18% on 2014 to 8.4% on 2021), a significant increase is observed
+for apramycin (increasing from 3.1% in 2014 to \>7% in 2021 and 2022)
+(Figure 45). Due to a high degree of observed resistance to
+trimethoprim-sulfonamides and tetracyclines, AMCRA classifies these
+molecules as third choice. Again, amoxicillin is not recommended by
+national guidelines, and the rate of resistance of *E. coli* isolates to
+amoxicillin remains extremely high (Figure 45).
+
+```{r 10.3_hemEcoli_swine, fig.dim=c(10,5), fig.cap="**Figure 45** — Evolution of resistance (%) to amoxicillin, colistin and apramycin in hemolytic *E. coli* isolated from faeces of diseased swine. Of note, pre-2017 the resistance to amoxicillin was based on resistance to ampicillin. Data source: DGZ"}
+
+swine_hemoecoli_graph <- graph_data_complete %>%
+  filter(grepl ("hemolytic E. coli", Bacteria )) %>%
+       filter(grepl("Swine_feaces", Source)) %>%
+   mutate(y_coord = case_when(
+     grepl("Apramycin",Antibiotic) ~ 5,
+     grepl("Colistin",Antibiotic) ~ 15,
+     grepl("Amoxicillin",Antibiotic) ~ 70)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Vet_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Vet_AntiB_colourscheme)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2024), breaks = seq(2014,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()   
+
+swine_hemoecoli_graph
+
+```
+
+\FloatBarrier
+
+### 9.3.2 *Staphylococcus hyicus* {#subparagraph86}
+
+*Staphylococcus hyicus* can be a normal inhabitant of porcine skin, but
+when toxin-producing strains penetrate the skin they can cause exudative
+epidermitis (Greasy Pig Disease). As very few isolates have been
+analysed each year so far, no trend analysis or graphical representation
+are presented here, but the full dataset can be found in the appendix.
+In addition to the small sample size, as *S. hyicus* is generally
+associated with porcine skin infections, it should be considered that it
+remains unclear how accurately the resistance profile of *S. hyicus*
+strains isolated from porcine blood (presented here) may represent *S.
+hyicus* present in skin lesions. AMCRA recommends benzylpenicillin as
+the first choice antimicrobial for treating exudative epidermitis. Since
+2015, we consistently observe very to extremely high resistance to
+benzylpenicillin (minimum 55% (11/20 isolates) in 2019, maximum 95.8%
+(23/24 isolates) in 2021. Similarly, very high resistance is observed
+most years for tetracyclines (minimum 20% (2/10 isolates) in 2022,
+maximum 85.7% (12/14 isolates) in 2016). Such very high resistance rates
+make tetracyclines third choice for treating *S. hyicus* skin
+infections. While we observe generally lower, but still high resistance
+to TMP-SMX, one of the recommended second choice antibiotics for *S.
+hyicus* causing skin infections (minimum 0% (2/10 isolates) in 2022,
+maximum 35.7% (5/14 isolates) in 2016).
+
+\FloatBarrier
+
+### 9.3.3 *Streptococcus suis* {#subparagraph87}
+
+*Streptococcus suis* is a common commensal of the nasopharynx but, often
+in association with highly stressful conditions, can cause sepsis and
+meningoencephalitis, primarily in piglets after weaning. As with other
+multifactorial conditions, preventative measures such as improved
+husbandry and reducing stress can be important to reducing disease
+development. Figure 46 indicates the results of resistance testing of
+*S. suis* from the internal organs of diseased pigs. Resistance to
+benzylpenicillin and amoxicillin is historically very low to low, which
+is in line with AMCRA's recommendation of benzylpenicillin as the first
+choice antimicrobial. Prevalence of resistance to TMP-SMX in *S. suis*
+has fluctuated, increasing from 2014 to a peak in 2018 before reducing
+again in 2019 and plateauing. Trimethoprim-sulphonamides are one of the
+recommended second choice treatments for generalized infections with
+streptococci.
+
+```{r 10.3_Ssuis_swine, fig.dim=c(10,5), fig.cap="**Figure 46** — Evolution of resistance (%) to benzylpenicillin, trimethoprim-sulfamethoxazole (TMP-SMX) and amoxicillin in *S. suis* isolated from inner organs of diseased swine Data source: DGZ"}
+
+swine_ssuis_graph <- graph_data_complete %>%
+  filter(grepl ("S. suis", Bacteria )) %>%
+       filter(grepl("Swine_inner_organs", Source)) %>%
+    mutate(y_coord = case_when(
+     grepl("Amoxicillin",Antibiotic) ~ 5,
+     grepl("Benzylpenicillin",Antibiotic) ~ 12,
+     grepl("TMP-SMX",Antibiotic) ~ 25)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Vet_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Vet_AntiB_colourscheme)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2024), breaks = seq(2014,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  
+
+swine_ssuis_graph
+
+```
+
+\FloatBarrier
+
+### 9.3.4 *Pasteurella multocida* {#subparagraph88}
+
+*Pasteurella multocida* causes progressive atrophic rhinitis in pigs.
+*P. multocida* infections can lead to lung damage and growth retardation
+among other lesions. First line antibiotic therapy is not recommended,
+as preventative strategies (primarily vaccination) are preferred to
+prevent and limit the disease at the farm level. If an antimicrobial
+therapy has to be applied, national guidelines recommend florfenicol and
+TMP-SMX as second line options. As seen in Figure
+47, *P. multocida* isolated from the internal organs of diseased swine
+has retained very low levels of resistance to florfenicol over the study
+period while resistance to TMP-SMX has decreased significantly to 9.0%
+in 2022. The use of benzylpenicillin is less recommended due to the
+selective pressure exerted towards the development of ESBL-producing
+bacteria. Indeed we see that the resistance to benzylpenicillin in *P.
+multocida* has increased significantly, nearly doubling between 2018 and
+2022 (24.5% (50/204 isolates) in 2018 to 48.6% (54/111 isolates) in
+2022). This might compromise the use of benzylpenicillin in treating
+bronchopneumonia caused by *P. multocida*.
+
+```{r 10.3_pmult_swine, fig.dim=c(10,5), fig.cap="**Figure 47** — Evolution of resistance (%) to florfenicol, trimethoprim-sulfamethoxazole (TMP-SMX) and benzylpenicillin in *P. multocida* isolated from inner organs of diseased swine. Data source: DGZ"}
+
+swine_pmult_graph <- graph_data_complete %>%
+  filter(grepl ("P. multocida", Bacteria )) %>%
+       filter(grepl("Swine_inner_organs", Source)) %>%
+    mutate(y_coord = case_when(
+     grepl("Florphenicol",Antibiotic) ~ 5,
+     grepl("Benzylpenicillin",Antibiotic) ~ 40,
+     grepl("TMP-SMX",Antibiotic) ~ 20)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Vet_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Vet_AntiB_colourscheme)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2024), breaks = seq(2014,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  
+
+swine_pmult_graph
+
+```
+
+\FloatBarrier
+
+### 9.3.5 *Actinobacillus pleuropneumoniae* {#subparagraph89}
+
+*Actinobacillus pleuropneumoniae* causes a range of respiratory
+conditions, ranging from acute death to haemorrhagic necrotizing
+pneumonia, dyspnea and chronic pulmonary abscesses. First choice
+antimicrobials include TMP-SMX, benzylpenicillin and florfenicol,
+selected not only for their effective activity against *Actinobacillus*
+but also their successful distribution across pulmonary tissue. Similar
+to that observed in *P. multocida*, clinical resistance to
+benzylpenicillin in *A. pleuropneumoniae* isolated from the internal
+organs of diseased swine has increased significantly, more than doubling
+between 2018 and 2021 (39.3% (88/224 isolates) in 2018 to 86.5% (183/214
+isolates) in 2022). This might compromise the use of benzylpenicillin as
+a first choice antibiotic for treating pleuropneumonia caused by *A.
+pleuropneumoniae*. Yet, resistance to TMP-SMX and florfenicol, also both
+first choice antibiotics, is low (\<10%, TMP-SMX) or very low (0.1-1%,
+florfenicol), making them both acceptable alternatives for
+benzylpenicillin.
+
+```{r 10.3_apleu_swine, fig.dim=c(10,5), fig.cap="**Figure 48** — Evolution of resistance (%) to florfenicol, trimethoprim-sulfamethoxazole (TMP-SMX) and benzylpenicillin in *A. pleuropneumoniae* isolated from inner organs of diseased swine. Data source: DGZ"}
+
+swine_apleu_graph <- graph_data_complete %>%
+  filter(grepl ("A. pleuropneumoniae", Bacteria )) %>%
+       filter(grepl("Swine_inner_organs", Source)) %>%
+    mutate(y_coord = case_when(
+     grepl("Florphenicol",Antibiotic) ~ 5,
+     grepl("Benzylpenicillin",Antibiotic) ~ 40,
+     grepl("TMP-SMX",Antibiotic) ~ 20)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Vet_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Vet_AntiB_colourscheme)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2024), breaks = seq(2014,2022,1))+
+    scale_y_continuous(limits = c(-1,135), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  
+
+swine_apleu_graph
+
+```
+
+\FloatBarrier
+
+### 9.3.6 *Brachyspira hyodysenteriae* {#subparagraph810}
+
+Swine dysentery (SD) is caused by a small, spiral shaped bacterium
+called *Brachyspira hyodysenteriae*. Pigs of all ages can be affected,
+showing watery, haemorrhagic diarrhea, reduced body condition and
+dehydration. The Brachyspira can survive in manure and rodent hosts,
+often causing repeated waves of infection on affected farms. The
+antimicrobial susceptibility of this bacteria against the recommended
+first line antimicrobials, pleuromutilins, has been monitored since
+2014. As very few isolates were analysed each year, no trend analysis or
+graphical representation are presented here, but the full dataset can be
+found in the appendix. The observed rate of resistance against both
+pleuromutilin molecules fluctuates between very high (50-70%) to
+extremely high (\>70%) throughout the study period, with sensitivity to
+both pleuromutilins often running in parallel. With very high prevalence
+of resistance against the second choice antimicrobial (lincomycin), and
+nearly 100% resistance against the recommended third choice (tylosin).
+In such cases, sensitivity testing should form the basis of treatment.
+
+\FloatBarrier
+
+## 9.4 Pathogens of bovine mastitis {#paragraph84}
+
+### 9.2.1 *Escherichia coli* and *Staphylococcus aureus*
+
+Mastitis is defined as the inflammation of the mammary tissue (udder),
+most often in response to bacterial intramammary infection
+[[69]](https://doi.org/10.5713/ajas.20.0156). Mastitis symptoms can
+range from subclinical (no clinical symptoms but detectable by for
+instance increased numbers of somatic cells within milk), chronic or
+acute and local or systemic. Bovine clinical mastitis is most commonly
+observed in early lactation, and is frequently caused by *E. coli*,
+*Streptococcus Agalactiae*, *Streptococcus uberis* or *S. aureus*
+infections. Since the cure rate of mild and moderate (sub)clinical mastitis (milk and
+udder symptoms only) caused by gram-negative coliforms is little
+influenced by the administration of antibiotics, no first choice of
+topical antibiotics are suggested in the AMCRA guidelines. By contrast,
+cases of severe mastitis (milk and udder abnormalities with symptoms of
+generalized disease) should be immediately treated with antimicrobials.
+TMP-SMX or the first generation cephalosporins, cefalexin or cefazolin,
+are first choice antimicrobials. As shown in Figure 49, occurrence of
+clinical resistance of *E. coli* isolated from mammary samples of
+diseased cattle is most common for TMP-SMX (minimum 7.3% (82/1110) in
+2017, maximum 12.1% (82/678) in 2022). TMP-SMX is also the most common
+resistance observed in subclinical cases (Figure 49B). Resistance to
+amoxicillin-clavulanic acid (recommended as an intramammary (local)
+preparation as a second choice antimicrobial) increased over the study
+period (from 3.3% in 2014 (19/584 isolates) to 6.2% (42/678 isolates) in
+2022).
+
+```{r 10.4_Ecoli_mast, fig.dim=c(10,5), fig.cap="**Figure 49** — Evolution of resistance (%) to trimethoprim-sulfamethoxazole (TMP-SMX), amoxicillin-clavulanic acid, cefazolin and cefalexin, in *E. coli* isolated from A) clinical mastitis cases and B) subclinical mastitis cases.**Note y axis scale adjusted 0 - 20% to facilitate pattern visualisation.** Data source: MCC"}
+
+cattle_mast_ecoli_graph <- graph_data_complete_mast %>%
+  filter(grepl ("E. coli", Bacteria )) %>%
+     mutate(y_coord = case_when(
+     grepl("Amoxyclav",Antibiotic) ~ 6,
+    grepl("Cefazolin",Antibiotic) ~ 4,
+     grepl("Cefalexin",Antibiotic) ~ 2,
+     grepl("TMP-SMX",Antibiotic) ~ 10)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant_clinical), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_clinical_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_clinical_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Vet_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Vet_AntiB_colourscheme)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2023.5), breaks = seq(2014,2022,1))+
+    scale_y_continuous(limits = c(-1,20), breaks = seq(0,20,10))+
+    geom_richtext(aes(x = 2023, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  
+
+
+
+
+cattle_mast_ecoli_subclin_graph <- graph_data_complete_mast %>%
+  filter(grepl ("E. coli", Bacteria )) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant_subclinical), fill = Antibiotic), stat="identity", position = "dodge")+
+     scale_fill_manual(values = BELMAP_Vet_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Vet_AntiB_colourscheme)+
+    scale_x_continuous(limits = c(2018,2023), breaks = seq(2019,2022,1))+
+    scale_y_continuous(limits = c(-1,20), breaks = seq(0,20,10))+
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()&
+      theme(legend.position = "none")
+
+
+cattle_mast_ecoli_graph + cattle_mast_ecoli_subclin_graph +
+  plot_annotation(tag_levels = "A") + plot_layout(widths = c(2,1)) 
+
+```
+
+As shown in Figure 50, *S. aureus* isolated from diseased cattle udders,
+displayed only low levels of resistance to first choice antimicrobials
+TMP-SMX and cefalexin throughout the study period. By contrast,
+resistance to penicillin G has increased significantly after 2018, with
+moderate (10-20%) resistant rates observed in both clinical and
+subclinical isolates.
+
+```{r 10.4_saur_mast, fig.dim=c(10,5), fig.cap="**Figure 50** — Evolution of resistance (%) to trimethoprim-sulfamethoxazole (TMP-SMX), cefalexin, cefazolin and penicillin G in *S. aureus* isolated from A) clinical mastitis cases and B) subclinical mastitis cases.**Note y axis scale adjusted 0 - 20% to facilitate pattern visualisation.** Data source: MCC"}
+
+cattle_mast_saur_graph <- graph_data_complete_mast %>%
+  filter(grepl ("S. aureus", Bacteria )) %>%
+   mutate(y_coord = case_when(
+     grepl("Penicillin G",Antibiotic) ~ 9,
+     grepl("Cefalexin",Antibiotic) ~ 6,
+    grepl("Cefazolin",Antibiotic) ~ 4,
+     grepl("TMP-SMX",Antibiotic) ~ 2)) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant_clinical), fill = Antibiotic), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Antibiotic, ymin = CI_lower, ymax = CI_upper, y = Percent_resistant_clinical_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Antibiotic, y = Percent_resistant_clinical_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Vet_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Vet_AntiB_colourscheme)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2013,2024), breaks = seq(2014,2022,1))+
+    scale_y_continuous(limits = c(-1,20), breaks = seq(0,20,10))+
+    geom_richtext(aes(x = 2023.5, y = y_coord,
+                      label = label,
+                      fill = Antibiotic), stat = "unique",
+                      colour= "white", show.legend = FALSE)+
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  
+
+
+
+
+cattle_mast_saur_subclin_graph <- graph_data_complete_mast %>%
+  filter(grepl ("S. aureus", Bacteria )) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistant_subclinical), fill = Antibiotic), stat="identity", position = "dodge")+
+     scale_fill_manual(values = BELMAP_Vet_AntiB_colourscheme )+
+    scale_colour_manual(values = BELMAP_Vet_AntiB_colourscheme)+
+    scale_x_continuous(limits = c(2018,2023), breaks = seq(2019,2022,1))+
+    scale_y_continuous(limits = c(-1,20), breaks = seq(0,20,10))+
+    labs(x="", y= "% Resistance")&
+    moiras_graph_theme()  +
+  theme(legend.position = "none")
+
+
+cattle_mast_saur_graph + cattle_mast_saur_subclin_graph +
+  plot_annotation(tag_levels = "A") + plot_layout(widths = c(2,1)) 
+
+```
+
+## 9.5 Research projects {#paragraph85}
+
+### 9.5.1 Investigating the causes of the high prevalence of fluoroquinolone resistance in broilers (FLUPOUL project) {#subparagraph851}
+
+-Moniek Ringenier, Ilias Chantziaras, Filip Boyen, Sigrid De
+Keersmaecker, Mathias
+Devreese, Jeroen Dewulf -- *Ghent University, Sciensano*
+
+Despite the current low use of fluoroquinolones (FQ) in the broiler
+sector, high
+prevalences of FQ resistant commensal *E. coli* strains are still being
+found and
+this raises many questions about the possible causes. The FOD-funded
+RF19/6334
+FLUPOUL was set to address the three distinct questions: a. To what
+extent can
+residues of FQ be found in feathers of broilers and broiler breeders? b.
+What are
+the causes (genetic background, spread model, co-resistance, resistance
+from
+parent farms to broiler farms)  of the unexpected high FQ resistance in
+broilers? 
+c. To what extent is the occurrence of FQ resistance in commensal *E.
+coli* a possible source for the spread of FQ resistance to
+*Campylobacter* spp*.*
+and *Salmonella* spp.?
+
+Concerning a., the extent to which residues of enrofloxacin and
+ciprofloxacin could be found in the feathers of broilers and parent
+stock (breeders) was determined (2021-2022). In broilers, residues
+of FQ can be found in the feathers during the entire production round,
+even if the animals were treated only in the first days of life. In
+broiler breeders, residues of enrofloxacin and ciprofloxacin remain
+present for at least 15 weeks after treatment.
+
+Regarding b., data from 29 farms were collected at multiple timepoints
+during a production
+round (days 0, 3, 21 and 35). On 24 of the 29 farms, FQ resistant *E.
+coli* was found in the chicks on day 0, even before they had entered the
+house. On 24% of the farms, FQ resistant *E. coli* 
+strains were found on the floor at the entrance of the barn, in 10% on
+the boots, 10% on the drinking nipples, 21% in the feed pans and 24% on
+the
+barn floor, and this after cleaning and disinfection and before the new
+chicks
+had entered the barns. FQ resistant *E. coli* were isolated from the
+broilers on
+all farms at the later measurement times (days 3, 21 and 35). These data
+show
+that both day-old chicks and houses are a source of FQ resistant *E.
+coli*
+strains in Belgian broiler farms. These strains were able to efficiently
+colonize the entire broiler population on a farm without selection
+pressure due
+to fluoroquinolone use. There was no evidence of unregistered use of
+fluoroquinolones.
+
+From the cross-sectional study above, an initial selection of 19
+isolates was sequenced (Whole Genome Sequencing; HRS) (task c.). A
+phylogenetic analysis using core genome Multilocus Sequence Typing
+(cgMLST) showed that some isolates from the broilers at day 35 were
+identical to isolates from the environment and others were identical to
+isolates from the day-old chicks. No evidence
+has been found for commensal *E. coli* to act as a source of spread to
+*Campylobacter*
+spp. and *Salmonella* spp.
+
+### 9.5.2 ABchangeR1 project {#subparagraph852}
+
+\- Joana Pessoa, Ilias Chantziaras, Natcha Dankittipong, Jeroen Dewulf
+-- *Ghent University*
+
+Antimicrobial resistance (AMR) is a global health and development threat
+requiring urgent
+multisectoral action. Links between antimicrobial use (AMU) in animals
+and the
+emergence of AMR in animals and potentially also humans have been
+suggested.
+AMU contributes not only to the emergence of AMR but also to the
+selection and
+persistence of AMR (e.g. via co-resistance and cross-resistance
+mechanisms). At
+present, an effect of the achieved reduction of AMU in animals at
+national
+level on the levels of resistance in human and animal pathogens has not
+been
+investigated. Neither has the link between resistance levels in animal
+pathogens and commensals and certain human pathogens been evaluated.
+
+The FOD-funded RT 22/03 project AB-changeR1 (Effect of altered
+antimicrobial use in
+food-producing animals on antimicrobial resistance in selected animal
+(and
+human) pathogens: looking back to go further (lessons learned,
+challenges
+remaining) started in August 2022. The purpose of this project is to
+assess all these potential links
+(phenotypical and genotypical) and by doing so understand better the
+result of
+the reductions in antimicrobial use in animals on animal and human
+health.
+These insights will allow to draw lessons for future policy as well as
+assess
+how the available data can be shared and used by all persons involved in
+a more
+efficient manner. This will be done based on a retrospection of all
+available
+AMR-AMU data stemming from the consortium\'s various databanks (AMCRA --
+via AB
+Register and Sanitel-Med, BELVETSAC, Sciensano, DGZ, ARSIA, ULiège;
+Poulpharm,
+Dialab & possibly others that agree to contribute) and publicly
+available
+reports.
+
+Therefore, the project aims to answer the following questions:
+
+A. What are the trends in the phenotypical (and if available
+genotypical) resistance profiles of important animal pathogens and
+commensal bacteria of pigs, poultry and veal calves?
+
+B. What are the trends in the phenotypical (and if available
+genotypical) resistance profiles of important human pathogens that have
+a link to animals?
+
+C. What is the evolution of antimicrobial use in animals in the last ten
+years and how can we retrospectively revert existing overall sales data
+into species level usage data?
+
+D. What are the associations between the trends in AMU at species level
+and the phenotypical (and if available genotypical) resistance profiles
+in animal and human pathogens that have a link to animals?
+
+E. What are the associations in phenotypical resistance profiles in
+animal commensals and animal pathogens and to what extend are trends in
+commensals predictive for the evolutions in resistance profiles in
+pathogenic bacteria?
+
+F. How can available information on antimicrobial resistance in human
+and animal pathogens be made available / accessible in an easy manner to
+all interested stakeholders?
+
+The main tasks for the first phase of the project were: i) to describe
+the available datasets on the phenotypical and genotypical AMR profiles
+of animal pathogens originating from pigs, poultry and
+veal calves and of human pathogens with a link to animals going back as
+far as possible. and ii) to use qualitative (active) research design to
+determine which pathogens will be selected for the associations that
+will be studied in the next phase of the project.
