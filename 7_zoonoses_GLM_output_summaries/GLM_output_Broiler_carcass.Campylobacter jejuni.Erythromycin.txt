@@ -1,0 +1,143 @@
+[1] "GLM analysis of Broiler_carcass.Campylobacter jejuni.Erythromycin"
+[1] "SELECTED MODEL----------------------------"
+
+Call:  glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Coefficients:
+(Intercept)  Year_simple  
+     -8.449        0.803  
+
+Degrees of Freedom: 4 Total (i.e. Null);  3 Residual
+Null Deviance:	    34.28 
+Residual Deviance: 12.73 	AIC: 22.78
+
+Call:
+glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+      1        2        3        4        5  
+ 2.4276  -0.7174  -0.9166  -2.2080   0.7772  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -8.4486     1.7372  -4.863 1.15e-06 ***
+Year_simple   0.8030     0.2372   3.385 0.000713 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 34.280  on 4  degrees of freedom
+Residual deviance: 12.727  on 3  degrees of freedom
+AIC: 22.781
+
+Number of Fisher Scoring iterations: 7
+
+[1] "TEST FOR DISPERSION-------------------- "
+[1] "dispersal parameter=  17.5141915749458 If >1 then overdispersed"
+
+	Overdispersion test
+
+data:  glmpoissonirr
+z = 0.13476, p-value = 0.4464
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  1.097542 
+
+
+	Underdispersion test
+
+data:  glmpoissonirr
+z = 0.13476, p-value = 0.5536
+alternative hypothesis: true dispersion is less than 1
+sample estimates:
+dispersion 
+  1.097542 
+
+[1] "ANOVA COMPARING MODELS-------------------- "
+[1] "Likelihood Ratio Test Poisson vs NB model   "
+Likelihood ratio test
+
+Model 1: Number_resistants ~ Year_simple + offset(log(Sample_size))
+Model 2: Number_resistants ~ Year_simple + offset(log(Sample_size))
+  #Df  LogLik Df  Chisq Pr(>Chisq)  
+1   2 -9.3905                       
+2   3 -7.8993  1 2.9823    0.08418 .
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "AIC of Poisson model: 12.2748049113592" "AIC of Poisson model: 26.9873583035898"
+[1] "AIC of NB model: 21.7985719501952"
+[1] "MODELS-------------------- "
+[1] "Output from Poisson model"
+
+Call:
+glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+      1        2        3        4        5  
+ 2.4276  -0.7174  -0.9166  -2.2080   0.7772  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -8.4486     1.7372  -4.863 1.15e-06 ***
+Year_simple   0.8030     0.2372   3.385 0.000713 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 34.280  on 4  degrees of freedom
+Residual deviance: 12.727  on 3  degrees of freedom
+AIC: 22.781
+
+Number of Fisher Scoring iterations: 7
+
+[1] "Output from Neg Binomial model"
+
+Call:
+glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 0.3180787162, link = log)
+
+Deviance Residuals: 
+      1        2        3        4        5  
+ 0.6286  -0.9810  -0.9980  -1.2211   0.5856  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)   
+(Intercept)  -5.7027     1.8949  -3.009  0.00262 **
+Year_simple   0.3797     0.3544   1.071  0.28399   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(0.3181) family taken to be 1)
+
+    Null deviance: 6.2053  on 4  degrees of freedom
+Residual deviance: 4.1873  on 3  degrees of freedom
+AIC: 21.799
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  0.318 
+          Std. Err.:  0.359 
+Warning while fitting theta: limite d'alternation atteinte 
+
+ 2 x log-likelihood:  -15.799 
+[1] "Poisson ZI test= "
+# Check for zero-inflation
+
+   Observed zeros: 3
+  Predicted zeros: 2
+            Ratio: 0.67
+
+[1] "NB ZI test= "
+# Check for zero-inflation
+
+   Observed zeros: 3
+  Predicted zeros: 3
+            Ratio: 1.00
+

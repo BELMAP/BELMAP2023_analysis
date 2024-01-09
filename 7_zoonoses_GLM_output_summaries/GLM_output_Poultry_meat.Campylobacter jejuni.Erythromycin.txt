@@ -1,0 +1,140 @@
+[1] "GLM analysis of Poultry_meat.Campylobacter jejuni.Erythromycin"
+[1] "SELECTED MODEL----------------------------"
+
+Call:  glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Coefficients:
+(Intercept)  Year_simple  
+    -4.6164       0.1877  
+
+Degrees of Freedom: 8 Total (i.e. Null);  7 Residual
+Null Deviance:	    22.15 
+Residual Deviance: 17.03 	AIC: 43.59
+
+Call:
+glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0064  -1.5590  -0.5366   0.9361   1.7432  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -4.61639    0.31595 -14.611   <2e-16 ***
+Year_simple  0.18772    0.07983   2.352   0.0187 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 22.154  on 8  degrees of freedom
+Residual deviance: 17.034  on 7  degrees of freedom
+AIC: 43.592
+
+Number of Fisher Scoring iterations: 5
+
+[1] "TEST FOR DISPERSION-------------------- "
+[1] "dispersal parameter=  2.06303913750067 If >1 then overdispersed"
+
+	Overdispersion test
+
+data:  glmpoissonirr
+z = 1.8179, p-value = 0.03454
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  1.689569 
+
+
+	Underdispersion test
+
+data:  glmpoissonirr
+z = 1.8179, p-value = 0.9655
+alternative hypothesis: true dispersion is less than 1
+sample estimates:
+dispersion 
+  1.689569 
+
+[1] "ANOVA COMPARING MODELS-------------------- "
+[1] "Likelihood Ratio Test Poisson vs NB model   "
+Likelihood ratio test
+
+Model 1: Number_resistants ~ Year_simple + offset(log(Sample_size))
+Model 2: Number_resistants ~ Year_simple + offset(log(Sample_size))
+  #Df  LogLik Df  Chisq Pr(>Chisq)
+1   2 -19.796                     
+2   3 -19.296  1 1.0013      0.317
+[1] "AIC of Poisson model: 33.9886533034608" "AIC of Poisson model: 42.7306685214674"
+[1] "AIC of NB model: 44.5910601027327"
+[1] "MODELS-------------------- "
+[1] "Output from Poisson model"
+
+Call:
+glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0064  -1.5590  -0.5366   0.9361   1.7432  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -4.61639    0.31595 -14.611   <2e-16 ***
+Year_simple  0.18772    0.07983   2.352   0.0187 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 22.154  on 8  degrees of freedom
+Residual deviance: 17.034  on 7  degrees of freedom
+AIC: 43.592
+
+Number of Fisher Scoring iterations: 5
+
+[1] "Output from Neg Binomial model"
+
+Call:
+glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 5.336536008, link = log)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.8333  -1.0757  -0.4012   0.6746   1.4312  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -4.64821    0.41971  -11.07   <2e-16 ***
+Year_simple  0.18988    0.09887    1.92   0.0548 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(5.3365) family taken to be 1)
+
+    Null deviance: 15.439  on 8  degrees of freedom
+Residual deviance: 11.777  on 7  degrees of freedom
+AIC: 44.591
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  5.34 
+          Std. Err.:  7.84 
+
+ 2 x log-likelihood:  -38.591 
+[1] "Poisson ZI test= "
+# Check for zero-inflation
+
+   Observed zeros: 2
+  Predicted zeros: 1
+            Ratio: 0.50
+
+[1] "NB ZI test= "
+# Check for zero-inflation
+
+   Observed zeros: 2
+  Predicted zeros: 1
+            Ratio: 0.50
+
