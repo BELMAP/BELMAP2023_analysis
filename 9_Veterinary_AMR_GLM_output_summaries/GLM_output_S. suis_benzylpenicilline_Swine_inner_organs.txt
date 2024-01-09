@@ -1,0 +1,141 @@
+[1] "GLM analysis of S. suis_benzylpenicilline_Swine_inner_organs"
+[1] "SELECTED MODEL----------------------------"
+
+Call:  glm(formula = Number_resistant ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Coefficients:
+(Intercept)  Year_simple  
+    -2.7968      -0.4726  
+
+Degrees of Freedom: 8 Total (i.e. Null);  7 Residual
+Null Deviance:	    55.61 
+Residual Deviance: 9.844 	AIC: 38.53
+
+Call:
+glm(formula = Number_resistant ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.8647  -1.0105  -0.2129   0.3813   1.1909  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -2.79677    0.23470 -11.916  < 2e-16 ***
+Year_simple -0.47260    0.07521  -6.284  3.3e-10 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 55.6131  on 8  degrees of freedom
+Residual deviance:  9.8445  on 7  degrees of freedom
+AIC: 38.532
+
+Number of Fisher Scoring iterations: 4
+
+[1] "TEST FOR DISPERSION-------------------- "
+[1] "dispersal parameter=  1.12915213970975 If >1 then overdispersed"
+
+	Overdispersion test
+
+data:  glmpoissonirr
+z = 0.17401, p-value = 0.4309
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  1.065435 
+
+
+	Underdispersion test
+
+data:  glmpoissonirr
+z = 0.17401, p-value = 0.5691
+alternative hypothesis: true dispersion is less than 1
+sample estimates:
+dispersion 
+  1.065435 
+
+[1] "ANOVA COMPARING MODELS-------------------- "
+[1] "Likelihood Ratio Test Poisson vs NB model   "
+Likelihood ratio test
+
+Model 1: Number_resistant ~ Year_simple + offset(log(Sample_size))
+Model 2: Number_resistant ~ Year_simple + offset(log(Sample_size))
+  #Df  LogLik Df  Chisq Pr(>Chisq)
+1   2 -17.266                     
+2   3 -17.213  1 0.1062     0.7445
+[1] "AIC of Poisson model: 31.2309843909993"
+[2] "AIC of Poisson model: 35.802663233757" 
+[1] "AIC of NB model: 40.4260443183505"
+[1] "MODELS-------------------- "
+[1] "Output from Poisson model"
+
+Call:
+glm(formula = Number_resistant ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.8647  -1.0105  -0.2129   0.3813   1.1909  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -2.79677    0.23470 -11.916  < 2e-16 ***
+Year_simple -0.47260    0.07521  -6.284  3.3e-10 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 55.6131  on 8  degrees of freedom
+Residual deviance:  9.8445  on 7  degrees of freedom
+AIC: 38.532
+
+Number of Fisher Scoring iterations: 4
+
+[1] "Output from Neg Binomial model"
+
+Call:
+glm.nb(formula = Number_resistant ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 35.26720647, link = log)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.7444  -0.9812  -0.1571   0.4098   1.0984  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -2.77861    0.25923 -10.719  < 2e-16 ***
+Year_simple -0.48138    0.08076  -5.961 2.51e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(35.2672) family taken to be 1)
+
+    Null deviance: 49.7691  on 8  degrees of freedom
+Residual deviance:  8.6339  on 7  degrees of freedom
+AIC: 40.426
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  35 
+          Std. Err.:  116 
+
+ 2 x log-likelihood:  -34.426 
+[1] "Poisson ZI test= "
+# Check for zero-inflation
+
+   Observed zeros: 2
+  Predicted zeros: 1
+            Ratio: 0.50
+
+[1] "NB ZI test= "
+# Check for zero-inflation
+
+   Observed zeros: 2
+  Predicted zeros: 1
+            Ratio: 0.50
+

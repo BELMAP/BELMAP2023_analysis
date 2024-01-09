@@ -1,0 +1,141 @@
+[1] "GLM analysis of M. haemolytica_FLORPHENICOL_pulmonary"
+[1] "SELECTED MODEL----------------------------"
+
+Call:  glm(formula = Number_resistant ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Coefficients:
+(Intercept)  Year_simple  
+   -4.14532      0.05496  
+
+Degrees of Freedom: 8 Total (i.e. Null);  7 Residual
+Null Deviance:	    15.61 
+Residual Deviance: 15.16 	AIC: 41.85
+
+Call:
+glm(formula = Number_resistant ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0166  -0.9594  -0.2927   0.4222   2.0232  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -4.14532    0.42402  -9.776   <2e-16 ***
+Year_simple  0.05496    0.08161   0.673    0.501    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 15.612  on 8  degrees of freedom
+Residual deviance: 15.156  on 7  degrees of freedom
+AIC: 41.85
+
+Number of Fisher Scoring iterations: 5
+
+[1] "TEST FOR DISPERSION-------------------- "
+[1] "dispersal parameter=  1.9910793246889 If >1 then overdispersed"
+
+	Overdispersion test
+
+data:  glmpoissonirr
+z = 1.2152, p-value = 0.1121
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  1.630771 
+
+
+	Underdispersion test
+
+data:  glmpoissonirr
+z = 1.2152, p-value = 0.8879
+alternative hypothesis: true dispersion is less than 1
+sample estimates:
+dispersion 
+  1.630771 
+
+[1] "ANOVA COMPARING MODELS-------------------- "
+[1] "Likelihood Ratio Test Poisson vs NB model   "
+Likelihood ratio test
+
+Model 1: Number_resistant ~ Year_simple + offset(log(Sample_size))
+Model 2: Number_resistant ~ Year_simple + offset(log(Sample_size))
+  #Df  LogLik Df  Chisq Pr(>Chisq)
+1   2 -18.925                     
+2   3 -17.928  1 1.9942     0.1579
+[1] "AIC of Poisson model: 32.7699003917531"
+[2] "AIC of Poisson model: 40.5838970161377"
+[1] "AIC of NB model: 41.8555274768539"
+[1] "MODELS-------------------- "
+[1] "Output from Poisson model"
+
+Call:
+glm(formula = Number_resistant ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0166  -0.9594  -0.2927   0.4222   2.0232  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -4.14532    0.42402  -9.776   <2e-16 ***
+Year_simple  0.05496    0.08161   0.673    0.501    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 15.612  on 8  degrees of freedom
+Residual deviance: 15.156  on 7  degrees of freedom
+AIC: 41.85
+
+Number of Fisher Scoring iterations: 5
+
+[1] "Output from Neg Binomial model"
+
+Call:
+glm.nb(formula = Number_resistant ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 3.964831727, link = log)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.6338  -0.6297  -0.1194   0.2457   1.3201  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -4.32792    0.55708  -7.769 7.91e-15 ***
+Year_simple  0.09034    0.10828   0.834    0.404    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(3.9648) family taken to be 1)
+
+    Null deviance: 9.1508  on 8  degrees of freedom
+Residual deviance: 8.5880  on 7  degrees of freedom
+AIC: 41.856
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  3.96 
+          Std. Err.:  4.18 
+
+ 2 x log-likelihood:  -35.856 
+[1] "Poisson ZI test= "
+# Check for zero-inflation
+
+   Observed zeros: 1
+  Predicted zeros: 1
+            Ratio: 1.00
+
+[1] "NB ZI test= "
+# Check for zero-inflation
+
+   Observed zeros: 1
+  Predicted zeros: 1
+            Ratio: 1.00
+
