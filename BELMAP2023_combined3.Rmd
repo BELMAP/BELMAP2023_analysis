@@ -1,0 +1,60 @@
+---
+title: ""
+output:
+  pdf_document:
+    latex_engine: lualatex
+    toc: yes
+  word_document:
+    toc: yes
+editor_options:
+  markdown:
+    wrap: 72
+header-includes:
+- \usepackage{placeins}
+- \usepackage{caption}
+- \captionsetup[figure]{labelformat=empty}
+- \captionsetup[table]{labelformat=empty}
+- \usepackage{fontspec}
+- \setmainfont{Gill Sans MT}
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[LE,RO]{BELMAP2023|  \thepage}
+---
+
+```{r child = '1_2_BELMAP_revised.Rmd'}
+```
+
+```{r child = '2_Human_AMC_revised.Rmd'}
+```
+
+
+```{r child = '3_Veterinary_AMC_revised.Rmd'}
+```
+
+
+```{r child = '4_Intersectoral_AMC_revised.Rmd'}
+```
+
+
+```{r child = '5_Human_AMR_revised.Rmd'}
+```
+
+
+```{r child = '6_Zoonoses_humans_and_food_chain_revised.Rmd'}
+```
+
+
+```{r child = '7_AMR_in_food_producing_animals_revised.Rmd'}
+```
+
+
+```{r child = '8_AMR_in_Veterinary_Pathogens_revised.Rmd'}
+```
+
+
+```{r child = '10_Environmental_Data.Rmd'}
+```
+
+
+```{r child = '11_Recommendations.Rmd'}
+```
