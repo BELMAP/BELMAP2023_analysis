@@ -1,0 +1,347 @@
+---
+title: "![](BELMAP-logo.png){width=6in}"
+subtitle: 8. AMR in food producing animals
+date: "Last compiled on `r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: default
+  word_document:
+    reference_docx: "word-styles-reference-01.docx"
+css: style.css
+editor_options:
+  markdown:
+    wrap: 72
+header-includes:
+- \usepackage{placeins}
+- \usepackage{caption}
+- \captionsetup[figure]{labelformat=empty}
+- \captionsetup[table]{labelformat=empty}
+---
+
+```{r setup6, include=FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE
+)
+```
+
+```{r load_data_and_themes6, include=FALSE}
+library(tidyverse)
+library(patchwork)
+library(jpeg)
+library(scales)
+library(extrafont)
+library(remotes)
+library(extrafontdb)
+library(magrittr)
+library(AER)
+library(AICcmodavg)
+library(pscl)
+library(MASS)
+library(COMPoissonReg)
+library(performance)
+library(grid)
+library(ggtext)
+library(showtext)
+library(ggnewscale)
+
+
+BELMAP_colourscheme <- c("#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c",
+                         "#fdbf6f","#ff7f00","#cab2d6")
+
+moiras_graph_theme<- function(..., base_size = 12){theme(
+   panel.background = element_blank(), #transparent panel bg
+  plot.background = element_blank(), #transparent plot bg
+  panel.grid.major.y =  element_line(colour = "#ccc6c4"), #grey y major gridlines
+  panel.grid.major.x =  element_blank(), #remove major gridlines
+  panel.grid.minor = element_blank(), #remove minor gridlines
+  # legend.background = element_rect(fill='#001f3f'), #transparent legend bg
+  legend.title = element_text(size = 16),
+  legend.text = element_text(size = 14),
+  #  legend.box.background = element_rect(fill='#001f3f'),
+  text = element_text( family = "Gill Sans MT"),
+  axis.text = element_text(size = 14),
+  #plot.background=element_blank(),#, , size = 10, family = "calibri"
+  axis.title = element_text(size = 16),
+  axis.ticks.x = element_blank(),
+  axis.text.x = element_text(angle = 90,vjust = 0.5, hjust = 0.5),
+  strip.background = element_blank(),
+  strip.text = element_text(size = 16),
+  legend.position = "top",
+  legend.direction = "horizontal"
+)}
+
+font_add("Gill Sans MT", "GIL_____.TTF")
+
+# adding icons to figures ------------------------------------
+
+# Important step to enable showtext font rendering!
+showtext_auto()
+
+font_add('fa-solid', '../font_awesome_font_files/fontawesome-free-6.4.0-desktop/otfs/Font Awesome 6 Free-Solid-900.otf')
+
+upward_arrow <- "<span style='font-family:fa-solid'>&#xf062;</span>"
+downward_arrow <- "<span style='font-family:fa-solid'>&#xf063;</span>" 
+equals <- "<span style='font-family:fa-solid'>&#xf52c;</span>"   #" = " 
+oscillate <- "<span style='font-family:fa-solid'>&#xf83e;</span>"   #" ~ "
+
+
+BELMAP_Indicator_colourscheme <- c("MDR"="#e31a1c",
+                                    "pan-S" = "#33a02c",
+                                    "MRSA" = "#1f78b4",
+                                    "ESBL producers" = "#a6cee3",
+                                    "Ciprofloxacin resistance" = "#b2df8a",
+                                    "Colistin resistance" = "#1f78b4")
+                                    #"#33a02c","#e31a1c","#fdbf6f","#ff7f00","#cab2d6", "#6a3d9a","#ffff99") #
+#-----------------------------------------------------------------------------------
+#2. Load data-----
+
+Indicator_vet_data <- read_csv2("Data/2.AMR/Food_producing/Indicator-VET_data_combined.csv",
+                                col_types = cols(
+                                  "Year" = col_double(),
+                                  "Sample_size"= col_double(),
+                                  "Percent_resistance"= col_double(),
+                                  "Number_resistants"= col_double(),
+                                  "Pathogen" = col_character(),
+                                  "Host" = col_character(),
+                                  "Indicator" = col_character()
+                                ),
+                                na = c("", "NA"),
+                                trim_ws = TRUE
+                                ) %>%
+  mutate(Year_simple = Year - 2011) %>%
+  filter(!is.na(Sample_size)) 
+
+
+
+#load graph data --------------------------------------------------
+
+graph_data_complete <- read.csv("8_food_producing_data_and_GLM_predictions.csv") %>%
+  mutate(label_icon = case_when(
+  icon == "upward_arrow" ~ upward_arrow,
+  icon == "downward_arrow" ~ downward_arrow,
+  icon == "equals" ~ equals,
+  icon == "oscilate" ~ oscillate
+)) %>%
+  mutate(label = if_else(signif_level == "", label_icon, paste(label_icon,signif_level,sep=" ")))
+
+
+y_coords_oth <- graph_data_complete %>%
+  mutate(Level_indicator = if_else(grepl("MDR|pan-S",Indicator), "Primary","Secondary")) %>%
+  filter(!grepl("MRSA",Pathogen))%>%
+  filter(Year == 2022) %>%
+  group_by(Host,Pathogen,Level_indicator)%>%
+  mutate(rank = rank(Percent_resistance_predict))%>%
+  ungroup() %>%
+  mutate(y_coord = case_when(
+    rank == 1 ~ 10,
+    rank == 2 ~ 30,
+    rank == 3 ~ 50
+  )) %>%
+  dplyr::select(Host,Pathogen,Indicator,y_coord)
+
+y_coords_mr <- graph_data_complete %>%
+  mutate(Level_indicator = if_else(grepl("MDR|pan-S",Indicator), "Primary","Secondary")) %>%
+  filter(grepl("MRSA",Pathogen))%>%
+  filter(grepl("2020|2021|2022",Year)) %>%
+  filter(!is.na(Percent_resistance_predict))%>%
+  group_by(Host,Pathogen,Level_indicator)%>%
+  mutate(rank = rank(Percent_resistance_predict))%>%
+  ungroup() %>%
+  mutate(y_coord = case_when(
+    rank == 1 ~ 10,
+    rank == 2 ~ 30,
+    rank == 3 ~ 50
+  )) %>%
+dplyr::select(Host,Pathogen,Indicator,y_coord)
+
+
+y_coords<-rbind(y_coords_mr,y_coords_oth) 
+  
+
+graph_data_complete_labels <- left_join(graph_data_complete,y_coords, by = c("Host","Pathogen","Indicator"))
+
+
+```
+
+\newpage
+
+# 8. AMR in food producing animals
+
+**Contents**
+
+8.1 [Methodology](#paragraph71f)    
+8.2 [*Escherichia coli*](#paragraph72f)     
+8.3 [MRSA](#paragraph73f)   
+8.4 [*Enterococcus faecalis* and *Enterococcus faecium*](#paragraph74f)   
+
+
+BELMAP uses AMR data from commensal *E. coli* isolated from healthy animals as a general indicator for resistance among food-producing animals. *E. coli* is an indicator bacterium that can be frequently isolated from all animal species. Resistance levels within *E. coli* reflect the magnitude of selective pressure exerted by antibiotics in the population, and can be used as an indicator of emergence and change in AMR in the population. Besides the gram-negative indicator *E. coli*, enterococci and especially *E. faecalis* and *E. faecium* are commensal bacteria that are considered to be good indicators of AMR among gram-positive bacteria. The monitoring of enterococci is therefore complementary to that of *E. coli*. Additionally, MRSA is monitored in different animal categories to map both the prevalence of this resistant zoonotic bacterium and its level of resistance to other antibiotics.
+
+## 8.1 Methodology {#paragraph71f}
+
+For commensal *E. coli* monitoring, the Federal Agency for the Safety of the Food Chain (FASFC) has collected samples of fresh faeces annually since 2011 as part of a nationwide surveillance program. The following categories of food-producing animals are included: veal calves, beef cattle (meat production), broiler chickens and fattening pigs. The sampling and isolation of indicator *E. coli* strains are performed according to standardized technical instructions, details of which are available in the reports of FASFC [[58]](https://www.favv-afsca.be/productionanimale/antibioresistance/resultats/#sciensano).
+
+*E. coli* bacteria are tested for susceptibility to ciprofloxacin, cefotaxime, colistin and 11 other antibiotics, as determined by European legislation (2013/652/EU and 2020/1729). Since 2014, all the isolates showing resistance to a third generation cephalosporin are considered potential beta-lactamase producing *E. coli*, and are analyzed in detail for their beta-lactamase activity. Besides the monitoring of commensal *E. coli*, European Decision 2013/652/EU and 2020/1729 also harmonizes the selective monitoring of beta-lactamase, AmpC and carbapenemases producing *E. coli* isolated from caecal or faecal samples gathered at slaughter from broilers, fattening turkeys, fattening pigs and veal calves and from fresh meat samples from broilers, pigs and bovines. Outside the EU-context, within Belgium there is additional surveillance of ESBL *E. coli* in fish and raw milk.
+
+The surveillance of MRSA follows a 3-year cycle and includes farm samples (pooled nasal swabs) from the poultry, cattle, or pig sector, depending on the year. AMR testing of MRSA strains is detailed in the reports available on the FASFC website. The method used to isolate MRSA strains from pooled nasal swabs changed in 2022 to the so-called 1-S isolation method according to the EURL-AR protocol version from 2018 [[59]](https://www.eurl-ar.eu/CustomerData/Files/Folders/21-protocols/430_mrsa-protocol-final-19-06-2018.pdf), in which the second enrichment step with cefoxitin and aztreonam applied for the monitoring in 2016 and 2019 (the so-called 2-S isolation method)  is excluded.   The confirmed MRSA isolates are spa-typed by retrieving, from the whole-genome sequencing (WGS), the repetitive region of the *spa* gene encoding for the staphylococcal protein A, and categorized as livestock associated (LA) MRSA if they are associated to the *S. aureus* clonal complex CC398 through WGS.
+
+AMR in *Enterococcus faecalis* and *Enterococcus faecium* was initially monitored from 2011–2013; and restarted in 2019 – in this report, data from the last 4 years are analyzed. The following categories of food-producing animals are included: veal calves, fattening turkeys, broiler chickens, breeding hens, laying hens and pigs. The sampling (at farm for breeding hens and laying hens; and at slaughterhouse for broilers, veal calves, pigs and fattening turkeys) and isolation of *Enterococcus* spp. strains are performed in the framework of the national control programme of the FASFC and according to standardized technical instructions, details of which are available in the reports of the FASFC [[58]](https://www.favv-afsca.be/productionanimale/antibioresistance/resultats/#sciensano).
+
+After identification of *Enterococcus faecalis* or *Enterococcus faecium* species by MALDI-TOF, isolates are tested for susceptibility to linezolid, vancomycin, daptomycine and 9 other antibiotics, as determined by European legislation (2020/1729/EU).
+
+## 8.2 *Escherichia coli* {#paragraph72f}
+
+In the BELMAP report, the antimicrobial susceptibility of commensal *E. coli* isolated from four different animal production categories are presented: veal calves, young beef cattle, broiler chickens and pigs. Results for fully sensitive *E. coli* are presented in green in Figure 36. The highest proportion of fully sensitive *E. coli* strains are isolated from beef cattle, however, this has oscillated during the study period, with high levels (>76%) of pan-susceptibility observed in 2020 and 2021 but only 53% pan-susceptibility observed in 2022. Likewise, the proportion of MDR *E. coli* isolated from beef cattle oscillated between 2011 and 2022, increasing from 14.3% in 2021 to 30% in 2022. While the proportion of fully sensitive *E. coli* isolates is lower in the three other monitored food-producing animal populations, in two populations (pigs and veal calves), encouraging trends are observed indicating increasing proportions of fully sensitive *E. coli* and reductions in the proportions of MDR *E. coli* (2011–2022). The levels of MDR *E. coli* are highest in poultry, but these are also reducing over time.
+
+```{r 7.2_e.coli, fig.dim=c(18,16), fig.cap="**Figure 36.** Proportion of fully sensitive *E. coli*, multi- or select- drug resistant strains isolated from beef cattle, pigs, chickens and veal calves, from 2011 to 2022. NB. In 2021 amikacin was added to the antimicrobial testing panel considered when identifying MDRO. Data source: [FASFC reports](https://www.favv-afsca.be/productionanimale/antibioresistance/resultats/#sciensano)"}
+
+(E_coli_graph <- graph_data_complete_labels %>%
+  filter(Pathogen == "E. coli") %>%
+    mutate(Level_indicator = if_else(grepl("MDR|pan-S",Indicator), "Primary","Secondary")) %>%
+    ggplot(aes(label = label_icon))+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistance), fill = Indicator), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Indicator, ymin = CI_lower, ymax = CI_upper, y = Percent_resistance_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Indicator, y = Percent_resistance_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Indicator_colourscheme,breaks=c("MDR", "pan-S", "Ciprofloxacin resistance", "Colistin resistance", "ESBL producers"))+
+    scale_colour_manual(values = BELMAP_Indicator_colourscheme,breaks=c("MDR", "pan-S", "Ciprofloxacin resistance", "Colistin resistance", "ESBL producers"))+
+    facet_grid(Level_indicator ~ Host)+
+   # geom_richtext( size = 16, hjust = 0, label.colour = NA) +
+    scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+    geom_richtext(aes(x = 2023.5, y = y_coord, 
+                      label = label, 
+                      fill = Indicator), stat = "unique", 
+                      colour= "white", show.legend = FALSE)+
+    # fill = NA, label.color = NA, # remove background and outline
+    # label.padding = grid::unit(rep(0, 4), "pt")) +
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+  #make this additional for interactive report
+    labs(y= "% Resistance", x = "")&
+    moiras_graph_theme()&
+   theme(strip.text.y = element_blank()))
+
+
+```
+
+Regarding the individual resistances against select antibiotics, encouraging results are also observed. In the two populations (poultry and veal calves) with the highest ciprofloxacin resistance (MIC > 0.06 ug/ml), a significant decrease in ciprofloxacin resistance  is observed when considering the entire 2011–2022 period (Figure 36). Likewise, the occurrence of colistin resistance in veal calves declined significantly, with colistin resistance at 1-2% in all monitored animal populations in 2022.
+
+\FloatBarrier
+
+## 8.3 MRSA {#paragraph73f}
+
+Since 2011, the prevalence of MRSA has been monitored based on a 3-year rotation for each animal category in the following order: poultry, cattle and pigs (three to four data points). The situation in poultry and the different categories of bovines remains stable since 2011 and 2012, respectively. In dairy cows and beef cattle, the prevalence was low to moderate (observed range 4.7-15.4%), with higher proportions observed in veal calves, which showed a notable peak in 2015. In poultry (broilers and layers), the prevalence was low (<2.5%). The monitoring for MRSA in 2022 focused on fattening pigs and sows, using a new isolation method (“1-S”). According to the literature, this method displayed in other countries  a higher sensitivity for MRSA in swine samples (Larsen et al., 2017) than the method applied in 2016 and 2019 (“2-S”). It is therefore not possible to compare the results in 2016 and 2019 with those in 2022. Trends in the prevalence of MRSA will only be able to be discussed with higher reliability in future years, when this method is applied for several years.
+
+
+```{r 7.3_mrsa, fig.dim=c(18,16), fig.cap="**Figure 37.** Prevalence of MRSA in poultry (broilers and layers), dairy cows, fattening pigs, sows, veal calves and bovines for meat observed since 2011 based on a 3-year rotation monitoring. Red line denotes a change in methodology in isolating MRSA from porcine samples - no statistical analysis was performed for these samples. Data source: [FASFC reports](https://www.favv-afsca.be/productionanimale/antibioresistance/resultats/#sciensano)"}
+
+graph_data_MRSA <- graph_data_complete_labels %>%
+  filter(Pathogen == "MRSA") %>%
+  mutate(label = if_else(grepl("pigs|Sow",Host),NA,label)) %>%
+  mutate(outline = if_else(grepl("pigs|Sow",Host) & Year == 2022, "red","none" ))
+  
+
+ordered_MRSA_Host <- c("Veal Calves","Bovines for meat", "Dairy Cattle","Fattening pigs","Sows","Poultry (broilers and layers)")
+
+(MRSA_graph <- graph_data_MRSA %>%
+   ggplot()+
+   geom_bar(aes(x=Year, y = as.numeric(Percent_resistance), fill = Indicator, colour = outline), stat="identity", position = "dodge", size = 1)+
+   geom_vline(data = filter(graph_data_MRSA, grepl("pigs|Sow",Host)),aes(xintercept =2021), colour = "red", linetype= "dashed")+
+    scale_colour_manual(values = c("white","red"))+
+     new_scale_colour() +
+   geom_ribbon(data = filter(graph_data_MRSA, !grepl("pigs|Sow",Host)),aes(x=Year, fill = Indicator, ymin = CI_lower, ymax = CI_upper, y = Percent_resistance_predict), alpha = 0.25)+
+   geom_smooth(data = filter(graph_data_MRSA, !grepl("pigs|Sow",Host)),aes(x=Year, colour = Indicator, y = Percent_resistance_predict),stat = "identity")+
+   scale_fill_manual(values = BELMAP_Indicator_colourscheme)+
+   scale_colour_manual(values = BELMAP_Indicator_colourscheme)+
+    geom_richtext(aes(x = 2023.5, y = y_coord, 
+                      label = label, 
+                      fill = Indicator), stat = "unique", 
+                  colour= "white", show.legend = FALSE)+
+                  # fill = NA, label.color = NA, # remove background and outline
+                  # label.padding = grid::unit(rep(0, 4), "pt")) +
+    facet_wrap(~ fct_relevel(Host,ordered_MRSA_Host), nrow = 2)+
+   scale_x_continuous(limits = c(2010,2024), breaks = seq(2011,2022,1))+
+   scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+ #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+
+   labs(y= "Prevalence MRSA", x = "")&
+   moiras_graph_theme()+
+  theme(legend.position = "none")
+)   
+   
+
+
+```
+
+In all monitored animal categories, most of the MRSA isolates were genotyped as livestock associated (LA)-MRSA. The detailed genotypes and their relative occurrence can be found in the different yearly reports available on the [FASFC website](https://www.favv-afsca.be/productionanimale/antibioresistance/resultats/#sciensano). During the last years of the MRSA monitoring in pigs (2022), poultry (2020) and cattle (2021), the prevalence of LA-MRSA among all isolated MRSA was 99.4% (169/170), 100% (4/4) and 93.9% (92/98), respectively. Hospital associated (HA) or community associated (CA) MRSA genotypes have also been found in animal samples (pigs, cattle or poultry) sporadically over the past years, although the source of infection for such cases has never been traced. In the future, whole genome sequencing analysis of such HA/CA-MRSA strains from animal origin, together with strains from human origin, would allow more in depth strain comparisons and assessment of their genetic relatedness, as conducted for such strains isolated from cattle in 2021 [[58]](https://www.favv-afsca.be/productionanimale/antibioresistance/resultats/#sciensano).
+
+\FloatBarrier
+
+## 8.4 *Enterococcus faecalis* and *Enterococcus faecium* {#paragraph74f}
+
+In Belgium, the prevalence of AMR in enterococci was monitored each year since 2019. For this monitoring, samples are collected on farms for breeding hens and laying hens and at slaughterhouse for broilers, veal calves, pigs and fattening turkeys. *Enterococcus faecalis* or *Enterococcus faecium* isolated from these samples are tested for their antimicrobial susceptibility, with a particular focus on vancomycin resistance, linezolid resistance and MDR (resistant to at least 3 of the 12 antibiotic classes). The proportion of MDR *E. faecalis* and MDR *E. faecium* are presented in Figure 38 and Figure 39, respectively.
+
+In general,   the number of MDR *E. faecalis* and *E. faecium* strains remains stable across animal species. Since 2019, very high rates of MDR are consistently observed in *E. faecalis* in veal calves (range 54.2% - 67.8%); with resistance to chloramphenicol, erythromycin and tetracycline most frequently observed. 
+
+Despite a significant reduction of chloramphenicol resistance since 2019 (from 62.6% in 2019 to 44.6% in 2022), the level of resistance in *E. faecalis* from veal calves was still higher than in other animal categories. The levels of resistance to erythromycin and tetracycline remained extremely high between 2019-2022. In addition, the highest proportion (13.3%)  of linezolid-resistant *E. faecalis* was found among veal calves in 2022 (see below). In pigs, the proportion of MDR *E. faecalis* observed in 2022 remained high (21.6%). Resistance to chloramphenicol, erythromycin and tetracycline were also the most frequently observed, in moderate, high and very high levels respectively, in these isolates.
+
+Very high rates (68.1% in 2019, 68.9% in 2020, 60.3% in 2021 and 60.3% in 2022) and high rates of MDR (48.7% in 2019, 50.0% in 2020 and 47.5% in 2022) are observed in *E. faecium* isolated from broilers and fattening turkeys, respectively, since 2019. Very high to extremely high levels of resistance to erythromycin, quinupristin/dalfopristin and tetracycline were observed in broilers and in fattening turkeys between 2019 and 2022.
+
+
+```{r 7.4e_faecium, fig.dim=c(16,7), fig.cap="**Figure 38.** Proportion of multidrug resistant (MDR) *E. faecium* isolated from breeding hens, broilers, laying hens, fattening turkeys, pigs and veal calves, from 2019 to 2022. No data was collected from fattening turkeys in 2021. Data source: [FASFC reports](https://www.favv-afsca.be/productionanimale/antibioresistance/resultats/#sciensano)"}
+
+
+(E_faecium_graph <- graph_data_complete_labels %>%
+    filter(grepl("E. faecium",Pathogen)) %>%
+    ggplot()+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistance), fill = Indicator), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Indicator, ymin = CI_lower, ymax = CI_upper, y = Percent_resistance_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Indicator, y = Percent_resistance_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Indicator_colourscheme)+
+    scale_colour_manual(values = BELMAP_Indicator_colourscheme)+
+    geom_richtext(aes(x = 2023.5, y = y_coord, 
+                      label = label, 
+                      fill = Indicator), stat = "unique", 
+                  colour= "white", show.legend = FALSE)+
+    facet_wrap(~Host, nrow = 1)+
+    scale_x_continuous(limits = c(2018,2024), breaks = seq(2019,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+  #  geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+
+    labs(y= "% MDR", x = "")+
+    moiras_graph_theme()
+)     
+  
+```
+
+Linezolid and vancomycin are critically important antibiotics in human medicine, used to treat challenging infections such as those caused by VRE or MRSA. Neither linezolid nor vancomycin is licensed for common use in food-producing animals, and yet linezolid-resistant and vancomycin-resistant enterococci have been reported in food producing animals in Belgium. Indeed, resistance to these critically important  antimicrobials was observed in very low to moderate levels in *E. faecalis* throughout the study period, with linezolid resistance observed in pigs (3.6% in 2019, 3.4% in 2020 and 3.9% in 2022), veal calves (3.5% in 2019, 5.7% in 2020, 10.3% in 2021 and 13.3% in 2022), broilers (0.6% in 2021) and breeding hens (3.6% in 2021); and vancomycin resistance was observed in pigs (1.8% in 2019) and veal calves (1.1% in 2020 and 0.9% in 2021). Similarly, very low to low levels of resistance to linezolid was observed in *E. faecium* in pigs (1.1% in 2019, 0.6% in 2020, 0.6% in 2021 and 1.2% in 2022), veal calves (1.7% in 2019, 1.2% in 2020, 0.6% in 2021 and 1.2% in 2022), broilers (1.2% in 2020) and breeding hens (0.8% in 2019 and 0.7% in 2022), while vancomycin resistance was never observed in *E. faecium*. In addition, a 2019 study assessing the rate of linezolid resistant staphylococci and enterococci in Belgian food-producing animals found that resistance rates varied between production category (0–6.1% in poultry, 16.4% in veal calves, 11.0–25.7% in pigs), with transferable resistance genes present in most isolates (97.3%, 143/147 isolates) [[61]](https:/doi.org/10.1093/jac/dkab376).
+
+```{r 7.4e_faecalis, fig.dim=c(16,7), fig.cap="**Figure 39**.Proportion of multidrug resistant *E. faecalis* isolated from breeding hens, broilers, laying hens, fattening turkeys, pigs and veal calves, from 2019 to 2022. The resistance to quinupristin/ dalfopristin was not included in the multidrug resistance of *E. faecalis* due to the intrinsic resistance of this species to this antimicrobial. No data was collected from fattening turkeys in 2021. Data source: FASFC reports"}
+
+(E_faecalis_graph <- graph_data_complete_labels %>%
+    filter(grepl("E. faecalis",Pathogen)) %>%
+    ggplot()+
+    geom_bar(aes(x=Year, y = as.numeric(Percent_resistance), fill = Indicator), stat="identity", position = "dodge")+
+    geom_ribbon(aes(x=Year, fill = Indicator, ymin = CI_lower, ymax = CI_upper, y = Percent_resistance_predict), alpha = 0.25)+
+    geom_smooth(aes(x=Year, colour = Indicator, y = Percent_resistance_predict),stat = "identity")+
+    scale_fill_manual(values = BELMAP_Indicator_colourscheme)+
+    scale_colour_manual(values = BELMAP_Indicator_colourscheme)+
+    facet_wrap(~Host, nrow = 1)+
+    scale_x_continuous(limits = c(2018,2024), breaks = seq(2019,2022,1))+
+    scale_y_continuous(limits = c(-1,100), breaks = seq(0,100,50))+
+   geom_richtext(aes(x = 2023.5, y = y_coord, 
+                     label = label, 
+                     fill = Indicator), stat = "unique", 
+                 colour= "white", show.legend = FALSE)+
+ #   geom_text(aes(x = Year, y = 2, label = Sample_size.x), na.rm = TRUE, size = 2.5)+
+    labs(y= "% MDR", x= "")+
+    moiras_graph_theme()
+)  
+  
+
+
+```
+
+
+\FloatBarrier
+\newpage
+
+
+     

@@ -1,0 +1,130 @@
+[1] "GLM analysis of Veal Calves.E. coli.MDR"
+[1] "SELECTED MODEL----------------------------"
+
+Call:  glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Coefficients:
+(Intercept)  Year_simple  
+   -0.39885     -0.02122  
+
+Degrees of Freedom: 11 Total (i.e. Null);  10 Residual
+Null Deviance:	    18.31 
+Residual Deviance: 12.75 	AIC: 93.33
+
+Call:
+glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.95354  -0.54432   0.03609   0.57100   1.94337  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -0.398852   0.057635  -6.920 4.51e-12 ***
+Year_simple -0.021224   0.009011  -2.355   0.0185 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 18.308  on 11  degrees of freedom
+Residual deviance: 12.746  on 10  degrees of freedom
+AIC: 93.325
+
+Number of Fisher Scoring iterations: 4
+
+[1] "TEST FOR DISPERSION-------------------- "
+[1] "dispersal parameter=  1.27584188972238 If >1 then overdispersed"
+
+	Overdispersion test
+
+data:  glmpoissonirr
+z = 0.14884, p-value = 0.4408
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  1.058965 
+
+
+	Underdispersion test
+
+data:  glmpoissonirr
+z = 0.14884, p-value = 0.5592
+alternative hypothesis: true dispersion is less than 1
+sample estimates:
+dispersion 
+  1.058965 
+
+[1] "ANOVA COMPARING MODELS-------------------- "
+[1] "Likelihood Ratio Test Poisson vs NB model   "
+Likelihood ratio test
+
+Model 1: Number_resistants ~ Year_simple + offset(log(Sample_size))
+Model 2: Number_resistants ~ Year_simple + offset(log(Sample_size))
+  #Df  LogLik Df  Chisq Pr(>Chisq)
+1   2 -44.663                     
+2   3 -44.584  1 0.1568     0.6922
+[1] "AIC of Poisson model: 90.7127727963002" "AIC of Poisson model: 91.6694419529415"
+[1] "AIC of NB model: 95.1685945609934"
+[1] "MODELS-------------------- "
+[1] "Output from Poisson model"
+
+Call:
+glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.95354  -0.54432   0.03609   0.57100   1.94337  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -0.398852   0.057635  -6.920 4.51e-12 ***
+Year_simple -0.021224   0.009011  -2.355   0.0185 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 18.308  on 11  degrees of freedom
+Residual deviance: 12.746  on 10  degrees of freedom
+AIC: 93.325
+
+Number of Fisher Scoring iterations: 4
+
+[1] "Output from Neg Binomial model"
+
+Call:
+glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 640.0979891, link = log)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.80369  -0.50781   0.03379   0.52062   1.78758  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -0.398279   0.062338  -6.389 1.67e-10 ***
+Year_simple -0.021280   0.009689  -2.196   0.0281 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(640.098) family taken to be 1)
+
+    Null deviance: 15.690  on 11  degrees of freedom
+Residual deviance: 10.847  on 10  degrees of freedom
+AIC: 95.169
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  640 
+          Std. Err.:  1798 
+
+ 2 x log-likelihood:  -89.169 
+[1] "Poisson ZI test= "
+NULL
+[1] "NB ZI test= "
+NULL

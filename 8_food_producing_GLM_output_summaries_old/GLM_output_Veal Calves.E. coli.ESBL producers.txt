@@ -1,0 +1,131 @@
+[1] "GLM analysis of Veal Calves.E. coli.ESBL producers"
+[1] "SELECTED MODEL----------------------------"
+
+Call:  glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Coefficients:
+(Intercept)  Year_simple  
+    -3.4459      -0.1506  
+
+Degrees of Freedom: 5 Total (i.e. Null);  4 Residual
+Null Deviance:	    3.09 
+Residual Deviance: 1.54 	AIC: 24.69
+
+Call:
+glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+       1         2         3         4         5         6  
+-0.37942   0.78307  -0.02818  -0.82723  -0.01092   0.31186  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -3.4459     0.3189 -10.805   <2e-16 ***
+Year_simple  -0.1506     0.1225  -1.229    0.219    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 3.0901  on 5  degrees of freedom
+Residual deviance: 1.5396  on 4  degrees of freedom
+AIC: 24.691
+
+Number of Fisher Scoring iterations: 4
+
+[1] "TEST FOR DISPERSION-------------------- "
+[1] "dispersal parameter=  0.376717915494317 If >1 then overdispersed"
+
+	Overdispersion test
+
+data:  glmpoissonirr
+z = -4.573, p-value = 1
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+   0.25387 
+
+
+	Underdispersion test
+
+data:  glmpoissonirr
+z = -4.573, p-value = 2.405e-06
+alternative hypothesis: true dispersion is less than 1
+sample estimates:
+dispersion 
+   0.25387 
+
+[1] "ANOVA COMPARING MODELS-------------------- "
+[1] "Likelihood Ratio Test Poisson vs NB model   "
+Likelihood ratio test
+
+Model 1: Number_resistants ~ Year_simple + offset(log(Sample_size))
+Model 2: Number_resistants ~ Year_simple + offset(log(Sample_size))
+  #Df  LogLik Df Chisq Pr(>Chisq)
+1   2 -10.345                    
+2   3 -10.345  1 1e-04     0.9939
+[1] "AIC of Poisson model: 16.749098338509" "AIC of Poisson model: 23.146649155374"
+[1] "AIC of NB model: 26.6910347929224"
+[1] "MODELS-------------------- "
+[1] "Output from Poisson model"
+
+Call:
+glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+       1         2         3         4         5         6  
+-0.37942   0.78307  -0.02818  -0.82723  -0.01092   0.31186  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -3.4459     0.3189 -10.805   <2e-16 ***
+Year_simple  -0.1506     0.1225  -1.229    0.219    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 3.0901  on 5  degrees of freedom
+Residual deviance: 1.5396  on 4  degrees of freedom
+AIC: 24.691
+
+Number of Fisher Scoring iterations: 4
+
+[1] "Output from Neg Binomial model"
+
+Call:
+glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 293665.4941, link = log)
+
+Deviance Residuals: 
+       1         2         3         4         5         6  
+-0.37941   0.78307  -0.02818  -0.82722  -0.01092   0.31186  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -3.4459     0.3189 -10.805   <2e-16 ***
+Year_simple  -0.1506     0.1225  -1.229    0.219    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(293665.5) family taken to be 1)
+
+    Null deviance: 3.0901  on 5  degrees of freedom
+Residual deviance: 1.5396  on 4  degrees of freedom
+AIC: 26.691
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  293665 
+          Std. Err.:  20740925 
+Warning while fitting theta: nombre limite d'iterations atteint 
+
+ 2 x log-likelihood:  -20.691 
+[1] "Poisson ZI test= "
+NULL
+[1] "NB ZI test= "
+NULL

@@ -1,0 +1,147 @@
+[1] "GLM analysis of Pigs.E. coli.ESBL producers"
+[1] "SELECTED MODEL----------------------------"
+
+Call:  glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 0.6970239729, link = log)
+
+Coefficients:
+(Intercept)  Year_simple  
+    -3.0008      -0.2955  
+
+Degrees of Freedom: 5 Total (i.e. Null);  4 Residual
+Null Deviance:	    7.972 
+Residual Deviance: 6.777 	AIC: 36.36
+
+Call:
+glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 0.6970239729, link = log)
+
+Deviance Residuals: 
+       1         2         3         4         5         6  
+ 0.02221   0.73510  -0.92530  -1.58047  -1.47093   0.84760  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)   
+(Intercept)  -3.0008     0.9145  -3.281  0.00103 **
+Year_simple  -0.2955     0.3144  -0.940  0.34729   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(0.697) family taken to be 1)
+
+    Null deviance: 7.9715  on 5  degrees of freedom
+Residual deviance: 6.7770  on 4  degrees of freedom
+AIC: 36.362
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  0.697 
+          Std. Err.:  0.582 
+
+ 2 x log-likelihood:  -30.362 
+[1] "TEST FOR DISPERSION-------------------- "
+[1] "dispersal parameter=  6.33237773899744 If >1 then overdispersed"
+
+	Overdispersion test
+
+data:  glmpoissonirr
+z = 3.3446, p-value = 0.000412
+alternative hypothesis: true dispersion is greater than 1
+sample estimates:
+dispersion 
+  4.117926 
+
+
+	Underdispersion test
+
+data:  glmpoissonirr
+z = 3.3446, p-value = 0.9996
+alternative hypothesis: true dispersion is less than 1
+sample estimates:
+dispersion 
+  4.117926 
+
+[1] "ANOVA COMPARING MODELS-------------------- "
+[1] "Likelihood Ratio Test Poisson vs NB model   "
+Likelihood ratio test
+
+Model 1: Number_resistants ~ Year_simple + offset(log(Sample_size))
+Model 2: Number_resistants ~ Year_simple + offset(log(Sample_size))
+  #Df  LogLik Df  Chisq Pr(>Chisq)   
+1   2 -20.350                        
+2   3 -15.181  1 10.338   0.001303 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "AIC of Poisson model: 37.5525077387164" "AIC of Poisson model: 42.3224386078316"
+[1] "AIC of NB model: 36.3615623749259"
+[1] "MODELS-------------------- "
+[1] "Output from Poisson model"
+
+Call:
+glm(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    family = poisson(link = "log"), data = dataset_analysis)
+
+Deviance Residuals: 
+      1        2        3        4        5        6  
+-0.6062   2.3688  -2.1294  -2.5063  -2.0474   2.3712  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -2.7778     0.2524 -11.005  < 2e-16 ***
+Year_simple  -0.4045     0.1245  -3.249  0.00116 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 38.825  on 5  degrees of freedom
+Residual deviance: 26.609  on 4  degrees of freedom
+AIC: 44.7
+
+Number of Fisher Scoring iterations: 6
+
+[1] "Output from Neg Binomial model"
+
+Call:
+glm.nb(formula = Number_resistants ~ Year_simple + offset(log(Sample_size)), 
+    data = dataset_analysis, init.theta = 0.6970239729, link = log)
+
+Deviance Residuals: 
+       1         2         3         4         5         6  
+ 0.02221   0.73510  -0.92530  -1.58047  -1.47093   0.84760  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)   
+(Intercept)  -3.0008     0.9145  -3.281  0.00103 **
+Year_simple  -0.2955     0.3144  -0.940  0.34729   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Negative Binomial(0.697) family taken to be 1)
+
+    Null deviance: 7.9715  on 5  degrees of freedom
+Residual deviance: 6.7770  on 4  degrees of freedom
+AIC: 36.362
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  0.697 
+          Std. Err.:  0.582 
+
+ 2 x log-likelihood:  -30.362 
+[1] "Poisson ZI test= "
+# Check for zero-inflation
+
+   Observed zeros: 2
+  Predicted zeros: 0
+            Ratio: 0.00
+
+[1] "NB ZI test= "
+# Check for zero-inflation
+
+   Observed zeros: 2
+  Predicted zeros: 2
+            Ratio: 1.00
+
